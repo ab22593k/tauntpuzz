@@ -3,7 +3,7 @@ description: Slide Puzzle Game Made With Flutter For The Flutter Puzzle Hack Cha
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+18
+version: 1.0.0+19
 
 environment:
   sdk: ">=3.6.0 <4.0.0"
