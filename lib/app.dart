@@ -93,6 +93,7 @@ class _AppState extends State<App> {
               systemNavigationBarColor: Colors.black,
             ),
           ),
+          useMaterial3: false,
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
