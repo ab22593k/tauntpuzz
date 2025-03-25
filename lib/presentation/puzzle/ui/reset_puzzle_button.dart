@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ResetPuzzleButton extends StatelessWidget {
-  const ResetPuzzleButton({Key? key}) : super(key: key);
+  const ResetPuzzleButton({super.key});
 
   void initResetPuzzle(
     BuildContext context,
@@ -47,10 +47,10 @@ class ResetPuzzleButton extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () =>
                 initResetPuzzle(context, puzzleProvider, stopWatchProvider),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
-              children: const [
+              children: [
                 Icon(Icons.refresh),
                 SizedBox(width: 7),
                 Text('Reset', style: AppTextStyles.button),
