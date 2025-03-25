@@ -19,9 +19,9 @@ class App extends StatefulWidget {
   final StorageService storageService;
 
   const App({
-    Key? key,
+    super.key,
     required this.storageService,
-  }) : super(key: key);
+  });
 
   @override
   State<App> createState() => _AppState();
@@ -54,7 +54,8 @@ class _AppState extends State<App> {
 
       for (int size in Puzzle.supportedPuzzleSizes) {
         precacheImage(
-          Image.asset('assets/images/puzzle-solved/solved-${size}x$size.png').image,
+          Image.asset('assets/images/puzzle-solved/solved-${size}x$size.png')
+              .image,
           context,
         );
       }
@@ -92,6 +93,7 @@ class _AppState extends State<App> {
               systemNavigationBarColor: Colors.black,
             ),
           ),
+          useMaterial3: false,
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(

@@ -7,7 +7,7 @@ import 'package:dashtronaut/presentation/layout/spacing.dart';
 import 'package:dashtronaut/presentation/puzzle/ui/puzzle_header.dart';
 import 'package:dashtronaut/presentation/puzzle/ui/reset_puzzle_button.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide DrawerButton;
 
 class PuzzleLayout implements LayoutDelegate {
   @override
@@ -67,9 +67,9 @@ class PuzzleLayout implements LayoutDelegate {
         left: !kIsWeb && Platform.isAndroid
             ? Spacing.md
             : MediaQuery.of(context).padding.left,
-        child: Column(
+        child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             DrawerButton(),
             SizedBox(height: 20),
             PuzzleHeader(),

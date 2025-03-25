@@ -10,11 +10,11 @@ class PuzzleSolvedDialog extends StatelessWidget {
   final int movesCount;
 
   const PuzzleSolvedDialog({
-    Key? key,
+    super.key,
     required this.puzzleSize,
     required this.solvingDuration,
     required this.movesCount,
-  }) : super(key: key);
+  });
 
   String get imageName => 'solved-${puzzleSize}x$puzzleSize.png';
 
@@ -25,9 +25,8 @@ class PuzzleSolvedDialog extends StatelessWidget {
     return AppAlertDialog(
       insetPadding: const EdgeInsets.symmetric(
           horizontal: Spacing.screenHPadding, vertical: Spacing.md),
-      content: screenTypeHelper.landscapeMode
-          ? _landscapeContent
-          : _portraitContent,
+      content:
+          screenTypeHelper.landscapeMode ? _landscapeContent : _portraitContent,
     );
   }
 

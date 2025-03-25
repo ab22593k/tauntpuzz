@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cross_file/cross_file.dart';
 import 'package:dashtronaut/helpers/duration_helper.dart';
 import 'package:dashtronaut/helpers/file_helper.dart';
 import 'package:dashtronaut/helpers/share_score_helper.dart';
@@ -17,11 +16,11 @@ class PuzzleScore extends StatelessWidget {
   final int puzzleSize;
 
   const PuzzleScore({
-    Key? key,
+    super.key,
     required this.duration,
     required this.movesCount,
     required this.puzzleSize,
-  }) : super(key: key);
+  });
 
   int get tilesCount => (puzzleSize * puzzleSize) - 1;
 

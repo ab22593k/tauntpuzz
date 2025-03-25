@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MovesCount extends StatelessWidget {
-  const MovesCount({Key? key}) : super(key: key);
+  const MovesCount({super.key});
 
   @override
   Widget build(BuildContext context) {

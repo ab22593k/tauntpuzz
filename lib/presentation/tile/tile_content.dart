@@ -11,11 +11,11 @@ class TileContent extends StatefulWidget {
   final int puzzleSize;
 
   const TileContent({
-    Key? key,
+    super.key,
     required this.tile,
     required this.isPuzzleSolved,
     required this.puzzleSize,
-  }) : super(key: key);
+  });
 
   @override
   State<TileContent> createState() => _TileContentState();

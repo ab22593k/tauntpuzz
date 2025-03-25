@@ -98,8 +98,7 @@ class BackgroundLayerLayout implements LayoutDelegate {
             top: -(size.height + extraSpace));
       case BackgroundLayerType.topLeftPlanet:
         return Position(
-            left: -(size.width + extraSpace),
-            top: -(size.height + extraSpace));
+            left: -(size.width + extraSpace), top: -(size.height + extraSpace));
       case BackgroundLayerType.bottomLeftPlanet:
       case BackgroundLayerType.bottomBgPlanet:
         return Position(
