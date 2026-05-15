@@ -22,7 +22,7 @@ void main() {
 
       expect(
         puzzleSolvedText,
-        'I just solved this $tilesCount-Tile Dashtronaut slide puzzle in 08:20 with 55 moves!',
+        'I just solved this $tilesCount-Tile tauntpuzz slide puzzle in 08:20 with 55 moves!',
       );
     });
 
@@ -34,7 +34,7 @@ void main() {
 
       expect(
         puzzleSolvedTextMobile,
-        'I just solved this 8-Tile Dashtronaut slide puzzle in 08:20 with 55 moves! \n\n$officialWebsiteUrl',
+        'I just solved this 8-Tile tauntpuzz slide puzzle in 08:20 with 55 moves! \n\n$officialWebsiteUrl',
       );
     });
 
@@ -44,7 +44,7 @@ void main() {
 
       expect(
         twitterShareLink,
-        'https://twitter.com/intent/tweet?text=I just solved this 8-Tile Dashtronaut slide puzzle in 08:20 with 55 moves!&url=$officialWebsiteUrl',
+        'https://twitter.com/intent/tweet?text=I just solved this 8-Tile tauntpuzz slide puzzle in 08:20 with 55 moves!&url=$officialWebsiteUrl',
       );
     });
   });

@@ -39,7 +39,7 @@ class PhrasesProvider with ChangeNotifier {
     'The mascot for Flutter 💙 & Dart',
     'Which is what this app is built with!',
     'And I\'m an astronaut here',
-    'So you can call me Dashtronaut 🚀',
+    'So you can call me tauntpuzz',
     'You can stop poking me now 😃',
     'Why don\'t you play with the puzzle instead???',
     'You\'re starting to annoy me!',

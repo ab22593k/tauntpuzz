@@ -123,7 +123,7 @@ class _DrawerHeader extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Dashtronaut',
+                Text('tauntpuzz',
                     style: (wc == WindowClass.compact
                             ? AppTextStyles.titleMedium
                             : AppTextStyles.titleLarge)
@@ -132,7 +132,7 @@ class _DrawerHeader extends StatelessWidget {
                     )),
                 const SizedBox(height: 1),
                 Text(
-                  'Slide Puzzle Game',
+                  'Slide Puzzle',
                   style: AppTextStyles.bodyAdaptive(wc).copyWith(
                     fontVariations: const [FontVariation('wght', 400)],
                   ),

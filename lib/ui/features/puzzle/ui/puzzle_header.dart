@@ -46,7 +46,7 @@ class PuzzleHeader extends StatelessWidget {
         const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Dashtronaut', style: AppTextStyles.headlineSmall),
+            Text('tauntpuzz', style: AppTextStyles.headlineSmall),
             SizedBox(height: 2),
             Text(
               'Solve This Slide Puzzle..',

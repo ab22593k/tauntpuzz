@@ -81,7 +81,7 @@ class _AppState extends State<App> {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Dashtronaut - Slide Puzzle Game',
+        title: 'tauntpuzz',
         theme: ThemeData(
           useMaterial3: true,
           brightness: Brightness.light,

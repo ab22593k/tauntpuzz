@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 ///
 /// e.g. sharing, launching a url, shared text, ...
 class ShareScoreHelper {
-  /// The Dashtronaut app official website
+  /// The tauntpuzz app official website
   static const String officialWebsiteUrl = 'https://dashtronaut.app';
 
   /// Path for images of solved puzzles stored on the official website
@@ -40,7 +40,7 @@ class ShareScoreHelper {
   /// Get the puzzle solved text based on score
   static String getPuzzleSolvedText(
       int movesCount, Duration duration, int tilesCount) {
-    return 'I just solved this $tilesCount-Tile Dashtronaut slide puzzle in ${DurationHelper.toFormattedTime(duration)} with $movesCount moves!';
+    return 'I just solved this $tilesCount-Tile tauntpuzz slide puzzle in ${DurationHelper.toFormattedTime(duration)} with $movesCount moves!';
   }
 
   /// Get the puzzle solved text based on score for mobile
