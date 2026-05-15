@@ -72,7 +72,6 @@ some user experience enhancements, interactivity, and design features including:
 1. The ability to swipe the tiles and have them move in the direction of the swipe.
 2. Giving the user the option to change the puzzle size to easier or more difficult sizes to solve than the default 4x4
    puzzle.
-3. Tile animations created with Rive that run when a tile is moved to its correct place and when the puzzle is solved.
 4. Persisting user progress including elapsed time, moves count and puzzle size even when the app is closed and
    reopened.
 5. Showing the user a list of their last 10 scores in the app drawer.

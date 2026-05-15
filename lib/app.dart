@@ -1,14 +1,15 @@
 import 'dart:io';
 
-import 'package:dashtronaut/models/puzzle.dart';
-import 'package:dashtronaut/presentation/background/utils/background_layers.dart';
-import 'package:dashtronaut/presentation/home/home_page.dart';
-import 'package:dashtronaut/presentation/layout/background_layer_layout.dart';
-import 'package:dashtronaut/presentation/styles/app_text_styles.dart';
-import 'package:dashtronaut/providers/phrases_provider.dart';
-import 'package:dashtronaut/providers/puzzle_provider.dart';
-import 'package:dashtronaut/providers/stop_watch_provider.dart';
-import 'package:dashtronaut/services/storage/storage_service.dart';
+import 'package:tauntpuzz/ui/core/app_colors.dart';
+import 'package:tauntpuzz/domain/models/puzzle.dart';
+import 'package:tauntpuzz/ui/features/background/background_layers.dart';
+import 'package:tauntpuzz/ui/features/home/home_page.dart';
+import 'package:tauntpuzz/ui/core/layout/background_layer_layout.dart';
+import 'package:tauntpuzz/ui/core/app_text_styles.dart';
+import 'package:tauntpuzz/ui/features/phrases/view_models/phrases_provider.dart';
+import 'package:tauntpuzz/ui/features/puzzle/view_models/puzzle_provider.dart';
+import 'package:tauntpuzz/ui/features/puzzle/view_models/stop_watch_provider.dart';
+import 'package:tauntpuzz/data/services/storage_service.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +65,6 @@ class _AppState extends State<App> {
     super.didChangeDependencies();
   }
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -83,8 +83,53 @@ class _AppState extends State<App> {
         debugShowCheckedModeBanner: false,
         title: 'Dashtronaut - Slide Puzzle Game',
         darkTheme: ThemeData(
-          fontFamily: AppTextStyles.secondaryFontFamily,
+          useMaterial3: true,
           brightness: Brightness.dark,
+          fontFamily: AppTextStyles.secondaryFontFamily,
+          colorScheme: const ColorScheme(
+            brightness: Brightness.dark,
+            primary: AppColors.primary,
+            onPrimary: AppColors.onPrimary,
+            primaryContainer: AppColors.primaryContainer,
+            onPrimaryContainer: AppColors.onPrimaryContainer,
+            secondary: AppColors.secondary,
+            onSecondary: AppColors.onSecondary,
+            secondaryContainer: AppColors.secondaryContainer,
+            onSecondaryContainer: AppColors.onSecondaryContainer,
+            tertiary: AppColors.tertiary,
+            onTertiary: AppColors.onTertiary,
+            tertiaryContainer: AppColors.tertiaryContainer,
+            onTertiaryContainer: AppColors.onTertiaryContainer,
+            error: AppColors.error,
+            onError: AppColors.onError,
+            errorContainer: AppColors.errorContainer,
+            onErrorContainer: AppColors.onErrorContainer,
+            surface: AppColors.surface,
+            onSurface: AppColors.onSurface,
+            onSurfaceVariant: AppColors.onSurfaceVariant,
+            outline: AppColors.outline,
+            outlineVariant: AppColors.outlineVariant,
+            surfaceDim: AppColors.surfaceDim,
+            surfaceBright: AppColors.surfaceBright,
+            surfaceContainerLowest: AppColors.surfaceContainerLowest,
+            surfaceContainerLow: AppColors.surfaceContainerLow,
+            surfaceContainer: AppColors.surfaceContainer,
+            surfaceContainerHigh: AppColors.surfaceContainerHigh,
+            surfaceContainerHighest: AppColors.surfaceContainerHighest,
+            primaryFixed: AppColors.primaryFixed,
+            primaryFixedDim: AppColors.primaryFixedDim,
+            onPrimaryFixed: AppColors.onPrimaryFixed,
+            onPrimaryFixedVariant: AppColors.onPrimaryFixedVariant,
+            secondaryFixed: AppColors.secondaryFixed,
+            secondaryFixedDim: AppColors.secondaryFixedDim,
+            onSecondaryFixed: AppColors.onSecondaryFixed,
+            onSecondaryFixedVariant: AppColors.onSecondaryFixedVariant,
+            tertiaryFixed: AppColors.tertiaryFixed,
+            tertiaryFixedDim: AppColors.tertiaryFixedDim,
+            onTertiaryFixed: AppColors.onTertiaryFixed,
+            onTertiaryFixedVariant: AppColors.onTertiaryFixedVariant,
+          ),
+          scaffoldBackgroundColor: AppColors.background,
           appBarTheme: const AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle(
               statusBarBrightness: Brightness.light,
@@ -93,17 +138,63 @@ class _AppState extends State<App> {
               systemNavigationBarColor: Colors.black,
             ),
           ),
-          useMaterial3: false,
+          textTheme: const TextTheme(
+            displayLarge: AppTextStyles.displayLarge,
+            displayMedium: AppTextStyles.displayMedium,
+            displaySmall: AppTextStyles.displaySmall,
+            headlineLarge: AppTextStyles.headlineLarge,
+            headlineMedium: AppTextStyles.headlineMedium,
+            headlineSmall: AppTextStyles.headlineSmall,
+            titleLarge: AppTextStyles.titleLarge,
+            titleMedium: AppTextStyles.titleMedium,
+            titleSmall: AppTextStyles.titleSmall,
+            bodyLarge: AppTextStyles.bodyLarge,
+            bodyMedium: AppTextStyles.bodyMedium,
+            bodySmall: AppTextStyles.bodySmall,
+            labelLarge: AppTextStyles.labelLarge,
+            labelMedium: AppTextStyles.labelMedium,
+            labelSmall: AppTextStyles.labelSmall,
+          ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
+              foregroundColor: AppColors.stellarWhite,
+              textStyle: AppTextStyles.button,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-                side: const BorderSide(color: Colors.white, width: 2),
+                borderRadius: BorderRadius.circular(12),
+                side: const BorderSide(color: AppColors.stellarWhite, width: 2),
               ),
-              fixedSize: const Size.fromHeight(50),
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              backgroundColor: AppColors.glassSurface,
+              elevation: 0,
+              shadowColor: AppColors.nebulaPurple,
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-              backgroundColor: Colors.white.withValues(alpha: 0.2),
+            ).copyWith(
+              overlayColor: WidgetStateProperty.resolveWith((states) {
+                if (states.contains(WidgetState.hovered)) {
+                  return AppColors.stellarWhite.withValues(alpha: 0.12);
+                }
+                if (states.contains(WidgetState.pressed)) {
+                  return AppColors.stellarWhite.withValues(alpha: 0.24);
+                }
+                return null;
+              }),
+            ),
+          ),
+          dialogTheme: DialogThemeData(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18),
+              side: const BorderSide(color: AppColors.stellarWhite, width: 2),
+            ),
+          ),
+          drawerTheme: const DrawerThemeData(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusDirectional.only(
+                topEnd: Radius.circular(15),
+                bottomEnd: Radius.circular(15),
+              ),
             ),
           ),
         ),

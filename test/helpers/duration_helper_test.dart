@@ -1,4 +1,4 @@
-import 'package:dashtronaut/helpers/duration_helper.dart';
+import 'package:tauntpuzz/helpers/duration_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

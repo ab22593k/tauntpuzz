@@ -1,4 +1,4 @@
-import 'package:dashtronaut/models/location.dart';
+import 'package:tauntpuzz/domain/models/location.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
