@@ -5,24 +5,23 @@ import 'package:flutter/material.dart';
 
 class LatestScoreItem extends StatelessWidget {
   final Score score;
+  final double paddingLeft;
 
-  const LatestScoreItem(this.score, {super.key});
+  const LatestScoreItem(this.score, {super.key, required this.paddingLeft});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        left: MediaQuery.of(context).padding.left == 0
-            ? Spacing.md
-            : MediaQuery.of(context).padding.left,
+        left: paddingLeft,
         right: Spacing.screenHPadding,
         top: Spacing.sm,
         bottom: Spacing.sm,
       ),
       decoration: BoxDecoration(
         border: Border(
-            bottom:
-                BorderSide(color: Colors.white.withOpacity(0.5), width: 0.5)),
+            bottom: BorderSide(
+                color: Colors.white.withValues(alpha: 0.5), width: 0.5)),
       ),
       child: Row(
         children: [

@@ -7,12 +7,15 @@ import 'package:flutter/material.dart';
 
 class StarsLayout implements LayoutDelegate {
   @override
-  final BuildContext context;
+  final ScreenTypeHelper screenTypeHelper;
+  final double starsMaxXOffset;
+  final double starsMaxYOffset;
 
-  StarsLayout(this.context);
-
-  @override
-  ScreenTypeHelper get screenTypeHelper => ScreenTypeHelper(context);
+  StarsLayout({
+    required this.screenTypeHelper,
+    required this.starsMaxXOffset,
+    required this.starsMaxYOffset,
+  });
 
   int get totalStarsCount {
     switch (screenTypeHelper.type) {
@@ -28,10 +31,6 @@ class StarsLayout implements LayoutDelegate {
   }
 
   final Random random = Random();
-
-  double get starsMaxXOffset => MediaQuery.of(context).size.width;
-
-  double get starsMaxYOffset => MediaQuery.of(context).size.height;
 
   List<int> get randomStarXOffsets => _getRandomStarsOffsetsList(
       starsMaxXOffset.ceil() <= 0 ? 1 : starsMaxXOffset.ceil());

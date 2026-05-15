@@ -20,7 +20,7 @@ class AppAlertDialog extends StatelessWidget {
     this.content,
     this.insetPadding =
         const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
-  })  : assert(content == null ? title != null && onConfirm != null : true);
+  }) : assert(content == null ? title != null && onConfirm != null : true);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class AppAlertDialog extends StatelessWidget {
                     horizontal: Spacing.screenHPadding, vertical: Spacing.md),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
-                  color: AppColors.primary.withOpacity(0.6),
+                  color: AppColors.primary.withValues(alpha: 0.6),
                 ),
                 child: content ??
                     Column(

@@ -1,7 +1,5 @@
 import 'package:dashtronaut/models/location.dart';
-import 'package:dashtronaut/models/position.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 
 class Tile extends Equatable {
   final int value;
@@ -17,14 +15,6 @@ class Tile extends Equatable {
   });
 
   bool get isAtCorrectLocation => correctLocation == currentLocation;
-
-  /// Get the tile's position in the Stack widget
-  /// based on its width and current location
-  Position getPosition(BuildContext context, double tileWidth) {
-    return Position(
-        top: (currentLocation.y - 1) * tileWidth,
-        left: (currentLocation.x - 1) * tileWidth);
-  }
 
   Tile copyWith({
     value,

@@ -1,6 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-
 enum ScreenType {
   xSmall,
   small,
@@ -9,11 +6,10 @@ enum ScreenType {
 }
 
 class ScreenTypeHelper {
-  final BuildContext context;
+  final double screenWidth;
+  final double screenHeight;
 
-  ScreenTypeHelper(this.context);
-
-  double get screenWidth => MediaQuery.of(context).size.width;
+  const ScreenTypeHelper(this.screenWidth, this.screenHeight);
 
   static Map<ScreenType, double> breakpoints = {
     ScreenType.xSmall: 375,
@@ -22,11 +18,7 @@ class ScreenTypeHelper {
     ScreenType.large: 1440,
   };
 
-  bool get landscapeMode =>
-      MediaQuery.of(context).orientation == Orientation.landscape &&
-      !kIsWeb &&
-      MediaQuery.of(context).size.height <
-          ScreenTypeHelper.breakpoints[ScreenType.small]!;
+  bool get isWideLayout => screenWidth > 600 && screenWidth > screenHeight;
 
   ScreenType get type {
     if (screenWidth <= breakpoints[ScreenType.xSmall]!) {

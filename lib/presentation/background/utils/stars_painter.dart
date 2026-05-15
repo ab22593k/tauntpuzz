@@ -34,7 +34,7 @@ class StarsPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     for (int i = 0; i <= totalStarsCount; i++) {
-      _paint.color = Colors.white.withOpacity(_getStarOpacity(i));
+      _paint.color = Colors.white.withValues(alpha: _getStarOpacity(i));
       canvas.drawCircle(
         Offset(xOffsets[i].toDouble(), yOffsets[i].toDouble()),
         sizes[i],

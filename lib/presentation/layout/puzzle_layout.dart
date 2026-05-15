@@ -11,22 +11,29 @@ import 'package:flutter/material.dart' hide DrawerButton;
 
 class PuzzleLayout implements LayoutDelegate {
   @override
-  final BuildContext context;
+  final ScreenTypeHelper screenTypeHelper;
+  final double screenWidth;
+  final double screenHeight;
+  final double paddingLeft;
+  final double paddingTop;
+  final bool isWideLayout;
 
-  PuzzleLayout(this.context);
-
-  @override
-  ScreenTypeHelper get screenTypeHelper => ScreenTypeHelper(context);
+  PuzzleLayout({
+    required this.screenTypeHelper,
+    required this.screenWidth,
+    required this.screenHeight,
+    required this.paddingLeft,
+    required this.paddingTop,
+  }) : isWideLayout = screenTypeHelper.isWideLayout;
 
   double get containerWidth {
     switch (screenTypeHelper.type) {
       case ScreenType.xSmall:
       case ScreenType.small:
-        return MediaQuery.of(context).size.width - Spacing.screenHPadding * 2;
+        return screenWidth - Spacing.screenHPadding * 2;
       case ScreenType.medium:
-        if (screenTypeHelper.landscapeMode) {
-          return MediaQuery.of(context).size.flipped.width -
-              Spacing.screenHPadding * 2;
+        if (isWideLayout) {
+          return screenHeight - Spacing.screenHPadding * 2;
         } else {
           return 500;
         }
@@ -36,10 +43,8 @@ class PuzzleLayout implements LayoutDelegate {
   }
 
   double get distanceOutsidePuzzle {
-    double screenHeight = screenTypeHelper.landscapeMode
-        ? MediaQuery.of(context).size.width
-        : MediaQuery.of(context).size.height;
-    return ((screenHeight - containerWidth) / 2) + containerWidth;
+    double effectiveHeight = isWideLayout ? screenWidth : screenHeight;
+    return ((effectiveHeight - containerWidth) / 2) + containerWidth;
   }
 
   static const double tilePadding = 4;
@@ -59,21 +64,19 @@ class PuzzleLayout implements LayoutDelegate {
       Positioned(
         width: distanceOutsidePuzzle -
             containerWidth -
-            MediaQuery.of(context).padding.left -
+            paddingLeft -
             (!kIsWeb && Platform.isAndroid ? Spacing.md : 0),
         top: !kIsWeb && Platform.isAndroid
-            ? MediaQuery.of(context).padding.top + Spacing.md
-            : MediaQuery.of(context).padding.bottom,
-        left: !kIsWeb && Platform.isAndroid
-            ? Spacing.md
-            : MediaQuery.of(context).padding.left,
-        child: const Column(
+            ? paddingTop + Spacing.md
+            : paddingTop,
+        left: !kIsWeb && Platform.isAndroid ? Spacing.md : paddingLeft,
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DrawerButton(),
-            SizedBox(height: 20),
-            PuzzleHeader(),
-            ResetPuzzleButton(),
+            const DrawerButton(),
+            const SizedBox(height: 20),
+            PuzzleHeader(containerWidth: containerWidth),
+            const ResetPuzzleButton(),
           ],
         ),
       ),
@@ -87,21 +90,21 @@ class PuzzleLayout implements LayoutDelegate {
             ? Spacing.md
             : !kIsWeb &&
                     (Platform.isAndroid || Platform.isMacOS || Platform.isLinux)
-                ? MediaQuery.of(context).padding.top + Spacing.md
-                : MediaQuery.of(context).padding.top,
+                ? paddingTop + Spacing.md
+                : paddingTop,
         left: Spacing.screenHPadding,
         child: const DrawerButton(),
       ),
       Positioned(
         bottom: distanceOutsidePuzzle,
         width: containerWidth,
-        left: (MediaQuery.of(context).size.width - containerWidth) / 2,
-        child: const PuzzleHeader(),
+        left: (screenWidth - containerWidth) / 2,
+        child: PuzzleHeader(containerWidth: containerWidth),
       ),
       Positioned(
         top: distanceOutsidePuzzle,
         right: 0,
-        left: (MediaQuery.of(context).size.width - containerWidth) / 2,
+        left: (screenWidth - containerWidth) / 2,
         child: const Align(
           alignment: Alignment.centerLeft,
           child: ResetPuzzleButton(),
@@ -111,8 +114,6 @@ class PuzzleLayout implements LayoutDelegate {
   }
 
   List<Widget> get buildUIElements {
-    return screenTypeHelper.landscapeMode
-        ? horizontalPuzzleUIElements
-        : verticalPuzzleUIElements;
+    return isWideLayout ? horizontalPuzzleUIElements : verticalPuzzleUIElements;
   }
 }

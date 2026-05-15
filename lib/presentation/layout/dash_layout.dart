@@ -1,45 +1,41 @@
 import 'package:dashtronaut/models/position.dart';
 import 'package:dashtronaut/presentation/layout/layout_delegate.dart';
-import 'package:dashtronaut/presentation/layout/puzzle_layout.dart';
 import 'package:dashtronaut/presentation/layout/screen_type_helper.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 
 class DashLayout implements LayoutDelegate {
   @override
-  final BuildContext context;
+  final ScreenTypeHelper screenTypeHelper;
+  final double screenWidth;
+  final double screenHeight;
+  final double containerWidth;
 
-  DashLayout(this.context);
-
-  @override
-  ScreenTypeHelper get screenTypeHelper => ScreenTypeHelper(context);
-
-  PuzzleLayout get puzzleLayout => PuzzleLayout(context);
+  DashLayout({
+    required this.screenTypeHelper,
+    required this.screenWidth,
+    required this.screenHeight,
+    required this.containerWidth,
+  });
 
   Size get size {
-    double puzzleWidth = puzzleLayout.containerWidth;
+    double puzzleWidth = containerWidth;
 
     late double dashHeight;
 
-    if (MediaQuery.of(context).orientation == Orientation.landscape) {
+    if (screenTypeHelper.isWideLayout) {
       switch (screenTypeHelper.type) {
         case ScreenType.xSmall:
         case ScreenType.small:
-          dashHeight = MediaQuery.of(context).size.height * 0.5;
+          dashHeight = screenHeight * 0.5;
           break;
         case ScreenType.medium:
-          if (!kIsWeb) {
-            dashHeight = MediaQuery.of(context).size.height * 0.35;
-          } else {
-            dashHeight = MediaQuery.of(context).size.height * 0.5;
-          }
+          dashHeight = screenHeight * 0.5;
           break;
         case ScreenType.large:
-          dashHeight = MediaQuery.of(context).size.height * 0.35;
+          dashHeight = screenHeight * 0.35;
       }
     } else {
-      dashHeight =
-          ((MediaQuery.of(context).size.height - puzzleWidth) / 2) * 0.85;
+      dashHeight = ((screenHeight - puzzleWidth) / 2) * 0.85;
     }
     return Size(dashHeight, dashHeight);
   }

@@ -6,18 +6,18 @@ import 'package:dashtronaut/presentation/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundStack extends StatelessWidget {
-  const BackgroundStack({super.key});
+  final Size size;
+
+  const BackgroundStack({super.key, required this.size});
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-
     List<BackgroundLayerLayout> backgroundLayers = BackgroundLayers()(context);
 
     return Positioned.fill(
       child: Container(
-        height: screenSize.height,
-        width: screenSize.width,
+        height: size.height,
+        width: size.width,
         decoration: const BoxDecoration(
           gradient: RadialGradient(
             colors: [AppColors.primaryAccent, AppColors.primary],
@@ -28,7 +28,7 @@ class BackgroundStack extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            const Positioned.fill(child: Stars()),
+            Positioned.fill(child: Stars(size: size)),
             ...List.generate(
               backgroundLayers.length,
               (i) => AnimatedBackgroundLayer(layer: backgroundLayers[i]),

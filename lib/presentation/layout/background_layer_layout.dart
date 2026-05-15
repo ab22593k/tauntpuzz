@@ -2,7 +2,6 @@ import 'package:dashtronaut/models/position.dart';
 import 'package:dashtronaut/presentation/layout/layout_delegate.dart';
 import 'package:dashtronaut/presentation/layout/screen_type_helper.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 enum BackgroundLayerType {
   topRightPlanet,
@@ -15,25 +14,18 @@ enum BackgroundLayerType {
 
 class BackgroundLayerLayout implements LayoutDelegate {
   @override
-  final BuildContext context;
+  final ScreenTypeHelper screenTypeHelper;
 
   final BackgroundLayerType type;
+  final bool isWideLayout;
 
-  const BackgroundLayerLayout(
-    this.context, {
+  const BackgroundLayerLayout({
+    required this.screenTypeHelper,
     required this.type,
+    required this.isWideLayout,
   });
 
   String get assetUrl => 'assets/images/background/${type.name}.png';
-
-  @override
-  ScreenTypeHelper get screenTypeHelper => ScreenTypeHelper(context);
-
-  bool get landscapeMode =>
-      MediaQuery.of(context).orientation == Orientation.landscape &&
-      !kIsWeb &&
-      MediaQuery.of(context).size.width <
-          ScreenTypeHelper.breakpoints[ScreenType.medium]!;
 
   Size get size {
     late Size size;
@@ -57,9 +49,6 @@ class BackgroundLayerLayout implements LayoutDelegate {
       case BackgroundLayerType.bottomBgPlanet:
         size = const Size(112, 104);
         break;
-      default:
-        size = Size.zero;
-        break;
     }
 
     switch (screenTypeHelper.type) {
@@ -70,14 +59,14 @@ class BackgroundLayerLayout implements LayoutDelegate {
         size = size * 0.9;
         break;
       case ScreenType.medium:
-        if (landscapeMode) {
+        if (isWideLayout) {
           size = size * 1;
         } else {
           size = size * 1.2;
         }
         break;
       case ScreenType.large:
-        if (landscapeMode) {
+        if (isWideLayout) {
           size = size * 0.9;
         } else {
           size = size * 2;
@@ -134,9 +123,6 @@ class BackgroundLayerLayout implements LayoutDelegate {
         break;
       case BackgroundLayerType.bottomBgPlanet:
         position = Position(left: size.width * 0.6, bottom: size.height * 0.8);
-        break;
-      default:
-        position = const Position.zero();
         break;
     }
     return position;

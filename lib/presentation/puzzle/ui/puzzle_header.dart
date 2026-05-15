@@ -1,6 +1,5 @@
 import 'package:dashtronaut/presentation/common/animations/utils/animations_manager.dart';
 import 'package:dashtronaut/presentation/common/animations/widgets/fade_in_transition.dart';
-import 'package:dashtronaut/presentation/layout/puzzle_layout.dart';
 import 'package:dashtronaut/presentation/layout/spacing.dart';
 import 'package:dashtronaut/presentation/puzzle/ui/correct_tiles_count.dart';
 import 'package:dashtronaut/presentation/puzzle/ui/moves_count.dart';
@@ -9,12 +8,12 @@ import 'package:dashtronaut/presentation/styles/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class PuzzleHeader extends StatelessWidget {
-  const PuzzleHeader({super.key});
+  final double containerWidth;
+
+  const PuzzleHeader({super.key, required this.containerWidth});
 
   @override
   Widget build(BuildContext context) {
-    PuzzleLayout puzzleLayout = PuzzleLayout(context);
-
     return FadeInTransition(
       delay: AnimationsManager.bgLayerAnimationDuration,
       child: Container(
@@ -35,17 +34,17 @@ class PuzzleHeader extends StatelessWidget {
               children: [
                 ConstrainedBox(
                   constraints: BoxConstraints(
-                      minWidth: (puzzleLayout.containerWidth / 3) - Spacing.md),
+                      minWidth: (containerWidth / 3) - Spacing.md),
                   child: const PuzzleStopWatch(),
                 ),
                 ConstrainedBox(
                   constraints: BoxConstraints(
-                      minWidth: (puzzleLayout.containerWidth / 3) - Spacing.md),
+                      minWidth: (containerWidth / 3) - Spacing.md),
                   child: const MovesCount(),
                 ),
                 ConstrainedBox(
                   constraints: BoxConstraints(
-                      minWidth: (puzzleLayout.containerWidth / 3) - Spacing.md),
+                      minWidth: (containerWidth / 3) - Spacing.md),
                   child: const CorrectTilesCount(),
                 ),
               ],

@@ -1,9 +1,12 @@
 import 'package:dashtronaut/presentation/common/animations/utils/animations_manager.dart';
+import 'package:dashtronaut/presentation/layout/screen_type_helper.dart';
 import 'package:dashtronaut/presentation/layout/stars_layout.dart';
 import 'package:flutter/material.dart';
 
 class Stars extends StatefulWidget {
-  const Stars({super.key});
+  final Size size;
+
+  const Stars({super.key, required this.size});
 
   @override
   _StarsState createState() => _StarsState();
@@ -39,7 +42,11 @@ class _StarsState extends State<Stars> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    StarsLayout starsLayout = StarsLayout(context);
+    StarsLayout starsLayout = StarsLayout(
+      screenTypeHelper: ScreenTypeHelper(widget.size.width, widget.size.height),
+      starsMaxXOffset: widget.size.width,
+      starsMaxYOffset: widget.size.height,
+    );
 
     return CustomPaint(
       painter: starsLayout.getPainter(

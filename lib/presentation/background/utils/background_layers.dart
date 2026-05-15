@@ -1,13 +1,8 @@
-import 'package:dashtronaut/presentation/background/widgets/background_stack.dart';
 import 'package:dashtronaut/presentation/layout/background_layer_layout.dart';
+import 'package:dashtronaut/presentation/layout/screen_type_helper.dart';
 import 'package:flutter/material.dart';
 
-/// Helper class that handles background layers
 class BackgroundLayers {
-  /// List of background layers based on their type
-  ///
-  /// The order of this list determines the z-index order
-  /// in which they are laid out in the Stack [BackgroundStack]
   static List<BackgroundLayerType> types = [
     BackgroundLayerType.topBgPlanet,
     BackgroundLayerType.topRightPlanet,
@@ -16,14 +11,16 @@ class BackgroundLayers {
     BackgroundLayerType.bottomRightPlanet,
   ];
 
-  /// Get Background layers to layout in [BackgroundStack]
-  ///
-  /// Generate a [BackgroundLayerLayout] from each background layer
-  /// And assign it its [BackgroundLayerType] and [BuildContext]
   List<BackgroundLayerLayout> call(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+    final screenTypeHelper = ScreenTypeHelper(size.width, size.height);
     return List.generate(
       types.length,
-      (i) => BackgroundLayerLayout(context, type: types[i]),
+      (i) => BackgroundLayerLayout(
+        screenTypeHelper: screenTypeHelper,
+        type: types[i],
+        isWideLayout: screenTypeHelper.isWideLayout,
+      ),
     );
   }
 }

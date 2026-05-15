@@ -103,7 +103,7 @@ class _AppState extends State<App> {
               fixedSize: const Size.fromHeight(50),
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-              backgroundColor: Colors.white.withOpacity(0.2),
+              backgroundColor: Colors.white.withValues(alpha: 0.2),
             ),
           ),
         ),

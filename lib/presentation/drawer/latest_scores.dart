@@ -11,6 +11,10 @@ class LatestScores extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final double paddingLeft =
+        mediaQuery.padding.left == 0 ? Spacing.md : mediaQuery.padding.left;
+
     return Selector<PuzzleProvider, List<Score>>(
       selector: (c, puzzleProvider) => puzzleProvider.scores.reversed.toList(),
       builder: (c, List<Score> scores, child) => Container(
@@ -20,16 +24,15 @@ class LatestScores extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.only(
-                left: MediaQuery.of(context).padding.left == 0
-                    ? Spacing.md
-                    : MediaQuery.of(context).padding.left,
+                left: paddingLeft,
                 right: Spacing.screenHPadding,
                 bottom: Spacing.xs,
               ),
               decoration: BoxDecoration(
                 border: Border(
                     bottom: BorderSide(
-                        color: Colors.white.withOpacity(0.5), width: 0.5)),
+                        color: Colors.white.withValues(alpha: 0.5),
+                        width: 0.5)),
               ),
               child: Text(
                 'Latest Scores',
@@ -40,17 +43,22 @@ class LatestScores extends StatelessWidget {
             if (scores.isEmpty)
               Padding(
                 padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).padding.left == 0
-                      ? Spacing.md
-                      : MediaQuery.of(context).padding.left,
+                  left: paddingLeft,
                   right: Spacing.screenHPadding,
                   top: Spacing.xs,
                   bottom: Spacing.xs,
                 ),
                 child: const Text(
                     'Solve the puzzle to see your scores here! You can do it!'),
+              )
+            else
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: scores.length,
+                itemBuilder: (c, i) =>
+                    LatestScoreItem(scores[i], paddingLeft: paddingLeft),
               ),
-            ...List.generate(scores.length, (i) => LatestScoreItem(scores[i])),
           ],
         ),
       ),

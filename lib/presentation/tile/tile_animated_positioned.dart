@@ -1,6 +1,4 @@
-import 'package:dashtronaut/models/position.dart';
 import 'package:dashtronaut/models/tile.dart';
-import 'package:dashtronaut/presentation/layout/puzzle_layout.dart';
 import 'package:flutter/material.dart';
 
 class TileAnimatedPositioned extends StatelessWidget {
@@ -8,6 +6,7 @@ class TileAnimatedPositioned extends StatelessWidget {
   final bool isPuzzleSolved;
   final int puzzleSize;
   final Widget tileGestureDetector;
+  final double containerWidth;
 
   const TileAnimatedPositioned({
     super.key,
@@ -15,20 +14,20 @@ class TileAnimatedPositioned extends StatelessWidget {
     required this.isPuzzleSolved,
     required this.puzzleSize,
     required this.tileGestureDetector,
+    required this.containerWidth,
   });
 
   @override
   Widget build(BuildContext context) {
-    double tileWidth = PuzzleLayout(context).containerWidth / puzzleSize;
-    Position tilePosition = tile.getPosition(context, tileWidth);
+    double tileWidth = containerWidth / puzzleSize;
 
     return AnimatedPositioned(
       duration: const Duration(milliseconds: 150),
       curve: Curves.easeInOut,
       width: tileWidth,
       height: tileWidth,
-      left: tilePosition.left,
-      top: tilePosition.top,
+      left: (tile.currentLocation.x - 1) * tileWidth,
+      top: (tile.currentLocation.y - 1) * tileWidth,
       child: tileGestureDetector,
     );
   }

@@ -8,7 +8,9 @@ import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
 
 class DashRiveAnimation extends StatefulWidget {
-  const DashRiveAnimation({super.key});
+  final DashLayout dashLayout;
+
+  const DashRiveAnimation({super.key, required this.dashLayout});
 
   @override
   _DashRiveAnimationState createState() => _DashRiveAnimationState();
@@ -34,7 +36,7 @@ class _DashRiveAnimationState extends State<DashRiveAnimation> {
 
   @override
   Widget build(BuildContext context) {
-    DashLayout dash = DashLayout(context);
+    final DashLayout dash = widget.dashLayout;
 
     return Positioned(
       right: dash.position.right,

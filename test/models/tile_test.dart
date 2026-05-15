@@ -1,7 +1,5 @@
 import 'package:dashtronaut/models/location.dart';
-import 'package:dashtronaut/models/position.dart';
 import 'package:dashtronaut/models/tile.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -28,21 +26,6 @@ void main() {
       expect(correctLocationTile.isAtCorrectLocation, true);
       expect(incorrectLocationTile.isAtCorrectLocation, false);
     });
-
-    testWidgets(
-      'Returns current position of tile in a Stack based on its width',
-      (WidgetTester tester) async {
-        await tester.pumpWidget(
-          Builder(builder: (BuildContext context) {
-            expect(
-              tile.getPosition(context, 100),
-              const Position(top: 200, left: 0),
-            );
-            return const Placeholder();
-          }),
-        );
-      },
-    );
 
     test('Returns correct model from json map', () {
       Map<String, dynamic> tileJson = {

@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AnimatedPhraseBubble extends StatefulWidget {
-  const AnimatedPhraseBubble({super.key});
+  final PhraseBubbleLayout phraseBubbleLayout;
+
+  const AnimatedPhraseBubble({super.key, required this.phraseBubbleLayout});
 
   @override
   State<AnimatedPhraseBubble> createState() => _AnimatedPhraseBubbleState();
@@ -34,7 +36,7 @@ class _AnimatedPhraseBubbleState extends State<AnimatedPhraseBubble>
 
   @override
   Widget build(BuildContext context) {
-    PhraseBubbleLayout phraseBubbleLayout = PhraseBubbleLayout(context);
+    PhraseBubbleLayout phraseBubbleLayout = widget.phraseBubbleLayout;
 
     return Positioned(
       right: phraseBubbleLayout.position.right,
