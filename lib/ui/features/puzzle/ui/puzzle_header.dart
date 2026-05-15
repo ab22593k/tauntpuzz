@@ -4,6 +4,7 @@ import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
 import 'package:tauntpuzz/ui/features/puzzle/ui/correct_tiles_count.dart';
 import 'package:tauntpuzz/ui/features/puzzle/ui/moves_count.dart';
 import 'package:tauntpuzz/ui/features/puzzle/ui/puzzle_stop_watch.dart';
+import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -67,10 +68,10 @@ class PuzzleHeader extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 14, color: Colors.white70),
+        Icon(icon, size: 14, color: AppColors.onSurface.withValues(alpha: 0.6)),
         const SizedBox(width: 4),
         DefaultTextStyle(
-          style: AppTextStyles.labelSmall.copyWith(color: Colors.white),
+          style: AppTextStyles.labelSmall.copyWith(color: AppColors.onSurface),
           child: text,
         ),
       ],

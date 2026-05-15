@@ -23,10 +23,10 @@ class PuzzleSizeSettings extends StatelessWidget {
         top: Spacing.md,
         bottom: Spacing.md,
       ),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: AppColors.stellarWhite.withValues(alpha: 0.15),
+            color: Color(0x26C6C6C6),
             width: 1,
           ),
         ),
@@ -39,7 +39,7 @@ class PuzzleSizeSettings extends StatelessWidget {
               Icon(
                 Icons.grid_view_rounded,
                 size: 16,
-                color: AppColors.stellarWhite.withValues(alpha: 0.6),
+                color: AppColors.onSurface.withValues(alpha: 0.6),
               ),
               const SizedBox(width: 6),
               Text('Puzzle Size', style: AppTextStyles.titleAdaptive(wc)),
@@ -49,15 +49,15 @@ class PuzzleSizeSettings extends StatelessWidget {
           Text(
             'Choose your grid',
             style: AppTextStyles.bodyAdaptive(wc).copyWith(
-              color: AppColors.stellarWhite.withValues(alpha: 0.5),
+              color: AppColors.onSurface.withValues(alpha: 0.5),
             ),
           ),
           const SizedBox(height: 2),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
             decoration: BoxDecoration(
-              color: AppColors.errorContainer.withValues(alpha: 0.2),
-              borderRadius: BorderRadius.circular(4),
+              color: AppColors.errorContainer.withValues(alpha: 0.3),
+              borderRadius: BorderRadius.zero,
             ),
             child: Text(
               'Resets progress',

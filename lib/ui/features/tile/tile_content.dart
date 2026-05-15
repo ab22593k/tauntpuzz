@@ -58,18 +58,17 @@ class _TileContentState extends State<TileContent>
       child: ScaleTransition(
         scale: _scale,
         child: Padding(
-          padding: const EdgeInsets.all(2.0),
+          padding: const EdgeInsets.all(1.5),
           child: Container(
             decoration: BoxDecoration(
-              color: AppColors.surfaceContainerHighest.withValues(alpha: 0.8),
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.nebulaPurple.withValues(alpha: 0.3),
-                  blurRadius: 4,
-                  offset: const Offset(0, 2),
-                ),
-              ],
+              color: widget.tile.isAtCorrectLocation
+                  ? AppColors.surfaceContainerHighest
+                  : AppColors.surfaceContainerLow,
+              borderRadius: BorderRadius.zero,
+              border: Border.all(
+                color: AppColors.outlineVariant.withValues(alpha: 0.2),
+                width: 0.5,
+              ),
             ),
             child: Center(
               child: Text(
@@ -78,7 +77,8 @@ class _TileContentState extends State<TileContent>
                         ? AppTextStyles.tileMobile
                         : AppTextStyles.tile)
                     .copyWith(
-                        fontSize: PuzzleLayout.tileTextSize(widget.puzzleSize)),
+                        fontSize: PuzzleLayout.tileTextSize(widget.puzzleSize),
+                        color: AppColors.onSurface),
               ),
             ),
           ),

@@ -46,29 +46,25 @@ class _DrawerButtonState extends State<DrawerButton>
             minimumSize: const Size(48, 42),
             fixedSize: const Size.fromHeight(42),
             backgroundColor: AppColors.glassSurface,
-            foregroundColor: AppColors.stellarWhite,
+            foregroundColor: AppColors.onSurface,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.zero,
               side: BorderSide(
-                width: 2,
-                color: AppColors.stellarWhite.withValues(alpha: 0.8),
+                width: 1,
+                color: AppColors.outlineVariant.withValues(alpha: 0.15),
               ),
             ),
           ).copyWith(
             elevation: WidgetStateProperty.resolveWith((states) {
-              if (states.contains(WidgetState.hovered)) return 6;
-              if (states.contains(WidgetState.pressed)) return 10;
-              return 2;
+              return 0;
             }),
-            shadowColor: WidgetStateProperty.all(
-              AppColors.nebulaPurple.withValues(alpha: 0.5),
-            ),
+            shadowColor: WidgetStateProperty.all(Colors.transparent),
             overlayColor: WidgetStateProperty.resolveWith((states) {
               if (states.contains(WidgetState.hovered)) {
-                return AppColors.stellarWhite.withValues(alpha: 0.1);
+                return AppColors.onSurface.withValues(alpha: 0.06);
               }
               if (states.contains(WidgetState.pressed)) {
-                return AppColors.stellarWhite.withValues(alpha: 0.2);
+                return AppColors.onSurface.withValues(alpha: 0.12);
               }
               return null;
             }),

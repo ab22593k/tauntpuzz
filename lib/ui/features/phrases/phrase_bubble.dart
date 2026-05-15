@@ -26,7 +26,7 @@ class PhraseBubble extends StatelessWidget {
             width: 12,
             height: 12,
             decoration: const BoxDecoration(
-              color: Colors.white,
+              color: AppColors.primary,
               shape: BoxShape.circle,
             ),
           ),
@@ -38,7 +38,7 @@ class PhraseBubble extends StatelessWidget {
             width: 8,
             height: 8,
             decoration: const BoxDecoration(
-              color: Colors.white,
+              color: AppColors.primary,
               shape: BoxShape.circle,
             ),
           ),
@@ -50,7 +50,7 @@ class PhraseBubble extends StatelessWidget {
             width: 4,
             height: 4,
             decoration: const BoxDecoration(
-              color: Colors.white,
+              color: AppColors.primary,
               shape: BoxShape.circle,
             ),
           ),
@@ -62,11 +62,11 @@ class PhraseBubble extends StatelessWidget {
             maxWidth: 180,
           ),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(18),
+            color: AppColors.primary,
+            borderRadius: BorderRadius.zero,
             boxShadow: [
               BoxShadow(
-                color: AppColors.nebulaPurple.withValues(alpha: 0.25),
+                color: AppColors.primary.withValues(alpha: 0.15),
                 blurRadius: 8,
                 offset: const Offset(0, 4),
               ),
@@ -81,7 +81,7 @@ class PhraseBubble extends StatelessWidget {
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 style: AppTextStyles.h2.copyWith(
-                  color: AppColors.primaryContainer,
+                  color: AppColors.onPrimary,
                   fontWeight: FontWeight.w700,
                   fontSize: phrase.length > 20 ? 16 : 20,
                 ),

@@ -36,13 +36,13 @@ class LatestScores extends StatelessWidget {
                   Icon(
                     Icons.emoji_events_outlined,
                     size: 16,
-                    color: AppColors.stellarWhite.withValues(alpha: 0.6),
+                    color: AppColors.onSurface.withValues(alpha: 0.6),
                   ),
                   const SizedBox(width: 6),
                   Text(
                     'Latest Scores',
                     style: AppTextStyles.titleAdaptive(wc).copyWith(
-                      color: AppColors.stellarWhite.withValues(alpha: 0.8),
+                      color: AppColors.onSurface.withValues(alpha: 0.8),
                     ),
                   ),
                 ],
@@ -77,10 +77,10 @@ class LatestScores extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(Spacing.md),
       decoration: BoxDecoration(
-        color: AppColors.stellarWhite.withValues(alpha: 0.04),
-        borderRadius: BorderRadius.circular(12),
+        color: AppColors.surfaceContainerLow,
+        borderRadius: BorderRadius.zero,
         border: Border.all(
-          color: AppColors.stellarWhite.withValues(alpha: 0.08),
+          color: AppColors.outlineVariant.withValues(alpha: 0.15),
           width: 1,
         ),
       ),
@@ -89,13 +89,13 @@ class LatestScores extends StatelessWidget {
           Icon(
             Icons.rocket_outlined,
             size: 28,
-            color: AppColors.stellarWhite.withValues(alpha: 0.2),
+            color: AppColors.onSurface.withValues(alpha: 0.2),
           ),
           const SizedBox(height: 8),
           Text(
             'Solve your first puzzle!',
             style: AppTextStyles.bodyAdaptive(wc).copyWith(
-              color: AppColors.stellarWhite.withValues(alpha: 0.4),
+              color: AppColors.onSurface.withValues(alpha: 0.4),
               fontVariations: const [FontVariation('wght', 380)],
             ),
           ),
@@ -103,7 +103,7 @@ class LatestScores extends StatelessWidget {
           Text(
             'Scores will appear here',
             style: AppTextStyles.bodyAdaptive(wc).copyWith(
-              color: AppColors.stellarWhite.withValues(alpha: 0.25),
+              color: AppColors.onSurface.withValues(alpha: 0.25),
               fontVariations: const [FontVariation('wght', 360)],
             ),
           ),

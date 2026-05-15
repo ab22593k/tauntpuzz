@@ -82,12 +82,12 @@ class _AppState extends State<App> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Dashtronaut - Slide Puzzle Game',
-        darkTheme: ThemeData(
+        theme: ThemeData(
           useMaterial3: true,
-          brightness: Brightness.dark,
+          brightness: Brightness.light,
           fontFamily: AppTextStyles.secondaryFontFamily,
           colorScheme: const ColorScheme(
-            brightness: Brightness.dark,
+            brightness: Brightness.light,
             primary: AppColors.primary,
             onPrimary: AppColors.onPrimary,
             primaryContainer: AppColors.primaryContainer,
@@ -132,10 +132,10 @@ class _AppState extends State<App> {
           scaffoldBackgroundColor: AppColors.background,
           appBarTheme: const AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarBrightness: Brightness.light,
-              statusBarIconBrightness: Brightness.light,
-              systemNavigationBarIconBrightness: Brightness.light,
-              systemNavigationBarColor: Colors.black,
+              statusBarBrightness: Brightness.dark,
+              statusBarIconBrightness: Brightness.dark,
+              systemNavigationBarIconBrightness: Brightness.dark,
+              systemNavigationBarColor: Color(0xfff9f9f9),
             ),
           ),
           textTheme: const TextTheme(
@@ -157,16 +157,15 @@ class _AppState extends State<App> {
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-              foregroundColor: AppColors.stellarWhite,
+              foregroundColor: AppColors.onPrimary,
               textStyle: AppTextStyles.button,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-                side: const BorderSide(color: AppColors.stellarWhite, width: 2),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.zero,
               ),
-              backgroundColor: AppColors.glassSurface,
+              backgroundColor: AppColors.primary,
               elevation: 0,
-              shadowColor: AppColors.nebulaPurple,
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+              shadowColor: Colors.transparent,
+              padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
             ).copyWith(
               overlayColor: WidgetStateProperty.resolveWith((states) {
                 if (states.contains(WidgetState.hovered)) {
@@ -179,12 +178,11 @@ class _AppState extends State<App> {
               }),
             ),
           ),
-          dialogTheme: DialogThemeData(
+          dialogTheme: const DialogThemeData(
             backgroundColor: Colors.transparent,
             elevation: 0,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18),
-              side: const BorderSide(color: AppColors.stellarWhite, width: 2),
+              borderRadius: BorderRadius.zero,
             ),
           ),
           drawerTheme: const DrawerThemeData(
@@ -192,13 +190,13 @@ class _AppState extends State<App> {
             elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadiusDirectional.only(
-                topEnd: Radius.circular(15),
-                bottomEnd: Radius.circular(15),
+                topEnd: Radius.zero,
+                bottomEnd: Radius.zero,
               ),
             ),
           ),
         ),
-        themeMode: ThemeMode.dark,
+        themeMode: ThemeMode.light,
         home: const HomePage(),
       ),
     );

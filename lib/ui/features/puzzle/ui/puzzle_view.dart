@@ -94,10 +94,10 @@ class _PuzzleViewState extends State<PuzzleView> {
                   ),
                   decoration: BoxDecoration(
                     color:
-                        AppColors.surfaceContainerHigh.withValues(alpha: 0.85),
-                    borderRadius: BorderRadius.circular(16),
+                        AppColors.surfaceContainerLow.withValues(alpha: 0.90),
+                    borderRadius: BorderRadius.zero,
                     border: Border.all(
-                      color: AppColors.stellarWhite.withValues(alpha: 0.2),
+                      color: AppColors.outlineVariant.withValues(alpha: 0.15),
                     ),
                   ),
                   child: PuzzleHeader(

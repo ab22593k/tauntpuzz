@@ -1,4 +1,4 @@
-name: tauntpuzzz
+name: tauntpuzz
 description: Slide Puzzle Game Made With Flutter For The Flutter Puzzle Hack Challenge
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
@@ -29,7 +29,6 @@ dependencies:
   desktop_window: ^0.4.3
   cross_file: ^0.3.5+2
 
-  tauntpuzz: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -39,7 +38,6 @@ dev_dependencies:
   plugin_platform_interface: ^2.1.2
   flutter_lints: ^6.0.0
 
-  tauntpuzz: any
 flutter:
   uses-material-design: true
   assets:

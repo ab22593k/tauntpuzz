@@ -32,10 +32,10 @@ class LatestScoreItem extends StatelessWidget {
         top: Spacing.sm,
         bottom: Spacing.sm,
       ),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: AppColors.stellarWhite.withValues(alpha: 0.06),
+            color: Color(0x1AC6C6C6),
             width: 1,
           ),
         ),
@@ -49,7 +49,7 @@ class LatestScoreItem extends StatelessWidget {
                 : Text(
                     '$rank',
                     style: AppTextStyles.labelAdaptive(wc).copyWith(
-                      color: AppColors.stellarWhite.withValues(alpha: 0.3),
+                      color: AppColors.onSurface.withValues(alpha: 0.3),
                       fontVariations: const [FontVariation('wght', 500)],
                     ),
                   ),
@@ -60,7 +60,7 @@ class LatestScoreItem extends StatelessWidget {
             child: Text(
               '${score.puzzleSize}\u00d7${score.puzzleSize}',
               style: AppTextStyles.bodyAdaptive(wc).copyWith(
-                color: AppColors.stellarWhite.withValues(alpha: 0.8),
+                color: AppColors.onSurface.withValues(alpha: 0.8),
                 fontVariations: const [FontVariation('wght', 500)],
               ),
             ),
@@ -70,14 +70,13 @@ class LatestScoreItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(Icons.schedule,
-                  size: 11,
-                  color: AppColors.stellarWhite.withValues(alpha: 0.4)),
+                  size: 11, color: AppColors.onSurface.withValues(alpha: 0.4)),
               const SizedBox(width: 3),
               Text(
                 DurationHelper.toFormattedTime(
                     Duration(seconds: score.secondsElapsed)),
                 style: AppTextStyles.labelAdaptive(wc).copyWith(
-                  color: AppColors.stellarWhite.withValues(alpha: 0.7),
+                  color: AppColors.onSurface.withValues(alpha: 0.7),
                 ),
               ),
             ],
@@ -87,13 +86,12 @@ class LatestScoreItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(Icons.swap_vert,
-                  size: 11,
-                  color: AppColors.stellarWhite.withValues(alpha: 0.4)),
+                  size: 11, color: AppColors.onSurface.withValues(alpha: 0.4)),
               const SizedBox(width: 3),
               Text(
                 '${score.movesCount}',
                 style: AppTextStyles.labelAdaptive(wc).copyWith(
-                  color: AppColors.stellarWhite.withValues(alpha: 0.7),
+                  color: AppColors.onSurface.withValues(alpha: 0.7),
                 ),
               ),
             ],
@@ -104,8 +102,8 @@ class LatestScoreItem extends StatelessWidget {
   }
 
   Color get _medalColor {
-    if (score.movesCount <= 30) return const Color(0xffffd700);
-    if (score.movesCount <= 60) return const Color(0xffcdbdff);
-    return AppColors.stellarWhite.withValues(alpha: 0.5);
+    if (score.movesCount <= 30) return const Color(0xffb8860b);
+    if (score.movesCount <= 60) return const Color(0xff595959);
+    return AppColors.onSurface.withValues(alpha: 0.5);
   }
 }

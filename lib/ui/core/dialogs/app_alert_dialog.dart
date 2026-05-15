@@ -29,25 +29,25 @@ class AppAlertDialog extends StatelessWidget {
       contentPadding: const EdgeInsets.all(0),
       scrollable: true,
       insetPadding: insetPadding,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18),
-        side: const BorderSide(color: Colors.white, width: 2),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.zero,
+        side: BorderSide(color: AppColors.outlineVariant, width: 0.5),
       ),
       content: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.zero,
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaY: 12, sigmaX: 12),
               child: Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(
                     horizontal: Spacing.screenHPadding, vertical: Spacing.md),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18),
-                  color: AppColors.surfaceContainerHigh,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.zero,
+                  color: AppColors.surfaceContainerLowest,
                 ),
                 child: content ??
                     Column(

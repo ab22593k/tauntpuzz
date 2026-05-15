@@ -25,8 +25,7 @@ class AppDrawer extends StatelessWidget {
     return SafeArea(
       left: false,
       child: ClipRRect(
-        borderRadius: const BorderRadiusDirectional.only(
-            topEnd: Radius.circular(18), bottomEnd: Radius.circular(18)),
+        borderRadius: BorderRadius.zero,
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaY: 16, sigmaX: 16),
           child: LayoutBuilder(
@@ -46,13 +45,13 @@ class AppDrawer extends StatelessWidget {
                             ? padding.bottom
                             : 0),
                 decoration: BoxDecoration(
-                  color: AppColors.surfaceContainerHigh.withValues(alpha: 0.95),
-                  borderRadius: const BorderRadiusDirectional.only(
-                      topEnd: Radius.circular(18),
-                      bottomEnd: Radius.circular(18)),
-                  border: Border.all(
-                    width: isWide ? 2 : 1.5,
-                    color: AppColors.stellarWhite.withValues(alpha: 0.6),
+                  color: AppColors.surfaceContainerLow.withValues(alpha: 0.95),
+                  borderRadius: BorderRadius.zero,
+                  border: Border(
+                    right: BorderSide(
+                      width: isWide ? 1 : 1,
+                      color: AppColors.outlineVariant.withValues(alpha: 0.15),
+                    ),
                   ),
                 ),
                 child: Column(
@@ -98,10 +97,10 @@ class _DrawerHeader extends StatelessWidget {
         top: Spacing.md,
         bottom: Spacing.sm,
       ),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: AppColors.stellarWhite.withValues(alpha: 0.2),
+            color: Color(0x26C6C6C6),
             width: 1,
           ),
         ),
@@ -111,13 +110,9 @@ class _DrawerHeader extends StatelessWidget {
           Container(
             width: 36,
             height: 36,
-            decoration: BoxDecoration(
-              color: AppColors.nebulaPurple,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: AppColors.stellarWhite.withValues(alpha: 0.3),
-                width: 1,
-              ),
+            decoration: const BoxDecoration(
+              color: AppColors.primary,
+              borderRadius: BorderRadius.zero,
             ),
             child: const Center(
               child: Text('D', style: AppTextStyles.titleMedium),
@@ -153,7 +148,7 @@ class _DrawerHeader extends StatelessWidget {
             },
             icon: const Icon(Icons.close),
             style: IconButton.styleFrom(
-              foregroundColor: AppColors.stellarWhite.withValues(alpha: 0.7),
+              foregroundColor: AppColors.onSurface.withValues(alpha: 0.7),
             ),
           ),
         ],
@@ -176,10 +171,10 @@ class _DrawerFooter extends StatelessWidget {
         top: Spacing.sm,
         bottom: Spacing.md + MediaQuery.paddingOf(context).bottom / 2,
       ),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: AppColors.stellarWhite.withValues(alpha: 0.2),
+            color: Color(0x26C6C6C6),
             width: 1,
           ),
         ),
@@ -193,7 +188,7 @@ class _DrawerFooter extends StatelessWidget {
           Icon(
             Icons.rocket_launch_outlined,
             size: 16,
-            color: AppColors.stellarWhite.withValues(alpha: 0.3),
+            color: AppColors.onSurface.withValues(alpha: 0.3),
           ),
         ],
       ),

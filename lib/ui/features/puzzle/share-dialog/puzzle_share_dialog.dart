@@ -30,7 +30,7 @@ class PuzzleSolvedDialog extends StatelessWidget {
   }
 
   Widget get _puzzleSolvedImage => ClipRRect(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.zero,
         child: Image.asset('assets/images/puzzle-solved/$imageName'),
       );
 

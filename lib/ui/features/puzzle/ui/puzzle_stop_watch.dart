@@ -1,4 +1,5 @@
 import 'package:tauntpuzz/helpers/duration_helper.dart';
+import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:tauntpuzz/ui/features/puzzle/view_models/stop_watch_provider.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class PuzzleStopWatch extends StatelessWidget {
             Text(
               DurationHelper.toFormattedTime(duration),
               style: AppTextStyles.titleMedium.copyWith(
+                color: AppColors.onSurface,
                 fontVariations: const [FontVariation('wght', 700)],
               ),
             ),

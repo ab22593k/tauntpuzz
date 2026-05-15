@@ -8,7 +8,7 @@ class AppTextStyles {
 
   static const TextStyle tile = TextStyle(
     fontFamily: primaryFontFamily,
-    fontSize: 40,
+    fontSize: 28,
     fontWeight: FontWeight.w700,
     height: 1.0,
     letterSpacing: 0,
@@ -16,7 +16,7 @@ class AppTextStyles {
 
   static const TextStyle tileMobile = TextStyle(
     fontFamily: primaryFontFamily,
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: FontWeight.w700,
     height: 1.0,
     letterSpacing: 0,
@@ -32,27 +32,27 @@ class AppTextStyles {
 
   static const TextStyle h1 = TextStyle(
     fontFamily: secondaryFontFamily,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: FontWeight.w700,
-    height: 28 / 20,
+    height: 24 / 18,
     letterSpacing: 0,
     fontVariations: [FontVariation('wght', 700)],
   );
 
   static const TextStyle h1Bold = TextStyle(
     fontFamily: secondaryFontFamily,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: FontWeight.w700,
-    height: 28 / 20,
+    height: 24 / 18,
     letterSpacing: 0,
     fontVariations: [FontVariation('wght', 700)],
   );
 
   static const TextStyle h2 = TextStyle(
     fontFamily: secondaryFontFamily,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: FontWeight.w400,
-    height: 24 / 18,
+    height: 22 / 16,
     letterSpacing: 0,
     fontVariations: [FontVariation('wght', 420)],
   );
@@ -68,35 +68,35 @@ class AppTextStyles {
 
   static const TextStyle body = TextStyle(
     fontFamily: secondaryFontFamily,
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: FontWeight.w400,
-    height: 24 / 16,
-    letterSpacing: 0.5,
+    height: 20 / 14,
+    letterSpacing: 0,
     fontVariations: [FontVariation('wght', 410)],
   );
 
   static const TextStyle bodyBold = TextStyle(
     fontFamily: secondaryFontFamily,
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: FontWeight.w700,
-    height: 24 / 16,
-    letterSpacing: 0.5,
+    height: 20 / 14,
+    letterSpacing: 0,
     fontVariations: [FontVariation('wght', 700)],
   );
 
   static const TextStyle bodySm = TextStyle(
     fontFamily: secondaryFontFamily,
     fontSize: 14,
-    letterSpacing: 0.25,
+    letterSpacing: 0,
     fontVariations: [FontVariation('wght', 415)],
   );
 
   static const TextStyle bodyXs = TextStyle(
     fontFamily: secondaryFontFamily,
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: FontWeight.w400,
-    height: 16 / 12,
-    letterSpacing: 0.4,
+    height: 16 / 11,
+    letterSpacing: 0.5,
     fontVariations: [FontVariation('wght', 425)],
   );
 
@@ -111,14 +111,14 @@ class AppTextStyles {
 
   static const TextStyle button = TextStyle(
     fontFamily: primaryFontFamily,
-    fontSize: 16,
+    fontSize: 14,
     height: 1,
     letterSpacing: 0.5,
   );
 
   static const TextStyle buttonSm = TextStyle(
     fontFamily: primaryFontFamily,
-    fontSize: 14,
+    fontSize: 12,
     height: 1,
     letterSpacing: 0.25,
   );
@@ -149,51 +149,51 @@ class AppTextStyles {
 
   static const TextStyle headlineLarge = TextStyle(
     fontFamily: primaryFontFamily,
-    fontSize: 32,
-    fontWeight: FontWeight.w400,
-    height: 40 / 32,
-    letterSpacing: 0,
+    fontSize: 56,
+    fontWeight: FontWeight.w700,
+    height: 64 / 56,
+    letterSpacing: -0.25,
   );
 
   static const TextStyle headlineMedium = TextStyle(
     fontFamily: primaryFontFamily,
-    fontSize: 28,
-    fontWeight: FontWeight.w400,
-    height: 36 / 28,
+    fontSize: 32,
+    fontWeight: FontWeight.w700,
+    height: 40 / 32,
     letterSpacing: 0,
   );
 
   static const TextStyle headlineSmall = TextStyle(
     fontFamily: primaryFontFamily,
     fontSize: 24,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w700,
     height: 32 / 24,
     letterSpacing: 0,
   );
 
   static const TextStyle titleLarge = TextStyle(
     fontFamily: secondaryFontFamily,
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: FontWeight.w700,
-    height: 28 / 22,
+    height: 24 / 18,
     letterSpacing: 0,
     fontVariations: [FontVariation('wght', 700)],
   );
 
   static const TextStyle titleMedium = TextStyle(
     fontFamily: secondaryFontFamily,
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: FontWeight.w600,
-    height: 24 / 16,
-    letterSpacing: 0.15,
+    height: 20 / 14,
+    letterSpacing: 0.1,
     fontVariations: [FontVariation('wght', 650)],
   );
 
   static const TextStyle titleSmall = TextStyle(
     fontFamily: secondaryFontFamily,
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: FontWeight.w600,
-    height: 20 / 14,
+    height: 16 / 12,
     letterSpacing: 0.1,
     fontVariations: [FontVariation('wght', 600)],
   );
@@ -208,9 +208,9 @@ class AppTextStyles {
 
   static const TextStyle labelMedium = TextStyle(
     fontFamily: secondaryFontFamily,
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: FontWeight.w500,
-    height: 16 / 12,
+    height: 16 / 11,
     letterSpacing: 0.5,
     fontVariations: [FontVariation('wght', 520)],
   );
@@ -220,34 +220,34 @@ class AppTextStyles {
     fontSize: 11,
     fontWeight: FontWeight.w500,
     height: 16 / 11,
-    letterSpacing: 0.5,
+    letterSpacing: 1.0,
     fontVariations: [FontVariation('wght', 540)],
   );
 
   static const TextStyle bodyLarge = TextStyle(
     fontFamily: secondaryFontFamily,
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: FontWeight.w400,
-    height: 24 / 16,
-    letterSpacing: 0.5,
+    height: 20 / 14,
+    letterSpacing: 0,
     fontVariations: [FontVariation('wght', 410)],
   );
 
   static const TextStyle bodyMedium = TextStyle(
     fontFamily: secondaryFontFamily,
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: FontWeight.w400,
-    height: 20 / 14,
-    letterSpacing: 0.25,
+    height: 16 / 12,
+    letterSpacing: 0,
     fontVariations: [FontVariation('wght', 415)],
   );
 
   static const TextStyle bodySmall = TextStyle(
     fontFamily: secondaryFontFamily,
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: FontWeight.w400,
-    height: 16 / 12,
-    letterSpacing: 0.4,
+    height: 16 / 11,
+    letterSpacing: 0,
     fontVariations: [FontVariation('wght', 425)],
   );
 

@@ -49,35 +49,29 @@ class PuzzleSizeItem extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.zero,
                     side: BorderSide(
                       width: isSelected ? 2 : 1,
                       color: isSelected
-                          ? AppColors.stellarWhite
-                          : AppColors.stellarWhite.withValues(alpha: 0.3),
+                          ? AppColors.primary
+                          : AppColors.outlineVariant.withValues(alpha: 0.3),
                     ),
                   ),
                   minimumSize: const Size.fromHeight(48),
                   backgroundColor:
-                      isSelected ? AppColors.stellarWhite : Colors.transparent,
+                      isSelected ? AppColors.primary : Colors.transparent,
                   elevation: 0,
                 ).copyWith(
                   elevation: WidgetStateProperty.resolveWith((states) {
-                    if (isSelected) return 4;
-                    if (states.contains(WidgetState.hovered)) return 3;
-                    if (states.contains(WidgetState.pressed)) return 6;
                     return 0;
                   }),
-                  shadowColor: WidgetStateProperty.all(
-                    AppColors.nebulaPurple.withValues(alpha: 0.4),
-                  ),
+                  shadowColor: WidgetStateProperty.all(Colors.transparent),
                 ),
                 child: Text(
                   '$size\u00d7$size',
                   style: AppTextStyles.labelLarge.copyWith(
-                    color: isSelected
-                        ? AppColors.primaryContainer
-                        : AppColors.stellarWhite,
+                    color:
+                        isSelected ? AppColors.onPrimary : AppColors.onSurface,
                     fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400,
                     fontVariations: [
                       FontVariation(
@@ -94,7 +88,7 @@ class PuzzleSizeItem extends StatelessWidget {
             Text(
               '${(size * size) - 1}',
               style: AppTextStyles.labelAdaptive(wc).copyWith(
-                color: AppColors.stellarWhite.withValues(alpha: 0.4),
+                color: AppColors.onSurface.withValues(alpha: 0.4),
               ),
             ),
           ],

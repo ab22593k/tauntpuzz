@@ -42,8 +42,8 @@ class CorrectTilesCount extends StatelessWidget {
   }
 
   static Color _progressColor(double ratio) {
-    if (ratio >= 1.0) return const Color(0xff66bb6a);
-    if (ratio >= 0.75) return const Color(0xffffc107);
+    if (ratio >= 1.0) return const Color(0xff2e7d32);
+    if (ratio >= 0.75) return const Color(0xffb8860b);
     if (ratio >= 0.5) return AppColors.secondary;
     return AppColors.primary;
   }
@@ -57,10 +57,7 @@ class CorrectTilesCount extends StatelessWidget {
         height: 14,
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(3),
-          boxShadow: [
-            BoxShadow(color: color.withValues(alpha: 0.5), blurRadius: 4),
-          ],
+          borderRadius: BorderRadius.zero,
         ),
         child: const Icon(Icons.star, size: 10, color: Colors.white),
       );
@@ -70,13 +67,10 @@ class CorrectTilesCount extends StatelessWidget {
         width: 14,
         height: 14,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(7),
+          borderRadius: BorderRadius.zero,
           border: Border.all(color: color, width: 1.5),
-          boxShadow: [
-            BoxShadow(color: color.withValues(alpha: 0.3), blurRadius: 3),
-          ],
         ),
-        child: const Icon(Icons.check, size: 10, color: Colors.white70),
+        child: const Icon(Icons.check, size: 10, color: Colors.black54),
       );
     }
     return Icon(Icons.check_circle_outline, size: 14, color: color);

@@ -2,7 +2,6 @@ import 'package:tauntpuzz/ui/features/background/background_layers.dart';
 import 'package:tauntpuzz/ui/features/background/animated_background_layer.dart';
 import 'package:tauntpuzz/ui/features/background/stars.dart';
 import 'package:tauntpuzz/ui/core/layout/background_layer_layout.dart';
-import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundStack extends StatelessWidget {
@@ -20,7 +19,7 @@ class BackgroundStack extends StatelessWidget {
         width: size.width,
         decoration: const BoxDecoration(
           gradient: RadialGradient(
-            colors: [AppColors.nebulaPurple, AppColors.surfaceDim],
+            colors: [Color(0xffe0e0e0), Color(0xfff5f5f5)],
             stops: [0, 1],
             radius: 1.1,
             center: Alignment.centerLeft,
