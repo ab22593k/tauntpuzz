@@ -1,3 +1,4 @@
+import 'package:tauntpuzz/helpers/localizations_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
@@ -9,28 +10,28 @@ class ErrorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: AppColors.background,
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(24),
+          padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.error_outline_rounded,
                 size: 64,
                 color: AppColors.error,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
-                'Page not found',
+                context.l10n.pageNotFound,
                 style: AppTextStyles.headlineLarge,
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
-                'The page you\'re looking for doesn\'t exist.',
+                context.l10n.pageNotFoundMessage,
                 style: AppTextStyles.bodyLarge,
                 textAlign: TextAlign.center,
               ),

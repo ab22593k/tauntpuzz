@@ -30,7 +30,7 @@ class PuzzleHeader extends StatelessWidget {
 
   Widget get _compactLayout {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         const PuzzleStopWatch(),
         _statChip(Icons.swap_vert, const MovesCount()),

@@ -1,3 +1,4 @@
+import 'package:tauntpuzz/helpers/localizations_ext.dart';
 import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:tauntpuzz/ui/core/app_colors.dart';
@@ -36,7 +37,7 @@ class _AppVersionSectionState extends State<AppVersionSection> {
     final wc =
         ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
     return Text(
-      'Version ${appVersionText ?? ''}',
+      '${context.l10n.version} ${appVersionText ?? ''}',
       style: AppTextStyles.labelAdaptive(wc).copyWith(
         color: AppColors.onSurface.withValues(alpha: 0.5),
       ),

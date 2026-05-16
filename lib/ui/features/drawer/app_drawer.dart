@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:tauntpuzz/helpers/localizations_ext.dart';
 import 'package:tauntpuzz/ui/features/drawer/app_version_section.dart';
 import 'package:tauntpuzz/ui/features/drawer/drawer_app_info.dart';
+import 'package:tauntpuzz/ui/features/drawer/language_picker.dart';
 import 'package:tauntpuzz/ui/features/drawer/latest_scores.dart';
 import 'package:tauntpuzz/ui/features/drawer/puzzle_size_settings.dart';
 import 'package:tauntpuzz/ui/core/layout/spacing.dart';
@@ -62,6 +64,7 @@ class AppDrawer extends StatelessWidget {
                         child: Column(
                           children: [
                             PuzzleSizeSettings(),
+                            LanguagePicker(),
                             SizedBox(height: 8),
                             LatestScores(),
                           ],
@@ -132,7 +135,7 @@ class _DrawerHeader extends StatelessWidget {
                     )),
                 const SizedBox(height: 1),
                 Text(
-                  'Slide Puzzle',
+                  context.l10n.appSubtitle,
                   style: AppTextStyles.bodyAdaptive(wc).copyWith(
                     fontVariations: const [FontVariation('wght', 400)],
                   ),

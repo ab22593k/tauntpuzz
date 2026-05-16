@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:tauntpuzz/helpers/duration_helper.dart';
 import 'package:tauntpuzz/helpers/file_helper.dart';
+import 'package:tauntpuzz/helpers/localizations_ext.dart';
 import 'package:tauntpuzz/helpers/share_score_helper.dart';
 import 'package:tauntpuzz/ui/core/layout/spacing.dart';
 import 'package:tauntpuzz/ui/core/app_colors.dart';
@@ -102,7 +103,7 @@ class PuzzleScore extends StatelessWidget {
                     rethrow;
                   }
                 },
-                label: const Text('Share'),
+                label: Text(context.l10n.share),
                 icon: kIsWeb
                     ? const FaIcon(FontAwesomeIcons.twitter)
                     : const Icon(Icons.share),

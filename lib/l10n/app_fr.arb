@@ -1,0 +1,70 @@
+{
+  "appTitle": "tauntpuzz",
+  "@appTitle": {
+    "description": "Le titre de l'application"
+  },
+  "appSubtitle": "Puzzle Glissant",
+  "@appSubtitle": {
+    "description": "Le sous-titre de l'application"
+  },
+  "language": "Langue",
+  "@language": {
+    "description": "Titre de la section de sélection de langue"
+  },
+  "switchLanguage": "Changer la langue",
+  "@switchLanguage": {
+    "description": "Description de la section de sélection de langue"
+  },
+  "puzzleSize": "Taille du Puzzle",
+  "@puzzleSize": {
+    "description": "Titre de la section taille du puzzle"
+  },
+  "chooseGrid": "Choisissez votre grille",
+  "@chooseGrid": {
+    "description": "Description de la section taille du puzzle"
+  },
+  "resetsProgress": "Réinitialise la progression",
+  "@resetsProgress": {
+    "description": "Étiquette d''avertissement lors du changement de taille"
+  },
+  "latestScores": "Meilleurs Scores",
+  "@latestScores": {
+    "description": "Titre de la section des scores"
+  },
+  "solveFirstPuzzle": "Résolvez votre premier puzzle !",
+  "@solveFirstPuzzle": {
+    "description": "Message d''état vide lorsqu''aucun score n''existe"
+  },
+  "scoresWillAppear": "Les scores apparaîtront ici",
+  "@scoresWillAppear": {
+    "description": "Sous-titre d''état vide"
+  },
+  "reset": "Réinitialiser",
+  "@reset": {
+    "description": "Bouton de réinitialisation du puzzle"
+  },
+  "resetConfirm": "Êtes-vous sûr de vouloir réinitialiser le puzzle ?",
+  "@resetConfirm": {
+    "description": "Titre de la boîte de dialogue de confirmation de réinitialisation"
+  },
+  "share": "Partager",
+  "@share": {
+    "description": "Bouton de partage du score"
+  },
+  "builtWith": "Construit avec ",
+  "@builtWith": {
+    "description": "Texte de pied de page avant 'Flutter'"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "Préfixe du numéro de version"
+  },
+  "pageNotFound": "Page introuvable",
+  "@pageNotFound": {
+    "description": "Titre de la page 404"
+  },
+  "pageNotFoundMessage": "La page que vous cherchez n''existe pas.",
+  "@pageNotFoundMessage": {
+    "description": "Message de la page 404"
+  }
+}

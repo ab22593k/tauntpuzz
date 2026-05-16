@@ -1,4 +1,5 @@
 import 'package:tauntpuzz/domain/models/puzzle.dart';
+import 'package:tauntpuzz/helpers/localizations_ext.dart';
 import 'package:tauntpuzz/ui/features/drawer/puzzle_size_item.dart';
 import 'package:tauntpuzz/ui/core/layout/spacing.dart';
 import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
@@ -42,12 +43,13 @@ class PuzzleSizeSettings extends StatelessWidget {
                 color: AppColors.onSurface.withValues(alpha: 0.6),
               ),
               const SizedBox(width: 6),
-              Text('Puzzle Size', style: AppTextStyles.titleAdaptive(wc)),
+              Text(context.l10n.puzzleSize,
+                  style: AppTextStyles.titleAdaptive(wc)),
             ],
           ),
           const SizedBox(height: 4),
           Text(
-            'Choose your grid',
+            context.l10n.chooseGrid,
             style: AppTextStyles.bodyAdaptive(wc).copyWith(
               color: AppColors.onSurface.withValues(alpha: 0.5),
             ),
@@ -60,7 +62,7 @@ class PuzzleSizeSettings extends StatelessWidget {
               borderRadius: BorderRadius.zero,
             ),
             child: Text(
-              'Resets progress',
+              context.l10n.resetsProgress,
               style: AppTextStyles.labelAdaptive(wc).copyWith(
                 color: AppColors.error.withValues(alpha: 0.8),
                 fontStyle: FontStyle.italic,

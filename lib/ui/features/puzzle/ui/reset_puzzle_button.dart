@@ -1,3 +1,4 @@
+import 'package:tauntpuzz/helpers/localizations_ext.dart';
 import 'package:tauntpuzz/ui/core/animations/animations_manager.dart';
 import 'package:tauntpuzz/ui/core/animations/fade_in_transition.dart';
 import 'package:tauntpuzz/ui/core/dialogs/app_alert_dialog.dart';
@@ -20,7 +21,7 @@ class ResetPuzzleButton extends StatelessWidget {
         context: context,
         builder: (context) {
           return AppAlertDialog(
-            title: 'Are you sure you want to reset your puzzle?',
+            title: context.l10n.resetConfirm,
             onConfirm: () {
               stopWatchProvider.stop();
               puzzleProvider.generate(forceRefresh: true);
@@ -47,13 +48,13 @@ class ResetPuzzleButton extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () =>
                 initResetPuzzle(context, puzzleProvider, stopWatchProvider),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.refresh),
-                SizedBox(width: 7),
-                Text('Reset', style: AppTextStyles.button),
+                const Icon(Icons.refresh),
+                const SizedBox(width: 7),
+                Text(context.l10n.reset, style: AppTextStyles.button),
               ],
             ),
           ),

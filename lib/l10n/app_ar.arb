@@ -1,0 +1,70 @@
+{
+  "appTitle": "tauntpuzz",
+  "@appTitle": {
+    "description": "عنوان التطبيق"
+  },
+  "appSubtitle": "لغز الانزلاق",
+  "@appSubtitle": {
+    "description": "العنوان الفرعي للتطبيق"
+  },
+  "language": "اللغة",
+  "@language": {
+    "description": "عنوان قسم اختيار اللغة"
+  },
+  "switchLanguage": "تغيير لغة التطبيق",
+  "@switchLanguage": {
+    "description": "وصف قسم اختيار اللغة"
+  },
+  "puzzleSize": "حجم اللغز",
+  "@puzzleSize": {
+    "description": "عنوان قسم حجم اللغز"
+  },
+  "chooseGrid": "اختر الشبكة",
+  "@chooseGrid": {
+    "description": "وصف قسم حجم اللغز"
+  },
+  "resetsProgress": "إعادة تعيين التقدم",
+  "@resetsProgress": {
+    "description": "ملصق تحذير عند تغيير الحجم"
+  },
+  "latestScores": "آخر النتائج",
+  "@latestScores": {
+    "description": "عنوان قسم آخر النتائج"
+  },
+  "solveFirstPuzzle": "حل لغزك الأول!",
+  "@solveFirstPuzzle": {
+    "description": "رسالة الحالة الفارغة عند عدم وجود نتائج"
+  },
+  "scoresWillAppear": "ستظهر النتائج هنا",
+  "@scoresWillAppear": {
+    "description": "نص الحالة الفارغة الفرعي"
+  },
+  "reset": "إعادة تعيين",
+  "@reset": {
+    "description": "زر إعادة تعيين اللغز"
+  },
+  "resetConfirm": "هل أنت متأكد من رغبتك في إعادة تعيين اللغز؟",
+  "@resetConfirm": {
+    "description": "عنوان حوار تأكيد إعادة التعيين"
+  },
+  "share": "مشاركة",
+  "@share": {
+    "description": "زر مشاركة النتيجة"
+  },
+  "builtWith": "بُني باستخدام ",
+  "@builtWith": {
+    "description": "نص التذييل قبل 'Flutter'"
+  },
+  "version": "الإصدار",
+  "@version": {
+    "description": "بادئة رقم الإصدار"
+  },
+  "pageNotFound": "الصفحة غير موجودة",
+  "@pageNotFound": {
+    "description": "عنوان خطأ 404"
+  },
+  "pageNotFoundMessage": "الصفحة التي تبحث عنها غير موجودة.",
+  "@pageNotFoundMessage": {
+    "description": "رسالة خطأ 404"
+  }
+}

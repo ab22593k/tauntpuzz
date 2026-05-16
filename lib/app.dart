@@ -1,11 +1,13 @@
 import 'dart:io';
 
+import 'package:tauntpuzz/generated/app_localizations.dart';
 import 'package:tauntpuzz/router/router_config.dart';
 import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:tauntpuzz/domain/models/puzzle.dart';
 import 'package:tauntpuzz/ui/features/background/background_layers.dart';
 import 'package:tauntpuzz/ui/core/layout/background_layer_layout.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
+import 'package:tauntpuzz/ui/core/locale_provider.dart';
 import 'package:tauntpuzz/ui/features/phrases/view_models/phrases_provider.dart';
 import 'package:tauntpuzz/ui/features/puzzle/view_models/puzzle_provider.dart';
 import 'package:tauntpuzz/ui/features/puzzle/view_models/stop_watch_provider.dart';
@@ -78,126 +80,139 @@ class _AppState extends State<App> {
         ChangeNotifierProvider(
           create: (_) => PhrasesProvider(),
         ),
-      ],
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        title: 'tauntpuzz',
-        theme: ThemeData(
-          useMaterial3: true,
-          brightness: Brightness.light,
-          fontFamily: AppTextStyles.secondaryFontFamily,
-          colorScheme: const ColorScheme(
-            brightness: Brightness.light,
-            primary: AppColors.primary,
-            onPrimary: AppColors.onPrimary,
-            primaryContainer: AppColors.primaryContainer,
-            onPrimaryContainer: AppColors.onPrimaryContainer,
-            secondary: AppColors.secondary,
-            onSecondary: AppColors.onSecondary,
-            secondaryContainer: AppColors.secondaryContainer,
-            onSecondaryContainer: AppColors.onSecondaryContainer,
-            tertiary: AppColors.tertiary,
-            onTertiary: AppColors.onTertiary,
-            tertiaryContainer: AppColors.tertiaryContainer,
-            onTertiaryContainer: AppColors.onTertiaryContainer,
-            error: AppColors.error,
-            onError: AppColors.onError,
-            errorContainer: AppColors.errorContainer,
-            onErrorContainer: AppColors.onErrorContainer,
-            surface: AppColors.surface,
-            onSurface: AppColors.onSurface,
-            onSurfaceVariant: AppColors.onSurfaceVariant,
-            outline: AppColors.outline,
-            outlineVariant: AppColors.outlineVariant,
-            surfaceDim: AppColors.surfaceDim,
-            surfaceBright: AppColors.surfaceBright,
-            surfaceContainerLowest: AppColors.surfaceContainerLowest,
-            surfaceContainerLow: AppColors.surfaceContainerLow,
-            surfaceContainer: AppColors.surfaceContainer,
-            surfaceContainerHigh: AppColors.surfaceContainerHigh,
-            surfaceContainerHighest: AppColors.surfaceContainerHighest,
-            primaryFixed: AppColors.primaryFixed,
-            primaryFixedDim: AppColors.primaryFixedDim,
-            onPrimaryFixed: AppColors.onPrimaryFixed,
-            onPrimaryFixedVariant: AppColors.onPrimaryFixedVariant,
-            secondaryFixed: AppColors.secondaryFixed,
-            secondaryFixedDim: AppColors.secondaryFixedDim,
-            onSecondaryFixed: AppColors.onSecondaryFixed,
-            onSecondaryFixedVariant: AppColors.onSecondaryFixedVariant,
-            tertiaryFixed: AppColors.tertiaryFixed,
-            tertiaryFixedDim: AppColors.tertiaryFixedDim,
-            onTertiaryFixed: AppColors.onTertiaryFixed,
-            onTertiaryFixedVariant: AppColors.onTertiaryFixedVariant,
-          ),
-          scaffoldBackgroundColor: AppColors.background,
-          appBarTheme: const AppBarTheme(
-            systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarBrightness: Brightness.dark,
-              statusBarIconBrightness: Brightness.dark,
-              systemNavigationBarIconBrightness: Brightness.dark,
-              systemNavigationBarColor: Color(0xfff9f9f9),
-            ),
-          ),
-          textTheme: const TextTheme(
-            displayLarge: AppTextStyles.displayLarge,
-            displayMedium: AppTextStyles.displayMedium,
-            displaySmall: AppTextStyles.displaySmall,
-            headlineLarge: AppTextStyles.headlineLarge,
-            headlineMedium: AppTextStyles.headlineMedium,
-            headlineSmall: AppTextStyles.headlineSmall,
-            titleLarge: AppTextStyles.titleLarge,
-            titleMedium: AppTextStyles.titleMedium,
-            titleSmall: AppTextStyles.titleSmall,
-            bodyLarge: AppTextStyles.bodyLarge,
-            bodyMedium: AppTextStyles.bodyMedium,
-            bodySmall: AppTextStyles.bodySmall,
-            labelLarge: AppTextStyles.labelLarge,
-            labelMedium: AppTextStyles.labelMedium,
-            labelSmall: AppTextStyles.labelSmall,
-          ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              foregroundColor: AppColors.onPrimary,
-              textStyle: AppTextStyles.button,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.zero,
-              ),
-              backgroundColor: AppColors.primary,
-              elevation: 0,
-              shadowColor: Colors.transparent,
-              padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
-            ).copyWith(
-              overlayColor: WidgetStateProperty.resolveWith((states) {
-                if (states.contains(WidgetState.hovered)) {
-                  return AppColors.stellarWhite.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return AppColors.stellarWhite.withValues(alpha: 0.24);
-                }
-                return null;
-              }),
-            ),
-          ),
-          dialogTheme: const DialogThemeData(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.zero,
-            ),
-          ),
-          drawerTheme: const DrawerThemeData(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusDirectional.only(
-                topEnd: Radius.zero,
-                bottomEnd: Radius.zero,
-              ),
-            ),
-          ),
+        ChangeNotifierProvider(
+          create: (_) => LocaleProvider(),
         ),
-        themeMode: ThemeMode.light,
-        routerConfig: AppRouter.router,
+      ],
+      child: Consumer<LocaleProvider>(
+        builder: (context, localeProvider, _) {
+          final localeKey = localeProvider.locale?.languageCode ?? 'system';
+          return MaterialApp.router(
+            key: ValueKey(localeKey),
+            debugShowCheckedModeBanner: false,
+            title: 'tauntpuzz',
+            theme: ThemeData(
+              useMaterial3: true,
+              brightness: Brightness.light,
+              fontFamily: AppTextStyles.secondaryFontFamily,
+              colorScheme: const ColorScheme(
+                brightness: Brightness.light,
+                primary: AppColors.primary,
+                onPrimary: AppColors.onPrimary,
+                primaryContainer: AppColors.primaryContainer,
+                onPrimaryContainer: AppColors.onPrimaryContainer,
+                secondary: AppColors.secondary,
+                onSecondary: AppColors.onSecondary,
+                secondaryContainer: AppColors.secondaryContainer,
+                onSecondaryContainer: AppColors.onSecondaryContainer,
+                tertiary: AppColors.tertiary,
+                onTertiary: AppColors.onTertiary,
+                tertiaryContainer: AppColors.tertiaryContainer,
+                onTertiaryContainer: AppColors.onTertiaryContainer,
+                error: AppColors.error,
+                onError: AppColors.onError,
+                errorContainer: AppColors.errorContainer,
+                onErrorContainer: AppColors.onErrorContainer,
+                surface: AppColors.surface,
+                onSurface: AppColors.onSurface,
+                onSurfaceVariant: AppColors.onSurfaceVariant,
+                outline: AppColors.outline,
+                outlineVariant: AppColors.outlineVariant,
+                surfaceDim: AppColors.surfaceDim,
+                surfaceBright: AppColors.surfaceBright,
+                surfaceContainerLowest: AppColors.surfaceContainerLowest,
+                surfaceContainerLow: AppColors.surfaceContainerLow,
+                surfaceContainer: AppColors.surfaceContainer,
+                surfaceContainerHigh: AppColors.surfaceContainerHigh,
+                surfaceContainerHighest: AppColors.surfaceContainerHighest,
+                primaryFixed: AppColors.primaryFixed,
+                primaryFixedDim: AppColors.primaryFixedDim,
+                onPrimaryFixed: AppColors.onPrimaryFixed,
+                onPrimaryFixedVariant: AppColors.onPrimaryFixedVariant,
+                secondaryFixed: AppColors.secondaryFixed,
+                secondaryFixedDim: AppColors.secondaryFixedDim,
+                onSecondaryFixed: AppColors.onSecondaryFixed,
+                onSecondaryFixedVariant: AppColors.onSecondaryFixedVariant,
+                tertiaryFixed: AppColors.tertiaryFixed,
+                tertiaryFixedDim: AppColors.tertiaryFixedDim,
+                onTertiaryFixed: AppColors.onTertiaryFixed,
+                onTertiaryFixedVariant: AppColors.onTertiaryFixedVariant,
+              ),
+              scaffoldBackgroundColor: AppColors.background,
+              appBarTheme: const AppBarTheme(
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarBrightness: Brightness.dark,
+                  statusBarIconBrightness: Brightness.dark,
+                  systemNavigationBarIconBrightness: Brightness.dark,
+                  systemNavigationBarColor: Color(0xfff9f9f9),
+                ),
+              ),
+              textTheme: const TextTheme(
+                displayLarge: AppTextStyles.displayLarge,
+                displayMedium: AppTextStyles.displayMedium,
+                displaySmall: AppTextStyles.displaySmall,
+                headlineLarge: AppTextStyles.headlineLarge,
+                headlineMedium: AppTextStyles.headlineMedium,
+                headlineSmall: AppTextStyles.headlineSmall,
+                titleLarge: AppTextStyles.titleLarge,
+                titleMedium: AppTextStyles.titleMedium,
+                titleSmall: AppTextStyles.titleSmall,
+                bodyLarge: AppTextStyles.bodyLarge,
+                bodyMedium: AppTextStyles.bodyMedium,
+                bodySmall: AppTextStyles.bodySmall,
+                labelLarge: AppTextStyles.labelLarge,
+                labelMedium: AppTextStyles.labelMedium,
+                labelSmall: AppTextStyles.labelSmall,
+              ),
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: AppColors.onPrimary,
+                  textStyle: AppTextStyles.button,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                  ),
+                  backgroundColor: AppColors.primary,
+                  elevation: 0,
+                  shadowColor: Colors.transparent,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
+                ).copyWith(
+                  overlayColor: WidgetStateProperty.resolveWith((states) {
+                    if (states.contains(WidgetState.hovered)) {
+                      return AppColors.stellarWhite.withValues(alpha: 0.12);
+                    }
+                    if (states.contains(WidgetState.pressed)) {
+                      return AppColors.stellarWhite.withValues(alpha: 0.24);
+                    }
+                    return null;
+                  }),
+                ),
+              ),
+              dialogTheme: const DialogThemeData(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero,
+                ),
+              ),
+              drawerTheme: const DrawerThemeData(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadiusDirectional.only(
+                    topEnd: Radius.zero,
+                    bottomEnd: Radius.zero,
+                  ),
+                ),
+              ),
+            ),
+            themeMode: ThemeMode.light,
+            routerConfig: AppRouter.router,
+            locale: localeProvider.locale,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+          );
+        },
       ),
     );
   }

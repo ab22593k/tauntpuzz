@@ -1,0 +1,70 @@
+{
+  "appTitle": "tauntpuzz",
+  "@appTitle": {
+    "description": "The application title"
+  },
+  "appSubtitle": "Slide Puzzle",
+  "@appSubtitle": {
+    "description": "The application subtitle"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language picker section title"
+  },
+  "switchLanguage": "Switch app language",
+  "@switchLanguage": {
+    "description": "Language picker section description"
+  },
+  "puzzleSize": "Puzzle Size",
+  "@puzzleSize": {
+    "description": "Puzzle size settings section title"
+  },
+  "chooseGrid": "Choose your grid",
+  "@chooseGrid": {
+    "description": "Puzzle size settings section description"
+  },
+  "resetsProgress": "Resets progress",
+  "@resetsProgress": {
+    "description": "Warning label when changing puzzle size"
+  },
+  "latestScores": "Latest Scores",
+  "@latestScores": {
+    "description": "Latest scores section title"
+  },
+  "solveFirstPuzzle": "Solve your first puzzle!",
+  "@solveFirstPuzzle": {
+    "description": "Empty state message when no scores exist"
+  },
+  "scoresWillAppear": "Scores will appear here",
+  "@scoresWillAppear": {
+    "description": "Empty state subtitle when no scores exist"
+  },
+  "reset": "Reset",
+  "@reset": {
+    "description": "Reset puzzle button label"
+  },
+  "resetConfirm": "Are you sure you want to reset your puzzle?",
+  "@resetConfirm": {
+    "description": "Reset confirmation dialog title"
+  },
+  "share": "Share",
+  "@share": {
+    "description": "Share score button label"
+  },
+  "builtWith": "Built with ",
+  "@builtWith": {
+    "description": "Footer text before 'Flutter'"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "Version label prefix"
+  },
+  "pageNotFound": "Page not found",
+  "@pageNotFound": {
+    "description": "404 page not found title"
+  },
+  "pageNotFoundMessage": "The page you're looking for doesn't exist.",
+  "@pageNotFoundMessage": {
+    "description": "404 page not found message"
+  }
+}

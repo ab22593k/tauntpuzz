@@ -1,4 +1,5 @@
 import 'package:tauntpuzz/domain/models/score.dart';
+import 'package:tauntpuzz/helpers/localizations_ext.dart';
 import 'package:tauntpuzz/ui/features/drawer/latest_score_item.dart';
 import 'package:tauntpuzz/ui/core/layout/spacing.dart';
 import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
@@ -40,7 +41,7 @@ class LatestScores extends StatelessWidget {
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    'Latest Scores',
+                    context.l10n.latestScores,
                     style: AppTextStyles.titleAdaptive(wc).copyWith(
                       color: AppColors.onSurface.withValues(alpha: 0.8),
                     ),
@@ -49,7 +50,7 @@ class LatestScores extends StatelessWidget {
               ),
             ),
             if (scores.isEmpty)
-              _emptyState(paddingLeft, wc)
+              _emptyState(context, paddingLeft, wc)
             else
               ListView.builder(
                 shrinkWrap: true,
@@ -68,7 +69,7 @@ class LatestScores extends StatelessWidget {
     );
   }
 
-  Widget _emptyState(double paddingLeft, WindowClass wc) {
+  Widget _emptyState(BuildContext context, double paddingLeft, WindowClass wc) {
     return Container(
       margin: EdgeInsets.only(
         left: paddingLeft,
@@ -93,7 +94,7 @@ class LatestScores extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'Solve your first puzzle!',
+            context.l10n.solveFirstPuzzle,
             style: AppTextStyles.bodyAdaptive(wc).copyWith(
               color: AppColors.onSurface.withValues(alpha: 0.4),
               fontVariations: const [FontVariation('wght', 380)],
@@ -101,7 +102,7 @@ class LatestScores extends StatelessWidget {
           ),
           const SizedBox(height: 2),
           Text(
-            'Scores will appear here',
+            context.l10n.scoresWillAppear,
             style: AppTextStyles.bodyAdaptive(wc).copyWith(
               color: AppColors.onSurface.withValues(alpha: 0.25),
               fontVariations: const [FontVariation('wght', 360)],
