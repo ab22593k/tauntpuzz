@@ -22,25 +22,6 @@ class DrawerAppInfo extends StatelessWidget {
               fontVariations: [const FontVariation('wght', 700)],
             ),
           ),
-          TextSpan(
-            text: 'for the ',
-            style: AppTextStyles.bodySmall.copyWith(
-              fontVariations: [const FontVariation('wght', 380)],
-            ),
-          ),
-          TextSpan(
-            text: 'Flutter Puzzle Hack',
-            style: AppTextStyles.bodySmall.copyWith(
-              fontWeight: FontWeight.w700,
-              fontVariations: [const FontVariation('wght', 700)],
-            ),
-          ),
-          TextSpan(
-            text: ' Challenge',
-            style: AppTextStyles.bodySmall.copyWith(
-              fontVariations: [const FontVariation('wght', 380)],
-            ),
-          ),
         ],
       ),
     );
