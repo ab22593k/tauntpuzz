@@ -25,19 +25,14 @@ class PhraseBubbleLayout implements LayoutDelegate {
     required this.dashPosition,
   });
 
-  Position get position {
-    switch (screenTypeHelper.windowClass) {
-      case WindowClass.compact:
-      case WindowClass.medium:
-        return Position(
-          right: dashSize.width + (dashPosition.right ?? 0) - 20,
-          bottom: (dashSize.height * 0.1) + (dashPosition.bottom ?? 0),
-        );
-      case WindowClass.expanded:
-        return Position(
-          right: dashSize.width + (dashPosition.right ?? 0) - 70,
-          bottom: (dashSize.height * 0.1) + (dashPosition.bottom ?? 0),
-        );
-    }
-  }
+  Position get position => switch (screenTypeHelper.windowClass) {
+        WindowClass.compact || WindowClass.medium => Position(
+            right: dashSize.width + (dashPosition.right ?? 0) - 20,
+            bottom: (dashSize.height * 0.1) + (dashPosition.bottom ?? 0),
+          ),
+        WindowClass.expanded => Position(
+            right: dashSize.width + (dashPosition.right ?? 0) - 70,
+            bottom: (dashSize.height * 0.1) + (dashPosition.bottom ?? 0),
+          ),
+      };
 }

@@ -11,36 +11,23 @@ class Spacing {
 
   static const double screenHPadding = 24;
 
-  static double screenHPaddingFor(WindowClass windowClass) {
-    switch (windowClass) {
-      case WindowClass.compact:
-        return 24;
-      case WindowClass.medium:
-        return 48;
-      case WindowClass.expanded:
-        return 80;
-    }
-  }
+  static double screenHPaddingFor(WindowClass windowClass) =>
+      switch (windowClass) {
+        WindowClass.compact => 24,
+        WindowClass.medium => 48,
+        WindowClass.expanded => 80,
+      };
 
-  static double puzzleMargin(WindowClass windowClass) {
-    switch (windowClass) {
-      case WindowClass.compact:
-        return 24;
-      case WindowClass.medium:
-        return 64;
-      case WindowClass.expanded:
-        return 80;
-    }
-  }
+  static double puzzleMargin(WindowClass windowClass) => switch (windowClass) {
+        WindowClass.compact => 24,
+        WindowClass.medium => 64,
+        WindowClass.expanded => 80,
+      };
 
-  static double overlayPadding(WindowClass windowClass) {
-    switch (windowClass) {
-      case WindowClass.compact:
-        return 16;
-      case WindowClass.medium:
-        return 24;
-      case WindowClass.expanded:
-        return 32;
-    }
-  }
+  static double overlayPadding(WindowClass windowClass) =>
+      switch (windowClass) {
+        WindowClass.compact => 16,
+        WindowClass.medium => 24,
+        WindowClass.expanded => 32,
+      };
 }

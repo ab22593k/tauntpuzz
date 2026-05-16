@@ -66,10 +66,12 @@ class TileGestureDetector extends StatelessWidget {
         });
       });
     } else {
-      if (phrasesProvider.phraseState != PhraseState.none) {
-        if (phrasesProvider.phraseState == PhraseState.puzzleStarted ||
-            phrasesProvider.phraseState == PhraseState.dashTapped ||
-            phrasesProvider.phraseState == PhraseState.puzzleSolved) {
+      if (phrasesProvider.phraseState case var state
+          when state != PhraseState.none) {
+        if (state
+            case PhraseState.puzzleStarted ||
+                PhraseState.dashTapped ||
+                PhraseState.puzzleSolved) {
           Future.delayed(AnimationsManager.phraseBubbleTotalAnimationDuration,
               () {
             phrasesProvider.setPhraseState(PhraseState.none);

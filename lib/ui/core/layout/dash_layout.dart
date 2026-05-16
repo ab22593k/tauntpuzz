@@ -18,32 +18,22 @@ class DashLayout implements LayoutDelegate {
   });
 
   Size get size {
-    double puzzleWidth = containerWidth;
-
-    late double dashHeight;
-
-    if (screenTypeHelper.isWideLayout) {
-      switch (screenTypeHelper.windowClass) {
-        case WindowClass.compact:
-        case WindowClass.medium:
-          dashHeight = screenHeight * 0.5;
-          break;
-        case WindowClass.expanded:
-          dashHeight = screenHeight * 0.35;
-      }
-    } else {
-      dashHeight = ((screenHeight - puzzleWidth) / 2) * 0.85;
-    }
+    final puzzleWidth = containerWidth;
+    final dashHeight =
+        switch ((screenTypeHelper.isWideLayout, screenTypeHelper.windowClass)) {
+      (true, WindowClass.compact) ||
+      (true, WindowClass.medium) =>
+        screenHeight * 0.5,
+      (true, WindowClass.expanded) => screenHeight * 0.35,
+      (false, _) => ((screenHeight - puzzleWidth) / 2) * 0.85,
+    };
     return Size(dashHeight, dashHeight);
   }
 
-  Position get position {
-    switch (screenTypeHelper.windowClass) {
-      case WindowClass.compact:
-      case WindowClass.medium:
-        return const Position(right: -10, bottom: 20);
-      case WindowClass.expanded:
-        return const Position(right: 0, bottom: 70);
-    }
-  }
+  Position get position => switch (screenTypeHelper.windowClass) {
+        WindowClass.compact ||
+        WindowClass.medium =>
+          const Position(right: -10, bottom: 20),
+        WindowClass.expanded => const Position(right: 0, bottom: 70),
+      };
 }

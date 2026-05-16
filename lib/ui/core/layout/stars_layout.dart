@@ -19,16 +19,11 @@ class StarsLayout implements LayoutDelegate {
 
   Color starColor = Colors.white60;
 
-  int get totalStarsCount {
-    switch (screenTypeHelper.windowClass) {
-      case WindowClass.compact:
-        return 300;
-      case WindowClass.medium:
-        return 600;
-      case WindowClass.expanded:
-        return 1000;
-    }
-  }
+  int get totalStarsCount => switch (screenTypeHelper.windowClass) {
+        WindowClass.compact => 300,
+        WindowClass.medium => 600,
+        WindowClass.expanded => 1000,
+      };
 
   final Random random = Random();
 

@@ -28,16 +28,11 @@ class _ThemeTransitionBuilderState extends State<ThemeTransitionBuilder>
   Brightness _currentBrightness = Brightness.light;
   Brightness? _previousBrightness;
 
-  Brightness get _effectiveBrightness {
-    switch (widget.themeMode) {
-      case ThemeMode.light:
-        return Brightness.light;
-      case ThemeMode.dark:
-        return Brightness.dark;
-      case ThemeMode.system:
-        return _platformBrightness;
-    }
-  }
+  Brightness get _effectiveBrightness => switch (widget.themeMode) {
+        ThemeMode.light => Brightness.light,
+        ThemeMode.dark => Brightness.dark,
+        ThemeMode.system => _platformBrightness,
+      };
 
   @override
   void initState() {

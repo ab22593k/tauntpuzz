@@ -61,22 +61,18 @@ class PhrasesProvider with ChangeNotifier {
 
   String getPhrase(PhraseState phraseState) {
     assert(phraseState != PhraseState.none);
-    switch (phraseState) {
-      case PhraseState.puzzleStarted:
-        return puzzleStartedPhrases[
-            random.nextInt(puzzleSolvedPhrases.length - 1)];
-      case PhraseState.puzzleSolved:
-        return puzzleSolvedPhrases[
-            random.nextInt(puzzleSolvedPhrases.length - 1)];
-      case PhraseState.hardPuzzleSelected:
-        return hardPuzzlePhrases[random.nextInt(hardPuzzlePhrases.length - 1)];
-      case PhraseState.doingGreat:
-        return doingGreatPhrases[random.nextInt(doingGreatPhrases.length - 1)];
-      case PhraseState.dashTapped:
-        return dashTappedPhrases[dashTapCount];
-      default:
-        return '';
-    }
+    return switch (phraseState) {
+      PhraseState.puzzleStarted =>
+        puzzleStartedPhrases[random.nextInt(puzzleSolvedPhrases.length - 1)],
+      PhraseState.puzzleSolved =>
+        puzzleSolvedPhrases[random.nextInt(puzzleSolvedPhrases.length - 1)],
+      PhraseState.hardPuzzleSelected =>
+        hardPuzzlePhrases[random.nextInt(hardPuzzlePhrases.length - 1)],
+      PhraseState.doingGreat =>
+        doingGreatPhrases[random.nextInt(doingGreatPhrases.length - 1)],
+      PhraseState.dashTapped => dashTappedPhrases[dashTapCount],
+      PhraseState.none || PhraseState.puzzleTakingTooLong => '',
+    };
   }
 
   PhraseState phraseState = PhraseState.none;

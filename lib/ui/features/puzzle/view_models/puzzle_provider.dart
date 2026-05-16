@@ -60,21 +60,17 @@ class PuzzleProvider with ChangeNotifier {
 
   /// Handle Keyboard event and move appropriate tile
   void handleKeyboardEvent(KeyEvent event) {
-    if (event is KeyDownEvent) {
-      final physicalKey = event.physicalKey;
-      Tile? tile;
-      if (physicalKey == PhysicalKeyboardKey.arrowDown) {
-        tile = puzzle.tileTopOfWhitespace;
-      } else if (physicalKey == PhysicalKeyboardKey.arrowUp) {
-        tile = puzzle.tileBottomOfWhitespace;
-      } else if (physicalKey == PhysicalKeyboardKey.arrowRight) {
-        tile = puzzle.tileLeftOfWhitespace;
-      } else if (physicalKey == PhysicalKeyboardKey.arrowLeft) {
-        tile = puzzle.tileRightOfWhitespace;
-      }
+    if (event case KeyDownEvent(:var physicalKey)) {
+      final tile = switch (physicalKey) {
+        PhysicalKeyboardKey.arrowDown => puzzle.tileTopOfWhitespace,
+        PhysicalKeyboardKey.arrowUp => puzzle.tileBottomOfWhitespace,
+        PhysicalKeyboardKey.arrowRight => puzzle.tileLeftOfWhitespace,
+        PhysicalKeyboardKey.arrowLeft => puzzle.tileRightOfWhitespace,
+        _ => null,
+      };
 
-      if (tile != null) {
-        swapTilesAndUpdatePuzzle(tile);
+      if (tile case var t?) {
+        swapTilesAndUpdatePuzzle(t);
       }
     }
   }

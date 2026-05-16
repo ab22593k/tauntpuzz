@@ -16,14 +16,11 @@ class PuzzleLayout {
     final margin = Spacing.puzzleMargin(screenTypeHelper.windowClass) * 2;
     final maxWidth = screenWidth - margin;
 
-    switch (screenTypeHelper.windowClass) {
-      case WindowClass.compact:
-        return maxWidth;
-      case WindowClass.medium:
-        return maxWidth.clamp(400, 520);
-      case WindowClass.expanded:
-        return (maxWidth).clamp(420, 560);
-    }
+    return switch (screenTypeHelper.windowClass) {
+      WindowClass.compact => maxWidth,
+      WindowClass.medium => maxWidth.clamp(400, 520),
+      WindowClass.expanded => (maxWidth).clamp(420, 560),
+    };
   }
 
   static double? tileTextSize(int puzzleSize) {

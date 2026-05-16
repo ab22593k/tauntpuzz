@@ -29,11 +29,11 @@ class ShareScoreHelper {
   ///
   /// Check if link can be opened first
   static Future<void> openLink(String url, {VoidCallback? onError}) async {
-    Uri uri = Uri.parse(url);
+    final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
-    } else if (onError != null) {
-      onError();
+    } else if (onError case var cb?) {
+      cb();
     }
   }
 
