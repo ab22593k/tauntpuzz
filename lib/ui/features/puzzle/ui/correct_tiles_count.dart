@@ -1,6 +1,7 @@
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:tauntpuzz/ui/features/puzzle/view_models/puzzle_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:provider/provider.dart';
 
 class CorrectTilesCount extends StatelessWidget {
@@ -62,7 +63,10 @@ class CorrectTilesCount extends StatelessWidget {
           color: color,
           borderRadius: BorderRadius.zero,
         ),
-        child: const Icon(Icons.star, size: 10, color: Colors.white),
+        child: const HugeIcon(
+            icon: HugeIcons.strokeRoundedStarAward01,
+            size: 10,
+            color: Colors.white),
       );
     }
     if (ratio >= 0.75) {
@@ -73,10 +77,13 @@ class CorrectTilesCount extends StatelessWidget {
           borderRadius: BorderRadius.zero,
           border: Border.all(color: color, width: 1.5),
         ),
-        child: Icon(Icons.check,
-            size: 10, color: colorScheme.onSurface.withValues(alpha: 0.54)),
+        child: HugeIcon(
+            icon: HugeIcons.strokeRoundedCheckmarkCircle01,
+            size: 10,
+            color: colorScheme.onSurface.withValues(alpha: 0.54)),
       );
     }
-    return Icon(Icons.check_circle_outline, size: 14, color: color);
+    return HugeIcon(
+        icon: HugeIcons.strokeRoundedCheckmarkCircle01, size: 14, color: color);
   }
 }

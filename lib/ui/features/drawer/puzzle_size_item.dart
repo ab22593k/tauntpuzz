@@ -68,7 +68,7 @@ class PuzzleSizeItem extends StatelessWidget {
                   shadowColor: WidgetStateProperty.all(Colors.transparent),
                 ),
                 child: Text(
-                  '$size\\u00d7$size',
+                  '$size\u00d7$size',
                   style: AppTextStyles.labelLarge.copyWith(
                     color: isSelected
                         ? colorScheme.onPrimary

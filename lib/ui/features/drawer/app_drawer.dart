@@ -13,6 +13,7 @@ import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -145,7 +146,7 @@ class _DrawerHeader extends StatelessWidget {
                 Navigator.of(context).pop();
               }
             },
-            icon: const Icon(Icons.close),
+            icon: const HugeIcon(icon: HugeIcons.strokeRoundedCancel01),
             style: IconButton.styleFrom(
               foregroundColor: colorScheme.onSurface.withValues(alpha: 0.7),
             ),
@@ -178,8 +179,8 @@ class _DrawerFooter extends StatelessWidget {
           const SizedBox(width: 8),
           const DrawerAppInfo(),
           const Spacer(),
-          Icon(
-            Icons.rocket_launch_outlined,
+          HugeIcon(
+            icon: HugeIcons.strokeRoundedRocket01,
             size: 16,
             color: colorScheme.onSurface.withValues(alpha: 0.3),
           ),

@@ -2,6 +2,7 @@ import 'package:tauntpuzz/helpers/duration_helper.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:tauntpuzz/ui/features/puzzle/view_models/stop_watch_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:provider/provider.dart';
 
 class PuzzleStopWatch extends StatelessWidget {
@@ -17,7 +18,7 @@ class PuzzleStopWatch extends StatelessWidget {
 
         return Row(
           children: [
-            const Icon(Icons.watch_later_outlined, size: 16),
+            const HugeIcon(icon: HugeIcons.strokeRoundedClock01, size: 16),
             const SizedBox(width: 4),
             Text(
               DurationHelper.toFormattedTime(duration),

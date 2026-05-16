@@ -6,6 +6,7 @@ import 'package:tauntpuzz/ui/features/puzzle/ui/moves_count.dart';
 import 'package:tauntpuzz/ui/features/puzzle/ui/puzzle_stop_watch.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class PuzzleHeader extends StatelessWidget {
   final double containerWidth;
@@ -35,7 +36,15 @@ class PuzzleHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         const PuzzleStopWatch(),
-        _statChip(Icons.swap_vert, const MovesCount(), colorScheme),
+        _statChip(
+          HugeIcon(
+            icon: HugeIcons.strokeRoundedArrowUpDown,
+            size: 14,
+            color: colorScheme.onSurface.withValues(alpha: 0.6),
+          ),
+          const MovesCount(),
+          colorScheme,
+        ),
         CorrectTilesCount(colorScheme: colorScheme),
       ],
     );
@@ -59,19 +68,26 @@ class PuzzleHeader extends StatelessWidget {
         const Spacer(),
         const PuzzleStopWatch(),
         const SizedBox(width: 12),
-        _statChip(Icons.swap_vert, const MovesCount(), colorScheme),
+        _statChip(
+          HugeIcon(
+            icon: HugeIcons.strokeRoundedArrowUpDown,
+            size: 14,
+            color: colorScheme.onSurface.withValues(alpha: 0.6),
+          ),
+          const MovesCount(),
+          colorScheme,
+        ),
         const SizedBox(width: 12),
         CorrectTilesCount(colorScheme: colorScheme),
       ],
     );
   }
 
-  Widget _statChip(IconData icon, Widget text, ColorScheme colorScheme) {
+  Widget _statChip(Widget iconWidget, Widget text, ColorScheme colorScheme) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon,
-            size: 14, color: colorScheme.onSurface.withValues(alpha: 0.6)),
+        iconWidget,
         const SizedBox(width: 4),
         DefaultTextStyle(
           style:

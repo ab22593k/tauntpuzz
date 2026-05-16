@@ -4,6 +4,7 @@ import 'package:tauntpuzz/ui/core/layout/spacing.dart';
 import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class LatestScoreItem extends StatelessWidget {
   final Score score;
@@ -37,7 +38,10 @@ class LatestScoreItem extends StatelessWidget {
           SizedBox(
             width: 20,
             child: isBest
-                ? Icon(Icons.star, size: 14, color: _medalColorFor(colorScheme))
+                ? HugeIcon(
+                    icon: HugeIcons.strokeRoundedStarAward01,
+                    size: 14,
+                    color: _medalColorFor(colorScheme))
                 : Text(
                     '$rank',
                     style: AppTextStyles.labelAdaptive(wc).copyWith(
@@ -50,7 +54,7 @@ class LatestScoreItem extends StatelessWidget {
           SizedBox(
             width: 36,
             child: Text(
-              '${score.puzzleSize}\\u00d7${score.puzzleSize}',
+              '${score.puzzleSize}\u00d7${score.puzzleSize}',
               style: AppTextStyles.bodyAdaptive(wc).copyWith(
                 color: colorScheme.onSurface.withValues(alpha: 0.8),
                 fontVariations: const [FontVariation('wght', 500)],
@@ -61,7 +65,8 @@ class LatestScoreItem extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.schedule,
+              HugeIcon(
+                  icon: HugeIcons.strokeRoundedClock01,
                   size: 11,
                   color: colorScheme.onSurface.withValues(alpha: 0.4)),
               const SizedBox(width: 3),
@@ -78,7 +83,8 @@ class LatestScoreItem extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.swap_vert,
+              HugeIcon(
+                  icon: HugeIcons.strokeRoundedArrowUpDown,
                   size: 11,
                   color: colorScheme.onSurface.withValues(alpha: 0.4)),
               const SizedBox(width: 3),

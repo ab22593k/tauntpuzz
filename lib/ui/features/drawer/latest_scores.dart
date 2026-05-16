@@ -6,6 +6,7 @@ import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:tauntpuzz/ui/features/puzzle/view_models/puzzle_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:provider/provider.dart';
 
 class LatestScores extends StatelessWidget {
@@ -88,8 +89,8 @@ class LatestScores extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Icon(
-            Icons.rocket_outlined,
+          HugeIcon(
+            icon: HugeIcons.strokeRoundedRocket01,
             size: 28,
             color: colorScheme.onSurface.withValues(alpha: 0.2),
           ),

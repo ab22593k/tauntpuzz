@@ -1,6 +1,7 @@
 import 'package:tauntpuzz/helpers/localizations_ext.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class ErrorScreen extends StatelessWidget {
   final Object? error;
@@ -19,8 +20,8 @@ class ErrorScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.error_outline_rounded,
+              HugeIcon(
+                icon: HugeIcons.strokeRoundedAlert01,
                 size: 64,
                 color: colorScheme.error,
               ),

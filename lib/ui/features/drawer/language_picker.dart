@@ -5,6 +5,7 @@ import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
 import 'package:tauntpuzz/ui/core/layout/spacing.dart';
 import 'package:tauntpuzz/ui/core/locale_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:provider/provider.dart';
 
 class LanguagePicker extends StatelessWidget {
@@ -37,8 +38,8 @@ class LanguagePicker extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(
-                Icons.language_rounded,
+              HugeIcon(
+                icon: HugeIcons.strokeRoundedLanguageSquare,
                 size: 16,
                 color: colorScheme.onSurface.withValues(alpha: 0.6),
               ),

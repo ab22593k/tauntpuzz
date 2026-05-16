@@ -6,6 +6,7 @@ import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:tauntpuzz/ui/features/puzzle/view_models/puzzle_provider.dart';
 import 'package:tauntpuzz/ui/features/puzzle/view_models/stop_watch_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:provider/provider.dart';
 
 class ResetPuzzleButton extends StatelessWidget {
@@ -52,7 +53,10 @@ class ResetPuzzleButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.refresh),
+                const HugeIcon(
+                  icon: HugeIcons.strokeRoundedRefresh03,
+                  size: 18,
+                ),
                 const SizedBox(width: 7),
                 Text(context.l10n.reset, style: AppTextStyles.button),
               ],

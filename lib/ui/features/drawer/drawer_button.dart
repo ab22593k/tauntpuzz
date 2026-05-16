@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class DrawerButton extends StatefulWidget {
   const DrawerButton({super.key});
@@ -71,7 +72,7 @@ class _DrawerButtonState extends State<DrawerButton>
               return null;
             }),
           ),
-          child: const Icon(Icons.menu, size: 22),
+          child: const HugeIcon(icon: HugeIcons.strokeRoundedMenu01, size: 22),
         ),
       ),
     );

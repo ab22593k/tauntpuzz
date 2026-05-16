@@ -4,15 +4,16 @@ import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
 import 'package:tauntpuzz/ui/core/layout/spacing.dart';
 import 'package:tauntpuzz/ui/core/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:provider/provider.dart';
 
 class DarkModeToggle extends StatelessWidget {
   const DarkModeToggle({super.key});
 
   static const _themeOptions = [
-    _ThemeOption(mode: ThemeMode.light, icon: Icons.light_mode),
-    _ThemeOption(mode: ThemeMode.system, icon: Icons.settings_brightness),
-    _ThemeOption(mode: ThemeMode.dark, icon: Icons.dark_mode),
+    _ThemeOption(mode: ThemeMode.light),
+    _ThemeOption(mode: ThemeMode.system),
+    _ThemeOption(mode: ThemeMode.dark),
   ];
 
   @override
@@ -36,8 +37,8 @@ class DarkModeToggle extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(
-                Icons.dark_mode_rounded,
+              HugeIcon(
+                icon: HugeIcons.strokeRoundedMoon01,
                 size: 16,
                 color: colorScheme.onSurface.withValues(alpha: 0.6),
               ),
@@ -66,7 +67,7 @@ class DarkModeToggle extends StatelessWidget {
                     start: index > 0 ? Spacing.xs / 2 : 0,
                   ),
                   child: _ThemeButton(
-                    icon: option.icon,
+                    iconBuilder: _iconFor(option.mode),
                     label: label,
                     isSelected: isSelected,
                     onTap: () {
@@ -97,18 +98,42 @@ class DarkModeToggle extends StatelessWidget {
 
 class _ThemeOption {
   final ThemeMode mode;
-  final IconData icon;
-  const _ThemeOption({required this.mode, required this.icon});
+  const _ThemeOption({required this.mode});
+}
+
+typedef _IconBuilder = Widget Function(Color color);
+
+_IconBuilder _iconFor(ThemeMode mode) {
+  switch (mode) {
+    case ThemeMode.light:
+      return (color) => HugeIcon(
+            icon: HugeIcons.strokeRoundedSun01,
+            size: 18,
+            color: color,
+          );
+    case ThemeMode.system:
+      return (color) => HugeIcon(
+            icon: HugeIcons.strokeRoundedComputerSettings,
+            size: 18,
+            color: color,
+          );
+    case ThemeMode.dark:
+      return (color) => HugeIcon(
+            icon: HugeIcons.strokeRoundedMoon01,
+            size: 18,
+            color: color,
+          );
+  }
 }
 
 class _ThemeButton extends StatefulWidget {
-  final IconData icon;
+  final _IconBuilder iconBuilder;
   final String label;
   final bool isSelected;
   final VoidCallback onTap;
 
   const _ThemeButton({
-    required this.icon,
+    required this.iconBuilder,
     required this.label,
     required this.isSelected,
     required this.onTap,
@@ -190,11 +215,7 @@ class _ThemeButtonState extends State<_ThemeButton>
                     builder: (context, child) {
                       return Transform.scale(
                         scale: iconScale,
-                        child: Icon(
-                          widget.icon,
-                          size: 18,
-                          color: foreground,
-                        ),
+                        child: widget.iconBuilder(foreground),
                       );
                     },
                   ),
