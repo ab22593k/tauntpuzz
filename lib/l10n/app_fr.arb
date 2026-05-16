@@ -66,5 +66,25 @@
   "pageNotFoundMessage": "La page que vous cherchez n''existe pas.",
   "@pageNotFoundMessage": {
     "description": "Message de la page 404"
+  },
+  "darkMode": "Mode Sombre",
+  "@darkMode": {
+    "description": "Titre de la section du mode sombre"
+  },
+  "toggleDarkMode": "Choisissez votre thème",
+  "@toggleDarkMode": {
+    "description": "Description de la section du thème"
+  },
+  "lightTheme": "Clair",
+  "@lightTheme": {
+    "description": "Libellé de l'option thème clair"
+  },
+  "systemTheme": "Système",
+  "@systemTheme": {
+    "description": "Libellé de l'option thème système"
+  },
+  "darkTheme": "Sombre",
+  "@darkTheme": {
+    "description": "Libellé de l'option thème sombre"
   }
 }

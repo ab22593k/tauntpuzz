@@ -58,4 +58,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pageNotFoundMessage => 'The page youre looking for doesnt exist.';
+
+  @override
+  String get darkMode => 'Dark Mode';
+
+  @override
+  String get toggleDarkMode => 'Choose your theme';
+
+  @override
+  String get lightTheme => 'Light';
+
+  @override
+  String get systemTheme => 'System';
+
+  @override
+  String get darkTheme => 'Dark';
 }

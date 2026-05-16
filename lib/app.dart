@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:tauntpuzz/generated/app_localizations.dart';
 import 'package:tauntpuzz/router/router_config.dart';
 import 'package:tauntpuzz/ui/core/app_colors.dart';
+import 'package:tauntpuzz/ui/core/app_colors_dark.dart';
+import 'package:tauntpuzz/ui/core/theme_provider.dart';
+import 'package:tauntpuzz/ui/core/theme_transition.dart';
 import 'package:tauntpuzz/domain/models/puzzle.dart';
 import 'package:tauntpuzz/ui/features/background/background_layers.dart';
 import 'package:tauntpuzz/ui/core/layout/background_layer_layout.dart';
@@ -83,134 +86,269 @@ class _AppState extends State<App> {
         ChangeNotifierProvider(
           create: (_) => LocaleProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => ThemeProvider(),
+        ),
       ],
       child: Consumer<LocaleProvider>(
         builder: (context, localeProvider, _) {
           final localeKey = localeProvider.locale?.languageCode ?? 'system';
-          return MaterialApp.router(
-            key: ValueKey(localeKey),
-            debugShowCheckedModeBanner: false,
-            title: 'tauntpuzz',
-            theme: ThemeData(
-              useMaterial3: true,
-              brightness: Brightness.light,
-              fontFamily: AppTextStyles.secondaryFontFamily,
-              colorScheme: const ColorScheme(
+          return Consumer<ThemeProvider>(
+            builder: (context, themeProvider, _) {
+              final lightTheme = ThemeData(
+                useMaterial3: true,
                 brightness: Brightness.light,
-                primary: AppColors.primary,
-                onPrimary: AppColors.onPrimary,
-                primaryContainer: AppColors.primaryContainer,
-                onPrimaryContainer: AppColors.onPrimaryContainer,
-                secondary: AppColors.secondary,
-                onSecondary: AppColors.onSecondary,
-                secondaryContainer: AppColors.secondaryContainer,
-                onSecondaryContainer: AppColors.onSecondaryContainer,
-                tertiary: AppColors.tertiary,
-                onTertiary: AppColors.onTertiary,
-                tertiaryContainer: AppColors.tertiaryContainer,
-                onTertiaryContainer: AppColors.onTertiaryContainer,
-                error: AppColors.error,
-                onError: AppColors.onError,
-                errorContainer: AppColors.errorContainer,
-                onErrorContainer: AppColors.onErrorContainer,
-                surface: AppColors.surface,
-                onSurface: AppColors.onSurface,
-                onSurfaceVariant: AppColors.onSurfaceVariant,
-                outline: AppColors.outline,
-                outlineVariant: AppColors.outlineVariant,
-                surfaceDim: AppColors.surfaceDim,
-                surfaceBright: AppColors.surfaceBright,
-                surfaceContainerLowest: AppColors.surfaceContainerLowest,
-                surfaceContainerLow: AppColors.surfaceContainerLow,
-                surfaceContainer: AppColors.surfaceContainer,
-                surfaceContainerHigh: AppColors.surfaceContainerHigh,
-                surfaceContainerHighest: AppColors.surfaceContainerHighest,
-                primaryFixed: AppColors.primaryFixed,
-                primaryFixedDim: AppColors.primaryFixedDim,
-                onPrimaryFixed: AppColors.onPrimaryFixed,
-                onPrimaryFixedVariant: AppColors.onPrimaryFixedVariant,
-                secondaryFixed: AppColors.secondaryFixed,
-                secondaryFixedDim: AppColors.secondaryFixedDim,
-                onSecondaryFixed: AppColors.onSecondaryFixed,
-                onSecondaryFixedVariant: AppColors.onSecondaryFixedVariant,
-                tertiaryFixed: AppColors.tertiaryFixed,
-                tertiaryFixedDim: AppColors.tertiaryFixedDim,
-                onTertiaryFixed: AppColors.onTertiaryFixed,
-                onTertiaryFixedVariant: AppColors.onTertiaryFixedVariant,
-              ),
-              scaffoldBackgroundColor: AppColors.background,
-              appBarTheme: const AppBarTheme(
-                systemOverlayStyle: SystemUiOverlayStyle(
-                  statusBarBrightness: Brightness.dark,
-                  statusBarIconBrightness: Brightness.dark,
-                  systemNavigationBarIconBrightness: Brightness.dark,
-                  systemNavigationBarColor: Color(0xfff9f9f9),
+                fontFamily: AppTextStyles.secondaryFontFamily,
+                colorScheme: const ColorScheme(
+                  brightness: Brightness.light,
+                  primary: AppColors.primary,
+                  onPrimary: AppColors.onPrimary,
+                  primaryContainer: AppColors.primaryContainer,
+                  onPrimaryContainer: AppColors.onPrimaryContainer,
+                  secondary: AppColors.secondary,
+                  onSecondary: AppColors.onSecondary,
+                  secondaryContainer: AppColors.secondaryContainer,
+                  onSecondaryContainer: AppColors.onSecondaryContainer,
+                  tertiary: AppColors.tertiary,
+                  onTertiary: AppColors.onTertiary,
+                  tertiaryContainer: AppColors.tertiaryContainer,
+                  onTertiaryContainer: AppColors.onTertiaryContainer,
+                  error: AppColors.error,
+                  onError: AppColors.onError,
+                  errorContainer: AppColors.errorContainer,
+                  onErrorContainer: AppColors.onErrorContainer,
+                  surface: AppColors.surface,
+                  onSurface: AppColors.onSurface,
+                  onSurfaceVariant: AppColors.onSurfaceVariant,
+                  outline: AppColors.outline,
+                  outlineVariant: AppColors.outlineVariant,
+                  surfaceDim: AppColors.surfaceDim,
+                  surfaceBright: AppColors.surfaceBright,
+                  surfaceContainerLowest: AppColors.surfaceContainerLowest,
+                  surfaceContainerLow: AppColors.surfaceContainerLow,
+                  surfaceContainer: AppColors.surfaceContainer,
+                  surfaceContainerHigh: AppColors.surfaceContainerHigh,
+                  surfaceContainerHighest: AppColors.surfaceContainerHighest,
+                  primaryFixed: AppColors.primaryFixed,
+                  primaryFixedDim: AppColors.primaryFixedDim,
+                  onPrimaryFixed: AppColors.onPrimaryFixed,
+                  onPrimaryFixedVariant: AppColors.onPrimaryFixedVariant,
+                  secondaryFixed: AppColors.secondaryFixed,
+                  secondaryFixedDim: AppColors.secondaryFixedDim,
+                  onSecondaryFixed: AppColors.onSecondaryFixed,
+                  onSecondaryFixedVariant: AppColors.onSecondaryFixedVariant,
+                  tertiaryFixed: AppColors.tertiaryFixed,
+                  tertiaryFixedDim: AppColors.tertiaryFixedDim,
+                  onTertiaryFixed: AppColors.onTertiaryFixed,
+                  onTertiaryFixedVariant: AppColors.onTertiaryFixedVariant,
                 ),
-              ),
-              textTheme: const TextTheme(
-                displayLarge: AppTextStyles.displayLarge,
-                displayMedium: AppTextStyles.displayMedium,
-                displaySmall: AppTextStyles.displaySmall,
-                headlineLarge: AppTextStyles.headlineLarge,
-                headlineMedium: AppTextStyles.headlineMedium,
-                headlineSmall: AppTextStyles.headlineSmall,
-                titleLarge: AppTextStyles.titleLarge,
-                titleMedium: AppTextStyles.titleMedium,
-                titleSmall: AppTextStyles.titleSmall,
-                bodyLarge: AppTextStyles.bodyLarge,
-                bodyMedium: AppTextStyles.bodyMedium,
-                bodySmall: AppTextStyles.bodySmall,
-                labelLarge: AppTextStyles.labelLarge,
-                labelMedium: AppTextStyles.labelMedium,
-                labelSmall: AppTextStyles.labelSmall,
-              ),
-              elevatedButtonTheme: ElevatedButtonThemeData(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: AppColors.onPrimary,
-                  textStyle: AppTextStyles.button,
-                  shape: const RoundedRectangleBorder(
+                scaffoldBackgroundColor: AppColors.background,
+                appBarTheme: const AppBarTheme(
+                  systemOverlayStyle: SystemUiOverlayStyle(
+                    statusBarBrightness: Brightness.dark,
+                    statusBarIconBrightness: Brightness.dark,
+                    systemNavigationBarIconBrightness: Brightness.dark,
+                    systemNavigationBarColor: Color(0xfff9f9f9),
+                  ),
+                ),
+                textTheme: const TextTheme(
+                  displayLarge: AppTextStyles.displayLarge,
+                  displayMedium: AppTextStyles.displayMedium,
+                  displaySmall: AppTextStyles.displaySmall,
+                  headlineLarge: AppTextStyles.headlineLarge,
+                  headlineMedium: AppTextStyles.headlineMedium,
+                  headlineSmall: AppTextStyles.headlineSmall,
+                  titleLarge: AppTextStyles.titleLarge,
+                  titleMedium: AppTextStyles.titleMedium,
+                  titleSmall: AppTextStyles.titleSmall,
+                  bodyLarge: AppTextStyles.bodyLarge,
+                  bodyMedium: AppTextStyles.bodyMedium,
+                  bodySmall: AppTextStyles.bodySmall,
+                  labelLarge: AppTextStyles.labelLarge,
+                  labelMedium: AppTextStyles.labelMedium,
+                  labelSmall: AppTextStyles.labelSmall,
+                ),
+                elevatedButtonTheme: ElevatedButtonThemeData(
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: AppColors.onPrimary,
+                    textStyle: AppTextStyles.button,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
+                    ),
+                    backgroundColor: AppColors.primary,
+                    elevation: 0,
+                    shadowColor: Colors.transparent,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 22, vertical: 12),
+                  ).copyWith(
+                    overlayColor: WidgetStateProperty.resolveWith((states) {
+                      if (states.contains(WidgetState.hovered)) {
+                        return AppColors.stellarWhite.withValues(alpha: 0.12);
+                      }
+                      if (states.contains(WidgetState.pressed)) {
+                        return AppColors.stellarWhite.withValues(alpha: 0.24);
+                      }
+                      return null;
+                    }),
+                  ),
+                ),
+                dialogTheme: const DialogThemeData(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.zero,
                   ),
-                  backgroundColor: AppColors.primary,
+                ),
+                drawerTheme: const DrawerThemeData(
+                  backgroundColor: Colors.transparent,
                   elevation: 0,
-                  shadowColor: Colors.transparent,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
-                ).copyWith(
-                  overlayColor: WidgetStateProperty.resolveWith((states) {
-                    if (states.contains(WidgetState.hovered)) {
-                      return AppColors.stellarWhite.withValues(alpha: 0.12);
-                    }
-                    if (states.contains(WidgetState.pressed)) {
-                      return AppColors.stellarWhite.withValues(alpha: 0.24);
-                    }
-                    return null;
-                  }),
-                ),
-              ),
-              dialogTheme: const DialogThemeData(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.zero,
-                ),
-              ),
-              drawerTheme: const DrawerThemeData(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadiusDirectional.only(
-                    topEnd: Radius.zero,
-                    bottomEnd: Radius.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadiusDirectional.only(
+                      topEnd: Radius.zero,
+                      bottomEnd: Radius.zero,
+                    ),
                   ),
                 ),
-              ),
-            ),
-            themeMode: ThemeMode.light,
-            routerConfig: AppRouter.router,
-            locale: localeProvider.locale,
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
+              );
+
+              final darkTheme = ThemeData(
+                useMaterial3: true,
+                brightness: Brightness.dark,
+                fontFamily: AppTextStyles.secondaryFontFamily,
+                colorScheme: const ColorScheme(
+                  brightness: Brightness.dark,
+                  primary: AppColorsDark.primary,
+                  onPrimary: AppColorsDark.onPrimary,
+                  primaryContainer: AppColorsDark.primaryContainer,
+                  onPrimaryContainer: AppColorsDark.onPrimaryContainer,
+                  secondary: AppColorsDark.secondary,
+                  onSecondary: AppColorsDark.onSecondary,
+                  secondaryContainer: AppColorsDark.secondaryContainer,
+                  onSecondaryContainer: AppColorsDark.onSecondaryContainer,
+                  tertiary: AppColorsDark.tertiary,
+                  onTertiary: AppColorsDark.onTertiary,
+                  tertiaryContainer: AppColorsDark.tertiaryContainer,
+                  onTertiaryContainer: AppColorsDark.onTertiaryContainer,
+                  error: AppColorsDark.error,
+                  onError: AppColorsDark.onError,
+                  errorContainer: AppColorsDark.errorContainer,
+                  onErrorContainer: AppColorsDark.onErrorContainer,
+                  surface: AppColorsDark.surface,
+                  onSurface: AppColorsDark.onSurface,
+                  onSurfaceVariant: AppColorsDark.onSurfaceVariant,
+                  outline: AppColorsDark.outline,
+                  outlineVariant: AppColorsDark.outlineVariant,
+                  surfaceDim: AppColorsDark.surfaceDim,
+                  surfaceBright: AppColorsDark.surfaceBright,
+                  surfaceContainerLowest: AppColorsDark.surfaceContainerLowest,
+                  surfaceContainerLow: AppColorsDark.surfaceContainerLow,
+                  surfaceContainer: AppColorsDark.surfaceContainer,
+                  surfaceContainerHigh: AppColorsDark.surfaceContainerHigh,
+                  surfaceContainerHighest:
+                      AppColorsDark.surfaceContainerHighest,
+                  primaryFixed: AppColorsDark.primaryFixed,
+                  primaryFixedDim: AppColorsDark.primaryFixedDim,
+                  onPrimaryFixed: AppColorsDark.onPrimaryFixed,
+                  onPrimaryFixedVariant: AppColorsDark.onPrimaryFixedVariant,
+                  secondaryFixed: AppColorsDark.secondaryFixed,
+                  secondaryFixedDim: AppColorsDark.secondaryFixedDim,
+                  onSecondaryFixed: AppColorsDark.onSecondaryFixed,
+                  onSecondaryFixedVariant:
+                      AppColorsDark.onSecondaryFixedVariant,
+                  tertiaryFixed: AppColorsDark.tertiaryFixed,
+                  tertiaryFixedDim: AppColorsDark.tertiaryFixedDim,
+                  onTertiaryFixed: AppColorsDark.onTertiaryFixed,
+                  onTertiaryFixedVariant: AppColorsDark.onTertiaryFixedVariant,
+                ),
+                scaffoldBackgroundColor: AppColorsDark.background,
+                appBarTheme: const AppBarTheme(
+                  systemOverlayStyle: SystemUiOverlayStyle(
+                    statusBarBrightness: Brightness.light,
+                    statusBarIconBrightness: Brightness.light,
+                    systemNavigationBarIconBrightness: Brightness.light,
+                    systemNavigationBarColor: Color(0xff131313),
+                  ),
+                ),
+                textTheme: const TextTheme(
+                  displayLarge: AppTextStyles.displayLarge,
+                  displayMedium: AppTextStyles.displayMedium,
+                  displaySmall: AppTextStyles.displaySmall,
+                  headlineLarge: AppTextStyles.headlineLarge,
+                  headlineMedium: AppTextStyles.headlineMedium,
+                  headlineSmall: AppTextStyles.headlineSmall,
+                  titleLarge: AppTextStyles.titleLarge,
+                  titleMedium: AppTextStyles.titleMedium,
+                  titleSmall: AppTextStyles.titleSmall,
+                  bodyLarge: AppTextStyles.bodyLarge,
+                  bodyMedium: AppTextStyles.bodyMedium,
+                  bodySmall: AppTextStyles.bodySmall,
+                  labelLarge: AppTextStyles.labelLarge,
+                  labelMedium: AppTextStyles.labelMedium,
+                  labelSmall: AppTextStyles.labelSmall,
+                ),
+                elevatedButtonTheme: ElevatedButtonThemeData(
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: AppColorsDark.onPrimary,
+                    textStyle: AppTextStyles.button,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
+                    ),
+                    backgroundColor: AppColorsDark.primary,
+                    elevation: 0,
+                    shadowColor: Colors.transparent,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 22, vertical: 12),
+                  ).copyWith(
+                    overlayColor: WidgetStateProperty.resolveWith((states) {
+                      if (states.contains(WidgetState.hovered)) {
+                        return AppColorsDark.deepSpace.withValues(alpha: 0.12);
+                      }
+                      if (states.contains(WidgetState.pressed)) {
+                        return AppColorsDark.deepSpace.withValues(alpha: 0.24);
+                      }
+                      return null;
+                    }),
+                  ),
+                ),
+                dialogTheme: const DialogThemeData(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                  ),
+                ),
+                drawerTheme: const DrawerThemeData(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadiusDirectional.only(
+                      topEnd: Radius.zero,
+                      bottomEnd: Radius.zero,
+                    ),
+                  ),
+                ),
+              );
+
+              return ThemeTransitionBuilder(
+                lightTheme: lightTheme,
+                darkTheme: darkTheme,
+                themeMode: themeProvider.mode,
+                builder: (context, animatedTheme) {
+                  return MaterialApp.router(
+                    key: ValueKey(localeKey),
+                    debugShowCheckedModeBanner: false,
+                    title: 'tauntpuzz',
+                    theme: animatedTheme,
+                    themeMode: ThemeMode.light,
+                    routerConfig: AppRouter.router,
+                    locale: localeProvider.locale,
+                    localizationsDelegates:
+                        AppLocalizations.localizationsDelegates,
+                    supportedLocales: AppLocalizations.supportedLocales,
+                  );
+                },
+              );
+            },
           );
         },
       ),

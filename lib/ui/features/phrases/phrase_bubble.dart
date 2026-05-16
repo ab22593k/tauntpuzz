@@ -1,6 +1,5 @@
 import 'package:tauntpuzz/ui/core/layout/phrase_bubble_layout.dart';
 import 'package:tauntpuzz/ui/core/layout/spacing.dart';
-import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:tauntpuzz/ui/features/phrases/view_models/phrases_provider.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +15,8 @@ class PhraseBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -25,8 +26,8 @@ class PhraseBubble extends StatelessWidget {
           child: Container(
             width: 12,
             height: 12,
-            decoration: const BoxDecoration(
-              color: AppColors.primary,
+            decoration: BoxDecoration(
+              color: colorScheme.primary,
               shape: BoxShape.circle,
             ),
           ),
@@ -37,8 +38,8 @@ class PhraseBubble extends StatelessWidget {
           child: Container(
             width: 8,
             height: 8,
-            decoration: const BoxDecoration(
-              color: AppColors.primary,
+            decoration: BoxDecoration(
+              color: colorScheme.primary,
               shape: BoxShape.circle,
             ),
           ),
@@ -49,8 +50,8 @@ class PhraseBubble extends StatelessWidget {
           child: Container(
             width: 4,
             height: 4,
-            decoration: const BoxDecoration(
-              color: AppColors.primary,
+            decoration: BoxDecoration(
+              color: colorScheme.primary,
               shape: BoxShape.circle,
             ),
           ),
@@ -62,11 +63,11 @@ class PhraseBubble extends StatelessWidget {
             maxWidth: 180,
           ),
           decoration: BoxDecoration(
-            color: AppColors.primary,
+            color: colorScheme.primary,
             borderRadius: BorderRadius.zero,
             boxShadow: [
               BoxShadow(
-                color: AppColors.primary.withValues(alpha: 0.15),
+                color: colorScheme.primary.withValues(alpha: 0.15),
                 blurRadius: 8,
                 offset: const Offset(0, 4),
               ),
@@ -81,7 +82,7 @@ class PhraseBubble extends StatelessWidget {
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 style: AppTextStyles.h2.copyWith(
-                  color: AppColors.onPrimary,
+                  color: colorScheme.onPrimary,
                   fontWeight: FontWeight.w700,
                   fontSize: phrase.length > 20 ? 16 : 20,
                 ),

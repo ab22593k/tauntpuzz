@@ -2,7 +2,6 @@ import 'package:tauntpuzz/ui/core/layout/spacing.dart';
 import 'package:tauntpuzz/ui/features/background/background_stack.dart';
 import 'package:tauntpuzz/ui/core/layout/puzzle_layout.dart';
 import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
-import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:tauntpuzz/ui/features/puzzle/board/puzzle_board.dart';
 import 'package:tauntpuzz/ui/features/drawer/drawer_button.dart';
 import 'package:tauntpuzz/ui/features/puzzle/ui/puzzle_header.dart';
@@ -54,6 +53,7 @@ class _PuzzleViewState extends State<PuzzleView> {
         );
         final containerWidth = puzzleLayout.containerWidth;
         final overlayPad = Spacing.overlayPadding(screenTypeHelper.windowClass);
+        final colorScheme = Theme.of(context).colorScheme;
 
         return Stack(
           children: [
@@ -94,10 +94,10 @@ class _PuzzleViewState extends State<PuzzleView> {
                   ),
                   decoration: BoxDecoration(
                     color:
-                        AppColors.surfaceContainerLow.withValues(alpha: 0.90),
+                        colorScheme.surfaceContainerLow.withValues(alpha: 0.90),
                     borderRadius: BorderRadius.zero,
                     border: Border.all(
-                      color: AppColors.outlineVariant.withValues(alpha: 0.15),
+                      color: colorScheme.outlineVariant.withValues(alpha: 0.15),
                     ),
                   ),
                   child: PuzzleHeader(

@@ -1,14 +1,17 @@
-import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:tauntpuzz/ui/features/puzzle/view_models/puzzle_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CorrectTilesCount extends StatelessWidget {
-  const CorrectTilesCount({super.key});
+  final ColorScheme? colorScheme;
+
+  const CorrectTilesCount({super.key, this.colorScheme});
 
   @override
   Widget build(BuildContext context) {
+    final cs = colorScheme ?? Theme.of(context).colorScheme;
+
     return Consumer<PuzzleProvider>(
       builder: (c, puzzleProvider, _) {
         final total = puzzleProvider.puzzle.tiles.length - 1;
@@ -25,12 +28,12 @@ class CorrectTilesCount extends StatelessWidget {
             key: ValueKey(correct),
             mainAxisSize: MainAxisSize.min,
             children: [
-              _progressIcon(ratio),
+              _progressIcon(ratio, cs),
               const SizedBox(width: 4),
               Text(
                 '$correct/$total',
                 style: AppTextStyles.labelSmall.copyWith(
-                  color: _progressColor(ratio),
+                  color: _progressColor(ratio, cs),
                   fontVariations: const [FontVariation('wght', 700)],
                 ),
               ),
@@ -41,15 +44,15 @@ class CorrectTilesCount extends StatelessWidget {
     );
   }
 
-  static Color _progressColor(double ratio) {
+  Color _progressColor(double ratio, ColorScheme colorScheme) {
     if (ratio >= 1.0) return const Color(0xff2e7d32);
     if (ratio >= 0.75) return const Color(0xffb8860b);
-    if (ratio >= 0.5) return AppColors.secondary;
-    return AppColors.primary;
+    if (ratio >= 0.5) return colorScheme.secondary;
+    return colorScheme.primary;
   }
 
-  Widget _progressIcon(double ratio) {
-    final color = _progressColor(ratio);
+  Widget _progressIcon(double ratio, ColorScheme colorScheme) {
+    final color = _progressColor(ratio, colorScheme);
 
     if (ratio >= 1.0) {
       return Container(
@@ -70,7 +73,8 @@ class CorrectTilesCount extends StatelessWidget {
           borderRadius: BorderRadius.zero,
           border: Border.all(color: color, width: 1.5),
         ),
-        child: const Icon(Icons.check, size: 10, color: Colors.black54),
+        child: Icon(Icons.check,
+            size: 10, color: colorScheme.onSurface.withValues(alpha: 0.54)),
       );
     }
     return Icon(Icons.check_circle_outline, size: 14, color: color);

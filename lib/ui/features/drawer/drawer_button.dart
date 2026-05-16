@@ -1,4 +1,3 @@
-import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class DrawerButton extends StatefulWidget {
@@ -33,6 +32,8 @@ class _DrawerButtonState extends State<DrawerButton>
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return AnimatedBuilder(
       animation: _pulseAnim,
       builder: (c, _) => Transform.scale(
@@ -45,13 +46,14 @@ class _DrawerButtonState extends State<DrawerButton>
             padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
             minimumSize: const Size(48, 42),
             fixedSize: const Size.fromHeight(42),
-            backgroundColor: AppColors.glassSurface,
-            foregroundColor: AppColors.onSurface,
+            backgroundColor:
+                colorScheme.surfaceContainer.withValues(alpha: 0.7),
+            foregroundColor: colorScheme.onSurface,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.zero,
               side: BorderSide(
                 width: 1,
-                color: AppColors.outlineVariant.withValues(alpha: 0.15),
+                color: colorScheme.outlineVariant.withValues(alpha: 0.15),
               ),
             ),
           ).copyWith(
@@ -61,10 +63,10 @@ class _DrawerButtonState extends State<DrawerButton>
             shadowColor: WidgetStateProperty.all(Colors.transparent),
             overlayColor: WidgetStateProperty.resolveWith((states) {
               if (states.contains(WidgetState.hovered)) {
-                return AppColors.onSurface.withValues(alpha: 0.06);
+                return colorScheme.onSurface.withValues(alpha: 0.06);
               }
               if (states.contains(WidgetState.pressed)) {
-                return AppColors.onSurface.withValues(alpha: 0.12);
+                return colorScheme.onSurface.withValues(alpha: 0.12);
               }
               return null;
             }),

@@ -2,7 +2,6 @@ import 'package:tauntpuzz/domain/models/tile.dart';
 import 'package:tauntpuzz/ui/core/animations/animations_manager.dart';
 import 'package:tauntpuzz/ui/core/animations/pulse_transition.dart';
 import 'package:tauntpuzz/ui/core/animations/scale_up_transition.dart';
-import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:tauntpuzz/ui/features/tile/tile_animated_positioned.dart';
 import 'package:tauntpuzz/ui/features/tile/tile_content.dart';
 import 'package:tauntpuzz/ui/features/tile/tile_gesture_detector.dart';
@@ -21,6 +20,7 @@ class PuzzleBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     StopWatchProvider stopWatchProvider =
         Provider.of<StopWatchProvider>(context, listen: false);
     return ScaleUpTransition(
@@ -47,9 +47,9 @@ class PuzzleBoard extends StatelessWidget {
                 child: Container(
                   width: containerWidth,
                   height: containerWidth,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.zero,
-                    color: AppColors.surfaceContainer,
+                    color: colorScheme.surfaceContainer,
                   ),
                   child: Stack(
                     children: List.generate(

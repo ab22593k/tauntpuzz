@@ -2,7 +2,6 @@ import 'package:tauntpuzz/helpers/duration_helper.dart';
 import 'package:tauntpuzz/domain/models/score.dart';
 import 'package:tauntpuzz/ui/core/layout/spacing.dart';
 import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
-import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -24,32 +23,25 @@ class LatestScoreItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final wc =
         ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Container(
       padding: EdgeInsets.only(
         left: paddingLeft,
         right: Spacing.screenHPadding + 4,
-        top: Spacing.sm,
-        bottom: Spacing.sm,
-      ),
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: Color(0x1AC6C6C6),
-            width: 1,
-          ),
-        ),
+        top: Spacing.sm + 4,
+        bottom: Spacing.sm + 4,
       ),
       child: Row(
         children: [
           SizedBox(
             width: 20,
             child: isBest
-                ? Icon(Icons.star, size: 14, color: _medalColor)
+                ? Icon(Icons.star, size: 14, color: _medalColorFor(colorScheme))
                 : Text(
                     '$rank',
                     style: AppTextStyles.labelAdaptive(wc).copyWith(
-                      color: AppColors.onSurface.withValues(alpha: 0.3),
+                      color: colorScheme.onSurface.withValues(alpha: 0.3),
                       fontVariations: const [FontVariation('wght', 500)],
                     ),
                   ),
@@ -58,9 +50,9 @@ class LatestScoreItem extends StatelessWidget {
           SizedBox(
             width: 36,
             child: Text(
-              '${score.puzzleSize}\u00d7${score.puzzleSize}',
+              '${score.puzzleSize}\\u00d7${score.puzzleSize}',
               style: AppTextStyles.bodyAdaptive(wc).copyWith(
-                color: AppColors.onSurface.withValues(alpha: 0.8),
+                color: colorScheme.onSurface.withValues(alpha: 0.8),
                 fontVariations: const [FontVariation('wght', 500)],
               ),
             ),
@@ -70,13 +62,14 @@ class LatestScoreItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(Icons.schedule,
-                  size: 11, color: AppColors.onSurface.withValues(alpha: 0.4)),
+                  size: 11,
+                  color: colorScheme.onSurface.withValues(alpha: 0.4)),
               const SizedBox(width: 3),
               Text(
                 DurationHelper.toFormattedTime(
                     Duration(seconds: score.secondsElapsed)),
                 style: AppTextStyles.labelAdaptive(wc).copyWith(
-                  color: AppColors.onSurface.withValues(alpha: 0.7),
+                  color: colorScheme.onSurface.withValues(alpha: 0.7),
                 ),
               ),
             ],
@@ -86,12 +79,13 @@ class LatestScoreItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(Icons.swap_vert,
-                  size: 11, color: AppColors.onSurface.withValues(alpha: 0.4)),
+                  size: 11,
+                  color: colorScheme.onSurface.withValues(alpha: 0.4)),
               const SizedBox(width: 3),
               Text(
                 '${score.movesCount}',
                 style: AppTextStyles.labelAdaptive(wc).copyWith(
-                  color: AppColors.onSurface.withValues(alpha: 0.7),
+                  color: colorScheme.onSurface.withValues(alpha: 0.7),
                 ),
               ),
             ],
@@ -101,9 +95,9 @@ class LatestScoreItem extends StatelessWidget {
     );
   }
 
-  Color get _medalColor {
+  Color _medalColorFor(ColorScheme colorScheme) {
     if (score.movesCount <= 30) return const Color(0xffb8860b);
     if (score.movesCount <= 60) return const Color(0xff595959);
-    return AppColors.onSurface.withValues(alpha: 0.5);
+    return colorScheme.onSurface.withValues(alpha: 0.4);
   }
 }

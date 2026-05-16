@@ -1,7 +1,6 @@
 import 'package:tauntpuzz/helpers/localizations_ext.dart';
 import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
-import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -36,10 +35,12 @@ class _AppVersionSectionState extends State<AppVersionSection> {
   Widget build(BuildContext context) {
     final wc =
         ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Text(
       '${context.l10n.version} ${appVersionText ?? ''}',
       style: AppTextStyles.labelAdaptive(wc).copyWith(
-        color: AppColors.onSurface.withValues(alpha: 0.5),
+        color: colorScheme.onSurface.withValues(alpha: 0.5),
       ),
     );
   }

@@ -8,6 +8,7 @@ class StarsPainter extends CustomPainter {
   final List<double> sizes;
   final Animation<double> opacityAnimation;
   final int totalStarsCount;
+  final Color starColor;
 
   StarsPainter({
     required this.xOffsets,
@@ -17,10 +18,10 @@ class StarsPainter extends CustomPainter {
     required this.sizes,
     required this.opacityAnimation,
     required this.totalStarsCount,
+    required this.starColor,
   }) : super(repaint: opacityAnimation);
 
   final Paint _paint = Paint();
-  final Color baseColor = const Color(0xff888888);
 
   double _getStarOpacity(int i) {
     if (fadeOutStarIndices.contains(i)) {
@@ -35,7 +36,7 @@ class StarsPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     for (int i = 0; i <= totalStarsCount; i++) {
-      _paint.color = baseColor.withValues(alpha: _getStarOpacity(i));
+      _paint.color = starColor.withValues(alpha: _getStarOpacity(i));
       canvas.drawCircle(
         Offset(xOffsets[i].toDouble(), yOffsets[i].toDouble()),
         sizes[i],

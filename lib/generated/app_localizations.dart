@@ -201,6 +201,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The page you\'re looking for doesn\'t exist.'**
   String get pageNotFoundMessage;
+
+  /// Dark mode toggle section title
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get darkMode;
+
+  /// Theme toggle section description
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your theme'**
+  String get toggleDarkMode;
+
+  /// Light theme option label
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get lightTheme;
+
+  /// System theme option label
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get systemTheme;
+
+  /// Dark theme option label
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get darkTheme;
 }
 
 class _AppLocalizationsDelegate

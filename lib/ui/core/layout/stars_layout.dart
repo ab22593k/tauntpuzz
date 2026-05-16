@@ -17,6 +17,8 @@ class StarsLayout implements LayoutDelegate {
     required this.starsMaxYOffset,
   });
 
+  Color starColor = Colors.white60;
+
   int get totalStarsCount {
     switch (screenTypeHelper.windowClass) {
       case WindowClass.compact:
@@ -81,6 +83,7 @@ class StarsLayout implements LayoutDelegate {
       fadeInStarIndices: fadeInStarIndices,
       totalStarsCount: totalStarsCount,
       opacityAnimation: opacity,
+      starColor: starColor,
     );
   }
 }

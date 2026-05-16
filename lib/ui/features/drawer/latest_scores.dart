@@ -3,7 +3,6 @@ import 'package:tauntpuzz/helpers/localizations_ext.dart';
 import 'package:tauntpuzz/ui/features/drawer/latest_score_item.dart';
 import 'package:tauntpuzz/ui/core/layout/spacing.dart';
 import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
-import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:tauntpuzz/ui/features/puzzle/view_models/puzzle_provider.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +16,7 @@ class LatestScores extends StatelessWidget {
     final padding = MediaQuery.paddingOf(context);
     final wc =
         ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
+    final colorScheme = Theme.of(context).colorScheme;
     final double paddingLeft = padding.left == 0 ? Spacing.md : padding.left;
 
     return Selector<PuzzleProvider, List<Score>>(
@@ -37,20 +37,20 @@ class LatestScores extends StatelessWidget {
                   Icon(
                     Icons.emoji_events_outlined,
                     size: 16,
-                    color: AppColors.onSurface.withValues(alpha: 0.6),
+                    color: colorScheme.onSurface.withValues(alpha: 0.6),
                   ),
                   const SizedBox(width: 6),
                   Text(
                     context.l10n.latestScores,
                     style: AppTextStyles.titleAdaptive(wc).copyWith(
-                      color: AppColors.onSurface.withValues(alpha: 0.8),
+                      color: colorScheme.onSurface.withValues(alpha: 0.8),
                     ),
                   ),
                 ],
               ),
             ),
             if (scores.isEmpty)
-              _emptyState(context, paddingLeft, wc)
+              _emptyState(context, paddingLeft, wc, colorScheme)
             else
               ListView.builder(
                 shrinkWrap: true,
@@ -69,7 +69,8 @@ class LatestScores extends StatelessWidget {
     );
   }
 
-  Widget _emptyState(BuildContext context, double paddingLeft, WindowClass wc) {
+  Widget _emptyState(BuildContext context, double paddingLeft, WindowClass wc,
+      ColorScheme colorScheme) {
     return Container(
       margin: EdgeInsets.only(
         left: paddingLeft,
@@ -78,10 +79,10 @@ class LatestScores extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(Spacing.md),
       decoration: BoxDecoration(
-        color: AppColors.surfaceContainerLow,
+        color: colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.zero,
         border: Border.all(
-          color: AppColors.outlineVariant.withValues(alpha: 0.15),
+          color: colorScheme.outlineVariant.withValues(alpha: 0.15),
           width: 1,
         ),
       ),
@@ -90,13 +91,13 @@ class LatestScores extends StatelessWidget {
           Icon(
             Icons.rocket_outlined,
             size: 28,
-            color: AppColors.onSurface.withValues(alpha: 0.2),
+            color: colorScheme.onSurface.withValues(alpha: 0.2),
           ),
           const SizedBox(height: 8),
           Text(
             context.l10n.solveFirstPuzzle,
             style: AppTextStyles.bodyAdaptive(wc).copyWith(
-              color: AppColors.onSurface.withValues(alpha: 0.4),
+              color: colorScheme.onSurface.withValues(alpha: 0.4),
               fontVariations: const [FontVariation('wght', 380)],
             ),
           ),
@@ -104,7 +105,7 @@ class LatestScores extends StatelessWidget {
           Text(
             context.l10n.scoresWillAppear,
             style: AppTextStyles.bodyAdaptive(wc).copyWith(
-              color: AppColors.onSurface.withValues(alpha: 0.25),
+              color: colorScheme.onSurface.withValues(alpha: 0.25),
               fontVariations: const [FontVariation('wght', 360)],
             ),
           ),

@@ -1,7 +1,6 @@
 import 'package:tauntpuzz/helpers/localizations_ext.dart';
-import 'package:flutter/material.dart';
-import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
+import 'package:flutter/material.dart';
 
 class ErrorScreen extends StatelessWidget {
   final Object? error;
@@ -10,18 +9,20 @@ class ErrorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: colorScheme.surface,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
+              Icon(
                 Icons.error_outline_rounded,
                 size: 64,
-                color: AppColors.error,
+                color: colorScheme.error,
               ),
               const SizedBox(height: 16),
               Text(

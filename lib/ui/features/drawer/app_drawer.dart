@@ -3,13 +3,13 @@ import 'dart:ui';
 
 import 'package:tauntpuzz/helpers/localizations_ext.dart';
 import 'package:tauntpuzz/ui/features/drawer/app_version_section.dart';
+import 'package:tauntpuzz/ui/features/drawer/dark_mode_toggle.dart';
 import 'package:tauntpuzz/ui/features/drawer/drawer_app_info.dart';
 import 'package:tauntpuzz/ui/features/drawer/language_picker.dart';
 import 'package:tauntpuzz/ui/features/drawer/latest_scores.dart';
 import 'package:tauntpuzz/ui/features/drawer/puzzle_size_settings.dart';
 import 'package:tauntpuzz/ui/core/layout/spacing.dart';
 import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
-import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +23,7 @@ class AppDrawer extends StatelessWidget {
     final screenSize = MediaQuery.sizeOf(context);
     final isWide = screenSize.width > 600;
     double drawerStartPadding = padding.left == 0 ? Spacing.md : padding.left;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return SafeArea(
       left: false,
@@ -47,12 +48,13 @@ class AppDrawer extends StatelessWidget {
                             ? padding.bottom
                             : 0),
                 decoration: BoxDecoration(
-                  color: AppColors.surfaceContainerLow.withValues(alpha: 0.95),
+                  color:
+                      colorScheme.surfaceContainerLow.withValues(alpha: 0.95),
                   borderRadius: BorderRadius.zero,
                   border: Border(
                     right: BorderSide(
                       width: isWide ? 1 : 1,
-                      color: AppColors.outlineVariant.withValues(alpha: 0.15),
+                      color: colorScheme.outlineVariant.withValues(alpha: 0.15),
                     ),
                   ),
                 ),
@@ -65,6 +67,7 @@ class AppDrawer extends StatelessWidget {
                           children: [
                             PuzzleSizeSettings(),
                             LanguagePicker(),
+                            DarkModeToggle(),
                             SizedBox(height: 8),
                             LatestScores(),
                           ],
@@ -92,6 +95,7 @@ class _DrawerHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final wc =
         ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Container(
       padding: EdgeInsets.only(
@@ -100,21 +104,13 @@ class _DrawerHeader extends StatelessWidget {
         top: Spacing.md,
         bottom: Spacing.sm,
       ),
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: Color(0x26C6C6C6),
-            width: 1,
-          ),
-        ),
-      ),
       child: Row(
         children: [
           Container(
             width: 36,
             height: 36,
-            decoration: const BoxDecoration(
-              color: AppColors.primary,
+            decoration: BoxDecoration(
+              color: colorScheme.primary,
               borderRadius: BorderRadius.zero,
             ),
             child: const Center(
@@ -151,7 +147,7 @@ class _DrawerHeader extends StatelessWidget {
             },
             icon: const Icon(Icons.close),
             style: IconButton.styleFrom(
-              foregroundColor: AppColors.onSurface.withValues(alpha: 0.7),
+              foregroundColor: colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
         ],
@@ -167,20 +163,14 @@ class _DrawerFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
       padding: EdgeInsets.only(
         left: drawerStartPadding,
         right: Spacing.md,
         top: Spacing.sm,
         bottom: Spacing.md + MediaQuery.paddingOf(context).bottom / 2,
-      ),
-      decoration: const BoxDecoration(
-        border: Border(
-          top: BorderSide(
-            color: Color(0x26C6C6C6),
-            width: 1,
-          ),
-        ),
       ),
       child: Row(
         children: [
@@ -191,7 +181,7 @@ class _DrawerFooter extends StatelessWidget {
           Icon(
             Icons.rocket_launch_outlined,
             size: 16,
-            color: AppColors.onSurface.withValues(alpha: 0.3),
+            color: colorScheme.onSurface.withValues(alpha: 0.3),
           ),
         ],
       ),

@@ -1,6 +1,5 @@
 import 'package:tauntpuzz/generated/app_localizations.dart';
 import 'package:tauntpuzz/helpers/localizations_ext.dart';
-import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
 import 'package:tauntpuzz/ui/core/layout/spacing.dart';
@@ -24,6 +23,7 @@ class LanguagePicker extends StatelessWidget {
     final padding = MediaQuery.paddingOf(context);
     final drawerStartPadding = padding.left == 0 ? Spacing.md : padding.left;
     final localeProvider = context.watch<LocaleProvider>();
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Container(
       padding: EdgeInsets.only(
@@ -31,14 +31,6 @@ class LanguagePicker extends StatelessWidget {
         left: drawerStartPadding,
         top: Spacing.md,
         bottom: Spacing.md,
-      ),
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: Color(0x26C6C6C6),
-            width: 1,
-          ),
-        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +40,7 @@ class LanguagePicker extends StatelessWidget {
               Icon(
                 Icons.language_rounded,
                 size: 16,
-                color: AppColors.onSurface.withValues(alpha: 0.6),
+                color: colorScheme.onSurface.withValues(alpha: 0.6),
               ),
               const SizedBox(width: 6),
               Text(context.l10n.language,
@@ -59,7 +51,7 @@ class LanguagePicker extends StatelessWidget {
           Text(
             context.l10n.switchLanguage,
             style: AppTextStyles.bodyAdaptive(wc).copyWith(
-              color: AppColors.onSurface.withValues(alpha: 0.5),
+              color: colorScheme.onSurface.withValues(alpha: 0.5),
             ),
           ),
           const SizedBox(height: 10),
@@ -115,8 +107,10 @@ class _LanguageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Material(
-      color: isSelected ? AppColors.primary : Colors.transparent,
+      color: isSelected ? colorScheme.primary : Colors.transparent,
       borderRadius: BorderRadius.zero,
       child: InkWell(
         onTap: onTap,
@@ -126,8 +120,8 @@ class _LanguageButton extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(
               color: isSelected
-                  ? AppColors.primary
-                  : AppColors.outlineVariant.withValues(alpha: 0.5),
+                  ? colorScheme.primary
+                  : colorScheme.outlineVariant.withValues(alpha: 0.5),
               width: 1,
             ),
           ),
@@ -135,7 +129,8 @@ class _LanguageButton extends StatelessWidget {
             child: Text(
               label,
               style: AppTextStyles.labelMedium.copyWith(
-                color: isSelected ? AppColors.onPrimary : AppColors.onSurface,
+                color:
+                    isSelected ? colorScheme.onPrimary : colorScheme.onSurface,
                 fontVariations: const [FontVariation('wght', 600)],
               ),
             ),

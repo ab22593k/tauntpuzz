@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:tauntpuzz/ui/core/layout/spacing.dart';
-import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -24,14 +23,16 @@ class AppAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return AlertDialog(
       backgroundColor: Colors.transparent,
       contentPadding: const EdgeInsets.all(0),
       scrollable: true,
       insetPadding: insetPadding,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.zero,
-        side: BorderSide(color: AppColors.outlineVariant, width: 0.5),
+        side: BorderSide(color: colorScheme.outlineVariant, width: 0.5),
       ),
       content: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -45,9 +46,9 @@ class AppAlertDialog extends StatelessWidget {
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(
                     horizontal: Spacing.screenHPadding, vertical: Spacing.md),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   borderRadius: BorderRadius.zero,
-                  color: AppColors.surfaceContainerLowest,
+                  color: colorScheme.surfaceContainerLowest,
                 ),
                 child: content ??
                     Column(

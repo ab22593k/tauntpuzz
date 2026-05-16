@@ -1,5 +1,4 @@
 import 'package:tauntpuzz/helpers/localizations_ext.dart';
-import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -8,11 +7,13 @@ class DrawerAppInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return RichText(
       text: TextSpan(
         text: context.l10n.builtWith,
         style: AppTextStyles.bodySmall.copyWith(
-          color: AppColors.onSurface,
+          color: colorScheme.onSurface,
           fontVariations: [const FontVariation('wght', 380)],
         ),
         children: <TextSpan>[

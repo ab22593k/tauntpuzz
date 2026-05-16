@@ -42,11 +42,12 @@ class _StarsState extends State<Stars> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    StarsLayout starsLayout = StarsLayout(
+    final colorScheme = Theme.of(context).colorScheme;
+    final starsLayout = StarsLayout(
       screenTypeHelper: ScreenTypeHelper(widget.size.width, widget.size.height),
       starsMaxXOffset: widget.size.width,
       starsMaxYOffset: widget.size.height,
-    );
+    )..starColor = colorScheme.onSurface;
 
     return CustomPaint(
       painter: starsLayout.getPainter(

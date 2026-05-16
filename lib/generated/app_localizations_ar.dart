@@ -58,4 +58,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get pageNotFoundMessage => 'الصفحة التي تبحث عنها غير موجودة.';
+
+  @override
+  String get darkMode => 'الوضع المظلم';
+
+  @override
+  String get toggleDarkMode => 'اختر السمة';
+
+  @override
+  String get lightTheme => 'فاتح';
+
+  @override
+  String get systemTheme => 'النظام';
+
+  @override
+  String get darkTheme => 'مظلم';
 }

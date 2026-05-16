@@ -66,5 +66,25 @@
   "pageNotFoundMessage": "The page you're looking for doesn't exist.",
   "@pageNotFoundMessage": {
     "description": "404 page not found message"
+  },
+  "darkMode": "Dark Mode",
+  "@darkMode": {
+    "description": "Dark mode toggle section title"
+  },
+  "toggleDarkMode": "Choose your theme",
+  "@toggleDarkMode": {
+    "description": "Theme toggle section description"
+  },
+  "lightTheme": "Light",
+  "@lightTheme": {
+    "description": "Light theme option label"
+  },
+  "systemTheme": "System",
+  "@systemTheme": {
+    "description": "System theme option label"
+  },
+  "darkTheme": "Dark",
+  "@darkTheme": {
+    "description": "Dark theme option label"
   }
 }

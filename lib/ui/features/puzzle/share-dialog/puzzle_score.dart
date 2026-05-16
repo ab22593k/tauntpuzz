@@ -5,7 +5,6 @@ import 'package:tauntpuzz/helpers/file_helper.dart';
 import 'package:tauntpuzz/helpers/localizations_ext.dart';
 import 'package:tauntpuzz/helpers/share_score_helper.dart';
 import 'package:tauntpuzz/ui/core/layout/spacing.dart';
-import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +27,8 @@ class PuzzleScore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -42,7 +43,7 @@ class PuzzleScore extends StatelessWidget {
             Text(
                 'You solved the puzzle! Share your score to challenge your friends',
                 style: TextStyle(
-                    color: AppColors.onSurface.withValues(alpha: 0.7))),
+                    color: colorScheme.onSurface.withValues(alpha: 0.7))),
             const SizedBox(height: Spacing.sm),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,4 +1,3 @@
-import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:tauntpuzz/domain/models/tile.dart';
 import 'package:tauntpuzz/ui/core/animations/animations_manager.dart';
 import 'package:tauntpuzz/ui/core/layout/puzzle_layout.dart';
@@ -44,6 +43,8 @@ class _TileContentState extends State<TileContent>
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return MouseRegion(
       onEnter: (_) {
         if (!widget.isPuzzleSolved) {
@@ -62,11 +63,11 @@ class _TileContentState extends State<TileContent>
           child: Container(
             decoration: BoxDecoration(
               color: widget.tile.isAtCorrectLocation
-                  ? AppColors.surfaceContainerHighest
-                  : AppColors.surfaceContainerLow,
+                  ? colorScheme.surfaceContainerHighest
+                  : colorScheme.surfaceContainerLow,
               borderRadius: BorderRadius.zero,
               border: Border.all(
-                color: AppColors.outlineVariant.withValues(alpha: 0.2),
+                color: colorScheme.outlineVariant.withValues(alpha: 0.2),
                 width: 0.5,
               ),
             ),
@@ -78,7 +79,7 @@ class _TileContentState extends State<TileContent>
                         : AppTextStyles.tile)
                     .copyWith(
                         fontSize: PuzzleLayout.tileTextSize(widget.puzzleSize),
-                        color: AppColors.onSurface),
+                        color: colorScheme.onSurface),
               ),
             ),
           ),

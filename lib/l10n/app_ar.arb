@@ -66,5 +66,25 @@
   "pageNotFoundMessage": "الصفحة التي تبحث عنها غير موجودة.",
   "@pageNotFoundMessage": {
     "description": "رسالة خطأ 404"
+  },
+  "darkMode": "الوضع المظلم",
+  "@darkMode": {
+    "description": "عنوان قسم الوضع المظلم"
+  },
+  "toggleDarkMode": "اختر السمة",
+  "@toggleDarkMode": {
+    "description": "وصف قسم السمة"
+  },
+  "lightTheme": "فاتح",
+  "@lightTheme": {
+    "description": "خيار السمة الفاتحة"
+  },
+  "systemTheme": "النظام",
+  "@systemTheme": {
+    "description": "خيار سمة النظام"
+  },
+  "darkTheme": "مظلم",
+  "@darkTheme": {
+    "description": "خيار السمة المظلمة"
   }
 }
