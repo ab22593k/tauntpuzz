@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:tauntpuzz/router/router_config.dart';
 import 'package:tauntpuzz/ui/core/app_colors.dart';
 import 'package:tauntpuzz/domain/models/puzzle.dart';
 import 'package:tauntpuzz/ui/features/background/background_layers.dart';
-import 'package:tauntpuzz/ui/features/home/home_page.dart';
 import 'package:tauntpuzz/ui/core/layout/background_layer_layout.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
 import 'package:tauntpuzz/ui/features/phrases/view_models/phrases_provider.dart';
@@ -79,7 +79,7 @@ class _AppState extends State<App> {
           create: (_) => PhrasesProvider(),
         ),
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         title: 'tauntpuzz',
         theme: ThemeData(
@@ -197,7 +197,7 @@ class _AppState extends State<App> {
           ),
         ),
         themeMode: ThemeMode.light,
-        home: const HomePage(),
+        routerConfig: AppRouter.router,
       ),
     );
   }
