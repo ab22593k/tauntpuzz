@@ -73,4 +73,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get darkTheme => 'مظلم';
+
+  @override
+  String get gameMode => 'وضع اللعبة';
+
+  @override
+  String get chooseMode => 'اختر تحديًا';
 }

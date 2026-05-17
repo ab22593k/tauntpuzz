@@ -74,4 +74,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get darkTheme => 'Sombre';
+
+  @override
+  String get gameMode => 'Mode de Jeu';
+
+  @override
+  String get chooseMode => 'Choisissez un défi';
 }

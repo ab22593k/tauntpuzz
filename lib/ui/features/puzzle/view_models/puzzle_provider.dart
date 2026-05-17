@@ -1,31 +1,28 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:math' show Random;
 
+import 'package:tauntpuzz/domain/models/game_mode.dart';
 import 'package:tauntpuzz/domain/models/location.dart';
 import 'package:tauntpuzz/domain/models/position.dart';
 import 'package:tauntpuzz/domain/models/puzzle.dart';
 import 'package:tauntpuzz/domain/models/score.dart';
 import 'package:tauntpuzz/domain/models/tile.dart';
 import 'package:tauntpuzz/data/services/storage_service.dart';
+import 'package:tauntpuzz/helpers/game_mode_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 class PuzzleProvider with ChangeNotifier {
   final StorageService storageService;
 
-  PuzzleProvider(this.storageService);
+  PuzzleProvider(this.storageService) {
+    _restoreGameMode();
+  }
 
   /// One dimensional size of the puzzle => size = n x n (Default = 4x4)
   int n = Puzzle.supportedPuzzleSizes[1];
-
-  void resetPuzzleSize(int size) {
-    assert(Puzzle.supportedPuzzleSizes.contains(size));
-    n = size;
-    movesCount = 0;
-    storageService.remove(StorageKey.puzzle);
-    generate(forceRefresh: true);
-  }
 
   /// Random value used in shuffling tiles
   final Random random = Random();
@@ -41,9 +38,157 @@ class PuzzleProvider with ChangeNotifier {
 
   bool get hasStarted => movesCount > 0;
 
+  // ──────────────────────────────────────────────
+  // Game Mode
+  // ──────────────────────────────────────────────
+
+  GameMode _gameMode = GameMode.classic;
+  GameMode get gameMode => _gameMode;
+  bool get isModeLocked => movesCount > 0;
+
+  void setGameMode(GameMode mode) {
+    if (_gameMode == mode) return;
+    _gameMode = mode;
+    _resetMarathonState();
+    _resetBlindState();
+    storageService.set(StorageKey.gameMode, mode.name);
+    movesCount = 0;
+    stopWatchSecondsOverride = 0;
+    storageService.remove(StorageKey.puzzle);
+    generate(forceRefresh: true);
+    notifyListeners();
+  }
+
+  void _restoreGameMode() {
+    final stored = storageService.get(StorageKey.gameMode);
+    if (stored != null) {
+      try {
+        _gameMode = GameMode.values.byName(stored);
+      } catch (_) {
+        _gameMode = GameMode.classic;
+      }
+    }
+  }
+
+  // ──────────────────────────────────────────────
+  // Speedrun
+  // ──────────────────────────────────────────────
+
+  int stopWatchSecondsOverride = 0;
+
+  /// Speedrun: countdown seconds for the current puzzle size.
+  int get speedrunCountdownSeconds =>
+      GameModeHelper.speedrunCountdownSeconds(n);
+
+  // ──────────────────────────────────────────────
+  // Blind Mode
+  // ──────────────────────────────────────────────
+
+  bool _tilesBlinded = false;
+  bool get tilesBlinded => _tilesBlinded;
+  final Set<Location> _blindRevealedTiles = {};
+  Set<Location> get blindRevealedTiles => Set.unmodifiable(_blindRevealedTiles);
+  Timer? _blindHideTimer;
+
+  void _startBlindTimer() {
+    _resetBlindState();
+    final delay = GameModeHelper.blindHideDelaySeconds(n);
+    _blindHideTimer = Timer(Duration(seconds: delay), () {
+      _tilesBlinded = true;
+      _blindRevealedTiles.clear();
+      notifyListeners();
+    });
+  }
+
+  void revealBlindTile(Location location) {
+    if (!_tilesBlinded) return;
+    _blindRevealedTiles.add(location);
+    notifyListeners();
+    Future.delayed(const Duration(milliseconds: 1500), () {
+      _blindRevealedTiles.remove(location);
+      notifyListeners();
+    });
+  }
+
+  bool isTileRevealed(Location location) =>
+      _blindRevealedTiles.contains(location);
+
+  void _resetBlindState() {
+    _tilesBlinded = false;
+    _blindRevealedTiles.clear();
+    _blindHideTimer?.cancel();
+    _blindHideTimer = null;
+  }
+
+  // ──────────────────────────────────────────────
+  // Marathon Mode
+  // ──────────────────────────────────────────────
+
+  int? _marathonStartSize;
+  int? get marathonStartSize => _marathonStartSize;
+  int? _marathonEndSize;
+  int? get marathonEndSize => _marathonEndSize;
+  bool _marathonRetried = false;
+  bool get marathonRetried => _marathonRetried;
+
+  void setMarathonRange(int start, int end) {
+    _marathonStartSize = start;
+    _marathonEndSize = end;
+    storageService.set(StorageKey.marathonStartSize, start);
+    storageService.set(StorageKey.marathonEndSize, end);
+  }
+
+  void _resetMarathonState() {
+    _marathonStartSize = null;
+    _marathonEndSize = null;
+    _marathonRetried = false;
+    if (_gameMode != GameMode.marathon) {
+      storageService.remove(StorageKey.marathonStartSize);
+      storageService.remove(StorageKey.marathonEndSize);
+    }
+  }
+
+  bool get isMarathonComplete {
+    if (_gameMode != GameMode.marathon || _marathonEndSize == null) {
+      return false;
+    }
+    return n >= _marathonEndSize!;
+  }
+
+  void _advanceMarathonSize() {
+    if (!_onPuzzleSolved) return;
+    _onPuzzleSolved = false;
+    final sizes = Puzzle.supportedPuzzleSizes;
+    final idx = sizes.indexOf(n);
+    if (idx < sizes.length - 1 &&
+        (_marathonEndSize == null || n < _marathonEndSize!)) {
+      n = sizes[idx + 1];
+      _marathonRetried = false;
+      movesCount = 0;
+      stopWatchSecondsOverride = 0;
+      _resetBlindState();
+      storageService.remove(StorageKey.puzzle);
+      generate(forceRefresh: true);
+    }
+  }
+
+  /// Flag set when a solve is detected, consumed by the post-solve handler.
+  bool _onPuzzleSolved = false;
+
+  // ──────────────────────────────────────────────
+
+  void resetPuzzleSize(int size) {
+    assert(Puzzle.supportedPuzzleSizes.contains(size));
+    n = size;
+    movesCount = 0;
+    stopWatchSecondsOverride = 0;
+    storageService.remove(StorageKey.puzzle);
+    generate(forceRefresh: true);
+  }
+
   int get correctTilesCount {
     int count = 0;
-    for (Tile tile in tiles) {
+    for (final tile in tiles) {
       if (tile.isAtCorrectLocation && !tile.tileIsWhiteSpace) {
         count++;
       }
@@ -64,8 +209,8 @@ class PuzzleProvider with ChangeNotifier {
       final tile = switch (physicalKey) {
         PhysicalKeyboardKey.arrowDown => puzzle.tileTopOfWhitespace,
         PhysicalKeyboardKey.arrowUp => puzzle.tileBottomOfWhitespace,
-        PhysicalKeyboardKey.arrowRight => puzzle.tileLeftOfWhitespace,
         PhysicalKeyboardKey.arrowLeft => puzzle.tileRightOfWhitespace,
+        PhysicalKeyboardKey.arrowRight => puzzle.tileLeftOfWhitespace,
         _ => null,
       };
 
@@ -79,12 +224,13 @@ class PuzzleProvider with ChangeNotifier {
   /// dragged by the user & the whitespace tile
   /// This causes the [tile.position] getter to get the correct position based on new [Location]'s
   void swapTilesAndUpdatePuzzle(Tile tile) {
-    int movedTileIndex = tiles
+    final movedTileIndex = tiles
         .indexWhere((ctile) => ctile.currentLocation == tile.currentLocation);
-    int whiteSpaceTileIndex = tiles.indexWhere((tile) => tile.tileIsWhiteSpace);
+    final whiteSpaceTileIndex =
+        tiles.indexWhere((tile) => tile.tileIsWhiteSpace);
     // Store instances of the moved tile and the white space tile before changing their locations
-    Tile movedTile = tiles[movedTileIndex];
-    Tile whiteSpaceTile = tiles[whiteSpaceTileIndex];
+    final movedTile = tiles[movedTileIndex];
+    final whiteSpaceTile = tiles[whiteSpaceTileIndex];
 
     tiles[movedTileIndex] = tiles[movedTileIndex]
         .copyWith(currentLocation: whiteSpaceTile.currentLocation);
@@ -96,7 +242,7 @@ class PuzzleProvider with ChangeNotifier {
     if (tiles[movedTileIndex].isAtCorrectLocation) {
       if (puzzle.isSolved) {
         HapticFeedback.vibrate();
-        _updateScoresInStorage();
+        _handlePuzzleSolved();
       } else {
         HapticFeedback.mediumImpact();
       }
@@ -107,24 +253,38 @@ class PuzzleProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void _handlePuzzleSolved() {
+    if (_gameMode == GameMode.marathon) {
+      _onPuzzleSolved = true;
+      _updateScoresInStorage();
+      _advanceMarathonSize();
+    } else {
+      _updateScoresInStorage();
+    }
+  }
+
   List<Score> scores = <Score>[];
 
   static const int maxStorableScores = 10;
 
   void _updateScoresInStorage() {
-    Score newScore = Score(
+    final seconds = stopWatchSecondsOverride > 0
+        ? stopWatchSecondsOverride
+        : (storageService.get(StorageKey.secondsElapsed) ?? 0);
+    final newScore = Score(
       movesCount: movesCount,
       puzzleSize: n,
-      secondsElapsed: storageService.get(StorageKey.secondsElapsed),
+      secondsElapsed: seconds,
+      gameMode: _gameMode,
     );
     try {
-      List<Score> scores = _getScoresFromStorage();
-      if (scores.length == maxStorableScores) {
-        scores.removeAt(0);
+      final savedScores = _getScoresFromStorage();
+      if (savedScores.length == maxStorableScores) {
+        savedScores.removeAt(0);
       }
-      scores.add(newScore);
+      savedScores.add(newScore);
+      scores = savedScores;
       storageService.set(StorageKey.scores, Score.toJsonList(scores));
-      scores = scores;
     } catch (e) {
       storageService.remove(StorageKey.scores);
       log('Error updating scores in storage $e');
@@ -134,9 +294,9 @@ class PuzzleProvider with ChangeNotifier {
   List<Score> _getScoresFromStorage() {
     List<Score> storedScores = [];
     try {
-      final scores = storageService.get(StorageKey.scores);
-      if (scores != null) {
-        storedScores = Score.fromJsonList(scores);
+      final scoresData = storageService.get(StorageKey.scores);
+      if (scoresData != null) {
+        storedScores = Score.fromJsonList(scoresData);
       }
     } catch (e) {
       storageService.remove(StorageKey.scores);
@@ -148,8 +308,8 @@ class PuzzleProvider with ChangeNotifier {
 
   Puzzle? _getPuzzleFromStorage() {
     try {
-      dynamic puzzle = storageService.get(StorageKey.puzzle);
-      return Puzzle.fromJson(json.decode(json.encode(puzzle)));
+      final puzzleData = storageService.get(StorageKey.puzzle);
+      return Puzzle.fromJson(json.decode(json.encode(puzzleData)));
     } catch (e) {
       log('Error in local storage, clearing data...');
       storageService.clear();
@@ -171,26 +331,29 @@ class PuzzleProvider with ChangeNotifier {
     if (storageService.has(StorageKey.scores)) {
       scores = _getScoresFromStorage();
     }
-    // Set tiles & size from locale storage only of they exist and there is no forceRefresh flag (for reset)
+    // Set tiles & size from locale storage only if they exist and there is no forceRefresh flag (for reset)
     if (storageService.has(StorageKey.puzzle) && !forceRefresh) {
-      Puzzle? puzzle = _getPuzzleFromStorage();
-      if (puzzle != null) {
-        tiles = puzzle.tiles;
-        n = puzzle.n;
-        movesCount = puzzle.movesCount;
+      final stored = _getPuzzleFromStorage();
+      if (stored != null) {
+        tiles = stored.tiles;
+        n = stored.n;
+        movesCount = stored.movesCount;
         return;
       }
     }
     movesCount = 0;
+    _resetBlindState();
     _generateNew();
     _updatePuzzleInStorage();
+    if (_gameMode == GameMode.blind) {
+      _startBlindTimer();
+    }
     notifyListeners();
   }
 
   void _generateNew() {
-    List<Location> tilesCorrectLocations =
-        Puzzle.generateTileCorrectLocations(n);
-    List<Location> tilesCurrentLocations = List.from(tilesCorrectLocations);
+    final tilesCorrectLocations = Puzzle.generateTileCorrectLocations(n);
+    final tilesCurrentLocations = List<Location>.from(tilesCorrectLocations);
 
     tiles = Puzzle.getTilesFromLocations(
       correctLocations: tilesCorrectLocations,

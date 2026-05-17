@@ -231,6 +231,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dark'**
   String get darkTheme;
+
+  /// Game mode section title
+  ///
+  /// In en, this message translates to:
+  /// **'Game Mode'**
+  String get gameMode;
+
+  /// Game mode section description
+  ///
+  /// In en, this message translates to:
+  /// **'Select a challenge variant'**
+  String get chooseMode;
 }
 
 class _AppLocalizationsDelegate

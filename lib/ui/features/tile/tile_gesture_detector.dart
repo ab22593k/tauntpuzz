@@ -45,6 +45,12 @@ class TileGestureDetector extends StatelessWidget {
 
     // Handle Phrases
     if (puzzleProvider.movesCount == 1) {
+      // Configure speedrun countdown on first move
+      if (puzzleProvider.gameMode.name == 'speedrun' &&
+          !stopWatchProvider.isCountDown) {
+        final seconds = puzzleProvider.speedrunCountdownSeconds;
+        stopWatchProvider.configureCountdown(seconds);
+      }
       stopWatchProvider.start();
       phrasesProvider.setPhraseState(PhraseState.puzzleStarted);
     } else if (puzzleProvider.puzzle.isSolved) {
@@ -118,6 +124,12 @@ class TileGestureDetector extends StatelessWidget {
           }
         },
         onTap: () {
+          // In blind mode, tap first reveals the tile, then moves it if possible
+          if (puzzleProvider.gameMode.name == 'blind' &&
+              puzzleProvider.tilesBlinded &&
+              !puzzleProvider.isTileRevealed(tile.currentLocation)) {
+            puzzleProvider.revealBlindTile(tile.currentLocation);
+          }
           bool tileIsMovable = puzzleProvider.puzzle.tileIsMovable(tile);
           if (tileIsMovable) {
             _swapTilesAndUpdatePuzzle(

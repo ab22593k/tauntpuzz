@@ -5,6 +5,7 @@ import 'package:tauntpuzz/helpers/localizations_ext.dart';
 import 'package:tauntpuzz/ui/features/drawer/app_version_section.dart';
 import 'package:tauntpuzz/ui/features/drawer/dark_mode_toggle.dart';
 import 'package:tauntpuzz/ui/features/drawer/drawer_app_info.dart';
+import 'package:tauntpuzz/ui/features/drawer/game_mode_settings.dart';
 import 'package:tauntpuzz/ui/features/drawer/language_picker.dart';
 import 'package:tauntpuzz/ui/features/drawer/latest_scores.dart';
 import 'package:tauntpuzz/ui/features/drawer/puzzle_size_settings.dart';
@@ -67,6 +68,7 @@ class AppDrawer extends StatelessWidget {
                         child: Column(
                           children: [
                             PuzzleSizeSettings(),
+                            GameModeSettings(),
                             LanguagePicker(),
                             DarkModeToggle(),
                             SizedBox(height: 8),

@@ -1,14 +1,18 @@
 import 'dart:convert';
 
+import 'package:tauntpuzz/domain/models/game_mode.dart';
+
 class Score {
   final int secondsElapsed;
   final int movesCount;
   final int puzzleSize;
+  final GameMode gameMode;
 
   const Score({
     required this.secondsElapsed,
     required this.movesCount,
     required this.puzzleSize,
+    this.gameMode = GameMode.classic,
   });
 
   factory Score.fromJson(Map<String, dynamic> json) {
@@ -16,6 +20,9 @@ class Score {
       secondsElapsed: json['secondsElapsed'],
       movesCount: json['movesCount'],
       puzzleSize: json['puzzleSize'],
+      gameMode: json['gameMode'] != null
+          ? GameMode.values.byName(json['gameMode'])
+          : GameMode.classic,
     );
   }
 
@@ -24,6 +31,7 @@ class Score {
       'secondsElapsed': secondsElapsed,
       'movesCount': movesCount,
       'puzzleSize': puzzleSize,
+      'gameMode': gameMode.name,
     };
   }
 

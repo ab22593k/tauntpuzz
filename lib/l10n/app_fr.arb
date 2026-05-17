@@ -86,5 +86,13 @@
   "darkTheme": "Sombre",
   "@darkTheme": {
     "description": "Libellé de l'option thème sombre"
+  },
+  "gameMode": "Mode de Jeu",
+  "@gameMode": {
+    "description": "Titre de la section mode de jeu"
+  },
+  "chooseMode": "Choisissez un défi",
+  "@chooseMode": {
+    "description": "Description de la section mode de jeu"
   }
 }

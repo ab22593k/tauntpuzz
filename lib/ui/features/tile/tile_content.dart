@@ -2,7 +2,9 @@ import 'package:tauntpuzz/domain/models/tile.dart';
 import 'package:tauntpuzz/ui/core/animations/animations_manager.dart';
 import 'package:tauntpuzz/ui/core/layout/puzzle_layout.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
+import 'package:tauntpuzz/ui/features/puzzle/view_models/puzzle_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TileContent extends StatefulWidget {
   final Tile tile;
@@ -72,19 +74,40 @@ class _TileContentState extends State<TileContent>
               ),
             ),
             child: Center(
-              child: Text(
-                '${widget.tile.value}',
-                style: (MediaQuery.of(context).size.width < 576
-                        ? AppTextStyles.tileMobile
-                        : AppTextStyles.tile)
-                    .copyWith(
-                        fontSize: PuzzleLayout.tileTextSize(widget.puzzleSize),
-                        color: colorScheme.onSurface),
-              ),
+              child: _buildTileLabel(colorScheme),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildTileLabel(ColorScheme colorScheme) {
+    // Check if tile content should be hidden in blind mode
+    final puzzleProvider = context.watch<PuzzleProvider>();
+    final isBlind = puzzleProvider.gameMode.name == 'blind';
+    final tileIsRevealed =
+        isBlind && puzzleProvider.isTileRevealed(widget.tile.currentLocation);
+
+    if (isBlind &&
+        puzzleProvider.tilesBlinded &&
+        !tileIsRevealed &&
+        !widget.isPuzzleSolved) {
+      return Icon(
+        Icons.help_outline,
+        size: (PuzzleLayout.tileTextSize(widget.puzzleSize) ?? 24) * 0.6,
+        color: colorScheme.onSurface.withValues(alpha: 0.25),
+      );
+    }
+
+    return Text(
+      '${widget.tile.value}',
+      style: (MediaQuery.of(context).size.width < 576
+              ? AppTextStyles.tileMobile
+              : AppTextStyles.tile)
+          .copyWith(
+              fontSize: PuzzleLayout.tileTextSize(widget.puzzleSize),
+              color: colorScheme.onSurface),
     );
   }
 }

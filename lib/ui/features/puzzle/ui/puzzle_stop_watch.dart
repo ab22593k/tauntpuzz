@@ -14,7 +14,39 @@ class PuzzleStopWatch extends StatelessWidget {
 
     return Consumer<StopWatchProvider>(
       builder: (c, stopWatchProvider, _) {
-        Duration duration = Duration(seconds: stopWatchProvider.secondsElapsed);
+        // Speedrun countdown display
+        if (stopWatchProvider.isCountDown) {
+          final remaining = stopWatchProvider.countdownRemaining;
+          final isCritical = remaining <= 10 && remaining > 0;
+          final isExpired = remaining <= 0;
+
+          return Row(
+            children: [
+              HugeIcon(
+                icon: isExpired
+                    ? HugeIcons.strokeRoundedStopWatch
+                    : HugeIcons.strokeRoundedTimer01,
+                size: 16,
+                color: isCritical
+                    ? colorScheme.error
+                    : isExpired
+                        ? colorScheme.onSurface.withValues(alpha: 0.4)
+                        : colorScheme.onSurface,
+              ),
+              const SizedBox(width: 4),
+              Text(
+                DurationHelper.toFormattedTime(Duration(seconds: remaining)),
+                style: AppTextStyles.titleMedium.copyWith(
+                  color: isCritical ? colorScheme.error : colorScheme.onSurface,
+                  fontVariations: const [FontVariation('wght', 700)],
+                ),
+              ),
+            ],
+          );
+        }
+
+        // Classic count-up display
+        final duration = Duration(seconds: stopWatchProvider.secondsElapsed);
 
         return Row(
           children: [

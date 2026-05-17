@@ -86,5 +86,13 @@
   "darkTheme": "مظلم",
   "@darkTheme": {
     "description": "خيار السمة المظلمة"
+  },
+  "gameMode": "وضع اللعبة",
+  "@gameMode": {
+    "description": "عنوان قسم وضع اللعبة"
+  },
+  "chooseMode": "اختر تحديًا",
+  "@chooseMode": {
+    "description": "وصف قسم وضع اللعبة"
   }
 }

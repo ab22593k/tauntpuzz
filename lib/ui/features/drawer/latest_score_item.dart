@@ -1,5 +1,6 @@
 import 'package:tauntpuzz/helpers/duration_helper.dart';
 import 'package:tauntpuzz/domain/models/score.dart';
+import 'package:tauntpuzz/domain/models/game_mode.dart';
 import 'package:tauntpuzz/ui/core/layout/spacing.dart';
 import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
 import 'package:tauntpuzz/ui/core/app_text_styles.dart';
@@ -61,6 +62,24 @@ class LatestScoreItem extends StatelessWidget {
               ),
             ),
           ),
+          // Mode tag for non-classic scores
+          if (score.gameMode != GameMode.classic) ...[
+            const SizedBox(width: 4),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+              decoration: BoxDecoration(
+                color: _modeTagColor(score.gameMode, colorScheme),
+                borderRadius: BorderRadius.zero,
+              ),
+              child: Text(
+                _modeTagLabel(score.gameMode),
+                style: AppTextStyles.bodyXxs.copyWith(
+                  color: colorScheme.onSurface,
+                  fontVariations: const [FontVariation('wght', 600)],
+                ),
+              ),
+            ),
+          ],
           const Spacer(),
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -106,4 +125,18 @@ class LatestScoreItem extends StatelessWidget {
     if (score.movesCount <= 60) return const Color(0xff595959);
     return colorScheme.onSurface.withValues(alpha: 0.4);
   }
+
+  String _modeTagLabel(GameMode mode) => switch (mode) {
+        GameMode.speedrun => 'SR',
+        GameMode.blind => 'BL',
+        GameMode.marathon => 'MA',
+        GameMode.classic => '',
+      };
+
+  Color _modeTagColor(GameMode mode, ColorScheme colorScheme) => switch (mode) {
+        GameMode.speedrun => colorScheme.error.withValues(alpha: 0.15),
+        GameMode.blind => colorScheme.secondary.withValues(alpha: 0.15),
+        GameMode.marathon => colorScheme.tertiary.withValues(alpha: 0.15),
+        GameMode.classic => Colors.transparent,
+      };
 }

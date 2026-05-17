@@ -4,6 +4,14 @@ class StorageKey {
   static const String secondsElapsed = 'secondsElapsed';
 
   static const String scores = 'scores';
+
+  static const String gameMode = 'gameMode';
+
+  static const String marathonStartSize = 'marathonStartSize';
+
+  static const String marathonEndSize = 'marathonEndSize';
+
+  static const String blindTilesRevealed = 'blindTilesRevealed';
 }
 
 abstract class StorageService {
