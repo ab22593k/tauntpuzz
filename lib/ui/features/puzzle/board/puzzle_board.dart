@@ -45,6 +45,7 @@ class PuzzleBoard extends StatelessWidget {
               }
               return Center(
                 child: Container(
+                  key: const ValueKey('puzzle_board'),
                   width: containerWidth,
                   height: containerWidth,
                   decoration: BoxDecoration(

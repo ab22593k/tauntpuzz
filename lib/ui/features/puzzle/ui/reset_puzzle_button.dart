@@ -47,6 +47,7 @@ class ResetPuzzleButton extends StatelessWidget {
         builder: (c, puzzleProvider, _) => Padding(
           padding: const EdgeInsets.only(top: 20),
           child: ElevatedButton(
+            key: const ValueKey('reset_button'),
             onPressed: () =>
                 initResetPuzzle(context, puzzleProvider, stopWatchProvider),
             child: Row(

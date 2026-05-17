@@ -29,6 +29,7 @@ class GameModeItem extends StatelessWidget {
           child: SizedBox(
             width: double.infinity,
             child: ElevatedButton(
+              key: ValueKey('game_mode_${mode.name}'),
               onPressed: isLocked
                   ? null
                   : () {

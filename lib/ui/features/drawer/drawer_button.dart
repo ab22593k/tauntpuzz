@@ -4,6 +4,8 @@ import 'package:hugeicons/hugeicons.dart';
 class DrawerButton extends StatefulWidget {
   const DrawerButton({super.key});
 
+  static const _key = ValueKey('drawer_button');
+
   @override
   State<DrawerButton> createState() => _DrawerButtonState();
 }
@@ -40,6 +42,7 @@ class _DrawerButtonState extends State<DrawerButton>
       builder: (c, _) => Transform.scale(
         scale: _pulseAnim.value,
         child: ElevatedButton(
+          key: DrawerButton._key,
           onPressed: () {
             Scaffold.of(context).openDrawer();
           },

@@ -101,6 +101,7 @@ class TileGestureDetector extends StatelessWidget {
     return IgnorePointer(
       ignoring: tile.tileIsWhiteSpace || puzzleProvider.puzzle.isSolved,
       child: GestureDetector(
+        key: ValueKey('tile_${tile.value}'),
         onHorizontalDragEnd: (details) {
           bool canMoveRight = details.velocity.pixelsPerSecond.dx >= 0 &&
               puzzleProvider.puzzle.tileIsLeftOfWhiteSpace(tile);

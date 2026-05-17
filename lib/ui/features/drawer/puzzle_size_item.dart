@@ -32,6 +32,7 @@ class PuzzleSizeItem extends StatelessWidget {
               duration: const Duration(milliseconds: 250),
               curve: Curves.easeOut,
               child: ElevatedButton(
+                key: ValueKey('puzzle_size_$size'),
                 onPressed: () {
                   if (!isSelected) {
                     puzzleProvider.resetPuzzleSize(size);

@@ -177,6 +177,12 @@ class PuzzleProvider
   }
 
   @override
+  void dispose() {
+    resetBlindState();
+    super.dispose();
+  }
+
+  @override
   void updatePuzzleInStorage() {
     try {
       storageService.set(StorageKey.puzzle, puzzle.toJson());
