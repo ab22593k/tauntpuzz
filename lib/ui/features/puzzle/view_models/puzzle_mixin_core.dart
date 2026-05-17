@@ -13,9 +13,16 @@ import 'package:flutter/services.dart';
 /// Mixin containing the core puzzle logic — tile swapping, puzzle generation,
 /// board state management, and the puzzle-solved dispatch.
 ///
-/// Must be applied **after** [PuzzleMixinBlind] (for `resetBlindState` /
-/// `startBlindTimer`) and [PuzzleMixinMarathon] (for
-/// `readyMarathonAdvance` / `advanceMarathonSize`) in the `with` clause.
+/// ## Position in the mixin chain
+/// Applied **right of** [PuzzleMixinMarathon] and **left of** [PuzzleMixinOrchestrator].
+/// Depends on:
+/// - [PuzzleMixinSpeedrun] / [PuzzleMixinBlind] for `resetBlindState()` / `startBlindTimer()`
+/// - [PuzzleMixinMarathon] for `readyMarathonAdvance()` / `advanceMarathonSize()`
+///
+/// Must be applied **after** [PuzzleMixinBlind] and [PuzzleMixinMarathon]
+/// in the `with` clause so these abstract members are satisfied.
+///
+/// Full chain: `Speedrun → Blind → Marathon → Core → Orchestrator`
 mixin PuzzleMixinCore on ChangeNotifier {
   // ──────────────────────────────────────────────
   // Abstract — provided by PuzzleProvider and/or other mixins

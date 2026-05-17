@@ -3,6 +3,21 @@ import 'dart:math';
 import 'package:tauntpuzz/ui/core/layout/phrase_bubble_layout.dart';
 import 'package:flutter/cupertino.dart';
 
+/// Provides contextual encouragement phrases displayed in the
+/// [PhraseBubble] widget.
+///
+/// Phrase lists are grouped by [PhraseState]:
+/// - `puzzleStarted` — random encouragement when the first move is made
+/// - `doingGreat` — random encouragement as tiles reach correct positions
+/// - `puzzleSolved` — celebratory message when the puzzle is solved
+/// - `hardPuzzleSelected` — playful reaction when a large puzzle size is
+///   chosen
+/// - `dashTapped` — cycling comic commentary when the mascot is repeatedly
+///   tapped; runs through ~15 lines in order before wrapping around
+///
+/// Phrases are drawn randomly from the relevant list, except for dash taps
+/// which advance sequentially through the `dashTappedPhrases` list via an
+/// incrementing [dashTapCount].
 class PhrasesProvider with ChangeNotifier {
   static const List<String> puzzleStartedPhrases = [
     'Good luck!',

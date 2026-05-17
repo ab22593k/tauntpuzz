@@ -6,6 +6,13 @@ import 'package:flutter/foundation.dart';
 
 /// Mixin that adds blind puzzle mode logic (tiles hide after a delay,
 /// tap to reveal temporarily) to a [ChangeNotifier] provider.
+///
+/// ## Position in the mixin chain
+/// Applied **right of** [PuzzleMixinSpeedrun] and **left of** [PuzzleMixinMarathon].
+/// Exposes `resetBlindState()` / `startBlindTimer()` which are consumed by
+/// [PuzzleMixinCore] to its right.
+///
+/// Full chain: `Speedrun → Blind → Marathon → Core → Orchestrator`
 mixin PuzzleMixinBlind on ChangeNotifier {
   /// Puzzle size — must be provided by the parent class.
   int get n;

@@ -3,6 +3,24 @@ import 'dart:async';
 import 'package:tauntpuzz/data/services/storage_service.dart';
 import 'package:flutter/cupertino.dart';
 
+/// Manages the puzzle timer using a periodic stream.
+///
+/// Supports two modes:
+/// - **Count-up** (classic / blind / marathon): increments [secondsElapsed]
+///   each second and persists the value to [StorageService].
+/// - **Countdown** (speedrun): counts down from a configured total, sets
+///   [isCountdownExpired] when it reaches zero.
+///
+/// Lifecycle:
+///   1. `init()` — restores [secondsElapsed] from storage
+///   2. `configureCountdown()` — switches to countdown mode
+///   3. `start()` — begins/resumes the timer stream
+///   4. `stop()` — pauses and resets all state; persists zero
+///   5. `cancel()` — disposes of the stream subscription (use in dispose)
+///
+/// In count-up mode, persisting happens on every tick so the elapsed time
+/// survives app restarts. In countdown mode, no persistence is needed since
+/// the timer resets on each puzzle.
 class StopWatchProvider with ChangeNotifier {
   Stream<int> timeStream =
       Stream.periodic(const Duration(seconds: 1), (x) => 1 + x++);

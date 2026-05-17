@@ -6,6 +6,14 @@ import 'package:flutter/foundation.dart';
 /// Mixin that adds marathon puzzle mode logic (chain-solve across a
 /// user-selected size range) to a [ChangeNotifier] provider.
 ///
+/// ## Position in the mixin chain
+/// Applied **right of** [PuzzleMixinBlind] and **left of** [PuzzleMixinCore].
+/// Exposes `readyMarathonAdvance()` / `advanceMarathonSize()` which are
+/// consumed by [PuzzleMixinCore] (for solved dispatch) and
+/// [PuzzleMixinOrchestrator] (for state reset).
+///
+/// Full chain: `Speedrun → Blind → Marathon → Core → Orchestrator`
+///
 /// Requires the parent class to expose the abstract members below.
 mixin PuzzleMixinMarathon on ChangeNotifier {
   // ──────────────────────────────────────────────

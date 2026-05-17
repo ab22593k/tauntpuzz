@@ -7,8 +7,30 @@ import 'package:flutter/foundation.dart';
 /// the game-mode-specific mixins ([PuzzleMixinSpeedrun], [PuzzleMixinBlind],
 /// [PuzzleMixinMarathon]) and [PuzzleMixinCore].
 ///
-/// Must be applied **after** [PuzzleMixinCore] and the game-mode mixins in the
-/// `with` clause so that the abstract members below are satisfied.
+/// ## Position in the mixin chain
+/// This is the **rightmost** mixin — the final layer in the chain. It depends
+/// on every mixin to its left for the members it calls:
+///
+/// ```
+/// PuzzleProvider
+///   with
+///     ChangeNotifier,
+///     PuzzleMixinSpeedrun,   ← stopWatchSecondsOverride
+///     PuzzleMixinBlind,       ← resetBlindState()
+///     PuzzleMixinMarathon,    ← resetMarathonState(), readyMarathonAdvance(),
+///                               advanceMarathonSize()
+///     PuzzleMixinCore,        ← generate(), updateScoresInStorage()
+///     PuzzleMixinOrchestrator ← [YOU ARE HERE]
+/// ```
+///
+/// **Why this ordering is required:**
+/// Each mixin declares abstract members that are satisfied by the mixins
+/// applied to its left. PuzzleMixinOrchestrator sits at the far right so it
+/// can call `generate()`, `resetMarathonState()`, `resetBlindState()`, etc.
+/// — all provided by the chain to its left — without needing to declare them
+/// as abstract.
+///
+/// Must be applied **after** all other puzzle mixins in the `with` clause.
 mixin PuzzleMixinOrchestrator on ChangeNotifier {
   // ──────────────────────────────────────────────
   // Abstract — provided by PuzzleProvider and/or the other mixins
