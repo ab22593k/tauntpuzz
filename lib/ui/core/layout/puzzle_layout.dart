@@ -23,13 +23,10 @@ class PuzzleLayout {
     };
   }
 
-  static double? tileTextSize(int puzzleSize) {
-    return puzzleSize > 5
-        ? 20
-        : puzzleSize > 4
-            ? 25
-            : puzzleSize > 3
-                ? 30
-                : null;
-  }
+  static double? tileTextSize(int puzzleSize) => switch (puzzleSize) {
+        > 5 => 20,
+        > 4 => 25,
+        > 3 => 30,
+        _ => null,
+      };
 }

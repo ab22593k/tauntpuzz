@@ -31,9 +31,9 @@ class PuzzleBoard extends StatelessWidget {
         builder: (c, PuzzleProvider puzzleProvider, _) => KeyboardListener(
           onKeyEvent: (event) {
             puzzleProvider.handleKeyboardEvent(event);
-            if (event is KeyDownEvent &&
-                puzzleProvider.movesCount == 1 &&
-                keyboardListenerFocusNode.hasFocus) {
+            if (event case KeyDownEvent()
+                when puzzleProvider.movesCount == 1 &&
+                    keyboardListenerFocusNode.hasFocus) {
               stopWatchProvider.start();
             }
           },

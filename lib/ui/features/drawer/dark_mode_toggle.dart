@@ -84,16 +84,11 @@ class DarkModeToggle extends StatelessWidget {
     );
   }
 
-  String _labelFor(BuildContext context, ThemeMode mode) {
-    switch (mode) {
-      case ThemeMode.light:
-        return context.l10n.lightTheme;
-      case ThemeMode.dark:
-        return context.l10n.darkTheme;
-      case ThemeMode.system:
-        return context.l10n.systemTheme;
-    }
-  }
+  String _labelFor(BuildContext context, ThemeMode mode) => switch (mode) {
+        ThemeMode.light => context.l10n.lightTheme,
+        ThemeMode.dark => context.l10n.darkTheme,
+        ThemeMode.system => context.l10n.systemTheme,
+      };
 }
 
 class _ThemeOption {
@@ -103,28 +98,23 @@ class _ThemeOption {
 
 typedef _IconBuilder = Widget Function(Color color);
 
-_IconBuilder _iconFor(ThemeMode mode) {
-  switch (mode) {
-    case ThemeMode.light:
-      return (color) => HugeIcon(
+_IconBuilder _iconFor(ThemeMode mode) => switch (mode) {
+      ThemeMode.light => (color) => HugeIcon(
             icon: HugeIcons.strokeRoundedSun01,
             size: 18,
             color: color,
-          );
-    case ThemeMode.system:
-      return (color) => HugeIcon(
+          ),
+      ThemeMode.system => (color) => HugeIcon(
             icon: HugeIcons.strokeRoundedComputerSettings,
             size: 18,
             color: color,
-          );
-    case ThemeMode.dark:
-      return (color) => HugeIcon(
+          ),
+      ThemeMode.dark => (color) => HugeIcon(
             icon: HugeIcons.strokeRoundedMoon01,
             size: 18,
             color: color,
-          );
-  }
-}
+          ),
+    };
 
 class _ThemeButton extends StatefulWidget {
   final _IconBuilder iconBuilder;

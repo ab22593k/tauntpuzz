@@ -15,13 +15,9 @@ class ScreenTypeHelper {
 
   bool get isWideLayout => screenWidth > screenHeight;
 
-  WindowClass get windowClass {
-    if (screenWidth <= compactMaxWidth) {
-      return WindowClass.compact;
-    } else if (screenWidth <= mediumMaxWidth) {
-      return WindowClass.medium;
-    } else {
-      return WindowClass.expanded;
-    }
-  }
+  WindowClass get windowClass => switch (screenWidth) {
+        <= compactMaxWidth => WindowClass.compact,
+        <= mediumMaxWidth => WindowClass.medium,
+        _ => WindowClass.expanded,
+      };
 }

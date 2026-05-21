@@ -60,8 +60,8 @@ class StopWatchProvider with ChangeNotifier {
   }
 
   void start() {
-    if (streamSubscription != null && streamSubscription!.isPaused) {
-      streamSubscription!.resume();
+    if (streamSubscription case var sub? when sub.isPaused) {
+      sub.resume();
     } else {
       streamSubscription = timeStream.listen((_) {
         if (isCountDown) {
@@ -80,8 +80,8 @@ class StopWatchProvider with ChangeNotifier {
   }
 
   void stop() {
-    if (streamSubscription != null && !streamSubscription!.isPaused) {
-      streamSubscription!.pause();
+    if (streamSubscription case var sub? when !sub.isPaused) {
+      sub.pause();
       secondsElapsed = 0;
       isCountDown = false;
       countdownInitial = 0;
@@ -92,8 +92,8 @@ class StopWatchProvider with ChangeNotifier {
   }
 
   void cancel() {
-    if (streamSubscription != null) {
-      streamSubscription!.cancel();
+    if (streamSubscription case var sub?) {
+      sub.cancel();
     }
   }
 }

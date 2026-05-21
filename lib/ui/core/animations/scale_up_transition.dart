@@ -38,12 +38,12 @@ class _ScaleUpTransitionState extends State<ScaleUpTransition>
       ),
     );
 
-    if (widget.delay == null) {
-      _animationController.forward();
-    } else {
-      Future.delayed(widget.delay!, () {
+    if (widget.delay case final delay?) {
+      Future.delayed(delay, () {
         _animationController.forward();
       });
+    } else {
+      _animationController.forward();
     }
     super.initState();
   }

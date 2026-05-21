@@ -45,45 +45,45 @@ class CorrectTilesCount extends StatelessWidget {
     );
   }
 
-  Color _progressColor(double ratio, ColorScheme colorScheme) {
-    if (ratio >= 1.0) return const Color(0xff2e7d32);
-    if (ratio >= 0.75) return const Color(0xffb8860b);
-    if (ratio >= 0.5) return colorScheme.secondary;
-    return colorScheme.primary;
-  }
+  Color _progressColor(double ratio, ColorScheme colorScheme) =>
+      switch (ratio) {
+        >= 1.0 => const Color(0xff2e7d32),
+        >= 0.75 => const Color(0xffb8860b),
+        >= 0.5 => colorScheme.secondary,
+        _ => colorScheme.primary,
+      };
 
   Widget _progressIcon(double ratio, ColorScheme colorScheme) {
     final color = _progressColor(ratio, colorScheme);
-
-    if (ratio >= 1.0) {
-      return Container(
-        width: 14,
-        height: 14,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.zero,
+    return switch (ratio) {
+      >= 1.0 => Container(
+          width: 14,
+          height: 14,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.zero,
+          ),
+          child: const HugeIcon(
+              icon: HugeIcons.strokeRoundedStarAward01,
+              size: 10,
+              color: Colors.white),
         ),
-        child: const HugeIcon(
-            icon: HugeIcons.strokeRoundedStarAward01,
-            size: 10,
-            color: Colors.white),
-      );
-    }
-    if (ratio >= 0.75) {
-      return Container(
-        width: 14,
-        height: 14,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.zero,
-          border: Border.all(color: color, width: 1.5),
+      >= 0.75 => Container(
+          width: 14,
+          height: 14,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.zero,
+            border: Border.all(color: color, width: 1.5),
+          ),
+          child: HugeIcon(
+              icon: HugeIcons.strokeRoundedCheckmarkCircle01,
+              size: 10,
+              color: colorScheme.onSurface.withValues(alpha: 0.54)),
         ),
-        child: HugeIcon(
-            icon: HugeIcons.strokeRoundedCheckmarkCircle01,
-            size: 10,
-            color: colorScheme.onSurface.withValues(alpha: 0.54)),
-      );
-    }
-    return HugeIcon(
-        icon: HugeIcons.strokeRoundedCheckmarkCircle01, size: 14, color: color);
+      _ => HugeIcon(
+          icon: HugeIcons.strokeRoundedCheckmarkCircle01,
+          size: 14,
+          color: color),
+    };
   }
 }

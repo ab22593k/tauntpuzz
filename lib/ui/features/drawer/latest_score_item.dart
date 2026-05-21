@@ -120,11 +120,11 @@ class LatestScoreItem extends StatelessWidget {
     );
   }
 
-  Color _medalColorFor(ColorScheme colorScheme) {
-    if (score.movesCount <= 30) return const Color(0xffb8860b);
-    if (score.movesCount <= 60) return const Color(0xff595959);
-    return colorScheme.onSurface.withValues(alpha: 0.4);
-  }
+  Color _medalColorFor(ColorScheme colorScheme) => switch (score.movesCount) {
+        <= 30 => const Color(0xffb8860b),
+        <= 60 => const Color(0xff595959),
+        _ => colorScheme.onSurface.withValues(alpha: 0.4),
+      };
 
   String _modeTagLabel(GameMode mode) => switch (mode) {
         GameMode.speedrun => 'SR',
