@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:checks/checks.dart';
 import 'package:tauntpuzz/helpers/file_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
@@ -16,7 +17,7 @@ void main() {
 
     test('getTemporaryDirectory', () async {
       final Directory result = await FileHelper.getTemporaryDirectory();
-      expect(result.path, kTemporaryPath);
+      check(result.path).equals(kTemporaryPath);
     });
   });
 }

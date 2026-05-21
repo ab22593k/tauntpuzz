@@ -1,5 +1,6 @@
 import 'dart:math' show Random;
 
+import 'package:checks/checks.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:tauntpuzz/domain/models/game_mode.dart';
 import 'package:tauntpuzz/domain/models/location.dart';
@@ -186,14 +187,14 @@ void main() {
     group('generate', () {
       test('creates a solvable board with tiles', () {
         harness.generate();
-        expect(harness.tiles.length, equals(9));
-        expect(harness.puzzle.isSolvable(), isTrue);
+        check(harness.tiles.length).equals(9);
+        check(harness.puzzle.isSolvable()).isTrue();
       });
 
       test('sets movesCount to 0', () {
         harness.movesCount = 42;
         harness.generate();
-        expect(harness.movesCount, equals(0));
+        check(harness.movesCount).equals(0);
       });
 
       test('restores from storage when puzzle exists', () {
@@ -213,8 +214,8 @@ void main() {
             .thenReturn(true);
 
         harness.generate();
-        expect(harness.n, equals(3));
-        expect(harness.movesCount, equals(7));
+        check(harness.n).equals(3);
+        check(harness.movesCount).equals(7);
       });
 
       test('does NOT restore from storage when forceRefresh is true', () {
@@ -234,36 +235,36 @@ void main() {
 
         harness.generate(forceRefresh: true);
         // movesCount should be 0 (fresh board), not 7
-        expect(harness.movesCount, equals(0));
+        check(harness.movesCount).equals(0);
       });
 
       test('resets blind state', () {
         harness.generate();
-        expect(harness.blindStateReset, isTrue);
+        check(harness.blindStateReset).isTrue();
       });
 
       test('starts blind timer in blind mode', () {
         harness = _CoreHarness(gameMode: GameMode.blind);
         harness.generate();
-        expect(harness.blindTimerStarted, isTrue);
+        check(harness.blindTimerStarted).isTrue();
       });
 
       test('does NOT start blind timer in classic mode', () {
         harness.generate();
-        expect(harness.blindTimerStarted, isFalse);
+        check(harness.blindTimerStarted).isFalse();
       });
 
       test('does NOT start blind timer in marathon mode', () {
         harness = _CoreHarness(gameMode: GameMode.marathon);
         harness.generate();
-        expect(harness.blindTimerStarted, isFalse);
+        check(harness.blindTimerStarted).isFalse();
       });
 
       test('notifies listeners', () {
         int notifyCount = 0;
         harness.addListener(() => notifyCount++);
         harness.generate();
-        expect(notifyCount, greaterThan(0));
+        check(notifyCount).isGreaterThan(0);
       });
 
       test('loads scores from storage when scores key exists', () {
@@ -279,8 +280,8 @@ void main() {
             .thenReturn(true);
 
         harness.generate();
-        expect(harness.scores.length, equals(1));
-        expect(harness.scores.first.movesCount, equals(5));
+        check(harness.scores.length).equals(1);
+        check(harness.scores.first.movesCount).equals(5);
       });
     });
 
@@ -299,8 +300,8 @@ void main() {
 
         harness.swapTilesAndUpdatePuzzle(tile8);
 
-        expect(harness.tiles[7].currentLocation, equals(locB));
-        expect(harness.tiles[8].currentLocation, equals(locA));
+        check(harness.tiles[7].currentLocation).equals(locB);
+        check(harness.tiles[8].currentLocation).equals(locA);
       });
 
       test('increments movesCount', () {
@@ -312,7 +313,7 @@ void main() {
 
         harness.swapTilesAndUpdatePuzzle(tile);
 
-        expect(harness.movesCount, equals(1));
+        check(harness.movesCount).equals(1);
       });
 
       test('calls updatePuzzleInStorage', () {
@@ -321,7 +322,7 @@ void main() {
 
         harness.swapTilesAndUpdatePuzzle(tile);
 
-        expect(harness.puzzleInStorageUpdated, isTrue);
+        check(harness.puzzleInStorageUpdated).isTrue();
       });
 
       test('notifies listeners', () {
@@ -333,7 +334,7 @@ void main() {
 
         harness.swapTilesAndUpdatePuzzle(tile);
 
-        expect(notifyCount, greaterThan(0));
+        check(notifyCount).isGreaterThan(0);
       });
 
       test('calls handlePuzzleSolved when puzzle becomes solved', () {
@@ -342,9 +343,9 @@ void main() {
 
         harness.swapTilesAndUpdatePuzzle(tile8);
 
-        expect(harness.scoresUpdated, isTrue);
+        check(harness.scoresUpdated).isTrue();
         // Classic mode → only updateScoresInStorage, no marathon methods
-        expect(harness.marathonReadyCalled, isFalse);
+        check(harness.marathonReadyCalled).isFalse();
       });
 
       test('does NOT call handlePuzzleSolved when puzzle is not solved', () {
@@ -353,7 +354,7 @@ void main() {
 
         harness.swapTilesAndUpdatePuzzle(tile);
 
-        expect(harness.scoresUpdated, isFalse);
+        check(harness.scoresUpdated).isFalse();
       });
     });
 
@@ -364,19 +365,19 @@ void main() {
     group('handlePuzzleSolved', () {
       test('calls updateScoresInStorage in classic mode', () {
         harness.handlePuzzleSolved();
-        expect(harness.scoresUpdated, isTrue);
+        check(harness.scoresUpdated).isTrue();
       });
 
       test('calls updateScoresInStorage in speedrun mode', () {
         harness = _CoreHarness(gameMode: GameMode.speedrun);
         harness.handlePuzzleSolved();
-        expect(harness.scoresUpdated, isTrue);
+        check(harness.scoresUpdated).isTrue();
       });
 
       test('calls updateScoresInStorage in blind mode', () {
         harness = _CoreHarness(gameMode: GameMode.blind);
         harness.handlePuzzleSolved();
-        expect(harness.scoresUpdated, isTrue);
+        check(harness.scoresUpdated).isTrue();
       });
 
       test(
@@ -385,9 +386,9 @@ void main() {
         harness = _CoreHarness(gameMode: GameMode.marathon);
         harness.handlePuzzleSolved();
 
-        expect(harness.marathonReadyCalled, isTrue);
-        expect(harness.scoresUpdated, isTrue);
-        expect(harness.marathonAdvanceCalled, isTrue);
+        check(harness.marathonReadyCalled).isTrue();
+        check(harness.scoresUpdated).isTrue();
+        check(harness.marathonAdvanceCalled).isTrue();
       });
     });
   });

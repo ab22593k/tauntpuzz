@@ -1,3 +1,4 @@
+import 'package:checks/checks.dart';
 import 'package:fake_async/fake_async.dart';
 import 'package:tauntpuzz/domain/models/location.dart';
 import 'package:tauntpuzz/helpers/game_mode_helper.dart';
@@ -23,16 +24,16 @@ void main() {
 
     group('initial state', () {
       test('tilesBlinded is false', () {
-        expect(harness.tilesBlinded, isFalse);
+        check(harness.tilesBlinded).isFalse();
       });
 
       test('blindRevealedTiles is empty', () {
-        expect(harness.blindRevealedTiles, isEmpty);
+        check(harness.blindRevealedTiles).isEmpty();
       });
 
       test('isTileRevealed returns false for any location', () {
         const loc = Location(x: 1, y: 1);
-        expect(harness.isTileRevealed(loc), isFalse);
+        check(harness.isTileRevealed(loc)).isFalse();
       });
     });
 
@@ -42,22 +43,22 @@ void main() {
         harness.startBlindTimer();
         // No need to wait — resetBlindState should clear it immediately
         harness.resetBlindState();
-        expect(harness.tilesBlinded, isFalse);
+        check(harness.tilesBlinded).isFalse();
       });
 
       test('clears revealed tiles', () {
         // Manually trigger reveal by setting up and calling reset
         harness.startBlindTimer();
         harness.resetBlindState();
-        expect(harness.blindRevealedTiles, isEmpty);
-        expect(harness.tilesBlinded, isFalse);
+        check(harness.blindRevealedTiles).isEmpty();
+        check(harness.tilesBlinded).isFalse();
       });
 
       test('can be called multiple times without error', () {
         harness.resetBlindState();
         harness.resetBlindState();
         harness.resetBlindState();
-        expect(harness.tilesBlinded, isFalse);
+        check(harness.tilesBlinded).isFalse();
       });
     });
 
@@ -65,8 +66,8 @@ void main() {
       test('does nothing when tiles are not blinded', () {
         const loc = Location(x: 2, y: 2);
         harness.revealBlindTile(loc);
-        expect(harness.isTileRevealed(loc), isFalse);
-        expect(harness.blindRevealedTiles, isEmpty);
+        check(harness.isTileRevealed(loc)).isFalse();
+        check(harness.blindRevealedTiles).isEmpty();
       });
 
       test('reveals tile after tileBlinded is true', () {
@@ -83,10 +84,10 @@ void main() {
         });
 
         // After fakeAsync, tiles should be blinded
-        expect(harness.tilesBlinded, isTrue);
+        check(harness.tilesBlinded).isTrue();
 
         harness.revealBlindTile(loc);
-        expect(harness.isTileRevealed(loc), isTrue);
+        check(harness.isTileRevealed(loc)).isTrue();
       });
 
       test('auto-hides revealed tile after 1.5 seconds', () {
@@ -99,15 +100,15 @@ void main() {
               Duration(seconds: GameModeHelper.blindHideDelaySeconds(4)));
         });
 
-        expect(harness.tilesBlinded, isTrue);
+        check(harness.tilesBlinded).isTrue();
 
         // Now reveal and test auto-hide
         fakeAsync((async) {
           harness.revealBlindTile(loc);
-          expect(harness.isTileRevealed(loc), isTrue);
+          check(harness.isTileRevealed(loc)).isTrue();
 
           async.elapse(const Duration(milliseconds: 1500));
-          expect(harness.isTileRevealed(loc), isFalse);
+          check(harness.isTileRevealed(loc)).isFalse();
         });
       });
     });
@@ -118,13 +119,13 @@ void main() {
 
         fakeAsync((async) {
           harness.startBlindTimer();
-          expect(harness.tilesBlinded, isFalse);
+          check(harness.tilesBlinded).isFalse();
 
           async.elapse(const Duration(seconds: 14));
-          expect(harness.tilesBlinded, isFalse);
+          check(harness.tilesBlinded).isFalse();
 
           async.elapse(const Duration(seconds: 1));
-          expect(harness.tilesBlinded, isTrue);
+          check(harness.tilesBlinded).isTrue();
         });
       });
 
@@ -136,8 +137,8 @@ void main() {
         });
 
         // Blind state achieved
-        expect(harness.tilesBlinded, isTrue);
-        expect(harness.blindRevealedTiles, isEmpty);
+        check(harness.tilesBlinded).isTrue();
+        check(harness.blindRevealedTiles).isEmpty();
       });
 
       test('notifies listeners when tiles become blinded', () {
@@ -149,7 +150,7 @@ void main() {
           freshHarness.startBlindTimer();
 
           async.elapse(const Duration(seconds: 15));
-          expect(notifyCount, greaterThan(0));
+          check(notifyCount).isGreaterThan(0);
         });
       });
     });

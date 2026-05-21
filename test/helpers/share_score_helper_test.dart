@@ -1,3 +1,4 @@
+import 'package:checks/checks.dart';
 import 'package:tauntpuzz/helpers/share_score_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -12,7 +13,7 @@ void main() {
     test('Gets ${puzzleSize}x$puzzleSize solved puzzle image', () {
       String imageUrl = ShareScoreHelper.getPuzzleSolvedImageUrl(puzzleSize);
 
-      expect(imageUrl,
+      check(imageUrl).equals(
           '${ShareScoreHelper.puzzleSolvedImagesUrlRoot}/solved-3x3.png');
     });
 
@@ -20,8 +21,7 @@ void main() {
       String puzzleSolvedText = ShareScoreHelper.getPuzzleSolvedText(
           movesCount, duration, tilesCount);
 
-      expect(
-        puzzleSolvedText,
+      check(puzzleSolvedText).equals(
         'I just solved this $tilesCount-Tile tauntpuzz slide puzzle in 08:20 with 55 moves!',
       );
     });
@@ -32,8 +32,7 @@ void main() {
           ShareScoreHelper.getPuzzleSolvedTextMobile(
               movesCount, duration, tilesCount);
 
-      expect(
-        puzzleSolvedTextMobile,
+      check(puzzleSolvedTextMobile).equals(
         'I just solved this 8-Tile tauntpuzz slide puzzle in 08:20 with 55 moves! \n\n$officialWebsiteUrl',
       );
     });
@@ -42,8 +41,7 @@ void main() {
       String twitterShareLink = ShareScoreHelper.getTwitterShareLink(
           movesCount, duration, tilesCount);
 
-      expect(
-        twitterShareLink,
+      check(twitterShareLink).equals(
         'https://twitter.com/intent/tweet?text=I just solved this 8-Tile tauntpuzz slide puzzle in 08:20 with 55 moves!&url=$officialWebsiteUrl',
       );
     });

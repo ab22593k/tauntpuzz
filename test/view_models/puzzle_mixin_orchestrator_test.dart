@@ -1,3 +1,4 @@
+import 'package:checks/checks.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:tauntpuzz/domain/models/game_mode.dart';
 import 'package:tauntpuzz/domain/models/puzzle.dart';
@@ -134,9 +135,9 @@ void main() {
 
     group('setGameMode', () {
       test('switches gameMode', () {
-        expect(harness.gameMode, equals(GameMode.classic));
+        check(harness.gameMode).equals(GameMode.classic);
         harness.setGameMode(GameMode.speedrun);
-        expect(harness.gameMode, equals(GameMode.speedrun));
+        check(harness.gameMode).equals(GameMode.speedrun);
       });
 
       test('persists mode to storage', () {
@@ -151,31 +152,31 @@ void main() {
         // None of these should be called
         verifyNever(() => harness.storageService.set(any(), any()));
         verifyNever(() => harness.storageService.remove(any()));
-        expect(harness.marathonStateReset, isFalse);
-        expect(harness.blindStateReset, isFalse);
-        expect(harness.generateCalled, isFalse);
+        check(harness.marathonStateReset).isFalse();
+        check(harness.blindStateReset).isFalse();
+        check(harness.generateCalled).isFalse();
       });
 
       test('resets marathon state', () {
         harness.setGameMode(GameMode.speedrun);
-        expect(harness.marathonStateReset, isTrue);
+        check(harness.marathonStateReset).isTrue();
       });
 
       test('resets blind state', () {
         harness.setGameMode(GameMode.speedrun);
-        expect(harness.blindStateReset, isTrue);
+        check(harness.blindStateReset).isTrue();
       });
 
       test('resets movesCount to 0', () {
         harness.movesCount = 99;
         harness.setGameMode(GameMode.speedrun);
-        expect(harness.movesCount, equals(0));
+        check(harness.movesCount).equals(0);
       });
 
       test('resets stopWatchSecondsOverride to 0', () {
         harness.stopWatchSecondsOverride = 99;
         harness.setGameMode(GameMode.speedrun);
-        expect(harness.stopWatchSecondsOverride, equals(0));
+        check(harness.stopWatchSecondsOverride).equals(0);
       });
 
       test('removes puzzle from storage', () {
@@ -185,8 +186,8 @@ void main() {
 
       test('calls generate with forceRefresh', () {
         harness.setGameMode(GameMode.speedrun);
-        expect(harness.generateCalled, isTrue);
-        expect(harness.generateForceRefresh, isTrue);
+        check(harness.generateCalled).isTrue();
+        check(harness.generateForceRefresh).isTrue();
       });
 
       test('notifies listeners', () {
@@ -194,7 +195,7 @@ void main() {
         harness.addListener(() => notifyCount++);
 
         harness.setGameMode(GameMode.speedrun);
-        expect(notifyCount, greaterThan(0));
+        check(notifyCount).isGreaterThan(0);
       });
 
       test('can switch to all game modes', () {
@@ -209,7 +210,7 @@ void main() {
           final other =
               mode == GameMode.classic ? GameMode.speedrun : GameMode.classic;
           h.setGameMode(other);
-          expect(h.gameMode, equals(other));
+          check(h.gameMode).equals(other);
         }
       });
     });
@@ -220,21 +221,21 @@ void main() {
 
     group('resetPuzzleSize', () {
       test('sets n to the given size', () {
-        expect(harness.n, equals(3));
+        check(harness.n).equals(3);
         harness.resetPuzzleSize(5);
-        expect(harness.n, equals(5));
+        check(harness.n).equals(5);
       });
 
       test('resets movesCount to 0', () {
         harness.movesCount = 42;
         harness.resetPuzzleSize(4);
-        expect(harness.movesCount, equals(0));
+        check(harness.movesCount).equals(0);
       });
 
       test('resets stopWatchSecondsOverride to 0', () {
         harness.stopWatchSecondsOverride = 99;
         harness.resetPuzzleSize(4);
-        expect(harness.stopWatchSecondsOverride, equals(0));
+        check(harness.stopWatchSecondsOverride).equals(0);
       });
 
       test('removes puzzle from storage', () {
@@ -244,8 +245,8 @@ void main() {
 
       test('calls generate with forceRefresh', () {
         harness.resetPuzzleSize(4);
-        expect(harness.generateCalled, isTrue);
-        expect(harness.generateForceRefresh, isTrue);
+        check(harness.generateCalled).isTrue();
+        check(harness.generateForceRefresh).isTrue();
       });
 
       test('works for all supported sizes', () {
@@ -256,7 +257,7 @@ void main() {
           when(() => h.storageService.remove(any()))
               .thenAnswer((_) => Future<void>.value());
           h.resetPuzzleSize(size);
-          expect(h.n, equals(size));
+          check(h.n).equals(size);
         }
       });
     });

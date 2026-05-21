@@ -1,3 +1,4 @@
+import 'package:checks/checks.dart';
 import 'package:tauntpuzz/helpers/duration_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -7,21 +8,21 @@ void main() {
       int digit = 2;
       String twoDigits = DurationHelper.twoDigits(digit);
 
-      expect(twoDigits, '02');
+      check(twoDigits).equals('02');
     });
 
     test('Returns 02:00 for duration of 2 minutes', () {
       const Duration duration = Duration(minutes: 2);
       String formattedDuration = DurationHelper.toFormattedTime(duration);
 
-      expect(formattedDuration, '02:00');
+      check(formattedDuration).equals('02:00');
     });
 
     test('Returns 01:40 for duration of 100 seconds', () {
       const Duration duration = Duration(seconds: 100);
       String formattedDuration = DurationHelper.toFormattedTime(duration);
 
-      expect(formattedDuration, '01:40');
+      check(formattedDuration).equals('01:40');
     });
   });
 }

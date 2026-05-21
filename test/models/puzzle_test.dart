@@ -2,6 +2,8 @@ import 'package:tauntpuzz/domain/models/location.dart';
 import 'package:tauntpuzz/domain/models/puzzle.dart';
 import 'package:tauntpuzz/domain/models/tile.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:checks/checks.dart';
+import 'package:collection/collection.dart';
 
 void main() {
   int n = 2;
@@ -253,75 +255,80 @@ void main() {
 
   group('Puzzle Model', () {
     test('Find tile of value 4 as whitespace tile', () {
-      expect(puzzle2x2.whiteSpaceTile.value, 4);
+      check(puzzle2x2.whiteSpaceTile.value).equals(4);
     });
 
     test('Find tile of value 9 as whitespace tile', () {
-      expect(puzzle3x3.whiteSpaceTile.value, 9);
+      check(puzzle3x3.whiteSpaceTile.value).equals(9);
     });
 
     test('Only tiles 2 and 3 are movable', () {
-      expect(puzzle2x2.tileIsMovable(puzzle2x2Tiles[0]), false);
-      expect(puzzle2x2.tileIsMovable(puzzle2x2Tiles[1]), true);
-      expect(puzzle2x2.tileIsMovable(puzzle2x2Tiles[2]), true);
-      expect(puzzle2x2.tileIsMovable(puzzle2x2Tiles[3]), false);
+      check(puzzle2x2.tileIsMovable(puzzle2x2Tiles[0])).isFalse();
+      check(puzzle2x2.tileIsMovable(puzzle2x2Tiles[1])).isTrue();
+      check(puzzle2x2.tileIsMovable(puzzle2x2Tiles[2])).isTrue();
+      check(puzzle2x2.tileIsMovable(puzzle2x2Tiles[3])).isFalse();
     });
 
     test('A tile is around of whitespace tile', () {
-      expect(puzzle2x2.tileIsLeftOfWhiteSpace(puzzle2x2Tiles[2]), true);
-      expect(puzzle2x2.tileIsRightOfWhiteSpace(puzzle2x2Tiles[2]), false);
-      expect(puzzle2x2.tileIsTopOfWhiteSpace(puzzle2x2Tiles[1]), true);
-      expect(puzzle2x2.tileIsBottomOfWhiteSpace(puzzle2x2Tiles[1]), false);
+      check(puzzle2x2.tileIsLeftOfWhiteSpace(puzzle2x2Tiles[2])).isTrue();
+      check(puzzle2x2.tileIsRightOfWhiteSpace(puzzle2x2Tiles[2])).isFalse();
+      check(puzzle2x2.tileIsTopOfWhiteSpace(puzzle2x2Tiles[1])).isTrue();
+      check(puzzle2x2.tileIsBottomOfWhiteSpace(puzzle2x2Tiles[1])).isFalse();
     });
 
     test('Get tile around whitespace tile', () {
-      expect(puzzle2x2.tileTopOfWhitespace, puzzle2x2Tiles[1]);
-      expect(puzzle2x2.tileBottomOfWhitespace, null);
-      expect(puzzle2x2.tileRightOfWhitespace, null);
-      expect(puzzle2x2.tileLeftOfWhitespace, puzzle2x2Tiles[2]);
+      check(puzzle2x2.tileTopOfWhitespace).equals(puzzle2x2Tiles[1]);
+      check(puzzle2x2.tileBottomOfWhitespace).isNull();
+      check(puzzle2x2.tileRightOfWhitespace).isNull();
+      check(puzzle2x2.tileLeftOfWhitespace).equals(puzzle2x2Tiles[2]);
     });
 
     test('Generates a list of correct locations from puzzle size', () {
-      expect(Puzzle.generateTileCorrectLocations(n), correctLocations);
+      final locations = Puzzle.generateTileCorrectLocations(n);
+      check(locations.length).equals(correctLocations.length);
+      for (var i = 0; i < locations.length; i++) {
+        check(locations[i]).equals(correctLocations[i]);
+      }
     });
 
     test('Generates tiles from locations', () {
-      expect(
-        Puzzle.getTilesFromLocations(
-          correctLocations: correctLocations,
-          currentLocations: correctLocations,
-        ),
-        puzzle2x2Tiles,
+      final tiles = Puzzle.getTilesFromLocations(
+        correctLocations: correctLocations,
+        currentLocations: correctLocations,
       );
+      check(tiles.length).equals(puzzle2x2Tiles.length);
+      for (var i = 0; i < tiles.length; i++) {
+        check(tiles[i]).equals(puzzle2x2Tiles[i]);
+      }
     });
 
     test('Zero inversions in a solved puzzle', () {
-      expect(puzzle2x2.countInversions(), 0);
+      check(puzzle2x2.countInversions()).equals(0);
     });
 
     test('1 inversion in unsolved 2x2 puzzle', () {
       /// An inversion is when a tile of a lower value is in a greater position than
       /// a tile of a higher value.
       /// In this puzzle, tile 2 is after tile 3
-      expect(puzzle2x2unsolved.countInversions(), 1);
+      check(puzzle2x2unsolved.countInversions()).equals(1);
     });
 
     test('Checks if puzzle is solvable', () {
-      expect(puzzle2x2unsolved.isSolvable(), isTrue);
-      expect(puzzle2x2unsolvable.isSolvable(), isFalse);
+      check(puzzle2x2unsolved.isSolvable()).isTrue();
+      check(puzzle2x2unsolvable.isSolvable()).isFalse();
 
-      expect(puzzle3x3unsolved.isSolvable(), isTrue);
-      expect(puzzle3x3unsolvable.isSolvable(), isFalse);
+      check(puzzle3x3unsolved.isSolvable()).isTrue();
+      check(puzzle3x3unsolvable.isSolvable()).isFalse();
     });
 
     test('Checks if puzzle is solved', () {
-      expect(puzzle2x2unsolved.isSolved, isFalse);
-      expect(puzzle2x2.isSolved, isTrue);
-      expect(puzzle3x3.isSolved, isTrue);
+      check(puzzle2x2unsolved.isSolved).isFalse();
+      check(puzzle2x2.isSolved).isTrue();
+      check(puzzle3x3.isSolved).isTrue();
     });
 
     test('Supported puzzle tiles include default 4x4', () {
-      expect(Puzzle.supportedPuzzleSizes.contains(4), isTrue);
+      check(Puzzle.supportedPuzzleSizes.contains(4)).isTrue();
     });
 
     test('fromJson & toJson gives correct data', () {
@@ -350,8 +357,9 @@ void main() {
         ]
       };
 
-      expect(puzzle.toJson(), equals(puzzleMap));
-      expect(Puzzle.fromJson(puzzleMap), equals(puzzle));
+      check(const DeepCollectionEquality().equals(puzzle.toJson(), puzzleMap))
+          .isTrue();
+      check(Puzzle.fromJson(puzzleMap)).equals(puzzle);
     });
   });
 }

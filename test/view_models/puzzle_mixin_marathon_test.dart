@@ -1,3 +1,4 @@
+import 'package:checks/checks.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:tauntpuzz/domain/models/game_mode.dart';
 import 'package:tauntpuzz/data/services/storage_service.dart';
@@ -67,19 +68,19 @@ void main() {
 
     group('initial state', () {
       test('marathonStartSize is null', () {
-        expect(harness.marathonStartSize, isNull);
+        check(harness.marathonStartSize).isNull();
       });
 
       test('marathonEndSize is null', () {
-        expect(harness.marathonEndSize, isNull);
+        check(harness.marathonEndSize).isNull();
       });
 
       test('marathonRetried is false', () {
-        expect(harness.marathonRetried, isFalse);
+        check(harness.marathonRetried).isFalse();
       });
 
       test('isMarathonComplete is false when no end size set', () {
-        expect(harness.isMarathonComplete, isFalse);
+        check(harness.isMarathonComplete).isFalse();
       });
 
       test(
@@ -94,15 +95,15 @@ void main() {
         when(() => harness.storageService.remove(any()))
             .thenAnswer((_) => Future<void>.value());
         harness.setMarathonRange(3, 6);
-        expect(harness.isMarathonComplete, isFalse);
+        check(harness.isMarathonComplete).isFalse();
       });
     });
 
     group('setMarathonRange', () {
       test('sets start and end sizes', () {
         harness.setMarathonRange(3, 6);
-        expect(harness.marathonStartSize, equals(3));
-        expect(harness.marathonEndSize, equals(6));
+        check(harness.marathonStartSize).equals(3);
+        check(harness.marathonEndSize).equals(6);
       });
 
       test('persists to storage', () {
@@ -117,19 +118,19 @@ void main() {
       test('returns false when n is below end size', () {
         harness.setMarathonRange(3, 6);
         harness.n = 4;
-        expect(harness.isMarathonComplete, isFalse);
+        check(harness.isMarathonComplete).isFalse();
       });
 
       test('returns true when n equals end size', () {
         harness.setMarathonRange(3, 6);
         harness.n = 6;
-        expect(harness.isMarathonComplete, isTrue);
+        check(harness.isMarathonComplete).isTrue();
       });
 
       test('returns true when n exceeds end size', () {
         harness.setMarathonRange(3, 4);
         harness.n = 5;
-        expect(harness.isMarathonComplete, isTrue);
+        check(harness.isMarathonComplete).isTrue();
       });
     });
 
@@ -137,15 +138,15 @@ void main() {
       test('clears start and end sizes', () {
         harness.setMarathonRange(3, 6);
         harness.resetMarathonState();
-        expect(harness.marathonStartSize, isNull);
-        expect(harness.marathonEndSize, isNull);
+        check(harness.marathonStartSize).isNull();
+        check(harness.marathonEndSize).isNull();
       });
 
       test('clears retried flag', () {
         harness.setMarathonRange(3, 6);
         harness.readyMarathonAdvance();
         harness.resetMarathonState();
-        expect(harness.marathonRetried, isFalse);
+        check(harness.marathonRetried).isFalse();
       });
 
       test('removes storage keys when not in marathon mode', () {
@@ -175,7 +176,7 @@ void main() {
       test('stays false after readyMarathonAdvance', () {
         harness.setMarathonRange(3, 6);
         harness.readyMarathonAdvance();
-        expect(harness.marathonRetried, isFalse);
+        check(harness.marathonRetried).isFalse();
       });
     });
 
@@ -185,13 +186,13 @@ void main() {
         harness.readyMarathonAdvance();
         // advanceMarathonSize should proceed because _onPuzzleSolved = true
         harness.advanceMarathonSize();
-        expect(harness.n, greaterThan(3));
+        check(harness.n).isGreaterThan(3);
       });
 
       test('advanceMarathonSize does nothing without readyMarathonAdvance', () {
         harness.setMarathonRange(3, 6);
         harness.advanceMarathonSize(); // no readyMarathonAdvance called
-        expect(harness.n, equals(3));
+        check(harness.n).equals(3);
       });
     });
 
@@ -200,14 +201,14 @@ void main() {
         harness.setMarathonRange(3, 6);
         harness.readyMarathonAdvance();
         harness.advanceMarathonSize();
-        expect(harness.n, equals(4));
+        check(harness.n).equals(4);
       });
 
       test('calls generate for the new board', () {
         harness.setMarathonRange(3, 6);
         harness.readyMarathonAdvance();
         harness.advanceMarathonSize();
-        expect(harness.generateCalled, isTrue);
+        check(harness.generateCalled).isTrue();
       });
 
       test('resets movesCount to 0', () {
@@ -215,7 +216,7 @@ void main() {
         harness.movesCount = 42;
         harness.readyMarathonAdvance();
         harness.advanceMarathonSize();
-        expect(harness.movesCount, equals(0));
+        check(harness.movesCount).equals(0);
       });
 
       test('resets stopWatchSecondsOverride to 0', () {
@@ -223,7 +224,7 @@ void main() {
         harness.stopWatchSecondsOverride = 99;
         harness.readyMarathonAdvance();
         harness.advanceMarathonSize();
-        expect(harness.stopWatchSecondsOverride, equals(0));
+        check(harness.stopWatchSecondsOverride).equals(0);
       });
 
       test('removes puzzle from storage', () {
@@ -239,7 +240,7 @@ void main() {
         harness.readyMarathonAdvance();
         harness.advanceMarathonSize();
         // Should stay at 4 since end size is 4
-        expect(harness.n, equals(4));
+        check(harness.n).equals(4);
       });
 
       test('does not advance beyond the last supported size', () {
@@ -249,7 +250,7 @@ void main() {
         harness.readyMarathonAdvance();
         harness.advanceMarathonSize();
         // Should not advance beyond 6
-        expect(harness.n, equals(6));
+        check(harness.n).equals(6);
       });
 
       test('advances across multiple sizes', () {
@@ -257,20 +258,20 @@ void main() {
 
         harness.readyMarathonAdvance();
         harness.advanceMarathonSize();
-        expect(harness.n, equals(4));
+        check(harness.n).equals(4);
 
         harness.readyMarathonAdvance();
         harness.advanceMarathonSize();
-        expect(harness.n, equals(5));
+        check(harness.n).equals(5);
 
         harness.readyMarathonAdvance();
         harness.advanceMarathonSize();
-        expect(harness.n, equals(6));
+        check(harness.n).equals(6);
 
         // Should not advance past 6
         harness.readyMarathonAdvance();
         harness.advanceMarathonSize();
-        expect(harness.n, equals(6));
+        check(harness.n).equals(6);
       });
     });
   });

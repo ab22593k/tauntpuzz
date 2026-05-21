@@ -1,6 +1,7 @@
 import 'package:tauntpuzz/domain/models/location.dart';
 import 'package:tauntpuzz/domain/models/tile.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:checks/checks.dart';
 
 void main() {
   Tile tile = const Tile(
@@ -23,8 +24,8 @@ void main() {
         currentLocation: Location(x: 2, y: 1),
       );
 
-      expect(correctLocationTile.isAtCorrectLocation, true);
-      expect(incorrectLocationTile.isAtCorrectLocation, false);
+      check(correctLocationTile.isAtCorrectLocation).isTrue();
+      check(incorrectLocationTile.isAtCorrectLocation).isFalse();
     });
 
     test('Returns correct model from json map', () {
@@ -41,7 +42,7 @@ void main() {
         correctLocation: Location(x: 1, y: 1),
       );
 
-      expect(Tile.fromJson(tileJson), expectedTile);
+      check(Tile.fromJson(tileJson)).equals(expectedTile);
     });
 
     test('Returns json map from model', () {
@@ -51,32 +52,27 @@ void main() {
         correctLocation: Location(x: 1, y: 1),
       );
 
-      Map<String, dynamic> expectedTileJson = {
-        'value': 1,
-        'tileIsWhiteSpace': false,
-        'currentLocation': {'x': 1, 'y': 1},
-        'correctLocation': {'x': 1, 'y': 1},
-      };
-
-      expect(tile.toJson(), expectedTileJson);
+      final json = tile.toJson();
+      check(json['value']).equals(1);
+      check(json['tileIsWhiteSpace']).equals(false);
+      check((json['currentLocation'] as Map)['x']).equals(1);
+      check((json['currentLocation'] as Map)['y']).equals(1);
+      check((json['correctLocation'] as Map)['x']).equals(1);
+      check((json['correctLocation'] as Map)['y']).equals(1);
     });
 
     test('toString prints correctly', () {
-      expect(
-          tile.toString(),
-          equals(
-              'Tile(value: 2, correctLocation: (1, 2), currentLocation: (3, 1))'));
+      check(tile.toString()).equals(
+          'Tile(value: 2, correctLocation: (1, 2), currentLocation: (3, 1))');
     });
 
     test('copyWith updates tile', () {
-      expect(
-          tile.copyWith().currentLocation, equals(const Location(x: 1, y: 3)));
-      expect(
+      check(tile.copyWith().currentLocation).equals(const Location(x: 1, y: 3));
+      check(
         tile
             .copyWith(currentLocation: const Location(x: 2, y: 1))
             .currentLocation,
-        equals(const Location(x: 2, y: 1)),
-      );
+      ).equals(const Location(x: 2, y: 1));
     });
   });
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:checks/checks.dart';
+import 'package:flutter_checks/flutter_checks.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:provider/provider.dart';
 
@@ -202,11 +204,11 @@ void main() {
       await pumpApp(tester, storageService);
 
       // Verify the puzzle board is rendered
-      expect(find.byKey(const ValueKey('puzzle_board')), findsOneWidget);
+      check(find.byKey(const ValueKey('puzzle_board'))).findsOne();
 
       // Tiles 1-15 rendered (default 4x4 = 15 non-whitespace tiles)
       for (int i = 1; i <= 15; i++) {
-        expect(find.byKey(ValueKey('tile_$i')), findsOneWidget);
+        check(find.byKey(ValueKey('tile_$i'))).findsOne();
       }
 
       // Record initial moves
@@ -238,7 +240,7 @@ void main() {
       }
 
       // At least one tile tap should have succeeded
-      expect(movesCount(tester), greaterThan(initialMoves));
+      check(movesCount(tester) > initialMoves).isTrue();
     });
 
     testWidgets('Speedrun mode switches via drawer and renders',
@@ -247,8 +249,8 @@ void main() {
 
       await switchMode(tester, GameMode.speedrun);
 
-      expect(movesCount(tester), 0,
-          reason: 'moves should reset on mode switch');
+      // moves should reset on mode switch
+      check(movesCount(tester)).equals(0);
     });
 
     testWidgets('Blind mode switches via drawer and renders', (tester) async {
@@ -256,8 +258,8 @@ void main() {
 
       await switchMode(tester, GameMode.blind);
 
-      expect(movesCount(tester), 0,
-          reason: 'moves should reset on mode switch');
+      // moves should reset on mode switch
+      check(movesCount(tester)).equals(0);
     });
 
     testWidgets('Marathon mode switches via drawer and renders',
@@ -266,8 +268,8 @@ void main() {
 
       await switchMode(tester, GameMode.marathon);
 
-      expect(movesCount(tester), 0,
-          reason: 'moves should reset on mode switch');
+      // moves should reset on mode switch
+      check(movesCount(tester)).equals(0);
     });
 
     testWidgets('Can cycle through all game modes sequentially',
@@ -276,8 +278,8 @@ void main() {
 
       for (final mode in GameMode.values) {
         await switchMode(tester, mode);
-        expect(movesCount(tester), 0,
-            reason: 'moves should reset to 0 after switching to ${mode.name}');
+        // moves should reset to 0 after switching to ${mode.name}
+        check(movesCount(tester)).equals(0);
       }
     });
 
@@ -286,7 +288,8 @@ void main() {
 
       await switchSize(tester, 3);
 
-      expect(movesCount(tester), 0, reason: 'moves reset after size change');
+      // moves reset after size change
+      check(movesCount(tester)).equals(0);
     });
 
     testWidgets('Puzzle shows correct tile count for chosen size',
@@ -295,8 +298,8 @@ void main() {
 
       // Default is 4x4 = 16 - 1 whitespace = 15 tiles
       for (int i = 1; i <= 15; i++) {
-        expect(find.byKey(ValueKey('tile_$i')), findsOneWidget,
-            reason: 'tile $i should exist in 4x4 puzzle');
+        // tile $i should exist in 4x4 puzzle
+        check(find.byKey(ValueKey('tile_$i'))).findsOne();
       }
 
       // Switch to 3x3
@@ -304,12 +307,12 @@ void main() {
 
       // Now 3x3 = 9 - 1 = 8 tiles
       for (int i = 1; i <= 8; i++) {
-        expect(find.byKey(ValueKey('tile_$i')), findsOneWidget,
-            reason: 'tile $i should exist in 3x3 puzzle');
+        // tile $i should exist in 3x3 puzzle
+        check(find.byKey(ValueKey('tile_$i'))).findsOne();
       }
       // Tile 9 should NOT exist (whitespace)
-      expect(find.byKey(const ValueKey('tile_9')), findsNothing,
-          reason: 'tile 9 is the whitespace tile');
+      // tile 9 is the whitespace tile
+      check(find.byKey(const ValueKey('tile_9'))).findsNothing();
     });
   });
 }

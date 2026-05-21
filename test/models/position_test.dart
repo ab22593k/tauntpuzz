@@ -2,18 +2,21 @@ import 'dart:ui';
 
 import 'package:tauntpuzz/domain/models/position.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:checks/checks.dart';
 
 void main() {
   group('Position model', () {
     Position targetPosition = const Position(left: 10, top: 10);
 
     test('Supports value comparison', () {
-      expect(const Position(left: 10, top: 10), equals(targetPosition));
-      expect(const Position(left: 10, top: 10, right: null, bottom: null),
-          equals(targetPosition));
+      check(const Position(left: 10, top: 10)).equals(targetPosition);
+      check(const Position(left: 10, top: 10, right: null, bottom: null))
+          .equals(targetPosition);
 
-      expect(const Position(left: 10, top: 200), isNot(targetPosition));
-      expect(const Position(left: 10, top: null), isNot(targetPosition));
+      check(const Position(left: 10, top: 200))
+          .not((it) => it.equals(targetPosition));
+      check(const Position(left: 10, top: null))
+          .not((it) => it.equals(targetPosition));
     });
 
     group('Position lerp functionality', () {
@@ -21,11 +24,13 @@ void main() {
       Position endPosition = const Position(left: 100, top: 100);
 
       test('Returns zero position if one is null', () {
-        expect(Position.lerp(startPosition, null, 0), const Position.zero());
+        check(Position.lerp(startPosition, null, 0))
+            .equals(const Position.zero());
       });
 
       test('Returns same start position if lerp double is 0', () {
-        expect(Position.lerp(startPosition, endPosition, 0), startPosition);
+        check(Position.lerp(startPosition, endPosition, 0))
+            .equals(startPosition);
       });
 
       test('Returns correct lerpDouble values between two positions', () {
@@ -34,34 +39,33 @@ void main() {
             lerpDouble(startPosition.left ?? 0, endPosition.left ?? 0, t);
         double? newTop =
             lerpDouble(startPosition.top ?? 0, endPosition.top ?? 0, t);
-        expect(
+        check(
           Position.lerp(startPosition, endPosition, t),
-          Position(left: newLeft, top: newTop),
-        );
+        ).equals(Position(left: newLeft, top: newTop));
       });
 
       test('Returns same end position if lerp double is 1', () {
-        expect(Position.lerp(startPosition, endPosition, 1), endPosition);
+        check(Position.lerp(startPosition, endPosition, 1)).equals(endPosition);
       });
 
       test(
           'Returns same start position if lerp double is 0 and one position param in null',
           () {
-        expect(Position.lerp(startPosition, const Position(left: 10), 0),
-            startPosition);
+        check(Position.lerp(startPosition, const Position(left: 10), 0))
+            .equals(startPosition);
       });
 
       test('toString prints correctly', () {
         Position position = const Position(left: 10.222, top: 20.666);
 
-        expect(position.toString(), '20.67, null, null, 10.22');
+        check(position.toString()).equals('20.67, null, null, 10.22');
       });
 
       test('copyWith updates position', () {
         Position position = const Position(left: 10, top: 20);
 
-        expect(position.copyWith().bottom, isNull);
-        expect(position.copyWith(bottom: 0).bottom, 0);
+        check(position.copyWith().bottom).isNull();
+        check(position.copyWith(bottom: 0).bottom).equals(0);
       });
     });
   });
