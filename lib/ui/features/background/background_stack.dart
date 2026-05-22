@@ -1,6 +1,6 @@
-import 'package:tauntpuzz/ui/features/background/background_layers.dart';
-import 'package:tauntpuzz/ui/features/background/animated_background_layer.dart';
-import 'package:tauntpuzz/ui/features/background/stars.dart';
+import 'package:lullaby/ui/features/background/background_layers.dart';
+import 'package:lullaby/ui/features/background/animated_background_layer.dart';
+import 'package:lullaby/ui/features/background/stars.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundStack extends StatelessWidget {

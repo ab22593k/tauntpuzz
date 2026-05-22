@@ -1,5 +1,5 @@
-import 'package:tauntpuzz/ui/core/layout/background_layer_layout.dart';
-import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
+import 'package:lullaby/ui/core/layout/background_layer_layout.dart';
+import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundLayers {

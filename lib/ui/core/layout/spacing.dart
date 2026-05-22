@@ -1,4 +1,4 @@
-import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
+import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
 
 class Spacing {
   static const double unit = 5;
@@ -15,19 +15,19 @@ class Spacing {
       switch (windowClass) {
         WindowClass.compact => 24,
         WindowClass.medium => 48,
-        WindowClass.expanded => 80,
+        WindowClass.expanded => 100,
       };
 
   static double puzzleMargin(WindowClass windowClass) => switch (windowClass) {
         WindowClass.compact => 24,
         WindowClass.medium => 64,
-        WindowClass.expanded => 80,
+        WindowClass.expanded => 100,
       };
 
   static double overlayPadding(WindowClass windowClass) =>
       switch (windowClass) {
         WindowClass.compact => 16,
         WindowClass.medium => 24,
-        WindowClass.expanded => 32,
+        WindowClass.expanded => 40,
       };
 }

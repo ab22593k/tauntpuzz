@@ -1,5 +1,5 @@
 import 'package:checks/checks.dart';
-import 'package:tauntpuzz/helpers/share_score_helper.dart';
+import 'package:lullaby/helpers/share_score_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -7,7 +7,7 @@ void main() {
   int tilesCount = 8;
   const int movesCount = 55;
   const Duration duration = Duration(seconds: 500);
-  String officialWebsiteUrl = 'https://dashtronaut.app';
+  String officialWebsiteUrl = 'https://lullaby.app';
 
   group('ShareScoreHelper', () {
     test('Gets ${puzzleSize}x$puzzleSize solved puzzle image', () {
@@ -22,7 +22,7 @@ void main() {
           movesCount, duration, tilesCount);
 
       check(puzzleSolvedText).equals(
-        'I just solved this $tilesCount-Tile tauntpuzz slide puzzle in 08:20 with 55 moves!',
+        'I just solved this $tilesCount-Tile Lullaby slide puzzle in 08:20 with 55 moves!',
       );
     });
 
@@ -33,7 +33,7 @@ void main() {
               movesCount, duration, tilesCount);
 
       check(puzzleSolvedTextMobile).equals(
-        'I just solved this 8-Tile tauntpuzz slide puzzle in 08:20 with 55 moves! \n\n$officialWebsiteUrl',
+        'I just solved this 8-Tile Lullaby slide puzzle in 08:20 with 55 moves! \n\n$officialWebsiteUrl',
       );
     });
 
@@ -42,7 +42,7 @@ void main() {
           movesCount, duration, tilesCount);
 
       check(twitterShareLink).equals(
-        'https://twitter.com/intent/tweet?text=I just solved this 8-Tile tauntpuzz slide puzzle in 08:20 with 55 moves!&url=$officialWebsiteUrl',
+        'https://twitter.com/intent/tweet?text=I just solved this 8-Tile Lullaby slide puzzle in 08:20 with 55 moves!&url=$officialWebsiteUrl',
       );
     });
   });

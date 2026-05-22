@@ -1,14 +1,14 @@
-import 'package:tauntpuzz/domain/models/game_mode.dart';
-import 'package:tauntpuzz/domain/models/puzzle.dart';
-import 'package:tauntpuzz/helpers/game_mode_helper.dart';
-import 'package:tauntpuzz/ui/core/animations/animations_manager.dart';
-import 'package:tauntpuzz/ui/core/animations/fade_in_transition.dart';
-import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
-import 'package:tauntpuzz/ui/features/puzzle/ui/correct_tiles_count.dart';
-import 'package:tauntpuzz/ui/features/puzzle/ui/moves_count.dart';
-import 'package:tauntpuzz/ui/features/puzzle/ui/puzzle_stop_watch.dart';
-import 'package:tauntpuzz/ui/features/puzzle/view_models/puzzle_provider.dart';
-import 'package:tauntpuzz/ui/core/app_text_styles.dart';
+import 'package:lullaby/domain/models/game_mode.dart';
+import 'package:lullaby/domain/models/puzzle.dart';
+import 'package:lullaby/helpers/game_mode_helper.dart';
+import 'package:lullaby/ui/core/animations/animations_manager.dart';
+import 'package:lullaby/ui/core/animations/fade_in_transition.dart';
+import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
+import 'package:lullaby/ui/features/puzzle/ui/correct_tiles_count.dart';
+import 'package:lullaby/ui/features/puzzle/ui/moves_count.dart';
+import 'package:lullaby/ui/features/puzzle/ui/puzzle_stop_watch.dart';
+import 'package:lullaby/ui/features/puzzle/view_models/puzzle_provider.dart';
+import 'package:lullaby/ui/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:provider/provider.dart';
@@ -155,28 +155,82 @@ class PuzzleHeader extends StatelessWidget {
         const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('tauntpuzz', style: AppTextStyles.headlineSmall),
+            Text('Lullaby', style: AppTextStyles.headlineSmall),
             SizedBox(height: 2),
             Text(
               'Solve This Slide Puzzle..',
-              style: AppTextStyles.bodyMedium,
+              style: AppTextStyles.bodyLarge,
             ),
           ],
         ),
         const Spacer(),
-        const PuzzleStopWatch(),
-        const SizedBox(width: 12),
-        _statChip(
-          HugeIcon(
+        _labeledStat(
+          icon: const HugeIcon(
+            icon: HugeIcons.strokeRoundedClock01,
+            size: 16,
+          ),
+          label: 'Time',
+          child: const PuzzleStopWatch(),
+          colorScheme: colorScheme,
+        ),
+        const SizedBox(width: 20),
+        _labeledStat(
+          icon: HugeIcon(
             icon: HugeIcons.strokeRoundedArrowUpDown,
-            size: 14,
+            size: 16,
             color: colorScheme.onSurface.withValues(alpha: 0.6),
           ),
-          const MovesCount(),
-          colorScheme,
+          label: 'Moves',
+          child: const MovesCount(),
+          colorScheme: colorScheme,
         ),
-        const SizedBox(width: 12),
-        CorrectTilesCount(colorScheme: colorScheme),
+        const SizedBox(width: 20),
+        _labeledStat(
+          icon: HugeIcon(
+            icon: HugeIcons.strokeRoundedCheckmarkCircle01,
+            size: 16,
+            color: colorScheme.onSurface.withValues(alpha: 0.6),
+          ),
+          label: 'Correct',
+          child: CorrectTilesCount(colorScheme: colorScheme),
+          colorScheme: colorScheme,
+        ),
+      ],
+    );
+  }
+
+  Widget _labeledStat({
+    required Widget icon,
+    required String label,
+    required Widget child,
+    required ColorScheme colorScheme,
+  }) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        icon,
+        const SizedBox(width: 6),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              label,
+              style: AppTextStyles.labelSmall.copyWith(
+                color: colorScheme.onSurface.withValues(alpha: 0.5),
+                fontVariations: const [FontVariation('wght', 600)],
+              ),
+            ),
+            const SizedBox(height: 1),
+            DefaultTextStyle(
+              style: AppTextStyles.titleMedium.copyWith(
+                color: colorScheme.onSurface,
+                fontVariations: const [FontVariation('wght', 700)],
+              ),
+              child: child,
+            ),
+          ],
+        ),
       ],
     );
   }

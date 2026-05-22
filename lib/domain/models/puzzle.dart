@@ -1,5 +1,5 @@
-import 'package:tauntpuzz/domain/models/location.dart';
-import 'package:tauntpuzz/domain/models/tile.dart';
+import 'package:lullaby/domain/models/location.dart';
+import 'package:lullaby/domain/models/tile.dart';
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 

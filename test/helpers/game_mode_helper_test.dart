@@ -1,6 +1,6 @@
 import 'package:checks/checks.dart';
-import 'package:tauntpuzz/domain/models/game_mode.dart';
-import 'package:tauntpuzz/helpers/game_mode_helper.dart';
+import 'package:lullaby/domain/models/game_mode.dart';
+import 'package:lullaby/helpers/game_mode_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

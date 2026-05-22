@@ -1,5 +1,5 @@
-# Dashtronaut
-## Slide Puzzle Game Built With Flutter 💙 For The Flutter Puzzle Hack Challenge
+# Lullaby
+## Slide Puzzle Game Built With Flutter 💙 (Originally Dashtronaut)
 
 [![HitCount](https://hits.dwyl.com/roaa94/flutter_puzzle_hack.svg?style=flat-square&show=unique)](http://hits.dwyl.com/roaa94/flutter_puzzle_hack)
 
@@ -63,9 +63,9 @@ programmatically! [(Ahm, unicorn developer speaking 🦄)](https://youtu.be/MIep
 
 ---
 
-## About Dashtronaut
+## About Lullaby
 
-**Dashtronaut** is a slide puzzle game set out in space with Dashtronaut, Dash the Astronaut, floating in space and
+**Lullaby** is a slide puzzle game set out in space (originally created as **Dashtronaut**), with Dashtronaut, Dash the Astronaut, floating in space and
 interacting with the user. Most of the basic puzzle functionality found in the example app is present in addition to
 some user experience enhancements, interactivity, and design features including:
 
@@ -91,7 +91,7 @@ some user experience enhancements, interactivity, and design features including:
 
 ---
 
-## How Dashtronaut Was Built
+## How Lullaby Was Built
 
 I started by reading through the [example code](https://github.com/VGVentures/slide_puzzle) made by the awesome people
 of **Very Good Ventures**. I learned a lot from it but ended up starting from scratch and only using the puzzle logic (
@@ -149,7 +149,7 @@ regularly.
 
 ---
 
-## What's next for Dashtronaut
+## What's next for Lullaby
 
 With Flutter, there are absolutely no limits to what you can do. And Dashtronaut is nothing but a small portion of what
 I wanted to do. But I’m proud of what I accomplished and will do my best to keep updating the app with features in the

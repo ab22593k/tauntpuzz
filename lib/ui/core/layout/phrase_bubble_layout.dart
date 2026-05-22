@@ -1,6 +1,6 @@
-import 'package:tauntpuzz/domain/models/position.dart';
-import 'package:tauntpuzz/ui/core/layout/layout_delegate.dart';
-import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
+import 'package:lullaby/domain/models/position.dart';
+import 'package:lullaby/ui/core/layout/layout_delegate.dart';
+import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
 import 'package:flutter/cupertino.dart';
 
 enum PhraseState {

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:tauntpuzz/data/services/storage_service.dart';
+import 'package:lullaby/data/services/storage_service.dart';
 import 'package:flutter/cupertino.dart';
 
 /// Manages the puzzle timer using a periodic stream.

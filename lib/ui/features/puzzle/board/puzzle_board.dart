@@ -1,20 +1,25 @@
-import 'package:tauntpuzz/domain/models/tile.dart';
-import 'package:tauntpuzz/ui/core/animations/animations_manager.dart';
-import 'package:tauntpuzz/ui/core/animations/pulse_transition.dart';
-import 'package:tauntpuzz/ui/core/animations/scale_up_transition.dart';
-import 'package:tauntpuzz/ui/features/tile/tile_animated_positioned.dart';
-import 'package:tauntpuzz/ui/features/tile/tile_content.dart';
-import 'package:tauntpuzz/ui/features/tile/tile_gesture_detector.dart';
-import 'package:tauntpuzz/ui/features/puzzle/view_models/puzzle_provider.dart';
-import 'package:tauntpuzz/ui/features/puzzle/view_models/stop_watch_provider.dart';
+import 'package:lullaby/domain/models/tile.dart';
+import 'package:lullaby/ui/core/animations/animations_manager.dart';
+import 'package:lullaby/ui/core/animations/pulse_transition.dart';
+import 'package:lullaby/ui/core/animations/scale_up_transition.dart';
+import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
+import 'package:lullaby/ui/features/tile/tile_animated_positioned.dart';
+import 'package:lullaby/ui/features/tile/tile_content.dart';
+import 'package:lullaby/ui/features/tile/tile_gesture_detector.dart';
+import 'package:lullaby/ui/features/puzzle/view_models/puzzle_provider.dart';
+import 'package:lullaby/ui/features/puzzle/view_models/stop_watch_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class PuzzleBoard extends StatelessWidget {
   final double containerWidth;
+  final WindowClass windowClass;
 
-  PuzzleBoard({super.key, required this.containerWidth});
+  PuzzleBoard(
+      {super.key,
+      required this.containerWidth,
+      this.windowClass = WindowClass.expanded});
 
   final FocusNode keyboardListenerFocusNode = FocusNode();
 
@@ -30,6 +35,30 @@ class PuzzleBoard extends StatelessWidget {
       child: Consumer<PuzzleProvider>(
         builder: (c, PuzzleProvider puzzleProvider, _) => KeyboardListener(
           onKeyEvent: (event) {
+            if (event case KeyDownEvent(:var physicalKey)) {
+              if (physicalKey == PhysicalKeyboardKey.keyR) {
+                if (puzzleProvider.hasStarted &&
+                    !puzzleProvider.puzzle.isSolved) {
+                  stopWatchProvider.stop();
+                  puzzleProvider.generate(forceRefresh: true);
+                } else {
+                  stopWatchProvider.stop();
+                  puzzleProvider.generate(forceRefresh: true);
+                }
+                return;
+              }
+              if (physicalKey == PhysicalKeyboardKey.keyD) {
+                final scaffold = Scaffold.maybeOf(context);
+                if (scaffold != null) {
+                  if (scaffold.isDrawerOpen) {
+                    Navigator.of(context).pop();
+                  } else {
+                    scaffold.openDrawer();
+                  }
+                }
+                return;
+              }
+            }
             puzzleProvider.handleKeyboardEvent(event);
             if (event case KeyDownEvent()
                 when puzzleProvider.movesCount == 1 &&

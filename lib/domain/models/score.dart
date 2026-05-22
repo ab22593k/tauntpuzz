@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:tauntpuzz/domain/models/game_mode.dart';
+import 'package:lullaby/domain/models/game_mode.dart';
 
 class Score {
   final int secondsElapsed;

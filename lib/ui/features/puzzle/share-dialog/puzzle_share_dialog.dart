@@ -1,6 +1,6 @@
-import 'package:tauntpuzz/ui/core/dialogs/app_alert_dialog.dart';
-import 'package:tauntpuzz/ui/core/layout/spacing.dart';
-import 'package:tauntpuzz/ui/features/puzzle/share-dialog/puzzle_score.dart';
+import 'package:lullaby/ui/core/dialogs/app_alert_dialog.dart';
+import 'package:lullaby/ui/core/layout/spacing.dart';
+import 'package:lullaby/ui/features/puzzle/share-dialog/puzzle_score.dart';
 import 'package:flutter/material.dart';
 
 class PuzzleSolvedDialog extends StatelessWidget {

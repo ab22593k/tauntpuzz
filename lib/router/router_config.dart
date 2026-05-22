@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
-import 'package:tauntpuzz/ui/core/error_screen.dart';
-import 'package:tauntpuzz/ui/features/home/home_page.dart';
+import 'package:lullaby/ui/core/error_screen.dart';
+import 'package:lullaby/ui/features/home/home_page.dart';
 
 class AppRouter {
   AppRouter._();

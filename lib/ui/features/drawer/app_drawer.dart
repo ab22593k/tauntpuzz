@@ -1,17 +1,17 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:tauntpuzz/helpers/localizations_ext.dart';
-import 'package:tauntpuzz/ui/features/drawer/app_version_section.dart';
-import 'package:tauntpuzz/ui/features/drawer/dark_mode_toggle.dart';
-import 'package:tauntpuzz/ui/features/drawer/drawer_app_info.dart';
-import 'package:tauntpuzz/ui/features/drawer/game_mode_settings.dart';
-import 'package:tauntpuzz/ui/features/drawer/language_picker.dart';
-import 'package:tauntpuzz/ui/features/drawer/latest_scores.dart';
-import 'package:tauntpuzz/ui/features/drawer/puzzle_size_settings.dart';
-import 'package:tauntpuzz/ui/core/layout/spacing.dart';
-import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
-import 'package:tauntpuzz/ui/core/app_text_styles.dart';
+import 'package:lullaby/helpers/localizations_ext.dart';
+import 'package:lullaby/ui/features/drawer/app_version_section.dart';
+import 'package:lullaby/ui/features/drawer/dark_mode_toggle.dart';
+import 'package:lullaby/ui/features/drawer/drawer_app_info.dart';
+import 'package:lullaby/ui/features/drawer/game_mode_settings.dart';
+import 'package:lullaby/ui/features/drawer/language_picker.dart';
+import 'package:lullaby/ui/features/drawer/latest_scores.dart';
+import 'package:lullaby/ui/features/drawer/puzzle_size_settings.dart';
+import 'package:lullaby/ui/core/layout/spacing.dart';
+import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
+import 'package:lullaby/ui/core/app_text_styles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -125,7 +125,7 @@ class _DrawerHeader extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('tauntpuzz',
+                Text('Lullaby',
                     style: (wc == WindowClass.compact
                             ? AppTextStyles.titleMedium
                             : AppTextStyles.titleLarge)

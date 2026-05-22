@@ -1,13 +1,13 @@
-import 'package:tauntpuzz/ui/core/layout/spacing.dart';
-import 'package:tauntpuzz/ui/features/background/background_stack.dart';
-import 'package:tauntpuzz/ui/core/layout/puzzle_layout.dart';
-import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
-import 'package:tauntpuzz/ui/features/puzzle/board/puzzle_board.dart';
-import 'package:tauntpuzz/ui/features/drawer/drawer_button.dart';
-import 'package:tauntpuzz/ui/features/puzzle/ui/puzzle_header.dart';
-import 'package:tauntpuzz/ui/features/puzzle/ui/reset_puzzle_button.dart';
-import 'package:tauntpuzz/ui/features/puzzle/view_models/puzzle_provider.dart';
-import 'package:tauntpuzz/ui/features/puzzle/view_models/stop_watch_provider.dart';
+import 'package:lullaby/ui/core/layout/spacing.dart';
+import 'package:lullaby/ui/features/background/background_stack.dart';
+import 'package:lullaby/ui/core/layout/puzzle_layout.dart';
+import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
+import 'package:lullaby/ui/features/puzzle/board/puzzle_board.dart';
+import 'package:lullaby/ui/features/drawer/drawer_button.dart';
+import 'package:lullaby/ui/features/puzzle/ui/puzzle_header.dart';
+import 'package:lullaby/ui/features/puzzle/ui/reset_puzzle_button.dart';
+import 'package:lullaby/ui/features/puzzle/view_models/puzzle_provider.dart';
+import 'package:lullaby/ui/features/puzzle/view_models/stop_watch_provider.dart';
 import 'package:flutter/material.dart' hide DrawerButton;
 import 'package:provider/provider.dart';
 
@@ -69,14 +69,25 @@ class _PuzzleViewState extends State<PuzzleView> {
                   horizontal:
                       Spacing.puzzleMargin(screenTypeHelper.windowClass),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Spacer(),
-                    PuzzleBoard(containerWidth: containerWidth),
-                    const Spacer(),
-                  ],
-                ),
+                child: screenTypeHelper.windowClass == WindowClass.expanded
+                    ? Align(
+                        alignment: const Alignment(0, -0.45),
+                        child: PuzzleBoard(
+                          containerWidth: containerWidth,
+                          windowClass: screenTypeHelper.windowClass,
+                        ),
+                      )
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Spacer(),
+                          PuzzleBoard(
+                            containerWidth: containerWidth,
+                            windowClass: screenTypeHelper.windowClass,
+                          ),
+                          const Spacer(),
+                        ],
+                      ),
               ),
             ),
             Positioned(

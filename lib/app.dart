@@ -1,20 +1,20 @@
 import 'dart:io';
 
-import 'package:tauntpuzz/generated/app_localizations.dart';
-import 'package:tauntpuzz/router/router_config.dart';
-import 'package:tauntpuzz/ui/core/app_colors.dart';
-import 'package:tauntpuzz/ui/core/app_colors_dark.dart';
-import 'package:tauntpuzz/ui/core/theme_provider.dart';
-import 'package:tauntpuzz/ui/core/theme_transition.dart';
-import 'package:tauntpuzz/domain/models/puzzle.dart';
-import 'package:tauntpuzz/ui/features/background/background_layers.dart';
-import 'package:tauntpuzz/ui/core/layout/background_layer_layout.dart';
-import 'package:tauntpuzz/ui/core/app_text_styles.dart';
-import 'package:tauntpuzz/ui/core/locale_provider.dart';
-import 'package:tauntpuzz/ui/features/phrases/view_models/phrases_provider.dart';
-import 'package:tauntpuzz/ui/features/puzzle/view_models/puzzle_provider.dart';
-import 'package:tauntpuzz/ui/features/puzzle/view_models/stop_watch_provider.dart';
-import 'package:tauntpuzz/data/services/storage_service.dart';
+import 'package:lullaby/generated/app_localizations.dart';
+import 'package:lullaby/router/router_config.dart';
+import 'package:lullaby/ui/core/app_colors.dart';
+import 'package:lullaby/ui/core/app_colors_dark.dart';
+import 'package:lullaby/ui/core/theme_provider.dart';
+import 'package:lullaby/ui/core/theme_transition.dart';
+import 'package:lullaby/domain/models/puzzle.dart';
+import 'package:lullaby/ui/features/background/background_layers.dart';
+import 'package:lullaby/ui/core/layout/background_layer_layout.dart';
+import 'package:lullaby/ui/core/app_text_styles.dart';
+import 'package:lullaby/ui/core/locale_provider.dart';
+import 'package:lullaby/ui/features/phrases/view_models/phrases_provider.dart';
+import 'package:lullaby/ui/features/puzzle/view_models/puzzle_provider.dart';
+import 'package:lullaby/ui/features/puzzle/view_models/stop_watch_provider.dart';
+import 'package:lullaby/data/services/storage_service.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -337,7 +337,7 @@ class _AppState extends State<App> {
                   return MaterialApp.router(
                     key: ValueKey(localeKey),
                     debugShowCheckedModeBanner: false,
-                    title: 'tauntpuzz',
+                    title: 'Lullaby',
                     theme: animatedTheme,
                     themeMode: ThemeMode.light,
                     routerConfig: AppRouter.router,

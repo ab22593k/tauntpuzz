@@ -1,7 +1,7 @@
-import 'package:tauntpuzz/ui/core/layout/phrase_bubble_layout.dart';
-import 'package:tauntpuzz/ui/core/layout/spacing.dart';
-import 'package:tauntpuzz/ui/core/app_text_styles.dart';
-import 'package:tauntpuzz/ui/features/phrases/view_models/phrases_provider.dart';
+import 'package:lullaby/ui/core/layout/phrase_bubble_layout.dart';
+import 'package:lullaby/ui/core/layout/spacing.dart';
+import 'package:lullaby/ui/core/app_text_styles.dart';
+import 'package:lullaby/ui/features/phrases/view_models/phrases_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

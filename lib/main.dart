@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:tauntpuzz/app.dart';
-import 'package:tauntpuzz/data/services/service_locator.dart';
-import 'package:tauntpuzz/data/services/storage_service.dart';
+import 'package:lullaby/app.dart';
+import 'package:lullaby/data/services/service_locator.dart';
+import 'package:lullaby/data/services/storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 

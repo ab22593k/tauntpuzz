@@ -1,4 +1,4 @@
-import 'package:tauntpuzz/domain/models/position.dart';
+import 'package:lullaby/domain/models/position.dart';
 import 'package:flutter/animation.dart';
 
 class PositionTween extends Tween<Position> {

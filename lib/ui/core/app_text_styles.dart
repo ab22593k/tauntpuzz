@@ -1,4 +1,4 @@
-import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
+import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -250,6 +250,12 @@ class AppTextStyles {
     letterSpacing: 0,
     fontVariations: [FontVariation('wght', 425)],
   );
+
+  static TextStyle tileAdaptive(WindowClass wc) => switch (wc) {
+        WindowClass.compact => tileMobile,
+        WindowClass.medium => tile,
+        WindowClass.expanded => tile.copyWith(fontSize: 36),
+      };
 
   static TextStyle titleAdaptive(WindowClass wc) => switch (wc) {
         WindowClass.compact => titleSmall,

@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:tauntpuzz/ui/features/background/stars_painter.dart';
-import 'package:tauntpuzz/ui/core/layout/layout_delegate.dart';
-import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
+import 'package:lullaby/ui/features/background/stars_painter.dart';
+import 'package:lullaby/ui/core/layout/layout_delegate.dart';
+import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
 import 'package:flutter/material.dart';
 
 class StarsLayout implements LayoutDelegate {

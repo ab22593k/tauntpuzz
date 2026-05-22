@@ -1,4 +1,4 @@
-package com.multicaret.flutter.puzzle.dashtronaut
+package com.multicaret.flutter.puzzle.lullaby
 
 import io.flutter.embedding.android.FlutterActivity
 

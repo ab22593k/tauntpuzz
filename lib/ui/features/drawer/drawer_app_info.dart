@@ -1,5 +1,5 @@
-import 'package:tauntpuzz/helpers/localizations_ext.dart';
-import 'package:tauntpuzz/ui/core/app_text_styles.dart';
+import 'package:lullaby/helpers/localizations_ext.dart';
+import 'package:lullaby/ui/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class DrawerAppInfo extends StatelessWidget {

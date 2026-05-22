@@ -1,5 +1,5 @@
-import 'package:tauntpuzz/helpers/duration_helper.dart';
-import 'package:tauntpuzz/domain/models/puzzle.dart';
+import 'package:lullaby/helpers/duration_helper.dart';
+import 'package:lullaby/domain/models/puzzle.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -7,8 +7,8 @@ import 'package:url_launcher/url_launcher.dart';
 ///
 /// e.g. sharing, launching a url, shared text, ...
 class ShareScoreHelper {
-  /// The tauntpuzz app official website
-  static const String officialWebsiteUrl = 'https://dashtronaut.app';
+  /// The Lullaby app official website
+  static const String officialWebsiteUrl = 'https://lullaby.app';
 
   /// Path for images of solved puzzles stored on the official website
   static const String puzzleSolvedImagesUrlRoot =
@@ -40,7 +40,7 @@ class ShareScoreHelper {
   /// Get the puzzle solved text based on score
   static String getPuzzleSolvedText(
       int movesCount, Duration duration, int tilesCount) {
-    return 'I just solved this $tilesCount-Tile tauntpuzz slide puzzle in ${DurationHelper.toFormattedTime(duration)} with $movesCount moves!';
+    return 'I just solved this $tilesCount-Tile Lullaby slide puzzle in ${DurationHelper.toFormattedTime(duration)} with $movesCount moves!';
   }
 
   /// Get the puzzle solved text based on score for mobile

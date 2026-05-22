@@ -1,5 +1,5 @@
-import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
-import 'package:tauntpuzz/ui/core/layout/spacing.dart';
+import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
+import 'package:lullaby/ui/core/layout/spacing.dart';
 
 class PuzzleLayout {
   final ScreenTypeHelper screenTypeHelper;
@@ -15,18 +15,22 @@ class PuzzleLayout {
   double get containerWidth {
     final margin = Spacing.puzzleMargin(screenTypeHelper.windowClass) * 2;
     final maxWidth = screenWidth - margin;
+    final isVeryWide = screenWidth > 1400;
 
     return switch (screenTypeHelper.windowClass) {
       WindowClass.compact => maxWidth,
-      WindowClass.medium => maxWidth.clamp(400, 520),
-      WindowClass.expanded => (maxWidth).clamp(420, 560),
+      WindowClass.medium => maxWidth.clamp(400, 560),
+      WindowClass.expanded => maxWidth.clamp(420, isVeryWide ? 820 : 680),
     };
   }
 
-  static double? tileTextSize(int puzzleSize) => switch (puzzleSize) {
-        > 5 => 20,
-        > 4 => 25,
-        > 3 => 30,
-        _ => null,
-      };
+  static double? tileTextSize(WindowClass windowClass, int puzzleSize) {
+    final desktop = windowClass == WindowClass.expanded;
+    return switch (puzzleSize) {
+      > 5 => desktop ? 28 : 20,
+      > 4 => desktop ? 36 : 25,
+      > 3 => desktop ? 40 : 30,
+      _ => null,
+    };
+  }
 }

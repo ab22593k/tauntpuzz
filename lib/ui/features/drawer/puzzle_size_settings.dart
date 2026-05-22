@@ -1,9 +1,9 @@
-import 'package:tauntpuzz/domain/models/puzzle.dart';
-import 'package:tauntpuzz/helpers/localizations_ext.dart';
-import 'package:tauntpuzz/ui/features/drawer/puzzle_size_item.dart';
-import 'package:tauntpuzz/ui/core/layout/spacing.dart';
-import 'package:tauntpuzz/ui/core/layout/screen_type_helper.dart';
-import 'package:tauntpuzz/ui/core/app_text_styles.dart';
+import 'package:lullaby/domain/models/puzzle.dart';
+import 'package:lullaby/helpers/localizations_ext.dart';
+import 'package:lullaby/ui/features/drawer/puzzle_size_item.dart';
+import 'package:lullaby/ui/core/layout/spacing.dart';
+import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
+import 'package:lullaby/ui/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 

@@ -5,18 +5,18 @@ import 'package:flutter_checks/flutter_checks.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:provider/provider.dart';
 
-import 'package:tauntpuzz/data/services/storage_service.dart';
-import 'package:tauntpuzz/domain/models/game_mode.dart';
-import 'package:tauntpuzz/generated/app_localizations.dart';
-import 'package:tauntpuzz/ui/features/puzzle/view_models/puzzle_provider.dart';
-import 'package:tauntpuzz/ui/features/puzzle/view_models/stop_watch_provider.dart';
-import 'package:tauntpuzz/ui/features/phrases/view_models/phrases_provider.dart';
-import 'package:tauntpuzz/ui/core/locale_provider.dart';
-import 'package:tauntpuzz/ui/core/theme_provider.dart';
-import 'package:tauntpuzz/ui/core/app_colors.dart';
-import 'package:tauntpuzz/ui/core/app_text_styles.dart';
-import 'package:tauntpuzz/ui/features/puzzle/ui/puzzle_view.dart';
-import 'package:tauntpuzz/ui/features/drawer/app_drawer.dart';
+import 'package:lullaby/data/services/storage_service.dart';
+import 'package:lullaby/domain/models/game_mode.dart';
+import 'package:lullaby/generated/app_localizations.dart';
+import 'package:lullaby/ui/features/puzzle/view_models/puzzle_provider.dart';
+import 'package:lullaby/ui/features/puzzle/view_models/stop_watch_provider.dart';
+import 'package:lullaby/ui/features/phrases/view_models/phrases_provider.dart';
+import 'package:lullaby/ui/core/locale_provider.dart';
+import 'package:lullaby/ui/core/theme_provider.dart';
+import 'package:lullaby/ui/core/app_colors.dart';
+import 'package:lullaby/ui/core/app_text_styles.dart';
+import 'package:lullaby/ui/features/puzzle/ui/puzzle_view.dart';
+import 'package:lullaby/ui/features/drawer/app_drawer.dart';
 
 /// In-memory storage service for integration tests.
 class _InMemoryStorage implements StorageService {

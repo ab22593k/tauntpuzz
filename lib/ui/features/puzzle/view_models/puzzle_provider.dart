@@ -2,16 +2,16 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:math' show Random;
 
-import 'package:tauntpuzz/domain/models/game_mode.dart';
-import 'package:tauntpuzz/domain/models/puzzle.dart';
-import 'package:tauntpuzz/domain/models/score.dart';
-import 'package:tauntpuzz/domain/models/tile.dart';
-import 'package:tauntpuzz/data/services/storage_service.dart';
-import 'package:tauntpuzz/ui/features/puzzle/view_models/puzzle_mixin_blind.dart';
-import 'package:tauntpuzz/ui/features/puzzle/view_models/puzzle_mixin_core.dart';
-import 'package:tauntpuzz/ui/features/puzzle/view_models/puzzle_mixin_marathon.dart';
-import 'package:tauntpuzz/ui/features/puzzle/view_models/puzzle_mixin_orchestrator.dart';
-import 'package:tauntpuzz/ui/features/puzzle/view_models/puzzle_mixin_speedrun.dart';
+import 'package:lullaby/domain/models/game_mode.dart';
+import 'package:lullaby/domain/models/puzzle.dart';
+import 'package:lullaby/domain/models/score.dart';
+import 'package:lullaby/domain/models/tile.dart';
+import 'package:lullaby/data/services/storage_service.dart';
+import 'package:lullaby/ui/features/puzzle/view_models/puzzle_mixin_blind.dart';
+import 'package:lullaby/ui/features/puzzle/view_models/puzzle_mixin_core.dart';
+import 'package:lullaby/ui/features/puzzle/view_models/puzzle_mixin_marathon.dart';
+import 'package:lullaby/ui/features/puzzle/view_models/puzzle_mixin_orchestrator.dart';
+import 'package:lullaby/ui/features/puzzle/view_models/puzzle_mixin_speedrun.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 

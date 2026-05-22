@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:tauntpuzz/ui/core/layout/phrase_bubble_layout.dart';
+import 'package:lullaby/ui/core/layout/phrase_bubble_layout.dart';
 import 'package:flutter/cupertino.dart';
 
 /// Provides contextual encouragement phrases displayed in the
@@ -54,7 +54,7 @@ class PhrasesProvider with ChangeNotifier {
     'The mascot for Flutter 💙 & Dart',
     'Which is what this app is built with!',
     'And I\'m an astronaut here',
-    'So you can call me tauntpuzz',
+    'So you can call me Lullaby',
     'You can stop poking me now 😃',
     'Why don\'t you play with the puzzle instead???',
     'You\'re starting to annoy me!',

@@ -1,4 +1,4 @@
-import 'package:tauntpuzz/data/services/storage_service.dart';
+import 'package:lullaby/data/services/storage_service.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class HiveStorageService implements StorageService {
@@ -7,7 +7,7 @@ class HiveStorageService implements StorageService {
   @override
   Future<void> init() async {
     await Hive.initFlutter();
-    _hiveBox = await Hive.openBox('dashtronaut');
+    _hiveBox = await Hive.openBox('lullaby');
   }
 
   @override

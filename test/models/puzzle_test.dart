@@ -1,6 +1,6 @@
-import 'package:tauntpuzz/domain/models/location.dart';
-import 'package:tauntpuzz/domain/models/puzzle.dart';
-import 'package:tauntpuzz/domain/models/tile.dart';
+import 'package:lullaby/domain/models/location.dart';
+import 'package:lullaby/domain/models/puzzle.dart';
+import 'package:lullaby/domain/models/tile.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:checks/checks.dart';
 import 'package:collection/collection.dart';

@@ -1,6 +1,6 @@
-import 'package:tauntpuzz/domain/models/position.dart';
-import 'package:tauntpuzz/ui/core/animations/animations_manager.dart';
-import 'package:tauntpuzz/ui/core/layout/background_layer_layout.dart';
+import 'package:lullaby/domain/models/position.dart';
+import 'package:lullaby/ui/core/animations/animations_manager.dart';
+import 'package:lullaby/ui/core/layout/background_layer_layout.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedBackgroundLayer extends StatefulWidget {

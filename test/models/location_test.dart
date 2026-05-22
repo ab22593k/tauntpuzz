@@ -1,4 +1,4 @@
-import 'package:tauntpuzz/domain/models/location.dart';
+import 'package:lullaby/domain/models/location.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:checks/checks.dart';
 

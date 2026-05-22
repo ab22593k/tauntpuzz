@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:tauntpuzz/ui/core/layout/spacing.dart';
-import 'package:tauntpuzz/ui/core/app_text_styles.dart';
+import 'package:lullaby/ui/core/layout/spacing.dart';
+import 'package:lullaby/ui/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class AppAlertDialog extends StatelessWidget {
