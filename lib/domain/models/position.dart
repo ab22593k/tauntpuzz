@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:lullaby/ui/core/animations/position_tween.dart';
+import 'package:jigsaw/ui/core/animations/position_tween.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 

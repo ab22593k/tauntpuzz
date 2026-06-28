@@ -1,5 +1,5 @@
-import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
-import 'package:lullaby/ui/core/layout/spacing.dart';
+import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
+import 'package:jigsaw/ui/core/layout/spacing.dart';
 
 class PuzzleLayout {
   final ScreenTypeHelper screenTypeHelper;
@@ -21,11 +21,13 @@ class PuzzleLayout {
       WindowClass.compact => maxWidth,
       WindowClass.medium => maxWidth.clamp(400, 560),
       WindowClass.expanded => maxWidth.clamp(420, isVeryWide ? 820 : 680),
+      WindowClass.large => maxWidth.clamp(480, 900),
+      WindowClass.extraLarge => maxWidth.clamp(540, 1000),
     };
   }
 
   static double? tileTextSize(WindowClass windowClass, int puzzleSize) {
-    final desktop = windowClass == WindowClass.expanded;
+    final desktop = windowClass != WindowClass.compact;
     return switch (puzzleSize) {
       > 5 => desktop ? 28 : 20,
       > 4 => desktop ? 36 : 25,

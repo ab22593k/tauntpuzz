@@ -1,9 +1,9 @@
-import 'package:lullaby/domain/models/puzzle.dart';
-import 'package:lullaby/helpers/localizations_ext.dart';
-import 'package:lullaby/ui/features/drawer/puzzle_size_item.dart';
-import 'package:lullaby/ui/core/layout/spacing.dart';
-import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
-import 'package:lullaby/ui/core/app_text_styles.dart';
+import 'package:jigsaw/domain/models/puzzle.dart';
+import 'package:jigsaw/helpers/localizations_ext.dart';
+import 'package:jigsaw/ui/features/drawer/puzzle_size_item.dart';
+import 'package:jigsaw/ui/core/layout/spacing.dart';
+import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
+import 'package:jigsaw/ui/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 

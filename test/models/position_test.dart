@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:lullaby/domain/models/position.dart';
+import 'package:jigsaw/domain/models/position.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:checks/checks.dart';
 

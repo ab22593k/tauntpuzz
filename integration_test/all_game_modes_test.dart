@@ -5,18 +5,17 @@ import 'package:flutter_checks/flutter_checks.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:provider/provider.dart';
 
-import 'package:lullaby/data/services/storage_service.dart';
-import 'package:lullaby/domain/models/game_mode.dart';
-import 'package:lullaby/generated/app_localizations.dart';
-import 'package:lullaby/ui/features/puzzle/view_models/puzzle_provider.dart';
-import 'package:lullaby/ui/features/puzzle/view_models/stop_watch_provider.dart';
-import 'package:lullaby/ui/features/phrases/view_models/phrases_provider.dart';
-import 'package:lullaby/ui/core/locale_provider.dart';
-import 'package:lullaby/ui/core/theme_provider.dart';
-import 'package:lullaby/ui/core/app_colors.dart';
-import 'package:lullaby/ui/core/app_text_styles.dart';
-import 'package:lullaby/ui/features/puzzle/ui/puzzle_view.dart';
-import 'package:lullaby/ui/features/drawer/app_drawer.dart';
+import 'package:jigsaw/data/services/storage_service.dart';
+import 'package:jigsaw/domain/models/game_mode.dart';
+import 'package:jigsaw/generated/app_localizations.dart';
+import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_provider.dart';
+import 'package:jigsaw/ui/features/puzzle/view_models/stop_watch_provider.dart';
+import 'package:jigsaw/ui/features/phrases/view_models/phrases_provider.dart';
+import 'package:jigsaw/ui/core/locale_provider.dart';
+import 'package:jigsaw/ui/core/theme_provider.dart';
+import 'package:jigsaw/ui/core/app_theme.dart';
+import 'package:jigsaw/ui/features/puzzle/ui/puzzle_view.dart';
+import 'package:jigsaw/ui/features/drawer/app_drawer.dart';
 
 /// In-memory storage service for integration tests.
 class _InMemoryStorage implements StorageService {
@@ -84,54 +83,7 @@ class _EndToEndAppState extends State<_EndToEndApp> {
         debugShowCheckedModeBanner: false,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        theme: ThemeData(
-          useMaterial3: true,
-          fontFamily: AppTextStyles.secondaryFontFamily,
-          colorScheme: const ColorScheme(
-            brightness: Brightness.light,
-            primary: AppColors.primary,
-            onPrimary: AppColors.onPrimary,
-            primaryContainer: AppColors.primaryContainer,
-            onPrimaryContainer: AppColors.onPrimaryContainer,
-            secondary: AppColors.secondary,
-            onSecondary: AppColors.onSecondary,
-            secondaryContainer: AppColors.secondaryContainer,
-            onSecondaryContainer: AppColors.onSecondaryContainer,
-            tertiary: AppColors.tertiary,
-            onTertiary: AppColors.onTertiary,
-            tertiaryContainer: AppColors.tertiaryContainer,
-            onTertiaryContainer: AppColors.onTertiaryContainer,
-            error: AppColors.error,
-            onError: AppColors.onError,
-            errorContainer: AppColors.errorContainer,
-            onErrorContainer: AppColors.onErrorContainer,
-            surface: AppColors.surface,
-            onSurface: AppColors.onSurface,
-            onSurfaceVariant: AppColors.onSurfaceVariant,
-            outline: AppColors.outline,
-            outlineVariant: AppColors.outlineVariant,
-            surfaceDim: AppColors.surfaceDim,
-            surfaceBright: AppColors.surfaceBright,
-            surfaceContainerLowest: AppColors.surfaceContainerLowest,
-            surfaceContainerLow: AppColors.surfaceContainerLow,
-            surfaceContainer: AppColors.surfaceContainer,
-            surfaceContainerHigh: AppColors.surfaceContainerHigh,
-            surfaceContainerHighest: AppColors.surfaceContainerHighest,
-            primaryFixed: AppColors.primaryFixed,
-            primaryFixedDim: AppColors.primaryFixedDim,
-            onPrimaryFixed: AppColors.onPrimaryFixed,
-            onPrimaryFixedVariant: AppColors.onPrimaryFixedVariant,
-            secondaryFixed: AppColors.secondaryFixed,
-            secondaryFixedDim: AppColors.secondaryFixedDim,
-            onSecondaryFixed: AppColors.onSecondaryFixed,
-            onSecondaryFixedVariant: AppColors.onSecondaryFixedVariant,
-            tertiaryFixed: AppColors.tertiaryFixed,
-            tertiaryFixedDim: AppColors.tertiaryFixedDim,
-            onTertiaryFixed: AppColors.onTertiaryFixed,
-            onTertiaryFixedVariant: AppColors.onTertiaryFixedVariant,
-          ),
-          scaffoldBackgroundColor: AppColors.background,
-        ),
+        theme: AppTheme.light(),
         home: const Scaffold(
           drawer: AppDrawer(),
           body: PuzzleView(),

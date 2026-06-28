@@ -1,4 +1,4 @@
-import 'package:lullaby/domain/models/tile.dart';
+import 'package:jigsaw/domain/models/tile.dart';
 import 'package:flutter/material.dart';
 
 class TileAnimatedPositioned extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
+import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -254,24 +254,36 @@ class AppTextStyles {
   static TextStyle tileAdaptive(WindowClass wc) => switch (wc) {
         WindowClass.compact => tileMobile,
         WindowClass.medium => tile,
-        WindowClass.expanded => tile.copyWith(fontSize: 36),
+        WindowClass.expanded ||
+        WindowClass.large ||
+        WindowClass.extraLarge =>
+          tile.copyWith(fontSize: 36),
       };
 
   static TextStyle titleAdaptive(WindowClass wc) => switch (wc) {
         WindowClass.compact => titleSmall,
         WindowClass.medium => titleMedium,
-        WindowClass.expanded => titleLarge,
+        WindowClass.expanded ||
+        WindowClass.large ||
+        WindowClass.extraLarge =>
+          titleLarge,
       };
 
   static TextStyle bodyAdaptive(WindowClass wc) => switch (wc) {
         WindowClass.compact => bodySmall,
         WindowClass.medium => bodyMedium,
-        WindowClass.expanded => bodyLarge,
+        WindowClass.expanded ||
+        WindowClass.large ||
+        WindowClass.extraLarge =>
+          bodyLarge,
       };
 
   static TextStyle labelAdaptive(WindowClass wc) => switch (wc) {
         WindowClass.compact => labelSmall,
         WindowClass.medium => labelMedium,
-        WindowClass.expanded => labelLarge,
+        WindowClass.expanded ||
+        WindowClass.large ||
+        WindowClass.extraLarge =>
+          labelLarge,
       };
 }

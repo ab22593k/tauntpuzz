@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:lullaby/helpers/duration_helper.dart';
-import 'package:lullaby/helpers/file_helper.dart';
-import 'package:lullaby/helpers/localizations_ext.dart';
-import 'package:lullaby/helpers/share_score_helper.dart';
-import 'package:lullaby/ui/core/layout/spacing.dart';
-import 'package:lullaby/ui/core/app_text_styles.dart';
+import 'package:jigsaw/helpers/duration_helper.dart';
+import 'package:jigsaw/helpers/file_helper.dart';
+import 'package:jigsaw/helpers/localizations_ext.dart';
+import 'package:jigsaw/helpers/share_score_helper.dart';
+import 'package:jigsaw/ui/core/layout/spacing.dart';
+import 'package:jigsaw/ui/core/app_text_styles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';

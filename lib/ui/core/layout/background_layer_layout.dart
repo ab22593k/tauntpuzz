@@ -1,6 +1,6 @@
-import 'package:lullaby/domain/models/position.dart';
-import 'package:lullaby/ui/core/layout/layout_delegate.dart';
-import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
+import 'package:jigsaw/domain/models/position.dart';
+import 'package:jigsaw/ui/core/layout/layout_delegate.dart';
+import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
 import 'package:flutter/cupertino.dart';
 
 enum BackgroundLayerType {
@@ -45,7 +45,9 @@ class BackgroundLayerLayout implements LayoutDelegate {
   double get _scaleForWindowClass => switch (screenTypeHelper.windowClass) {
         WindowClass.compact => 0.8,
         WindowClass.medium => isWideLayout ? 1.0 : 1.2,
-        WindowClass.expanded => isWideLayout ? 0.9 : 1.8,
+        WindowClass.expanded => isWideLayout ? 0.9 : 1.4,
+        WindowClass.large => isWideLayout ? 1.0 : 1.7,
+        WindowClass.extraLarge => isWideLayout ? 1.1 : 2.0,
       };
 
   Position get outOfViewPosition {

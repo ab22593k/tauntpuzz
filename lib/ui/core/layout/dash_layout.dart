@@ -1,6 +1,6 @@
-import 'package:lullaby/domain/models/position.dart';
-import 'package:lullaby/ui/core/layout/layout_delegate.dart';
-import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
+import 'package:jigsaw/domain/models/position.dart';
+import 'package:jigsaw/ui/core/layout/layout_delegate.dart';
+import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
 import 'package:flutter/cupertino.dart';
 
 class DashLayout implements LayoutDelegate {
@@ -24,7 +24,10 @@ class DashLayout implements LayoutDelegate {
       (true, WindowClass.compact) ||
       (true, WindowClass.medium) =>
         screenHeight * 0.5,
-      (true, WindowClass.expanded) => screenHeight * 0.35,
+      (true, WindowClass.expanded) ||
+      (true, WindowClass.large) ||
+      (true, WindowClass.extraLarge) =>
+        screenHeight * 0.35,
       (false, _) => ((screenHeight - puzzleWidth) / 2) * 0.85,
     };
     return Size(dashHeight, dashHeight);
@@ -34,6 +37,9 @@ class DashLayout implements LayoutDelegate {
         WindowClass.compact ||
         WindowClass.medium =>
           const Position(right: -10, bottom: 20),
-        WindowClass.expanded => const Position(right: 0, bottom: 70),
+        WindowClass.expanded ||
+        WindowClass.large ||
+        WindowClass.extraLarge =>
+          const Position(right: 0, bottom: 70),
       };
 }

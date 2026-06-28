@@ -1,6 +1,6 @@
-import 'package:lullaby/ui/core/dialogs/app_alert_dialog.dart';
-import 'package:lullaby/ui/core/layout/spacing.dart';
-import 'package:lullaby/ui/features/puzzle/share-dialog/puzzle_score.dart';
+import 'package:jigsaw/ui/core/dialogs/app_alert_dialog.dart';
+import 'package:jigsaw/ui/core/layout/spacing.dart';
+import 'package:jigsaw/ui/features/puzzle/share-dialog/puzzle_score.dart';
 import 'package:flutter/material.dart';
 
 class PuzzleSolvedDialog extends StatelessWidget {

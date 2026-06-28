@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 
+/// Brand color tokens for the Jigsaw puzzle app.
+///
+/// The [brandSeed] is the single key color that seeds the Material 3
+/// color system. Per the M3 "Customizing Material" spec, it generates
+/// the fallback brand scheme (used when dynamic color is unavailable)
+/// and is the value user-generated dynamic color schemes map onto.
+///
+/// The explicit role constants below remain the hand-tuned monochrome
+/// palette used by [AppTheme.brandLight] / [AppTheme.brandDark] — the
+/// deterministic fallback that preserves the app's identity regardless
+/// of platform dynamic-color support.
 class AppColors {
+  /// The brand key color. A near-black anchors the "Jigsaw" space
+  /// aesthetic; seeding M3 with it yields tonal palettes that stay
+  /// neutral and high-contrast in both light and dark.
+  static const Color brandSeed = Color(0xff1b1b1b);
+
   static const Color primary = Color(0xff000000);
   static const Color onPrimary = Color(0xffe2e2e2);
   static const Color primaryContainer = Color(0xff3b3b3b);

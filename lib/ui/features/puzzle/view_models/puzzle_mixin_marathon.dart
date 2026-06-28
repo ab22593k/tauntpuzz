@@ -1,6 +1,6 @@
-import 'package:lullaby/domain/models/game_mode.dart';
-import 'package:lullaby/domain/models/puzzle.dart';
-import 'package:lullaby/data/services/storage_service.dart';
+import 'package:jigsaw/domain/models/game_mode.dart';
+import 'package:jigsaw/domain/models/puzzle.dart';
+import 'package:jigsaw/data/services/storage_service.dart';
 import 'package:flutter/foundation.dart';
 
 /// Mixin that adds marathon puzzle mode logic (chain-solve across a

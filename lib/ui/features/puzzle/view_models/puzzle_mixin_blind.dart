@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:lullaby/domain/models/location.dart';
-import 'package:lullaby/helpers/game_mode_helper.dart';
+import 'package:jigsaw/domain/models/location.dart';
+import 'package:jigsaw/helpers/game_mode_helper.dart';
 import 'package:flutter/foundation.dart';
 
 /// Mixin that adds blind puzzle mode logic (tiles hide after a delay,

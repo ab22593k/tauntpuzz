@@ -1,5 +1,5 @@
-import 'package:lullaby/helpers/localizations_ext.dart';
-import 'package:lullaby/ui/core/app_text_styles.dart';
+import 'package:jigsaw/helpers/localizations_ext.dart';
+import 'package:jigsaw/ui/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class DrawerAppInfo extends StatelessWidget {

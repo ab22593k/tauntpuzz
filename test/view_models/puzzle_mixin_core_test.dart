@@ -2,13 +2,13 @@ import 'dart:math' show Random;
 
 import 'package:checks/checks.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:lullaby/domain/models/game_mode.dart';
-import 'package:lullaby/domain/models/location.dart';
-import 'package:lullaby/domain/models/puzzle.dart';
-import 'package:lullaby/domain/models/score.dart';
-import 'package:lullaby/domain/models/tile.dart';
-import 'package:lullaby/data/services/storage_service.dart';
-import 'package:lullaby/ui/features/puzzle/view_models/puzzle_mixin_core.dart';
+import 'package:jigsaw/domain/models/game_mode.dart';
+import 'package:jigsaw/domain/models/location.dart';
+import 'package:jigsaw/domain/models/puzzle.dart';
+import 'package:jigsaw/domain/models/score.dart';
+import 'package:jigsaw/domain/models/tile.dart';
+import 'package:jigsaw/data/services/storage_service.dart';
+import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_mixin_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 

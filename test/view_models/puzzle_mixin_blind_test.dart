@@ -1,8 +1,8 @@
 import 'package:checks/checks.dart';
 import 'package:fake_async/fake_async.dart';
-import 'package:lullaby/domain/models/location.dart';
-import 'package:lullaby/helpers/game_mode_helper.dart';
-import 'package:lullaby/ui/features/puzzle/view_models/puzzle_mixin_blind.dart';
+import 'package:jigsaw/domain/models/location.dart';
+import 'package:jigsaw/helpers/game_mode_helper.dart';
+import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_mixin_blind.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 

@@ -1,5 +1,5 @@
 import 'package:checks/checks.dart';
-import 'package:lullaby/ui/features/puzzle/view_models/puzzle_mixin_speedrun.dart';
+import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_mixin_speedrun.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 

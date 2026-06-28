@@ -1,4 +1,4 @@
-import 'package:lullaby/domain/models/game_mode.dart';
+import 'package:jigsaw/domain/models/game_mode.dart';
 
 /// Constants and helpers shared across the game mode system.
 class GameModeHelper {

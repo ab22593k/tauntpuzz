@@ -1,47 +1,70 @@
-import 'package:lullaby/domain/models/game_mode.dart';
-import 'package:lullaby/domain/models/puzzle.dart';
-import 'package:lullaby/helpers/game_mode_helper.dart';
-import 'package:lullaby/ui/core/animations/animations_manager.dart';
-import 'package:lullaby/ui/core/animations/fade_in_transition.dart';
-import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
-import 'package:lullaby/ui/features/puzzle/ui/correct_tiles_count.dart';
-import 'package:lullaby/ui/features/puzzle/ui/moves_count.dart';
-import 'package:lullaby/ui/features/puzzle/ui/puzzle_stop_watch.dart';
-import 'package:lullaby/ui/features/puzzle/view_models/puzzle_provider.dart';
-import 'package:lullaby/ui/core/app_text_styles.dart';
+import 'package:jigsaw/domain/models/game_mode.dart';
+import 'package:jigsaw/domain/models/puzzle.dart';
+import 'package:jigsaw/helpers/game_mode_helper.dart';
+import 'package:jigsaw/ui/core/animations/animations_manager.dart';
+import 'package:jigsaw/ui/core/animations/fade_in_transition.dart';
+import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
+import 'package:jigsaw/ui/features/puzzle/ui/correct_tiles_count.dart';
+import 'package:jigsaw/ui/features/puzzle/ui/moves_count.dart';
+import 'package:jigsaw/ui/features/puzzle/ui/puzzle_stop_watch.dart';
+import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_provider.dart';
+import 'package:jigsaw/ui/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:provider/provider.dart';
 
-class PuzzleHeader extends StatelessWidget {
-  final double containerWidth;
-  final WindowClass windowClass;
+/// Where the header is surfaced in the adaptive layout.
+///
+/// Per MD3 "show and hide" strategy (Designing Interfaces Ch.4 "Responsive
+/// Disclosure"): the same stats reflow between surfaces as breakpoints change.
+enum HeaderDisplay {
+  /// Compact stat row for the bottom toolbar (compact/medium breakpoints).
+  bottomBar,
 
-  const PuzzleHeader({
-    super.key,
-    required this.containerWidth,
-    required this.windowClass,
-  });
+  /// Inline labeled stats for the top rail region (expanded+ breakpoints,
+  /// where the bottom bar is hidden).
+  topRail,
+
+  /// Vertical stat column for the co-planar side pane (expanded+).
+  /// The pane is narrow (~360dp), so stats stack vertically instead of
+  /// spreading horizontally.
+  sidePane,
+}
+
+class PuzzleHeader extends StatelessWidget {
+  final HeaderDisplay displayMode;
+
+  const PuzzleHeader({super.key, this.displayMode = HeaderDisplay.bottomBar});
 
   @override
   Widget build(BuildContext context) {
-    final isCompact = windowClass == WindowClass.compact;
+    final wc =
+        ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
     final colorScheme = Theme.of(context).colorScheme;
     final puzzleProvider = context.watch<PuzzleProvider>();
 
-    // Marathon mode — show chain progress instead of classic header
     if (puzzleProvider.gameMode == GameMode.marathon) {
       return FadeInTransition(
         delay: AnimationsManager.bgLayerAnimationDuration,
-        child: _marathonHeader(colorScheme, puzzleProvider),
+        child: displayMode == HeaderDisplay.sidePane
+            ? _marathonPane(colorScheme, puzzleProvider)
+            : _marathonHeader(colorScheme, puzzleProvider),
       );
     }
 
+    // Adaptive surfacing: bottom bar uses compact stats on compact/medium;
+    // top rail uses the labeled expanded layout where the bottom bar hides;
+    // side pane uses a vertical stat column for the narrow co-planar pane.
     return FadeInTransition(
       delay: AnimationsManager.bgLayerAnimationDuration,
-      child: isCompact
-          ? _compactLayout(colorScheme)
-          : _expandedLayout(colorScheme),
+      child: switch (displayMode) {
+        HeaderDisplay.sidePane => _sidePaneLayout(colorScheme),
+        HeaderDisplay.topRail => _expandedLayout(colorScheme),
+        HeaderDisplay.bottomBar
+            when wc == WindowClass.compact || wc == WindowClass.medium =>
+          _compactLayout(colorScheme),
+        _ => _expandedLayout(colorScheme),
+      },
     );
   }
 
@@ -71,13 +94,12 @@ class PuzzleHeader extends StatelessWidget {
         ),
         const SizedBox(width: 4),
         Text(
-          '•',
+          '\u2022',
           style: AppTextStyles.labelSmall.copyWith(
             color: colorScheme.onSurface.withValues(alpha: 0.3),
           ),
         ),
         const SizedBox(width: 4),
-        // Chain progress: 3×3 → 4×4 → ...
         ...List.generate(endIdx + 1, (i) {
           final size = sizes[i];
           final isDone = i < currentIdx;
@@ -89,7 +111,7 @@ class PuzzleHeader extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 2),
                   child: Text(
-                    '→',
+                    '\u2192',
                     style: AppTextStyles.labelSmall.copyWith(
                       color: colorScheme.onSurface.withValues(alpha: 0.2),
                     ),
@@ -129,6 +151,71 @@ class PuzzleHeader extends StatelessWidget {
     );
   }
 
+  /// Marathon progress for the narrow side pane — wraps chips vertically
+  /// and shows just the linked-mode indicator + a compact progress column.
+  Widget _marathonPane(ColorScheme colorScheme, PuzzleProvider puzzleProvider) {
+    final currentSize = puzzleProvider.n;
+    final endSize = puzzleProvider.marathonEndSize ?? currentSize;
+    final sizes = Puzzle.supportedPuzzleSizes;
+    final currentIdx = sizes.indexOf(currentSize);
+    final endIdx = sizes.indexOf(endSize);
+
+    return Wrap(
+      spacing: 4,
+      runSpacing: 6,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            HugeIcon(
+              icon: HugeIcons.strokeRoundedLink01,
+              size: 16,
+              color: colorScheme.onSurface.withValues(alpha: 0.6),
+            ),
+            const SizedBox(width: 6),
+            Text(
+              GameModeHelper.displayName(GameMode.marathon),
+              style: AppTextStyles.labelSmall.copyWith(
+                color: colorScheme.onSurface.withValues(alpha: 0.6),
+                fontVariations: const [FontVariation('wght', 600)],
+              ),
+            ),
+          ],
+        ),
+        ...List.generate(endIdx + 1, (i) {
+          final size = sizes[i];
+          final isDone = i < currentIdx;
+          final isCurrent = i == currentIdx;
+          return Container(
+            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+            decoration: BoxDecoration(
+              color: isCurrent
+                  ? colorScheme.primary.withValues(alpha: 0.15)
+                  : isDone
+                      ? colorScheme.tertiary.withValues(alpha: 0.15)
+                      : Colors.transparent,
+              border: isCurrent
+                  ? Border.all(
+                      color: colorScheme.primary.withValues(alpha: 0.3))
+                  : null,
+            ),
+            child: Text(
+              '$size\u00d7$size',
+              style: AppTextStyles.labelSmall.copyWith(
+                color: isDone
+                    ? colorScheme.tertiary
+                    : isCurrent
+                        ? colorScheme.primary
+                        : colorScheme.onSurface.withValues(alpha: 0.3),
+                fontVariations: [const FontVariation('wght', 700)],
+              ),
+            ),
+          );
+        }),
+      ],
+    );
+  }
+
   Widget _compactLayout(ColorScheme colorScheme) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -155,7 +242,7 @@ class PuzzleHeader extends StatelessWidget {
         const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Lullaby', style: AppTextStyles.headlineSmall),
+            Text('Jigsaw', style: AppTextStyles.headlineSmall),
             SizedBox(height: 2),
             Text(
               'Solve This Slide Puzzle..',
@@ -194,6 +281,87 @@ class PuzzleHeader extends StatelessWidget {
           label: 'Correct',
           child: CorrectTilesCount(colorScheme: colorScheme),
           colorScheme: colorScheme,
+        ),
+      ],
+    );
+  }
+
+  /// Vertical stat column for the narrow co-planar side pane (~360dp).
+  ///
+  /// Each stat is a single row (icon + label + value). Stacks vertically
+  /// instead of the horizontal spread used in [_expandedLayout].
+  Widget _sidePaneLayout(ColorScheme colorScheme) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _labeledStatRow(
+          icon: const HugeIcon(
+            icon: HugeIcons.strokeRoundedClock01,
+            size: 16,
+          ),
+          label: 'Time',
+          child: const PuzzleStopWatch(),
+          colorScheme: colorScheme,
+        ),
+        const SizedBox(height: 16),
+        _labeledStatRow(
+          icon: HugeIcon(
+            icon: HugeIcons.strokeRoundedArrowUpDown,
+            size: 16,
+            color: colorScheme.onSurface.withValues(alpha: 0.6),
+          ),
+          label: 'Moves',
+          child: const MovesCount(),
+          colorScheme: colorScheme,
+        ),
+        const SizedBox(height: 16),
+        _labeledStatRow(
+          icon: HugeIcon(
+            icon: HugeIcons.strokeRoundedCheckmarkCircle01,
+            size: 16,
+            color: colorScheme.onSurface.withValues(alpha: 0.6),
+          ),
+          label: 'Correct',
+          child: CorrectTilesCount(colorScheme: colorScheme),
+          colorScheme: colorScheme,
+        ),
+      ],
+    );
+  }
+
+  /// A single horizontal row for a labeled stat in the side pane.
+  Widget _labeledStatRow({
+    required Widget icon,
+    required String label,
+    required Widget child,
+    required ColorScheme colorScheme,
+  }) {
+    return Row(
+      children: [
+        icon,
+        const SizedBox(width: 8),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: AppTextStyles.labelSmall.copyWith(
+                  color: colorScheme.onSurface.withValues(alpha: 0.5),
+                  fontVariations: const [FontVariation('wght', 600)],
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 1),
+              DefaultTextStyle(
+                style: AppTextStyles.titleMedium.copyWith(
+                  color: colorScheme.onSurface,
+                  fontVariations: const [FontVariation('wght', 700)],
+                ),
+                child: child,
+              ),
+            ],
+          ),
         ),
       ],
     );

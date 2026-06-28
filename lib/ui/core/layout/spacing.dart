@@ -1,4 +1,4 @@
-import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
+import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
 
 class Spacing {
   static const double unit = 5;
@@ -15,19 +15,34 @@ class Spacing {
       switch (windowClass) {
         WindowClass.compact => 24,
         WindowClass.medium => 48,
-        WindowClass.expanded => 100,
+        WindowClass.expanded => 72,
+        WindowClass.large => 100,
+        WindowClass.extraLarge => 120,
       };
 
   static double puzzleMargin(WindowClass windowClass) => switch (windowClass) {
         WindowClass.compact => 24,
         WindowClass.medium => 64,
-        WindowClass.expanded => 100,
+        WindowClass.expanded => 80,
+        WindowClass.large => 100,
+        WindowClass.extraLarge => 140,
       };
 
   static double overlayPadding(WindowClass windowClass) =>
       switch (windowClass) {
         WindowClass.compact => 16,
         WindowClass.medium => 24,
-        WindowClass.expanded => 40,
+        WindowClass.expanded => 32,
+        WindowClass.large => 40,
+        WindowClass.extraLarge => 48,
+      };
+
+  static double paneContentMaxWidth(WindowClass windowClass) =>
+      switch (windowClass) {
+        WindowClass.compact => 600,
+        WindowClass.medium => 720,
+        WindowClass.expanded => 840,
+        WindowClass.large => 960,
+        WindowClass.extraLarge => 1200,
       };
 }

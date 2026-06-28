@@ -1,4 +1,4 @@
-import 'package:lullaby/ui/core/animations/animations_manager.dart';
+import 'package:jigsaw/ui/core/animations/animations_manager.dart';
 import 'package:flutter/material.dart';
 
 class ScaleUpTransition extends StatefulWidget {

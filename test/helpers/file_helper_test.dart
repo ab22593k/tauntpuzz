@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:checks/checks.dart';
-import 'package:lullaby/helpers/file_helper.dart';
+import 'package:jigsaw/helpers/file_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 

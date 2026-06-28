@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:jigsaw/ui/core/layout/panes.dart';
+import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
+import 'package:jigsaw/ui/features/drawer/app_drawer.dart';
 
 class DrawerButton extends StatefulWidget {
   const DrawerButton({super.key});
@@ -33,6 +36,34 @@ class _DrawerButtonState extends State<DrawerButton>
     super.dispose();
   }
 
+  /// Adaptive surfacing (MD3 "levitate" strategy):
+  /// On compact/medium the settings open as a navigation drawer (the
+  /// docked pane slides in from the leading edge). On expanded+ where the
+  /// drawer is hidden, the same content levitates into a floating pane —
+  /// same destination, different presentation per breakpoint.
+  void _openSettings(BuildContext context) {
+    final wc =
+        ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
+    final isExpandedPlus = wc == WindowClass.expanded ||
+        wc == WindowClass.large ||
+        wc == WindowClass.extraLarge;
+
+    if (isExpandedPlus) {
+      showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (_) => const FloatingPane(
+          showScrim: true,
+          modal: true,
+          width: 480,
+          child: AppDrawer(),
+        ),
+      );
+    } else {
+      Scaffold.of(context).openDrawer();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -46,9 +77,7 @@ class _DrawerButtonState extends State<DrawerButton>
           preferBelow: false,
           child: ElevatedButton(
             key: DrawerButton._key,
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
-            },
+            onPressed: () => _openSettings(context),
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
               minimumSize: const Size(48, 42),

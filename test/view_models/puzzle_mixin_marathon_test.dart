@@ -1,8 +1,8 @@
 import 'package:checks/checks.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:lullaby/domain/models/game_mode.dart';
-import 'package:lullaby/data/services/storage_service.dart';
-import 'package:lullaby/ui/features/puzzle/view_models/puzzle_mixin_marathon.dart';
+import 'package:jigsaw/domain/models/game_mode.dart';
+import 'package:jigsaw/data/services/storage_service.dart';
+import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_mixin_marathon.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 

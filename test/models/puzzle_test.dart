@@ -1,6 +1,6 @@
-import 'package:lullaby/domain/models/location.dart';
-import 'package:lullaby/domain/models/puzzle.dart';
-import 'package:lullaby/domain/models/tile.dart';
+import 'package:jigsaw/domain/models/location.dart';
+import 'package:jigsaw/domain/models/puzzle.dart';
+import 'package:jigsaw/domain/models/tile.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:checks/checks.dart';
 import 'package:collection/collection.dart';

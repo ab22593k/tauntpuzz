@@ -1,6 +1,6 @@
-import 'package:lullaby/domain/models/position.dart';
-import 'package:lullaby/ui/core/animations/animations_manager.dart';
-import 'package:lullaby/ui/core/layout/background_layer_layout.dart';
+import 'package:jigsaw/domain/models/position.dart';
+import 'package:jigsaw/ui/core/animations/animations_manager.dart';
+import 'package:jigsaw/ui/core/layout/background_layer_layout.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedBackgroundLayer extends StatefulWidget {

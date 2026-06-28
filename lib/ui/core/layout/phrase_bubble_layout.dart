@@ -1,6 +1,6 @@
-import 'package:lullaby/domain/models/position.dart';
-import 'package:lullaby/ui/core/layout/layout_delegate.dart';
-import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
+import 'package:jigsaw/domain/models/position.dart';
+import 'package:jigsaw/ui/core/layout/layout_delegate.dart';
+import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
 import 'package:flutter/cupertino.dart';
 
 enum PhraseState {
@@ -27,12 +27,15 @@ class PhraseBubbleLayout implements LayoutDelegate {
 
   Position get position => switch (screenTypeHelper.windowClass) {
         WindowClass.compact || WindowClass.medium => Position(
-            right: dashSize.width + (dashPosition.right ?? 0) - 20,
-            bottom: (dashSize.height * 0.1) + (dashPosition.bottom ?? 0),
+            right: screenTypeHelper.screenWidth * 0.05,
+            top: screenTypeHelper.screenHeight * 0.15,
           ),
-        WindowClass.expanded => Position(
-            right: dashSize.width + (dashPosition.right ?? 0) - 70,
-            bottom: (dashSize.height * 0.1) + (dashPosition.bottom ?? 0),
+        WindowClass.expanded ||
+        WindowClass.large ||
+        WindowClass.extraLarge =>
+          Position(
+            right: screenTypeHelper.screenWidth * 0.12,
+            top: screenTypeHelper.screenHeight * 0.20,
           ),
       };
 }

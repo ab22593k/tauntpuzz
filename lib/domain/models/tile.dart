@@ -1,4 +1,4 @@
-import 'package:lullaby/domain/models/location.dart';
+import 'package:jigsaw/domain/models/location.dart';
 import 'package:equatable/equatable.dart';
 
 class Tile extends Equatable {

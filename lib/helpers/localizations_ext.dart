@@ -1,4 +1,4 @@
-import 'package:lullaby/generated/app_localizations.dart';
+import 'package:jigsaw/generated/app_localizations.dart';
 import 'package:flutter/widgets.dart';
 
 extension LocalizationsExt on BuildContext {

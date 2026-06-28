@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:lullaby/ui/features/background/stars_painter.dart';
-import 'package:lullaby/ui/core/layout/layout_delegate.dart';
-import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
+import 'package:jigsaw/ui/features/background/stars_painter.dart';
+import 'package:jigsaw/ui/core/layout/layout_delegate.dart';
+import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
 import 'package:flutter/material.dart';
 
 class StarsLayout implements LayoutDelegate {
@@ -22,7 +22,9 @@ class StarsLayout implements LayoutDelegate {
   int get totalStarsCount => switch (screenTypeHelper.windowClass) {
         WindowClass.compact => 300,
         WindowClass.medium => 600,
-        WindowClass.expanded => 1000,
+        WindowClass.expanded => 800,
+        WindowClass.large => 1000,
+        WindowClass.extraLarge => 1200,
       };
 
   final Random random = Random();

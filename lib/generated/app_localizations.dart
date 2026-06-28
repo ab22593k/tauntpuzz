@@ -103,7 +103,7 @@ abstract class AppLocalizations {
   /// The application title
   ///
   /// In en, this message translates to:
-  /// **'Lullaby'**
+  /// **'Jigsaw'**
   String get appTitle;
 
   /// The application subtitle

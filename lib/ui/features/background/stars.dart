@@ -1,6 +1,6 @@
-import 'package:lullaby/ui/core/animations/animations_manager.dart';
-import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
-import 'package:lullaby/ui/core/layout/stars_layout.dart';
+import 'package:jigsaw/ui/core/animations/animations_manager.dart';
+import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
+import 'package:jigsaw/ui/core/layout/stars_layout.dart';
 import 'package:flutter/material.dart';
 
 class Stars extends StatefulWidget {

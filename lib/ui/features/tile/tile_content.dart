@@ -1,9 +1,9 @@
-import 'package:lullaby/domain/models/tile.dart';
-import 'package:lullaby/ui/core/animations/animations_manager.dart';
-import 'package:lullaby/ui/core/layout/puzzle_layout.dart';
-import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
-import 'package:lullaby/ui/core/app_text_styles.dart';
-import 'package:lullaby/ui/features/puzzle/view_models/puzzle_provider.dart';
+import 'package:jigsaw/domain/models/tile.dart';
+import 'package:jigsaw/ui/core/animations/animations_manager.dart';
+import 'package:jigsaw/ui/core/layout/puzzle_layout.dart';
+import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
+import 'package:jigsaw/ui/core/app_text_styles.dart';
+import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

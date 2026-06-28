@@ -1,4 +1,4 @@
-name: lullaby
+name: jigsaw
 description: Slide Puzzle Game Made With Flutter For The Flutter Puzzle Hack Challenge
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
@@ -33,6 +33,7 @@ dependencies:
   cross_file: ^0.3.5+2
   go_router: ^17.2.3
   hugeicons: ^1.1.7
+  dynamic_color: ^1.8.1
 
 dev_dependencies:
   flutter_test:

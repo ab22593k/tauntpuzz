@@ -1,5 +1,5 @@
 import 'package:checks/checks.dart';
-import 'package:lullaby/helpers/duration_helper.dart';
+import 'package:jigsaw/helpers/duration_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -1,17 +1,17 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:lullaby/helpers/localizations_ext.dart';
-import 'package:lullaby/ui/features/drawer/app_version_section.dart';
-import 'package:lullaby/ui/features/drawer/dark_mode_toggle.dart';
-import 'package:lullaby/ui/features/drawer/drawer_app_info.dart';
-import 'package:lullaby/ui/features/drawer/game_mode_settings.dart';
-import 'package:lullaby/ui/features/drawer/language_picker.dart';
-import 'package:lullaby/ui/features/drawer/latest_scores.dart';
-import 'package:lullaby/ui/features/drawer/puzzle_size_settings.dart';
-import 'package:lullaby/ui/core/layout/spacing.dart';
-import 'package:lullaby/ui/core/layout/screen_type_helper.dart';
-import 'package:lullaby/ui/core/app_text_styles.dart';
+import 'package:jigsaw/helpers/localizations_ext.dart';
+import 'package:jigsaw/ui/features/drawer/app_version_section.dart';
+import 'package:jigsaw/ui/features/drawer/dark_mode_toggle.dart';
+import 'package:jigsaw/ui/features/drawer/drawer_app_info.dart';
+import 'package:jigsaw/ui/features/drawer/game_mode_settings.dart';
+import 'package:jigsaw/ui/features/drawer/language_picker.dart';
+import 'package:jigsaw/ui/features/drawer/latest_scores.dart';
+import 'package:jigsaw/ui/features/drawer/puzzle_size_settings.dart';
+import 'package:jigsaw/ui/core/layout/spacing.dart';
+import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
+import 'package:jigsaw/ui/core/app_text_styles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -125,7 +125,7 @@ class _DrawerHeader extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Lullaby',
+                Text('Jigsaw',
                     style: (wc == WindowClass.compact
                             ? AppTextStyles.titleMedium
                             : AppTextStyles.titleLarge)
@@ -143,11 +143,7 @@ class _DrawerHeader extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () {
-              if (Scaffold.of(context).isDrawerOpen) {
-                Navigator.of(context).pop();
-              }
-            },
+            onPressed: () => Navigator.of(context).pop(),
             icon: const HugeIcon(icon: HugeIcons.strokeRoundedCancel01),
             style: IconButton.styleFrom(
               foregroundColor: colorScheme.onSurface.withValues(alpha: 0.7),
