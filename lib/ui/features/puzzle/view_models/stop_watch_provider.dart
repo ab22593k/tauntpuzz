@@ -22,9 +22,6 @@ import 'package:flutter/cupertino.dart';
 /// survives app restarts. In countdown mode, no persistence is needed since
 /// the timer resets on each puzzle.
 class StopWatchProvider with ChangeNotifier {
-  Stream<int> timeStream =
-      Stream.periodic(const Duration(seconds: 1), (x) => 1 + x++);
-
   final StorageService storageService;
 
   StopWatchProvider(this.storageService);
@@ -63,7 +60,10 @@ class StopWatchProvider with ChangeNotifier {
     if (streamSubscription case var sub? when sub.isPaused) {
       sub.resume();
     } else {
-      streamSubscription = timeStream.listen((_) {
+      streamSubscription = Stream.periodic(
+        const Duration(seconds: 1),
+        (x) => 1 + x++,
+      ).listen((_) {
         if (isCountDown) {
           if (countdownRemaining > 0) {
             countdownRemaining--;

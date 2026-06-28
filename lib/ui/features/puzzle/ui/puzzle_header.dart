@@ -237,7 +237,6 @@ class PuzzleHeader extends StatelessWidget {
 
   Widget _expandedLayout(ColorScheme colorScheme) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -257,7 +256,7 @@ class PuzzleHeader extends StatelessWidget {
             size: 16,
           ),
           label: 'Time',
-          child: const PuzzleStopWatch(),
+          child: const PuzzleStopWatch(showIcon: false),
           colorScheme: colorScheme,
         ),
         const SizedBox(width: 20),
@@ -279,7 +278,10 @@ class PuzzleHeader extends StatelessWidget {
             color: colorScheme.onSurface.withValues(alpha: 0.6),
           ),
           label: 'Correct',
-          child: CorrectTilesCount(colorScheme: colorScheme),
+          child: CorrectTilesCount(
+            colorScheme: colorScheme,
+            showIcon: false,
+          ),
           colorScheme: colorScheme,
         ),
       ],
@@ -300,7 +302,7 @@ class PuzzleHeader extends StatelessWidget {
             size: 16,
           ),
           label: 'Time',
-          child: const PuzzleStopWatch(),
+          child: const PuzzleStopWatch(showIcon: false),
           colorScheme: colorScheme,
         ),
         const SizedBox(height: 16),
@@ -322,7 +324,10 @@ class PuzzleHeader extends StatelessWidget {
             color: colorScheme.onSurface.withValues(alpha: 0.6),
           ),
           label: 'Correct',
-          child: CorrectTilesCount(colorScheme: colorScheme),
+          child: CorrectTilesCount(
+            colorScheme: colorScheme,
+            showIcon: false,
+          ),
           colorScheme: colorScheme,
         ),
       ],

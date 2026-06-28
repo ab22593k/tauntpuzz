@@ -70,21 +70,8 @@ class _StatsPane extends StatelessWidget {
           ),
           const SizedBox(height: Spacing.md),
           const PuzzleHeader(displayMode: HeaderDisplay.sidePane),
-          const Spacer(),
-          const _SettingsEntry(),
         ],
       ),
     );
-  }
-}
-
-/// A compact entry that opens settings — surfaces the drawer's settings
-/// content as a side sheet on expanded+ where the drawer is hidden.
-class _SettingsEntry extends StatelessWidget {
-  const _SettingsEntry();
-
-  @override
-  Widget build(BuildContext context) {
-    return const DrawerButton();
   }
 }

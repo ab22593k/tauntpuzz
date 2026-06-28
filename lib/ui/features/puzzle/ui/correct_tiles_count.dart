@@ -6,8 +6,9 @@ import 'package:provider/provider.dart';
 
 class CorrectTilesCount extends StatelessWidget {
   final ColorScheme? colorScheme;
+  final bool showIcon;
 
-  const CorrectTilesCount({super.key, this.colorScheme});
+  const CorrectTilesCount({super.key, this.colorScheme, this.showIcon = true});
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +30,10 @@ class CorrectTilesCount extends StatelessWidget {
             key: ValueKey(correct),
             mainAxisSize: MainAxisSize.min,
             children: [
-              _progressIcon(ratio, cs),
-              const SizedBox(width: 4),
+              if (showIcon) ...[
+                _progressIcon(ratio, cs),
+                const SizedBox(width: 4),
+              ],
               Text(
                 '$correct/$total',
                 style: AppTextStyles.labelSmall.copyWith(
