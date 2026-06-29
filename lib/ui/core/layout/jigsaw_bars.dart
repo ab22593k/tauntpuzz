@@ -50,7 +50,6 @@ class PuzzleAppBar extends StatelessWidget implements PreferredSizeWidget {
         top: MediaQuery.paddingOf(context).top,
       ),
       decoration: BoxDecoration(
-        color: colorScheme.surface,
         border: Border(
           bottom: BorderSide(
             color: colorScheme.outlineVariant.withValues(alpha: 0.12),

@@ -151,6 +151,7 @@ class _JigsawScaffoldState extends State<JigsawScaffold> {
     final showDrawer = _shouldShowDrawer(wc);
 
     final scaffold = Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: widget.topBar,
       bottomNavigationBar: showBottomBar ? widget.bottomBar : null,
       drawer: showDrawer ? widget.drawer : null,

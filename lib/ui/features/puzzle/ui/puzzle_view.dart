@@ -1,7 +1,6 @@
 import 'package:jigsaw/ui/core/layout/puzzle_layout.dart';
 import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
 import 'package:jigsaw/ui/core/layout/spacing.dart';
-import 'package:jigsaw/ui/features/background/background_stack.dart';
 import 'package:jigsaw/ui/features/puzzle/board/puzzle_board.dart';
 import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_provider.dart';
 import 'package:jigsaw/ui/features/puzzle/view_models/stop_watch_provider.dart';
@@ -49,38 +48,32 @@ class _PuzzleViewState extends State<PuzzleView> {
         );
         final containerWidth = puzzleLayout.containerWidth;
 
-        return Stack(
-          children: [
-            BackgroundStack(size: Size(windowWidth, windowHeight)),
-            Center(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal:
-                      Spacing.puzzleMargin(screenTypeHelper.windowClass),
-                ),
-                child: screenTypeHelper.windowClass == WindowClass.compact ||
-                        screenTypeHelper.windowClass == WindowClass.medium
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Spacer(),
-                          PuzzleBoard(
-                            containerWidth: containerWidth,
-                            windowClass: screenTypeHelper.windowClass,
-                          ),
-                          const Spacer(),
-                        ],
-                      )
-                    : Align(
-                        alignment: const Alignment(0, -0.45),
-                        child: PuzzleBoard(
-                          containerWidth: containerWidth,
-                          windowClass: screenTypeHelper.windowClass,
-                        ),
-                      ),
-              ),
+        return Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: Spacing.puzzleMargin(screenTypeHelper.windowClass),
             ),
-          ],
+            child: screenTypeHelper.windowClass == WindowClass.compact ||
+                    screenTypeHelper.windowClass == WindowClass.medium
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Spacer(),
+                      PuzzleBoard(
+                        containerWidth: containerWidth,
+                        windowClass: screenTypeHelper.windowClass,
+                      ),
+                      const Spacer(),
+                    ],
+                  )
+                : Align(
+                    alignment: const Alignment(0, -0.45),
+                    child: PuzzleBoard(
+                      containerWidth: containerWidth,
+                      windowClass: screenTypeHelper.windowClass,
+                    ),
+                  ),
+          ),
         );
       },
     );
