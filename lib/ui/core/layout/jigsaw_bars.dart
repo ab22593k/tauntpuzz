@@ -17,14 +17,14 @@ import 'package:flutter/material.dart';
 /// | `trailing-icon.color` | `on-surface-variant` |
 class PuzzleAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;
-  final String title;
+  final String? title;
   final String? subtitle;
   final List<Widget> actions;
 
   const PuzzleAppBar({
     super.key,
     this.leading,
-    required this.title,
+    this.title,
     this.subtitle,
     this.actions = const [],
   });
@@ -64,7 +64,7 @@ class PuzzleAppBar extends StatelessWidget implements PreferredSizeWidget {
           Expanded(
             child: subtitle == null
                 ? Text(
-                    title,
+                    title!,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontFamily: AppTextStyles.primaryFontFamily,
                           color: colorScheme.onSurface,
@@ -76,7 +76,7 @@ class PuzzleAppBar extends StatelessWidget implements PreferredSizeWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        title,
+                        title!,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               fontFamily: AppTextStyles.primaryFontFamily,
                               color: colorScheme.onSurface,

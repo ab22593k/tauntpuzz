@@ -24,8 +24,6 @@ class HomePage extends StatelessWidget {
         const JigsawScaffold(
           topBar: PuzzleAppBar(
             leading: DrawerButton(),
-            title: 'Jigsaw',
-            subtitle: 'Slide Puzzle',
             actions: [
               Padding(
                 padding: EdgeInsets.all(8.0),

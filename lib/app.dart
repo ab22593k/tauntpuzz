@@ -88,40 +88,43 @@ class _AppState extends State<App> {
           create: (_) => ThemeProvider(),
         ),
       ],
-      child: Consumer<LocaleProvider>(
-        builder: (context, localeProvider, _) {
-          final localeKey = localeProvider.locale?.languageCode ?? 'system';
-          return Consumer<ThemeProvider>(
-            builder: (context, themeProvider, _) {
-              return DynamicColorBuilder(
-                builder: (dynamicLight, dynamicDark) {
-                  final lightTheme = AppTheme.light(dynamicLight: dynamicLight);
-                  final darkTheme = AppTheme.dark(dynamicDark: dynamicDark);
+      child: SafeArea(
+        child: Consumer<LocaleProvider>(
+          builder: (context, localeProvider, _) {
+            final localeKey = localeProvider.locale?.languageCode ?? 'system';
+            return Consumer<ThemeProvider>(
+              builder: (context, themeProvider, _) {
+                return DynamicColorBuilder(
+                  builder: (dynamicLight, dynamicDark) {
+                    final lightTheme =
+                        AppTheme.light(dynamicLight: dynamicLight);
+                    final darkTheme = AppTheme.dark(dynamicDark: dynamicDark);
 
-                  return ThemeTransitionBuilder(
-                    lightTheme: lightTheme,
-                    darkTheme: darkTheme,
-                    themeMode: themeProvider.mode,
-                    builder: (context, animatedTheme) {
-                      return MaterialApp.router(
-                        key: ValueKey(localeKey),
-                        debugShowCheckedModeBanner: false,
-                        title: 'Jigsaw',
-                        theme: animatedTheme,
-                        themeMode: ThemeMode.light,
-                        routerConfig: AppRouter.router,
-                        locale: localeProvider.locale,
-                        localizationsDelegates:
-                            AppLocalizations.localizationsDelegates,
-                        supportedLocales: AppLocalizations.supportedLocales,
-                      );
-                    },
-                  );
-                },
-              );
-            },
-          );
-        },
+                    return ThemeTransitionBuilder(
+                      lightTheme: lightTheme,
+                      darkTheme: darkTheme,
+                      themeMode: themeProvider.mode,
+                      builder: (context, animatedTheme) {
+                        return MaterialApp.router(
+                          key: ValueKey(localeKey),
+                          debugShowCheckedModeBanner: false,
+                          title: 'Jigsaw',
+                          theme: animatedTheme,
+                          themeMode: ThemeMode.light,
+                          routerConfig: AppRouter.router,
+                          locale: localeProvider.locale,
+                          localizationsDelegates:
+                              AppLocalizations.localizationsDelegates,
+                          supportedLocales: AppLocalizations.supportedLocales,
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }
