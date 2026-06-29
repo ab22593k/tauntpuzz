@@ -66,7 +66,7 @@ class PuzzleAppBar extends StatelessWidget implements PreferredSizeWidget {
           Expanded(
             child: subtitle == null
                 ? Text(
-                    title!,
+                    title ?? '',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontFamily: AppTextStyles.primaryFontFamily,
                       color: colorScheme.onSurface,
@@ -78,7 +78,7 @@ class PuzzleAppBar extends StatelessWidget implements PreferredSizeWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        title!,
+                        title ?? '',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontFamily: AppTextStyles.primaryFontFamily,
                           color: colorScheme.onSurface,

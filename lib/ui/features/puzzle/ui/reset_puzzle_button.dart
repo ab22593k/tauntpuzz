@@ -62,41 +62,51 @@ class ResetPuzzleButton extends StatelessWidget {
       delay: AnimationsManager.bgLayerAnimationDuration,
       child: Consumer<PuzzleProvider>(
         builder: (c, puzzleProvider, _) {
+          final colorScheme = Theme.of(c).colorScheme;
+
           if (isExpandedPlus) {
             return Padding(
               padding: const EdgeInsets.only(top: 12),
-              child: FloatingActionButton.extended(
-                key: const ValueKey('reset_button'),
-                onPressed: () =>
-                    initResetPuzzle(context, puzzleProvider, stopWatchProvider),
-                icon: const HugeIcon(
-                  icon: HugeIcons.strokeRoundedRefresh03,
-                  size: 18,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 200),
+                child: FloatingActionButton.extended(
+                  key: const ValueKey('reset_button'),
+                  onPressed: () => initResetPuzzle(
+                    context,
+                    puzzleProvider,
+                    stopWatchProvider,
+                  ),
+                  backgroundColor: colorScheme.primary,
+                  foregroundColor: colorScheme.onPrimary,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                  ),
+                  icon: const HugeIcon(
+                    icon: HugeIcons.strokeRoundedRefresh03,
+                    size: 18,
+                  ),
+                  label: Text(context.l10n.reset, style: AppTextStyles.button),
                 ),
-                label: Text(context.l10n.reset, style: AppTextStyles.button),
               ),
             );
           }
 
           return Padding(
-            padding: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 16),
             child: Tooltip(
               message: 'Reset',
-              child: ElevatedButton(
+              child: FloatingActionButton.small(
                 key: const ValueKey('reset_button'),
                 onPressed: () =>
                     initResetPuzzle(context, puzzleProvider, stopWatchProvider),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const HugeIcon(
-                      icon: HugeIcons.strokeRoundedRefresh03,
-                      size: 18,
-                    ),
-                    const SizedBox(width: 7),
-                    Text(context.l10n.reset, style: AppTextStyles.button),
-                  ],
+                backgroundColor: colorScheme.primary,
+                foregroundColor: colorScheme.onPrimary,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero,
+                ),
+                child: const HugeIcon(
+                  icon: HugeIcons.strokeRoundedRefresh03,
+                  size: 18,
                 ),
               ),
             ),
