@@ -39,12 +39,25 @@ class PuzzleProvider
   final Random random = Random();
 
   /// List of tiles of the puzzle
+  late List<Tile> _tiles;
+
   @override
-  late List<Tile> tiles;
+  List<Tile> get tiles => _tiles;
+
+  @override
+  set tiles(List<Tile> v) {
+    _tiles = v;
+    _invalidateBoardState();
+  }
 
   /// list of [tiles] excluding white space tile
-  List<Tile> get tilesWithoutWhitespace =>
-      tiles.where((tile) => !tile.tileIsWhiteSpace).toList();
+  List<Tile>? _cachedTilesWithoutWhitespace;
+  List<Tile> get tilesWithoutWhitespace {
+    if (_cachedTilesWithoutWhitespace case final cached?) return cached;
+    final result = _tiles.where((tile) => !tile.tileIsWhiteSpace).toList();
+    _cachedTilesWithoutWhitespace = result;
+    return result;
+  }
 
   @override
   int movesCount = 0;
@@ -79,13 +92,25 @@ class PuzzleProvider
   @override
   Puzzle get puzzle => Puzzle(n: n, tiles: tiles, movesCount: movesCount);
 
+  void _invalidateBoardState() {
+    _cachedTilesWithoutWhitespace = null;
+    _cachedCorrectTilesCount = null;
+  }
+
+  /// Invalidates cached board state. Called by mixins after tile mutations.
+  @override
+  void invalidateBoardState() => _invalidateBoardState();
+
+  int? _cachedCorrectTilesCount;
   int get correctTilesCount {
+    if (_cachedCorrectTilesCount case final cached?) return cached;
     int count = 0;
-    for (final tile in tiles) {
+    for (final tile in _tiles) {
       if (tile.isAtCorrectLocation && !tile.tileIsWhiteSpace) {
         count++;
       }
     }
+    _cachedCorrectTilesCount = count;
     return count;
   }
 

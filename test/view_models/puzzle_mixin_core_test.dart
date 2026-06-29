@@ -111,6 +111,9 @@ class _CoreHarness extends ChangeNotifier with PuzzleMixinCore {
   @override
   List<Score> getScoresFromStorage() => scoresFromStorageResult;
 
+  @override
+  void invalidateBoardState() {}
+
   // --- Test helpers ---
 
   /// Generates correct location list for the current [n].

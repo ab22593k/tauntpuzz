@@ -78,13 +78,13 @@ class PhrasesProvider with ChangeNotifier {
     assert(phraseState != PhraseState.none);
     return switch (phraseState) {
       PhraseState.puzzleStarted =>
-        puzzleStartedPhrases[random.nextInt(puzzleSolvedPhrases.length - 1)],
+        puzzleStartedPhrases[random.nextInt(puzzleStartedPhrases.length)],
       PhraseState.puzzleSolved =>
-        puzzleSolvedPhrases[random.nextInt(puzzleSolvedPhrases.length - 1)],
+        puzzleSolvedPhrases[random.nextInt(puzzleSolvedPhrases.length)],
       PhraseState.hardPuzzleSelected =>
-        hardPuzzlePhrases[random.nextInt(hardPuzzlePhrases.length - 1)],
+        hardPuzzlePhrases[random.nextInt(hardPuzzlePhrases.length)],
       PhraseState.doingGreat =>
-        doingGreatPhrases[random.nextInt(doingGreatPhrases.length - 1)],
+        doingGreatPhrases[random.nextInt(doingGreatPhrases.length)],
       PhraseState.dashTapped => dashTappedPhrases[dashTapCount],
       PhraseState.none || PhraseState.puzzleTakingTooLong => '',
     };
@@ -92,9 +92,9 @@ class PhrasesProvider with ChangeNotifier {
 
   PhraseState phraseState = PhraseState.none;
 
-  void setPhraseState(PhraseState phraseState) {
-    phraseState = phraseState;
-    if (phraseState == PhraseState.dashTapped) {
+  void setPhraseState(PhraseState state) {
+    phraseState = state;
+    if (state == PhraseState.dashTapped) {
       if (dashTapCount == maxDashTaps) {
         dashTapCount = 0;
       } else {

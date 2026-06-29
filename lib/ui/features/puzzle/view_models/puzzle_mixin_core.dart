@@ -48,6 +48,7 @@ mixin PuzzleMixinCore on ChangeNotifier {
   Puzzle? getPuzzleFromStorage();
   void updatePuzzleInStorage();
   List<Score> getScoresFromStorage();
+  void invalidateBoardState();
 
   // ──────────────────────────────────────────────
   // Core puzzle logic
@@ -75,6 +76,8 @@ mixin PuzzleMixinCore on ChangeNotifier {
     tiles[whiteSpaceTileIndex] = whiteSpaceTile.copyWith(
       currentLocation: movedTile.currentLocation,
     );
+
+    invalidateBoardState();
 
     log(
       'Number of correct tiles ${puzzle.getNumberOfCorrectTiles()} | Is solved: ${puzzle.isSolved}',
@@ -137,6 +140,8 @@ mixin PuzzleMixinCore on ChangeNotifier {
         correctLocations: tilesCorrectLocations,
         currentLocations: tilesCurrentLocations,
       );
+
+      invalidateBoardState();
     }
   }
 

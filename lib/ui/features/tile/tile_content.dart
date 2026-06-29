@@ -3,20 +3,20 @@ import 'package:jigsaw/ui/core/animations/animations_manager.dart';
 import 'package:jigsaw/ui/core/layout/puzzle_layout.dart';
 import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
 import 'package:jigsaw/ui/core/app_text_styles.dart';
-import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class TileContent extends StatefulWidget {
   final Tile tile;
   final bool isPuzzleSolved;
   final int puzzleSize;
+  final bool isBlindContentHidden;
 
   const TileContent({
     super.key,
     required this.tile,
     required this.isPuzzleSolved,
     required this.puzzleSize,
+    this.isBlindContentHidden = false,
   });
 
   @override
@@ -82,19 +82,10 @@ class _TileContentState extends State<TileContent>
   }
 
   Widget _buildTileLabel(ColorScheme colorScheme) {
-    // Check if tile content should be hidden in blind mode
-    final puzzleProvider = context.watch<PuzzleProvider>();
-    final isBlind = puzzleProvider.gameMode.name == 'blind';
-    final tileIsRevealed =
-        isBlind && puzzleProvider.isTileRevealed(widget.tile.currentLocation);
-
     final screenWidth = MediaQuery.of(context).size.width;
     final wc = ScreenTypeHelper(screenWidth, 0).windowClass;
 
-    if (isBlind &&
-        puzzleProvider.tilesBlinded &&
-        !tileIsRevealed &&
-        !widget.isPuzzleSolved) {
+    if (widget.isBlindContentHidden) {
       return Icon(
         Icons.help_outline,
         size: (PuzzleLayout.tileTextSize(wc, widget.puzzleSize) ?? 24) * 0.6,

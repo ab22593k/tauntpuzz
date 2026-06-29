@@ -332,10 +332,10 @@ void main() {
     });
 
     test('fromJson & toJson gives correct data', () {
-      Puzzle puzzle = const Puzzle(
+      Puzzle puzzle = Puzzle(
         n: 1,
         movesCount: 0,
-        tiles: [
+        tiles: const [
           Tile(
             value: 1,
             correctLocation: Location(x: 1, y: 1),

@@ -1,4 +1,4 @@
-import 'package:jigsaw/domain/models/tile.dart';
+import 'package:jigsaw/domain/models/game_mode.dart';
 import 'package:jigsaw/ui/core/animations/animations_manager.dart';
 import 'package:jigsaw/ui/core/animations/pulse_transition.dart';
 import 'package:jigsaw/ui/core/animations/scale_up_transition.dart';
@@ -40,14 +40,8 @@ class PuzzleBoard extends StatelessWidget {
           onKeyEvent: (event) {
             if (event case KeyDownEvent(:var physicalKey)) {
               if (physicalKey == PhysicalKeyboardKey.keyR) {
-                if (puzzleProvider.hasStarted &&
-                    !puzzleProvider.puzzle.isSolved) {
-                  stopWatchProvider.stop();
-                  puzzleProvider.generate(forceRefresh: true);
-                } else {
-                  stopWatchProvider.stop();
-                  puzzleProvider.generate(forceRefresh: true);
-                }
+                stopWatchProvider.stop();
+                puzzleProvider.generate(forceRefresh: true);
                 return;
               }
               if (physicalKey == PhysicalKeyboardKey.keyD) {
@@ -75,6 +69,11 @@ class PuzzleBoard extends StatelessWidget {
               if (!keyboardListenerFocusNode.hasFocus) {
                 FocusScope.of(context).requestFocus(keyboardListenerFocusNode);
               }
+              final isSolved = puzzleProvider.puzzle.isSolved;
+              final tileWidth = containerWidth / puzzleProvider.n;
+              final isBlind = puzzleProvider.gameMode == GameMode.blind;
+              final tilesBlinded = puzzleProvider.tilesBlinded;
+
               return Center(
                 child: Container(
                   key: const ValueKey('puzzle_board'),
@@ -88,23 +87,30 @@ class PuzzleBoard extends StatelessWidget {
                     children: List.generate(
                       puzzleProvider.tilesWithoutWhitespace.length,
                       (index) {
-                        Tile tile =
+                        final tile =
                             puzzleProvider.tilesWithoutWhitespace[index];
+                        final tileIsMovable = puzzleProvider.puzzle
+                            .tileIsMovable(tile);
+                        final isBlindContentHidden =
+                            isBlind &&
+                            tilesBlinded &&
+                            !puzzleProvider.isTileRevealed(
+                              tile.currentLocation,
+                            ) &&
+                            !isSolved;
                         return TileAnimatedPositioned(
                           tile: tile,
-                          isPuzzleSolved: puzzleProvider.puzzle.isSolved,
                           puzzleSize: puzzleProvider.n,
-                          containerWidth: containerWidth,
+                          tileWidth: tileWidth,
                           tileGestureDetector: TileGestureDetector(
-                            tile: puzzleProvider.tilesWithoutWhitespace[index],
+                            tile: tile,
                             tileContent: PulseTransition(
-                              isActive:
-                                  puzzleProvider.puzzle.tileIsMovable(tile) &&
-                                  !puzzleProvider.puzzle.isSolved,
+                              isActive: tileIsMovable && !isSolved,
                               child: TileContent(
                                 tile: tile,
-                                isPuzzleSolved: puzzleProvider.puzzle.isSolved,
+                                isPuzzleSolved: isSolved,
                                 puzzleSize: puzzleProvider.n,
+                                isBlindContentHidden: isBlindContentHidden,
                               ),
                             ),
                           ),

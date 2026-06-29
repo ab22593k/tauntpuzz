@@ -9,14 +9,24 @@ class Puzzle extends Equatable {
   final List<Tile> tiles;
   final int movesCount;
 
-  const Puzzle({required this.n, required this.tiles, this.movesCount = 0})
-    : assert(n < 10);
+  /// Cached index of the whitespace tile to avoid O(n) scans on repeated
+  /// lookups from [whiteSpaceTile], [tileIsMovable], and directional checks.
+  final int _whitespaceTileIndex;
+
+  Puzzle({
+    required this.n,
+    required this.tiles,
+    this.movesCount = 0,
+    int? whitespaceTileIndex,
+  }) : _whitespaceTileIndex =
+           whitespaceTileIndex ??
+           tiles.lastIndexWhere((tile) => tile.tileIsWhiteSpace);
 
   /// List of supported puzzle sizes
   static List<int> supportedPuzzleSizes = [3, 4, 5, 6];
 
   /// Get whitespace tile
-  Tile get whiteSpaceTile => tiles.firstWhere((tile) => tile.tileIsWhiteSpace);
+  Tile get whiteSpaceTile => tiles[_whitespaceTileIndex];
 
   /// Check if a [Tile] is movable
   ///
@@ -99,29 +109,27 @@ class Puzzle extends Equatable {
     );
   }
 
-  /// Determines if the two tiles are inverted.
-  bool _isInversion(Tile a, Tile b) {
-    if (b.tileIsWhiteSpace || a.value == b.value) return false;
-    return b.value < a.value
-        ? b.currentLocation.compareTo(a.currentLocation) > 0
-        : a.currentLocation.compareTo(b.currentLocation) > 0;
-  }
-
   /// Gives the number of inversions in a puzzle given its tile arrangement.
   ///
   /// An inversion is when a tile of a lower value is in a greater position than
   /// a tile of a higher value.
   int countInversions() {
-    var count = 0;
-    for (var a = 0; a < tiles.length; a++) {
-      final tileA = tiles[a];
-      if (tileA.tileIsWhiteSpace) {
-        continue;
-      }
+    if (tiles.length < 4) return 0; // 2x2 or smaller has no inversions
 
-      for (var b = a + 1; b < tiles.length; b++) {
+    var count = 0;
+    final len = tiles.length;
+    for (var a = 0; a < len; a++) {
+      if (a == _whitespaceTileIndex) continue;
+      final tileA = tiles[a];
+
+      for (var b = a + 1; b < len; b++) {
+        if (b == _whitespaceTileIndex) continue;
         final tileB = tiles[b];
-        if (_isInversion(tileA, tileB)) {
+        if (tileA.value == tileB.value) continue;
+        final lowerValue = tileA.value < tileB.value ? tileA : tileB;
+        final higherValue = tileA.value < tileB.value ? tileB : tileA;
+        if (lowerValue.currentLocation.compareTo(higherValue.currentLocation) >
+            0) {
           count++;
         }
       }
@@ -139,8 +147,7 @@ class Puzzle extends Equatable {
       return inversions.isEven;
     }
 
-    final whitespace = tiles.singleWhere((tile) => tile.tileIsWhiteSpace);
-    final whitespaceRow = whitespace.currentLocation.y;
+    final whitespaceRow = tiles[_whitespaceTileIndex].currentLocation.y;
 
     return ((height - whitespaceRow) + 1).isOdd
         ? inversions.isEven

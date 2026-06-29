@@ -3,24 +3,20 @@ import 'package:flutter/material.dart';
 
 class TileAnimatedPositioned extends StatelessWidget {
   final Tile tile;
-  final bool isPuzzleSolved;
   final int puzzleSize;
   final Widget tileGestureDetector;
-  final double containerWidth;
+  final double tileWidth;
 
   const TileAnimatedPositioned({
     super.key,
     required this.tile,
-    required this.isPuzzleSolved,
     required this.puzzleSize,
     required this.tileGestureDetector,
-    required this.containerWidth,
+    required this.tileWidth,
   });
 
   @override
   Widget build(BuildContext context) {
-    double tileWidth = containerWidth / puzzleSize;
-
     return AnimatedPositioned(
       duration: const Duration(milliseconds: 150),
       curve: Curves.easeInOut,
