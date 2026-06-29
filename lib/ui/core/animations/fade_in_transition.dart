@@ -5,11 +5,7 @@ class FadeInTransition extends StatefulWidget {
   final Widget child;
   final Duration? delay;
 
-  const FadeInTransition({
-    super.key,
-    required this.child,
-    this.delay,
-  });
+  const FadeInTransition({super.key, required this.child, this.delay});
 
   @override
   _FadeInTransitionState createState() => _FadeInTransitionState();
@@ -53,9 +49,6 @@ class _FadeInTransitionState extends State<FadeInTransition>
 
   @override
   Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: _opacity,
-      child: widget.child,
-    );
+    return FadeTransition(opacity: _opacity, child: widget.child);
   }
 }

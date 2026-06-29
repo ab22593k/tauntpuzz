@@ -21,12 +21,12 @@ class Spacing {
       };
 
   static double puzzleMargin(WindowClass windowClass) => switch (windowClass) {
-        WindowClass.compact => 24,
-        WindowClass.medium => 64,
-        WindowClass.expanded => 80,
-        WindowClass.large => 100,
-        WindowClass.extraLarge => 140,
-      };
+    WindowClass.compact => 24,
+    WindowClass.medium => 64,
+    WindowClass.expanded => 80,
+    WindowClass.large => 100,
+    WindowClass.extraLarge => 140,
+  };
 
   static double overlayPadding(WindowClass windowClass) =>
       switch (windowClass) {

@@ -17,8 +17,10 @@ class AppAlertDialog extends StatelessWidget {
     this.onConfirm,
     this.onCancel,
     this.content,
-    this.insetPadding =
-        const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
+    this.insetPadding = const EdgeInsets.symmetric(
+      horizontal: 40.0,
+      vertical: 24.0,
+    ),
   }) : assert(content == null ? title != null && onConfirm != null : true);
 
   @override
@@ -45,12 +47,15 @@ class AppAlertDialog extends StatelessWidget {
               child: Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(
-                    horizontal: Spacing.screenHPadding, vertical: Spacing.md),
+                  horizontal: Spacing.screenHPadding,
+                  vertical: Spacing.md,
+                ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.zero,
                   color: colorScheme.surfaceContainerLowest,
                 ),
-                child: content ??
+                child:
+                    content ??
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -59,8 +64,9 @@ class AppAlertDialog extends StatelessWidget {
                             title!,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style:
-                                AppTextStyles.bodyLarge.copyWith(height: 1.5),
+                            style: AppTextStyles.bodyLarge.copyWith(
+                              height: 1.5,
+                            ),
                           ),
                         const SizedBox(height: 40),
                         Row(
@@ -79,13 +85,14 @@ class AppAlertDialog extends StatelessWidget {
                             const SizedBox(width: Spacing.sm),
                             Expanded(
                               child: ElevatedButton(
-                                onPressed: onCancel ??
+                                onPressed:
+                                    onCancel ??
                                     () => Navigator.of(context).pop(),
                                 child: const Text('Cancel'),
                               ),
                             ),
                           ],
-                        )
+                        ),
                       ],
                     ),
               ),

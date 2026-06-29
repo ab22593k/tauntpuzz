@@ -18,8 +18,10 @@ class DarkModeToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final wc =
-        ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
+    final wc = ScreenTypeHelper(
+      MediaQuery.sizeOf(context).width,
+      0,
+    ).windowClass;
     final padding = MediaQuery.paddingOf(context);
     final drawerStartPadding = padding.left == 0 ? Spacing.md : padding.left;
     final themeProvider = context.watch<ThemeProvider>();
@@ -43,16 +45,18 @@ class DarkModeToggle extends StatelessWidget {
                 color: colorScheme.onSurface.withValues(alpha: 0.6),
               ),
               const SizedBox(width: 6),
-              Text(context.l10n.darkMode,
-                  style: AppTextStyles.titleAdaptive(wc)),
+              Text(
+                context.l10n.darkMode,
+                style: AppTextStyles.titleAdaptive(wc),
+              ),
             ],
           ),
           const SizedBox(height: 4),
           Text(
             context.l10n.toggleDarkMode,
-            style: AppTextStyles.bodyAdaptive(wc).copyWith(
-              color: colorScheme.onSurface.withValues(alpha: 0.5),
-            ),
+            style: AppTextStyles.bodyAdaptive(
+              wc,
+            ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.5)),
           ),
           const SizedBox(height: 10),
           Row(
@@ -85,10 +89,10 @@ class DarkModeToggle extends StatelessWidget {
   }
 
   String _labelFor(BuildContext context, ThemeMode mode) => switch (mode) {
-        ThemeMode.light => context.l10n.lightTheme,
-        ThemeMode.dark => context.l10n.darkTheme,
-        ThemeMode.system => context.l10n.systemTheme,
-      };
+    ThemeMode.light => context.l10n.lightTheme,
+    ThemeMode.dark => context.l10n.darkTheme,
+    ThemeMode.system => context.l10n.systemTheme,
+  };
 }
 
 class _ThemeOption {
@@ -99,22 +103,22 @@ class _ThemeOption {
 typedef _IconBuilder = Widget Function(Color color);
 
 _IconBuilder _iconFor(ThemeMode mode) => switch (mode) {
-      ThemeMode.light => (color) => HugeIcon(
-            icon: HugeIcons.strokeRoundedSun01,
-            size: 18,
-            color: color,
-          ),
-      ThemeMode.system => (color) => HugeIcon(
-            icon: HugeIcons.strokeRoundedComputerSettings,
-            size: 18,
-            color: color,
-          ),
-      ThemeMode.dark => (color) => HugeIcon(
-            icon: HugeIcons.strokeRoundedMoon01,
-            size: 18,
-            color: color,
-          ),
-    };
+  ThemeMode.light => (color) => HugeIcon(
+    icon: HugeIcons.strokeRoundedSun01,
+    size: 18,
+    color: color,
+  ),
+  ThemeMode.system => (color) => HugeIcon(
+    icon: HugeIcons.strokeRoundedComputerSettings,
+    size: 18,
+    color: color,
+  ),
+  ThemeMode.dark => (color) => HugeIcon(
+    icon: HugeIcons.strokeRoundedMoon01,
+    size: 18,
+    color: color,
+  ),
+};
 
 class _ThemeButton extends StatefulWidget {
   final _IconBuilder iconBuilder;
@@ -175,10 +179,16 @@ class _ThemeButtonState extends State<_ThemeButton>
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
       builder: (context, value, child) {
-        final background =
-            Color.lerp(Colors.transparent, colorScheme.primary, value)!;
-        final foreground =
-            Color.lerp(colorScheme.onSurface, colorScheme.onPrimary, value)!;
+        final background = Color.lerp(
+          Colors.transparent,
+          colorScheme.primary,
+          value,
+        )!;
+        final foreground = Color.lerp(
+          colorScheme.onSurface,
+          colorScheme.onPrimary,
+          value,
+        )!;
         final borderColor = Color.lerp(
           colorScheme.outlineVariant.withValues(alpha: 0.5),
           colorScheme.primary,

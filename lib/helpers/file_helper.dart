@@ -12,9 +12,15 @@ class FileHelper {
 
   /// Write File as Bytes from path
   static Future<File> writeFileAsBytes(
-      dynamic byteData, String filePath) async {
-    return await File(filePath).writeAsBytes(byteData.buffer
-        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+    dynamic byteData,
+    String filePath,
+  ) async {
+    return await File(filePath).writeAsBytes(
+      byteData.buffer.asUint8List(
+        byteData.offsetInBytes,
+        byteData.lengthInBytes,
+      ),
+    );
   }
 
   /// Returns a type [File] from a url

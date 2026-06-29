@@ -19,8 +19,10 @@ class LanguagePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final wc =
-        ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
+    final wc = ScreenTypeHelper(
+      MediaQuery.sizeOf(context).width,
+      0,
+    ).windowClass;
     final padding = MediaQuery.paddingOf(context);
     final drawerStartPadding = padding.left == 0 ? Spacing.md : padding.left;
     final localeProvider = context.watch<LocaleProvider>();
@@ -44,16 +46,18 @@ class LanguagePicker extends StatelessWidget {
                 color: colorScheme.onSurface.withValues(alpha: 0.6),
               ),
               const SizedBox(width: 6),
-              Text(context.l10n.language,
-                  style: AppTextStyles.titleAdaptive(wc)),
+              Text(
+                context.l10n.language,
+                style: AppTextStyles.titleAdaptive(wc),
+              ),
             ],
           ),
           const SizedBox(height: 4),
           Text(
             context.l10n.switchLanguage,
-            style: AppTextStyles.bodyAdaptive(wc).copyWith(
-              color: colorScheme.onSurface.withValues(alpha: 0.5),
-            ),
+            style: AppTextStyles.bodyAdaptive(
+              wc,
+            ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.5)),
           ),
           const SizedBox(height: 10),
           Row(
@@ -61,7 +65,8 @@ class LanguagePicker extends StatelessWidget {
               ...List.generate(_languages.length, (index) {
                 final lang = _languages[index];
                 final currentCode = localeProvider.locale?.languageCode;
-                final isSelected = currentCode == lang.code ||
+                final isSelected =
+                    currentCode == lang.code ||
                     (currentCode == null &&
                         AppLocalizations.of(context)?.localeName == lang.code);
                 return Expanded(
@@ -130,8 +135,9 @@ class _LanguageButton extends StatelessWidget {
             child: Text(
               label,
               style: AppTextStyles.labelMedium.copyWith(
-                color:
-                    isSelected ? colorScheme.onPrimary : colorScheme.onSurface,
+                color: isSelected
+                    ? colorScheme.onPrimary
+                    : colorScheme.onSurface,
                 fontVariations: const [FontVariation('wght', 600)],
               ),
             ),

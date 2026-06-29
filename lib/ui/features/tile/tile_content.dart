@@ -74,9 +74,7 @@ class _TileContentState extends State<TileContent>
                 width: 0.5,
               ),
             ),
-            child: Center(
-              child: _buildTileLabel(colorScheme),
-            ),
+            child: Center(child: _buildTileLabel(colorScheme)),
           ),
         ),
       ),

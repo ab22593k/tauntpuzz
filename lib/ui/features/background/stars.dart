@@ -49,10 +49,6 @@ class _StarsState extends State<Stars> with SingleTickerProviderStateMixin {
       starsMaxYOffset: widget.size.height,
     )..starColor = colorScheme.onSurface;
 
-    return CustomPaint(
-      painter: starsLayout.getPainter(
-        opacity: _opacity,
-      ),
-    );
+    return CustomPaint(painter: starsLayout.getPainter(opacity: _opacity));
   }
 }

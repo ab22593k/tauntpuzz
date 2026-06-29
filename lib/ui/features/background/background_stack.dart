@@ -19,10 +19,7 @@ class BackgroundStack extends StatelessWidget {
         width: size.width,
         decoration: BoxDecoration(
           gradient: RadialGradient(
-            colors: [
-              colorScheme.surfaceContainerLow,
-              colorScheme.surface,
-            ],
+            colors: [colorScheme.surfaceContainerLow, colorScheme.surface],
             stops: const [0, 1],
             radius: 1.1,
             center: Alignment.centerLeft,

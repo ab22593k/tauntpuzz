@@ -14,17 +14,17 @@ class GameModeHelper {
 
   /// Human-readable label for a mode.
   static String displayName(GameMode mode) => switch (mode) {
-        GameMode.classic => 'Classic',
-        GameMode.speedrun => 'Speedrun',
-        GameMode.blind => 'Blind',
-        GameMode.marathon => 'Marathon',
-      };
+    GameMode.classic => 'Classic',
+    GameMode.speedrun => 'Speedrun',
+    GameMode.blind => 'Blind',
+    GameMode.marathon => 'Marathon',
+  };
 
   /// Short description of the mode.
   static String description(GameMode mode) => switch (mode) {
-        GameMode.classic => 'Solve at your own pace',
-        GameMode.speedrun => 'Beat the countdown',
-        GameMode.blind => 'Tiles hide — tap to peek',
-        GameMode.marathon => 'Chain-solve across sizes',
-      };
+    GameMode.classic => 'Solve at your own pace',
+    GameMode.speedrun => 'Beat the countdown',
+    GameMode.blind => 'Tiles hide — tap to peek',
+    GameMode.marathon => 'Chain-solve across sizes',
+  };
 }

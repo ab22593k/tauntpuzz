@@ -197,24 +197,21 @@ class _JigsawScaffoldState extends State<JigsawScaffold> {
 
     final layout = _resolvePaneLayout(wc, showTertiary);
 
-    switch (layout) {
-      case PaneLayout.single:
-        return _paneArea(wc, widget.body);
-
-      case PaneLayout.split:
-        return _buildSplitPane(wc);
-
-      case PaneLayout.fixedAndFlexible:
-        return _buildFixedAndFlexiblePane(wc, showTertiary);
-
-      case PaneLayout.threePane:
-        return _buildThreePane(wc);
-    }
+    return switch (layout) {
+      PaneLayout.single => _paneArea(wc, widget.body),
+      PaneLayout.split => _buildSplitPane(wc),
+      PaneLayout.fixedAndFlexible => _buildFixedAndFlexiblePane(
+        wc,
+        showTertiary,
+      ),
+      PaneLayout.threePane => _buildThreePane(wc),
+    };
   }
 
   PaneLayout _resolvePaneLayout(WindowClass wc, bool showTertiary) {
     if (showTertiary) return PaneLayout.threePane;
-    final isExpandedPlus = wc == WindowClass.expanded ||
+    final isExpandedPlus =
+        wc == WindowClass.expanded ||
         wc == WindowClass.large ||
         wc == WindowClass.extraLarge;
     if (isExpandedPlus) return PaneLayout.fixedAndFlexible;
@@ -251,50 +248,57 @@ class _JigsawScaffoldState extends State<JigsawScaffold> {
   // The drag handle can fully collapse and expand the fixed pane.
 
   Widget _buildFixedAndFlexiblePane(WindowClass wc, bool showTertiary) {
-    final fixedWidth = _secondaryWidth ??
+    final fixedWidth =
+        _secondaryWidth ??
         widget.secondaryFixedWidth ??
         PaneSnapPoints.fixedPane;
 
-    final panes = <Widget>[
-      Expanded(child: _paneArea(wc, widget.body)),
-    ];
+    final panes = <Widget>[Expanded(child: _paneArea(wc, widget.body))];
 
     if (!_secondaryCollapsed) {
-      panes.add(PaneDragHandle(
-        currentWidth: fixedWidth,
-        onTap: () => setState(() => _secondaryCollapsed = true),
-        onDrag: (delta) {
-          setState(() {
-            _secondaryWidth = (fixedWidth - delta).clamp(
-              PaneSnapPoints.narrow,
-              PaneSnapPoints.standard + 100,
-            );
-          });
-        },
-        onDragEnd: (width) {
-          final snap = PaneSnapPoints.nearest(width);
-          if (snap != null) {
-            setState(() => _secondaryWidth = snap);
-          }
-        },
-      ));
-      panes.add(SizedBox(
-        width: _secondaryWidth ?? fixedWidth,
-        child: _paneArea(wc, widget.secondaryPane!),
-      ));
+      panes.add(
+        PaneDragHandle(
+          currentWidth: fixedWidth,
+          onTap: () => setState(() => _secondaryCollapsed = true),
+          onDrag: (delta) {
+            setState(() {
+              _secondaryWidth = (fixedWidth - delta).clamp(
+                PaneSnapPoints.narrow,
+                PaneSnapPoints.standard + 100,
+              );
+            });
+          },
+          onDragEnd: (width) {
+            final snap = PaneSnapPoints.nearest(width);
+            if (snap != null) {
+              setState(() => _secondaryWidth = snap);
+            }
+          },
+        ),
+      );
+      panes.add(
+        SizedBox(
+          width: _secondaryWidth ?? fixedWidth,
+          child: _paneArea(wc, widget.secondaryPane!),
+        ),
+      );
     } else {
-      panes.add(PaneDragHandle(
-        isCollapsed: true,
-        onTap: () => setState(() => _secondaryCollapsed = false),
-      ));
+      panes.add(
+        PaneDragHandle(
+          isCollapsed: true,
+          onTap: () => setState(() => _secondaryCollapsed = false),
+        ),
+      );
     }
 
     if (showTertiary) {
       panes.add(paneDivider(context));
-      panes.add(SizedBox(
-        width: widget.tertiaryFixedWidth ?? PaneSnapPoints.sideSheetMax,
-        child: _paneArea(wc, widget.tertiaryPane!),
-      ));
+      panes.add(
+        SizedBox(
+          width: widget.tertiaryFixedWidth ?? PaneSnapPoints.sideSheetMax,
+          child: _paneArea(wc, widget.tertiaryPane!),
+        ),
+      );
     }
 
     return Row(children: panes);
@@ -357,19 +361,17 @@ class _JigsawScaffoldState extends State<JigsawScaffold> {
           border: Border(
             bottom: isTop
                 ? BorderSide(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .outlineVariant
-                        .withValues(alpha: 0.08),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.outlineVariant.withValues(alpha: 0.08),
                     width: 0.5,
                   )
                 : BorderSide.none,
             top: !isTop
                 ? BorderSide(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .outlineVariant
-                        .withValues(alpha: 0.08),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.outlineVariant.withValues(alpha: 0.08),
                     width: 0.5,
                   )
                 : BorderSide.none,
@@ -405,8 +407,7 @@ class _JigsawScaffoldState extends State<JigsawScaffold> {
       WindowClass.medium ||
       WindowClass.expanded ||
       WindowClass.large ||
-      WindowClass.extraLarge =>
-        true,
+      WindowClass.extraLarge => true,
     };
   }
 
@@ -416,8 +417,7 @@ class _JigsawScaffoldState extends State<JigsawScaffold> {
       WindowClass.compact || WindowClass.medium => false,
       WindowClass.expanded ||
       WindowClass.large ||
-      WindowClass.extraLarge =>
-        true,
+      WindowClass.extraLarge => true,
     };
   }
 
@@ -428,8 +428,7 @@ class _JigsawScaffoldState extends State<JigsawScaffold> {
       WindowClass.medium ||
       WindowClass.expanded ||
       WindowClass.large ||
-      WindowClass.extraLarge =>
-        true,
+      WindowClass.extraLarge => true,
     };
   }
 
@@ -442,9 +441,7 @@ class _JigsawScaffoldState extends State<JigsawScaffold> {
 
   Widget _paneArea(WindowClass wc, Widget child) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: Spacing.screenHPaddingFor(wc),
-      ),
+      padding: EdgeInsets.symmetric(horizontal: Spacing.screenHPaddingFor(wc)),
       child: child,
     );
   }
@@ -470,14 +467,15 @@ class AdaptiveNavigationRail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final wc =
-        ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
+    final wc = ScreenTypeHelper(
+      MediaQuery.sizeOf(context).width,
+      0,
+    ).windowClass;
     final extended = switch (wc) {
       WindowClass.compact || WindowClass.medium => false,
       WindowClass.expanded ||
       WindowClass.large ||
-      WindowClass.extraLarge =>
-        true,
+      WindowClass.extraLarge => true,
     };
 
     return NavigationRail(

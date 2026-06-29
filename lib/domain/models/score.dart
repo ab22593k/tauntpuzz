@@ -39,5 +39,6 @@ class Score {
       List<dynamic>.from(scores.map((x) => x.toJson()));
 
   static List<Score> fromJsonList(dynamic scores) => List<Score>.from(
-      json.decode(json.encode(scores)).map((x) => Score.fromJson(x)));
+    json.decode(json.encode(scores)).map((x) => Score.fromJson(x)),
+  );
 }

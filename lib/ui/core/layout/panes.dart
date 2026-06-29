@@ -256,10 +256,7 @@ class FloatingPane extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(28),
-              child: Material(
-                color: Colors.transparent,
-                child: child,
-              ),
+              child: Material(color: Colors.transparent, child: child),
             ),
           ),
         ),
@@ -278,20 +275,12 @@ class DockedPane extends StatelessWidget {
   final Widget child;
   final bool isExpanded;
 
-  const DockedPane({
-    super.key,
-    required this.child,
-    this.isExpanded = false,
-  });
+  const DockedPane({super.key, required this.child, this.isExpanded = false});
 
   @override
   Widget build(BuildContext context) {
     if (isExpanded) {
-      return FloatingPane(
-        showScrim: false,
-        modal: false,
-        child: child,
-      );
+      return FloatingPane(showScrim: false, modal: false, child: child);
     }
 
     final colorScheme = Theme.of(context).colorScheme;
@@ -305,9 +294,7 @@ class DockedPane extends StatelessWidget {
         margin: EdgeInsets.only(bottom: padding.bottom),
         decoration: BoxDecoration(
           color: colorScheme.surfaceContainerHigh,
-          borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(28),
-          ),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
           boxShadow: [
             BoxShadow(
               color: colorScheme.shadow.withValues(alpha: 0.15),
@@ -317,9 +304,7 @@ class DockedPane extends StatelessWidget {
           ],
         ),
         child: ClipRRect(
-          borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(28),
-          ),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

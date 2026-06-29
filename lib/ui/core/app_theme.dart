@@ -206,34 +206,33 @@ class AppTheme {
         labelSmall: AppTextStyles.labelSmall,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          foregroundColor: colorScheme.onPrimary,
-          textStyle: AppTextStyles.button,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.zero,
-          ),
-          backgroundColor: colorScheme.primary,
-          elevation: 0,
-          shadowColor: Colors.transparent,
-          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
-        ).copyWith(
-          overlayColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.hovered)) {
-              return overlayTint.withValues(alpha: 0.12);
-            }
-            if (states.contains(WidgetState.pressed)) {
-              return overlayTint.withValues(alpha: 0.24);
-            }
-            return null;
-          }),
-        ),
+        style:
+            ElevatedButton.styleFrom(
+              foregroundColor: colorScheme.onPrimary,
+              textStyle: AppTextStyles.button,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.zero,
+              ),
+              backgroundColor: colorScheme.primary,
+              elevation: 0,
+              shadowColor: Colors.transparent,
+              padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
+            ).copyWith(
+              overlayColor: WidgetStateProperty.resolveWith((states) {
+                if (states.contains(WidgetState.hovered)) {
+                  return overlayTint.withValues(alpha: 0.12);
+                }
+                if (states.contains(WidgetState.pressed)) {
+                  return overlayTint.withValues(alpha: 0.24);
+                }
+                return null;
+              }),
+            ),
       ),
       dialogTheme: const DialogThemeData(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.zero,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
       ),
       drawerTheme: const DrawerThemeData(
         backgroundColor: Colors.transparent,

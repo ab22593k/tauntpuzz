@@ -252,38 +252,34 @@ class AppTextStyles {
   );
 
   static TextStyle tileAdaptive(WindowClass wc) => switch (wc) {
-        WindowClass.compact => tileMobile,
-        WindowClass.medium => tile,
-        WindowClass.expanded ||
-        WindowClass.large ||
-        WindowClass.extraLarge =>
-          tile.copyWith(fontSize: 36),
-      };
+    WindowClass.compact => tileMobile,
+    WindowClass.medium => tile,
+    WindowClass.expanded ||
+    WindowClass.large ||
+    WindowClass.extraLarge => tile.copyWith(fontSize: 36),
+  };
 
   static TextStyle titleAdaptive(WindowClass wc) => switch (wc) {
-        WindowClass.compact => titleSmall,
-        WindowClass.medium => titleMedium,
-        WindowClass.expanded ||
-        WindowClass.large ||
-        WindowClass.extraLarge =>
-          titleLarge,
-      };
+    WindowClass.compact => titleSmall,
+    WindowClass.medium => titleMedium,
+    WindowClass.expanded ||
+    WindowClass.large ||
+    WindowClass.extraLarge => titleLarge,
+  };
 
   static TextStyle bodyAdaptive(WindowClass wc) => switch (wc) {
-        WindowClass.compact => bodySmall,
-        WindowClass.medium => bodyMedium,
-        WindowClass.expanded ||
-        WindowClass.large ||
-        WindowClass.extraLarge =>
-          bodyLarge,
-      };
+    WindowClass.compact => bodySmall,
+    WindowClass.medium => bodyMedium,
+    WindowClass.expanded ||
+    WindowClass.large ||
+    WindowClass.extraLarge => bodyLarge,
+  };
 
   static TextStyle labelAdaptive(WindowClass wc) => switch (wc) {
-        WindowClass.compact => labelSmall,
-        WindowClass.medium => labelMedium,
-        WindowClass.expanded ||
-        WindowClass.large ||
-        WindowClass.extraLarge =>
-          labelLarge,
-      };
+    WindowClass.compact => labelSmall,
+    WindowClass.medium => labelMedium,
+    WindowClass.expanded ||
+    WindowClass.large ||
+    WindowClass.extraLarge => labelLarge,
+  };
 }

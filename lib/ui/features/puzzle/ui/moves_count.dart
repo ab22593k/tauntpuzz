@@ -15,8 +15,9 @@ class MovesCount extends StatelessWidget {
       builder: (c, int movesCount, _) => RichText(
         text: TextSpan(
           text: 'Moves: ',
-          style:
-              AppTextStyles.labelMedium.copyWith(color: colorScheme.onSurface),
+          style: AppTextStyles.labelMedium.copyWith(
+            color: colorScheme.onSurface,
+          ),
           children: <TextSpan>[
             TextSpan(
               text: '$movesCount',

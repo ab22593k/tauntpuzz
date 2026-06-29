@@ -14,13 +14,19 @@ class PuzzleSizeItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final wc =
-        ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
+    final wc = ScreenTypeHelper(
+      MediaQuery.sizeOf(context).width,
+      0,
+    ).windowClass;
     final colorScheme = Theme.of(context).colorScheme;
-    StopWatchProvider stopWatchProvider =
-        Provider.of<StopWatchProvider>(context, listen: false);
-    PhrasesProvider phrasesProvider =
-        Provider.of<PhrasesProvider>(context, listen: false);
+    StopWatchProvider stopWatchProvider = Provider.of<StopWatchProvider>(
+      context,
+      listen: false,
+    );
+    PhrasesProvider phrasesProvider = Provider.of<PhrasesProvider>(
+      context,
+      listen: false,
+    );
 
     return Consumer<PuzzleProvider>(
       builder: (c, puzzleProvider, _) {
@@ -38,33 +44,38 @@ class PuzzleSizeItem extends StatelessWidget {
                     puzzleProvider.resetPuzzleSize(size);
                     stopWatchProvider.stop();
                     if (size > 4) {
-                      phrasesProvider
-                          .setPhraseState(PhraseState.hardPuzzleSelected);
+                      phrasesProvider.setPhraseState(
+                        PhraseState.hardPuzzleSelected,
+                      );
                     }
                     Navigator.of(context).pop();
                   }
                 },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero,
-                    side: BorderSide(
-                      width: isSelected ? 2 : 1,
-                      color: isSelected
+                style:
+                    ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                        side: BorderSide(
+                          width: isSelected ? 2 : 1,
+                          color: isSelected
+                              ? colorScheme.primary
+                              : colorScheme.outlineVariant.withValues(
+                                  alpha: 0.3,
+                                ),
+                        ),
+                      ),
+                      minimumSize: const Size.fromHeight(48),
+                      backgroundColor: isSelected
                           ? colorScheme.primary
-                          : colorScheme.outlineVariant.withValues(alpha: 0.3),
+                          : Colors.transparent,
+                      elevation: 0,
+                    ).copyWith(
+                      elevation: WidgetStateProperty.resolveWith((states) {
+                        return 0;
+                      }),
+                      shadowColor: WidgetStateProperty.all(Colors.transparent),
                     ),
-                  ),
-                  minimumSize: const Size.fromHeight(48),
-                  backgroundColor:
-                      isSelected ? colorScheme.primary : Colors.transparent,
-                  elevation: 0,
-                ).copyWith(
-                  elevation: WidgetStateProperty.resolveWith((states) {
-                    return 0;
-                  }),
-                  shadowColor: WidgetStateProperty.all(Colors.transparent),
-                ),
                 child: Text(
                   '$size\u00d7$size',
                   style: AppTextStyles.labelLarge.copyWith(
@@ -74,10 +85,11 @@ class PuzzleSizeItem extends StatelessWidget {
                     fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400,
                     fontVariations: [
                       FontVariation(
-                          'wght',
-                          isSelected
-                              ? (wc == WindowClass.expanded ? 700 : 650)
-                              : 550),
+                        'wght',
+                        isSelected
+                            ? (wc == WindowClass.expanded ? 700 : 650)
+                            : 550,
+                      ),
                     ],
                   ),
                 ),
@@ -86,9 +98,9 @@ class PuzzleSizeItem extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               '${(size * size) - 1}',
-              style: AppTextStyles.labelAdaptive(wc).copyWith(
-                color: colorScheme.onSurface.withValues(alpha: 0.4),
-              ),
+              style: AppTextStyles.labelAdaptive(
+                wc,
+              ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.4)),
             ),
           ],
         );

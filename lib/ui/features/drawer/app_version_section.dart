@@ -33,15 +33,17 @@ class _AppVersionSectionState extends State<AppVersionSection> {
 
   @override
   Widget build(BuildContext context) {
-    final wc =
-        ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
+    final wc = ScreenTypeHelper(
+      MediaQuery.sizeOf(context).width,
+      0,
+    ).windowClass;
     final colorScheme = Theme.of(context).colorScheme;
 
     return Text(
       '${context.l10n.version} ${appVersionText ?? ''}',
-      style: AppTextStyles.labelAdaptive(wc).copyWith(
-        color: colorScheme.onSurface.withValues(alpha: 0.5),
-      ),
+      style: AppTextStyles.labelAdaptive(
+        wc,
+      ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.5)),
     );
   }
 }

@@ -17,11 +17,9 @@ class MockStorageService extends Mock implements StorageService {}
 // ---------------------------------------------------------------------------
 
 class _MarathonHarness extends ChangeNotifier with PuzzleMixinMarathon {
-  _MarathonHarness({
-    int n = 3,
-    GameMode gameMode = GameMode.marathon,
-  })  : _n = n,
-        _gameMode = gameMode;
+  _MarathonHarness({int n = 3, GameMode gameMode = GameMode.marathon})
+    : _n = n,
+      _gameMode = gameMode;
 
   int _n;
   @override
@@ -60,10 +58,12 @@ void main() {
     setUp(() {
       harness = _MarathonHarness(n: 3, gameMode: GameMode.marathon);
       // Default stubs for Future<void> methods
-      when(() => harness.storageService.set(any(), any()))
-          .thenAnswer((_) => Future<void>.value());
-      when(() => harness.storageService.remove(any()))
-          .thenAnswer((_) => Future<void>.value());
+      when(
+        () => harness.storageService.set(any(), any()),
+      ).thenAnswer((_) => Future<void>.value());
+      when(
+        () => harness.storageService.remove(any()),
+      ).thenAnswer((_) => Future<void>.value());
     });
 
     group('initial state', () {
@@ -84,19 +84,19 @@ void main() {
       });
 
       test(
-          'isMarathonComplete is false when not in marathon mode even with range',
-          () {
-        harness = _MarathonHarness(
-          n: 3,
-          gameMode: GameMode.classic,
-        );
-        when(() => harness.storageService.set(any(), any()))
-            .thenAnswer((_) => Future<void>.value());
-        when(() => harness.storageService.remove(any()))
-            .thenAnswer((_) => Future<void>.value());
-        harness.setMarathonRange(3, 6);
-        check(harness.isMarathonComplete).isFalse();
-      });
+        'isMarathonComplete is false when not in marathon mode even with range',
+        () {
+          harness = _MarathonHarness(n: 3, gameMode: GameMode.classic);
+          when(
+            () => harness.storageService.set(any(), any()),
+          ).thenAnswer((_) => Future<void>.value());
+          when(
+            () => harness.storageService.remove(any()),
+          ).thenAnswer((_) => Future<void>.value());
+          harness.setMarathonRange(3, 6);
+          check(harness.isMarathonComplete).isFalse();
+        },
+      );
     });
 
     group('setMarathonRange', () {
@@ -109,7 +109,8 @@ void main() {
       test('persists to storage', () {
         harness.setMarathonRange(3, 6);
         verify(
-            () => harness.storageService.set(StorageKey.marathonStartSize, 3));
+          () => harness.storageService.set(StorageKey.marathonStartSize, 3),
+        );
         verify(() => harness.storageService.set(StorageKey.marathonEndSize, 6));
       });
     });
@@ -151,14 +152,17 @@ void main() {
 
       test('removes storage keys when not in marathon mode', () {
         harness = _MarathonHarness(gameMode: GameMode.classic);
-        when(() => harness.storageService.set(any(), any()))
-            .thenAnswer((_) => Future<void>.value());
-        when(() => harness.storageService.remove(any()))
-            .thenAnswer((_) => Future<void>.value());
+        when(
+          () => harness.storageService.set(any(), any()),
+        ).thenAnswer((_) => Future<void>.value());
+        when(
+          () => harness.storageService.remove(any()),
+        ).thenAnswer((_) => Future<void>.value());
         harness.setMarathonRange(3, 6);
         harness.resetMarathonState();
         verify(
-            () => harness.storageService.remove(StorageKey.marathonStartSize));
+          () => harness.storageService.remove(StorageKey.marathonStartSize),
+        );
         verify(() => harness.storageService.remove(StorageKey.marathonEndSize));
       });
 
@@ -166,9 +170,11 @@ void main() {
         harness.setMarathonRange(3, 6);
         harness.resetMarathonState();
         verifyNever(
-            () => harness.storageService.remove(StorageKey.marathonStartSize));
+          () => harness.storageService.remove(StorageKey.marathonStartSize),
+        );
         verifyNever(
-            () => harness.storageService.remove(StorageKey.marathonEndSize));
+          () => harness.storageService.remove(StorageKey.marathonEndSize),
+        );
       });
     });
 

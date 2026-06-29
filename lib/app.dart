@@ -22,10 +22,7 @@ import 'package:provider/provider.dart';
 class App extends StatefulWidget {
   final StorageService storageService;
 
-  const App({
-    super.key,
-    required this.storageService,
-  });
+  const App({super.key, required this.storageService});
 
   @override
   State<App> createState() => _AppState();
@@ -35,11 +32,15 @@ class _AppState extends State<App> {
   @override
   void initState() {
     if (!kIsWeb && Platform.isMacOS) {
-      DesktopWindow.getWindowSize().then((size) {
-        DesktopWindow.setMinWindowSize(Size(size.height * 0.5, size.height));
-      }).onError((error, stackTrace) {
-        DesktopWindow.setMinWindowSize(const Size(600, 1000));
-      });
+      DesktopWindow.getWindowSize()
+          .then((size) {
+            DesktopWindow.setMinWindowSize(
+              Size(size.height * 0.5, size.height),
+            );
+          })
+          .onError((error, stackTrace) {
+            DesktopWindow.setMinWindowSize(const Size(600, 1000));
+          });
     }
     super.initState();
   }
@@ -58,8 +59,9 @@ class _AppState extends State<App> {
 
       for (int size in Puzzle.supportedPuzzleSizes) {
         precacheImage(
-          Image.asset('assets/images/puzzle-solved/solved-${size}x$size.png')
-              .image,
+          Image.asset(
+            'assets/images/puzzle-solved/solved-${size}x$size.png',
+          ).image,
           context,
         );
       }
@@ -78,15 +80,9 @@ class _AppState extends State<App> {
         ChangeNotifierProvider(
           create: (_) => StopWatchProvider(widget.storageService)..init(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => PhrasesProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => LocaleProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => ThemeProvider(),
-        ),
+        ChangeNotifierProvider(create: (_) => PhrasesProvider()),
+        ChangeNotifierProvider(create: (_) => LocaleProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ],
       child: SafeArea(
         child: Consumer<LocaleProvider>(
@@ -96,8 +92,9 @@ class _AppState extends State<App> {
               builder: (context, themeProvider, _) {
                 return DynamicColorBuilder(
                   builder: (dynamicLight, dynamicDark) {
-                    final lightTheme =
-                        AppTheme.light(dynamicLight: dynamicLight);
+                    final lightTheme = AppTheme.light(
+                      dynamicLight: dynamicLight,
+                    );
                     final darkTheme = AppTheme.dark(dynamicDark: dynamicDark);
 
                     return ThemeTransitionBuilder(

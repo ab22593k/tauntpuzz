@@ -20,20 +20,22 @@ class StarsLayout implements LayoutDelegate {
   Color starColor = Colors.white60;
 
   int get totalStarsCount => switch (screenTypeHelper.windowClass) {
-        WindowClass.compact => 300,
-        WindowClass.medium => 600,
-        WindowClass.expanded => 800,
-        WindowClass.large => 1000,
-        WindowClass.extraLarge => 1200,
-      };
+    WindowClass.compact => 300,
+    WindowClass.medium => 600,
+    WindowClass.expanded => 800,
+    WindowClass.large => 1000,
+    WindowClass.extraLarge => 1200,
+  };
 
   final Random random = Random();
 
   List<int> get randomStarXOffsets => _getRandomStarsOffsetsList(
-      starsMaxXOffset.ceil() <= 0 ? 1 : starsMaxXOffset.ceil());
+    starsMaxXOffset.ceil() <= 0 ? 1 : starsMaxXOffset.ceil(),
+  );
 
   List<int> get randomStarYOffsets => _getRandomStarsOffsetsList(
-      starsMaxYOffset.ceil() <= 0 ? 1 : starsMaxYOffset.ceil());
+    starsMaxYOffset.ceil() <= 0 ? 1 : starsMaxYOffset.ceil(),
+  );
 
   List<int> _getRandomStarsOffsetsList(int max) {
     List<int> offsets = [];

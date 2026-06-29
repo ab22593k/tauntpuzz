@@ -63,7 +63,8 @@ void main() {
 
     test('toString prints correctly', () {
       check(tile.toString()).equals(
-          'Tile(value: 2, correctLocation: (1, 2), currentLocation: (3, 1))');
+        'Tile(value: 2, correctLocation: (1, 2), currentLocation: (3, 1))',
+      );
     });
 
     test('copyWith updates tile', () {

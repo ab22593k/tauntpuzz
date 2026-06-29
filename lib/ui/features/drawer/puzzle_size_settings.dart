@@ -13,8 +13,10 @@ class PuzzleSizeSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final padding = MediaQuery.paddingOf(context);
-    final wc =
-        ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
+    final wc = ScreenTypeHelper(
+      MediaQuery.sizeOf(context).width,
+      0,
+    ).windowClass;
     final colorScheme = Theme.of(context).colorScheme;
     double drawerStartPadding = padding.left == 0 ? Spacing.md : padding.left;
 
@@ -36,8 +38,10 @@ class PuzzleSizeSettings extends StatelessWidget {
                 color: colorScheme.onSurface.withValues(alpha: 0.6),
               ),
               const SizedBox(width: 6),
-              Text(context.l10n.puzzleSize,
-                  style: AppTextStyles.titleAdaptive(wc)),
+              Text(
+                context.l10n.puzzleSize,
+                style: AppTextStyles.titleAdaptive(wc),
+              ),
             ],
           ),
           const SizedBox(height: 4),
@@ -46,9 +50,9 @@ class PuzzleSizeSettings extends StatelessWidget {
             children: [
               Text(
                 context.l10n.chooseGrid,
-                style: AppTextStyles.bodyAdaptive(wc).copyWith(
-                  color: colorScheme.onSurface.withValues(alpha: 0.5),
-                ),
+                style: AppTextStyles.bodyAdaptive(
+                  wc,
+                ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.5)),
               ),
               const SizedBox(height: 2),
               Container(
@@ -86,7 +90,7 @@ class PuzzleSizeSettings extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

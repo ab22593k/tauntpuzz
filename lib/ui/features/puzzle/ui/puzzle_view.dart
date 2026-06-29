@@ -53,7 +53,8 @@ class _PuzzleViewState extends State<PuzzleView> {
             padding: EdgeInsets.symmetric(
               horizontal: Spacing.puzzleMargin(screenTypeHelper.windowClass),
             ),
-            child: screenTypeHelper.windowClass == WindowClass.compact ||
+            child:
+                screenTypeHelper.windowClass == WindowClass.compact ||
                     screenTypeHelper.windowClass == WindowClass.medium
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,

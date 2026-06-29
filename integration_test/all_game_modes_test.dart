@@ -68,15 +68,9 @@ class _EndToEndAppState extends State<_EndToEndApp> {
         ChangeNotifierProvider(
           create: (_) => StopWatchProvider(widget.storageService)..init(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => PhrasesProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => LocaleProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => ThemeProvider(),
-        ),
+        ChangeNotifierProvider(create: (_) => PhrasesProvider()),
+        ChangeNotifierProvider(create: (_) => LocaleProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ],
       child: MaterialApp(
         key: const ValueKey('test_app'),
@@ -84,10 +78,7 @@ class _EndToEndAppState extends State<_EndToEndApp> {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         theme: AppTheme.light(),
-        home: const Scaffold(
-          drawer: AppDrawer(),
-          body: PuzzleView(),
-        ),
+        home: const Scaffold(drawer: AppDrawer(), body: PuzzleView()),
       ),
     );
   }
@@ -101,7 +92,9 @@ class _EndToEndAppState extends State<_EndToEndApp> {
 /// `pumpAndSettle()` to avoid hanging on the continuously animating background
 /// layers (stars + parallax layers).
 Future<void> pumpApp(
-    WidgetTester tester, _InMemoryStorage storageService) async {
+  WidgetTester tester,
+  _InMemoryStorage storageService,
+) async {
   await tester.pumpWidget(_EndToEndApp(storageService: storageService));
   // Allow the 400ms delayed animation start + 600ms bg layer animation
   await tester.pump(const Duration(seconds: 2));
@@ -151,8 +144,9 @@ void main() {
   });
 
   group('All Game Modes End-to-End', () {
-    testWidgets('Classic mode renders tiles and responds to taps',
-        (tester) async {
+    testWidgets('Classic mode renders tiles and responds to taps', (
+      tester,
+    ) async {
       await pumpApp(tester, storageService);
 
       // Verify the puzzle board is rendered
@@ -182,7 +176,7 @@ void main() {
         4,
         3,
         2,
-        1
+        1,
       ]) {
         final tileKey = ValueKey('tile_$tileValue');
         if (find.byKey(tileKey).evaluate().isNotEmpty) {
@@ -195,8 +189,9 @@ void main() {
       check(movesCount(tester) > initialMoves).isTrue();
     });
 
-    testWidgets('Speedrun mode switches via drawer and renders',
-        (tester) async {
+    testWidgets('Speedrun mode switches via drawer and renders', (
+      tester,
+    ) async {
       await pumpApp(tester, storageService);
 
       await switchMode(tester, GameMode.speedrun);
@@ -214,8 +209,9 @@ void main() {
       check(movesCount(tester)).equals(0);
     });
 
-    testWidgets('Marathon mode switches via drawer and renders',
-        (tester) async {
+    testWidgets('Marathon mode switches via drawer and renders', (
+      tester,
+    ) async {
       await pumpApp(tester, storageService);
 
       await switchMode(tester, GameMode.marathon);
@@ -224,8 +220,9 @@ void main() {
       check(movesCount(tester)).equals(0);
     });
 
-    testWidgets('Can cycle through all game modes sequentially',
-        (tester) async {
+    testWidgets('Can cycle through all game modes sequentially', (
+      tester,
+    ) async {
       await pumpApp(tester, storageService);
 
       for (final mode in GameMode.values) {
@@ -244,8 +241,9 @@ void main() {
       check(movesCount(tester)).equals(0);
     });
 
-    testWidgets('Puzzle shows correct tile count for chosen size',
-        (tester) async {
+    testWidgets('Puzzle shows correct tile count for chosen size', (
+      tester,
+    ) async {
       await pumpApp(tester, storageService);
 
       // Default is 4x4 = 16 - 1 whitespace = 15 tiles

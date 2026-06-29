@@ -38,8 +38,10 @@ class PuzzleHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final wc =
-        ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
+    final wc = ScreenTypeHelper(
+      MediaQuery.sizeOf(context).width,
+      0,
+    ).windowClass;
     final colorScheme = Theme.of(context).colorScheme;
     final puzzleProvider = context.watch<PuzzleProvider>();
 
@@ -62,13 +64,15 @@ class PuzzleHeader extends StatelessWidget {
         HeaderDisplay.bottomBar
             when wc == WindowClass.compact || wc == WindowClass.medium =>
           _compactLayout(colorScheme),
-        _ => const SizedBox.shrink()
+        _ => const SizedBox.shrink(),
       },
     );
   }
 
   Widget _marathonHeader(
-      ColorScheme colorScheme, PuzzleProvider puzzleProvider) {
+    ColorScheme colorScheme,
+    PuzzleProvider puzzleProvider,
+  ) {
     final currentSize = puzzleProvider.n;
     final endSize = puzzleProvider.marathonEndSize ?? currentSize;
     final sizes = Puzzle.supportedPuzzleSizes;
@@ -122,11 +126,12 @@ class PuzzleHeader extends StatelessWidget {
                   color: isCurrent
                       ? colorScheme.primary.withValues(alpha: 0.15)
                       : isDone
-                          ? colorScheme.tertiary.withValues(alpha: 0.15)
-                          : Colors.transparent,
+                      ? colorScheme.tertiary.withValues(alpha: 0.15)
+                      : Colors.transparent,
                   border: isCurrent
                       ? Border.all(
-                          color: colorScheme.primary.withValues(alpha: 0.3))
+                          color: colorScheme.primary.withValues(alpha: 0.3),
+                        )
                       : null,
                 ),
                 child: Text(
@@ -135,11 +140,9 @@ class PuzzleHeader extends StatelessWidget {
                     color: isDone
                         ? colorScheme.tertiary
                         : isCurrent
-                            ? colorScheme.primary
-                            : colorScheme.onSurface.withValues(alpha: 0.3),
-                    fontVariations: [
-                      const FontVariation('wght', 700),
-                    ],
+                        ? colorScheme.primary
+                        : colorScheme.onSurface.withValues(alpha: 0.3),
+                    fontVariations: [const FontVariation('wght', 700)],
                   ),
                 ),
               ),
@@ -191,11 +194,12 @@ class PuzzleHeader extends StatelessWidget {
               color: isCurrent
                   ? colorScheme.primary.withValues(alpha: 0.15)
                   : isDone
-                      ? colorScheme.tertiary.withValues(alpha: 0.15)
-                      : Colors.transparent,
+                  ? colorScheme.tertiary.withValues(alpha: 0.15)
+                  : Colors.transparent,
               border: isCurrent
                   ? Border.all(
-                      color: colorScheme.primary.withValues(alpha: 0.3))
+                      color: colorScheme.primary.withValues(alpha: 0.3),
+                    )
                   : null,
             ),
             child: Text(
@@ -204,8 +208,8 @@ class PuzzleHeader extends StatelessWidget {
                 color: isDone
                     ? colorScheme.tertiary
                     : isCurrent
-                        ? colorScheme.primary
-                        : colorScheme.onSurface.withValues(alpha: 0.3),
+                    ? colorScheme.primary
+                    : colorScheme.onSurface.withValues(alpha: 0.3),
                 fontVariations: [const FontVariation('wght', 700)],
               ),
             ),
@@ -243,10 +247,7 @@ class PuzzleHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _labeledStatRow(
-          icon: const HugeIcon(
-            icon: HugeIcons.strokeRoundedClock01,
-            size: 16,
-          ),
+          icon: const HugeIcon(icon: HugeIcons.strokeRoundedClock01, size: 16),
           label: 'Time',
           child: const PuzzleStopWatch(showIcon: false),
           colorScheme: colorScheme,
@@ -270,10 +271,7 @@ class PuzzleHeader extends StatelessWidget {
             color: colorScheme.onSurface.withValues(alpha: 0.6),
           ),
           label: 'Correct',
-          child: CorrectTilesCount(
-            colorScheme: colorScheme,
-            showIcon: false,
-          ),
+          child: CorrectTilesCount(colorScheme: colorScheme, showIcon: false),
           colorScheme: colorScheme,
         ),
       ],
@@ -325,8 +323,9 @@ class PuzzleHeader extends StatelessWidget {
         iconWidget,
         const SizedBox(width: 4),
         DefaultTextStyle(
-          style:
-              AppTextStyles.labelSmall.copyWith(color: colorScheme.onSurface),
+          style: AppTextStyles.labelSmall.copyWith(
+            color: colorScheme.onSurface,
+          ),
           child: text,
         ),
       ],

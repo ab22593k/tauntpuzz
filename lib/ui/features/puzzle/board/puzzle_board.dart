@@ -16,18 +16,21 @@ class PuzzleBoard extends StatelessWidget {
   final double containerWidth;
   final WindowClass windowClass;
 
-  PuzzleBoard(
-      {super.key,
-      required this.containerWidth,
-      this.windowClass = WindowClass.expanded});
+  PuzzleBoard({
+    super.key,
+    required this.containerWidth,
+    this.windowClass = WindowClass.expanded,
+  });
 
   final FocusNode keyboardListenerFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    StopWatchProvider stopWatchProvider =
-        Provider.of<StopWatchProvider>(context, listen: false);
+    StopWatchProvider stopWatchProvider = Provider.of<StopWatchProvider>(
+      context,
+      listen: false,
+    );
     return ScaleUpTransition(
       duration: const Duration(milliseconds: 700),
       curve: Curves.easeOutBack,
@@ -97,7 +100,7 @@ class PuzzleBoard extends StatelessWidget {
                             tileContent: PulseTransition(
                               isActive:
                                   puzzleProvider.puzzle.tileIsMovable(tile) &&
-                                      !puzzleProvider.puzzle.isSolved,
+                                  !puzzleProvider.puzzle.isSolved,
                               child: TileContent(
                                 tile: tile,
                                 isPuzzleSolved: puzzleProvider.puzzle.isSolved,

@@ -56,9 +56,6 @@ class _ScaleUpTransitionState extends State<ScaleUpTransition>
 
   @override
   Widget build(BuildContext context) {
-    return ScaleTransition(
-      scale: _scale,
-      child: widget.child,
-    );
+    return ScaleTransition(scale: _scale, child: widget.child);
   }
 }

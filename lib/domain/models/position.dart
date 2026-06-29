@@ -12,18 +12,9 @@ class Position extends Equatable {
   final double? right;
   final double? bottom;
 
-  const Position({
-    this.left,
-    this.top,
-    this.right,
-    this.bottom,
-  });
+  const Position({this.left, this.top, this.right, this.bottom});
 
-  const Position.zero()
-      : left = 0,
-        top = 0,
-        bottom = 0,
-        right = 0;
+  const Position.zero() : left = 0, top = 0, bottom = 0, right = 0;
 
   @override
   String toString() =>
@@ -32,8 +23,12 @@ class Position extends Equatable {
   @override
   List<Object?> get props => [left, top];
 
-  Position copyWith(
-      {double? left, double? top, double? right, double? bottom}) {
+  Position copyWith({
+    double? left,
+    double? top,
+    double? right,
+    double? bottom,
+  }) {
     return Position(
       left: left ?? this.left,
       top: top ?? this.top,

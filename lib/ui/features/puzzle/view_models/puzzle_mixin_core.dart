@@ -58,21 +58,27 @@ mixin PuzzleMixinCore on ChangeNotifier {
   /// This causes the [tile.position] getter to get the correct position
   /// based on new [Location]'s.
   void swapTilesAndUpdatePuzzle(Tile tile) {
-    final movedTileIndex = tiles
-        .indexWhere((ctile) => ctile.currentLocation == tile.currentLocation);
-    final whiteSpaceTileIndex =
-        tiles.indexWhere((tile) => tile.tileIsWhiteSpace);
+    final movedTileIndex = tiles.indexWhere(
+      (ctile) => ctile.currentLocation == tile.currentLocation,
+    );
+    final whiteSpaceTileIndex = tiles.indexWhere(
+      (tile) => tile.tileIsWhiteSpace,
+    );
     // Store instances of the moved tile and the white space tile
     // before changing their locations
     final movedTile = tiles[movedTileIndex];
     final whiteSpaceTile = tiles[whiteSpaceTileIndex];
 
-    tiles[movedTileIndex] = tiles[movedTileIndex]
-        .copyWith(currentLocation: whiteSpaceTile.currentLocation);
-    tiles[whiteSpaceTileIndex] =
-        whiteSpaceTile.copyWith(currentLocation: movedTile.currentLocation);
+    tiles[movedTileIndex] = tiles[movedTileIndex].copyWith(
+      currentLocation: whiteSpaceTile.currentLocation,
+    );
+    tiles[whiteSpaceTileIndex] = whiteSpaceTile.copyWith(
+      currentLocation: movedTile.currentLocation,
+    );
 
-    log('Number of correct tiles ${puzzle.getNumberOfCorrectTiles()} | Is solved: ${puzzle.isSolved}');
+    log(
+      'Number of correct tiles ${puzzle.getNumberOfCorrectTiles()} | Is solved: ${puzzle.isSolved}',
+    );
 
     if (tiles[movedTileIndex].isAtCorrectLocation) {
       if (puzzle.isSolved) {

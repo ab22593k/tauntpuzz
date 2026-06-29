@@ -80,7 +80,8 @@ void main() {
           // to trigger the reveal path. We can inspect internally via
           // isTileRevealed after manually making tilesBlinded true via startBlindTimer + elapse.
           async.elapse(
-              Duration(seconds: GameModeHelper.blindHideDelaySeconds(4)));
+            Duration(seconds: GameModeHelper.blindHideDelaySeconds(4)),
+          );
         });
 
         // After fakeAsync, tiles should be blinded
@@ -97,7 +98,8 @@ void main() {
         fakeAsync((async) {
           harness.startBlindTimer();
           async.elapse(
-              Duration(seconds: GameModeHelper.blindHideDelaySeconds(4)));
+            Duration(seconds: GameModeHelper.blindHideDelaySeconds(4)),
+          );
         });
 
         check(harness.tilesBlinded).isTrue();
@@ -133,7 +135,8 @@ void main() {
         fakeAsync((async) {
           harness.startBlindTimer();
           async.elapse(
-              Duration(seconds: GameModeHelper.blindHideDelaySeconds(4)));
+            Duration(seconds: GameModeHelper.blindHideDelaySeconds(4)),
+          );
         });
 
         // Blind state achieved

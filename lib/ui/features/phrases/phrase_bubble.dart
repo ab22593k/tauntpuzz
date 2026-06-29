@@ -8,10 +8,8 @@ import 'package:provider/provider.dart';
 class PhraseBubble extends StatelessWidget {
   final PhraseState state;
 
-  const PhraseBubble({
-    super.key,
-    required this.state,
-  }) : assert(state != PhraseState.none);
+  const PhraseBubble({super.key, required this.state})
+    : assert(state != PhraseState.none);
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +56,10 @@ class PhraseBubble extends StatelessWidget {
         ),
         Container(
           padding: const EdgeInsets.symmetric(
-              horizontal: Spacing.md, vertical: Spacing.sm),
-          constraints: const BoxConstraints(
-            maxWidth: 180,
+            horizontal: Spacing.md,
+            vertical: Spacing.sm,
           ),
+          constraints: const BoxConstraints(maxWidth: 180),
           decoration: BoxDecoration(
             color: colorScheme.primary,
             borderRadius: BorderRadius.zero,

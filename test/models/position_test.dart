@@ -10,13 +10,16 @@ void main() {
 
     test('Supports value comparison', () {
       check(const Position(left: 10, top: 10)).equals(targetPosition);
-      check(const Position(left: 10, top: 10, right: null, bottom: null))
-          .equals(targetPosition);
+      check(
+        const Position(left: 10, top: 10, right: null, bottom: null),
+      ).equals(targetPosition);
 
-      check(const Position(left: 10, top: 200))
-          .not((it) => it.equals(targetPosition));
-      check(const Position(left: 10, top: null))
-          .not((it) => it.equals(targetPosition));
+      check(
+        const Position(left: 10, top: 200),
+      ).not((it) => it.equals(targetPosition));
+      check(
+        const Position(left: 10, top: null),
+      ).not((it) => it.equals(targetPosition));
     });
 
     group('Position lerp functionality', () {
@@ -24,21 +27,29 @@ void main() {
       Position endPosition = const Position(left: 100, top: 100);
 
       test('Returns zero position if one is null', () {
-        check(Position.lerp(startPosition, null, 0))
-            .equals(const Position.zero());
+        check(
+          Position.lerp(startPosition, null, 0),
+        ).equals(const Position.zero());
       });
 
       test('Returns same start position if lerp double is 0', () {
-        check(Position.lerp(startPosition, endPosition, 0))
-            .equals(startPosition);
+        check(
+          Position.lerp(startPosition, endPosition, 0),
+        ).equals(startPosition);
       });
 
       test('Returns correct lerpDouble values between two positions', () {
         double t = 0.5;
-        double? newLeft =
-            lerpDouble(startPosition.left ?? 0, endPosition.left ?? 0, t);
-        double? newTop =
-            lerpDouble(startPosition.top ?? 0, endPosition.top ?? 0, t);
+        double? newLeft = lerpDouble(
+          startPosition.left ?? 0,
+          endPosition.left ?? 0,
+          t,
+        );
+        double? newTop = lerpDouble(
+          startPosition.top ?? 0,
+          endPosition.top ?? 0,
+          t,
+        );
         check(
           Position.lerp(startPosition, endPosition, t),
         ).equals(Position(left: newLeft, top: newTop));
@@ -49,11 +60,13 @@ void main() {
       });
 
       test(
-          'Returns same start position if lerp double is 0 and one position param in null',
-          () {
-        check(Position.lerp(startPosition, const Position(left: 10), 0))
-            .equals(startPosition);
-      });
+        'Returns same start position if lerp double is 0 and one position param in null',
+        () {
+          check(
+            Position.lerp(startPosition, const Position(left: 10), 0),
+          ).equals(startPosition);
+        },
+      );
 
       test('toString prints correctly', () {
         Position position = const Position(left: 10.222, top: 20.666);

@@ -23,8 +23,10 @@ class LatestScoreItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final wc =
-        ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
+    final wc = ScreenTypeHelper(
+      MediaQuery.sizeOf(context).width,
+      0,
+    ).windowClass;
     final colorScheme = Theme.of(context).colorScheme;
 
     return Container(
@@ -42,7 +44,8 @@ class LatestScoreItem extends StatelessWidget {
                 ? HugeIcon(
                     icon: HugeIcons.strokeRoundedStarAward01,
                     size: 14,
-                    color: _medalColorFor(colorScheme))
+                    color: _medalColorFor(colorScheme),
+                  )
                 : Text(
                     '$rank',
                     style: AppTextStyles.labelAdaptive(wc).copyWith(
@@ -85,16 +88,18 @@ class LatestScoreItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               HugeIcon(
-                  icon: HugeIcons.strokeRoundedClock01,
-                  size: 11,
-                  color: colorScheme.onSurface.withValues(alpha: 0.4)),
+                icon: HugeIcons.strokeRoundedClock01,
+                size: 11,
+                color: colorScheme.onSurface.withValues(alpha: 0.4),
+              ),
               const SizedBox(width: 3),
               Text(
                 DurationHelper.toFormattedTime(
-                    Duration(seconds: score.secondsElapsed)),
-                style: AppTextStyles.labelAdaptive(wc).copyWith(
-                  color: colorScheme.onSurface.withValues(alpha: 0.7),
+                  Duration(seconds: score.secondsElapsed),
                 ),
+                style: AppTextStyles.labelAdaptive(
+                  wc,
+                ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.7)),
               ),
             ],
           ),
@@ -103,15 +108,16 @@ class LatestScoreItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               HugeIcon(
-                  icon: HugeIcons.strokeRoundedArrowUpDown,
-                  size: 11,
-                  color: colorScheme.onSurface.withValues(alpha: 0.4)),
+                icon: HugeIcons.strokeRoundedArrowUpDown,
+                size: 11,
+                color: colorScheme.onSurface.withValues(alpha: 0.4),
+              ),
               const SizedBox(width: 3),
               Text(
                 '${score.movesCount}',
-                style: AppTextStyles.labelAdaptive(wc).copyWith(
-                  color: colorScheme.onSurface.withValues(alpha: 0.7),
-                ),
+                style: AppTextStyles.labelAdaptive(
+                  wc,
+                ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.7)),
               ),
             ],
           ),
@@ -121,22 +127,22 @@ class LatestScoreItem extends StatelessWidget {
   }
 
   Color _medalColorFor(ColorScheme colorScheme) => switch (score.movesCount) {
-        <= 30 => const Color(0xffb8860b),
-        <= 60 => const Color(0xff595959),
-        _ => colorScheme.onSurface.withValues(alpha: 0.4),
-      };
+    <= 30 => const Color(0xffb8860b),
+    <= 60 => const Color(0xff595959),
+    _ => colorScheme.onSurface.withValues(alpha: 0.4),
+  };
 
   String _modeTagLabel(GameMode mode) => switch (mode) {
-        GameMode.speedrun => 'SR',
-        GameMode.blind => 'BL',
-        GameMode.marathon => 'MA',
-        GameMode.classic => '',
-      };
+    GameMode.speedrun => 'SR',
+    GameMode.blind => 'BL',
+    GameMode.marathon => 'MA',
+    GameMode.classic => '',
+  };
 
   Color _modeTagColor(GameMode mode, ColorScheme colorScheme) => switch (mode) {
-        GameMode.speedrun => colorScheme.error.withValues(alpha: 0.15),
-        GameMode.blind => colorScheme.secondary.withValues(alpha: 0.15),
-        GameMode.marathon => colorScheme.tertiary.withValues(alpha: 0.15),
-        GameMode.classic => Colors.transparent,
-      };
+    GameMode.speedrun => colorScheme.error.withValues(alpha: 0.15),
+    GameMode.blind => colorScheme.secondary.withValues(alpha: 0.15),
+    GameMode.marathon => colorScheme.tertiary.withValues(alpha: 0.15),
+    GameMode.classic => Colors.transparent,
+  };
 }

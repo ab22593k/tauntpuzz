@@ -29,10 +29,10 @@ class _ThemeTransitionBuilderState extends State<ThemeTransitionBuilder>
   Brightness? _previousBrightness;
 
   Brightness get _effectiveBrightness => switch (widget.themeMode) {
-        ThemeMode.light => Brightness.light,
-        ThemeMode.dark => Brightness.dark,
-        ThemeMode.system => _platformBrightness,
-      };
+    ThemeMode.light => Brightness.light,
+    ThemeMode.dark => Brightness.dark,
+    ThemeMode.system => _platformBrightness,
+  };
 
   @override
   void initState() {
@@ -43,14 +43,8 @@ class _ThemeTransitionBuilderState extends State<ThemeTransitionBuilder>
     _previousBrightness = _currentBrightness;
 
     WidgetsBinding.instance.addObserver(this);
-    _controller = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    );
-    _animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    );
+    _controller = AnimationController(vsync: this, duration: widget.duration);
+    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
     _controller.addListener(_onTick);
   }
 

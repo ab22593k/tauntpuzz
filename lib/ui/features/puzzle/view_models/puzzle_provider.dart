@@ -77,11 +77,7 @@ class PuzzleProvider
 
   /// Getter for puzzle object
   @override
-  Puzzle get puzzle => Puzzle(
-        n: n,
-        tiles: tiles,
-        movesCount: movesCount,
-      );
+  Puzzle get puzzle => Puzzle(n: n, tiles: tiles, movesCount: movesCount);
 
   int get correctTilesCount {
     int count = 0;

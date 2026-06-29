@@ -39,19 +39,28 @@ class ShareScoreHelper {
 
   /// Get the puzzle solved text based on score
   static String getPuzzleSolvedText(
-      int movesCount, Duration duration, int tilesCount) {
+    int movesCount,
+    Duration duration,
+    int tilesCount,
+  ) {
     return 'I just solved this $tilesCount-Tile Jigsaw slide puzzle in ${DurationHelper.toFormattedTime(duration)} with $movesCount moves!';
   }
 
   /// Get the puzzle solved text based on score for mobile
   static String getPuzzleSolvedTextMobile(
-      int movesCount, Duration duration, int tilesCount) {
+    int movesCount,
+    Duration duration,
+    int tilesCount,
+  ) {
     return '${getPuzzleSolvedText(movesCount, duration, tilesCount)} \n\n$officialWebsiteUrl';
   }
 
   /// Get the link to Twitter with text and url params filled based on score
   static String getTwitterShareLink(
-      int movesCount, Duration duration, int tilesCount) {
+    int movesCount,
+    Duration duration,
+    int tilesCount,
+  ) {
     return '$twitterIntentUrl?text=${getPuzzleSolvedText(movesCount, duration, tilesCount)}&url=$officialWebsiteUrl';
   }
 }

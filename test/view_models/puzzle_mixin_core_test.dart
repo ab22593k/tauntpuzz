@@ -23,15 +23,15 @@ class MockStorageService extends Mock implements StorageService {}
 // ---------------------------------------------------------------------------
 
 class _CoreHarness extends ChangeNotifier with PuzzleMixinCore {
-  _CoreHarness({
-    GameMode gameMode = GameMode.classic,
-  }) : _gameMode = gameMode {
+  _CoreHarness({GameMode gameMode = GameMode.classic}) : _gameMode = gameMode {
     when(() => storageService.has(any())).thenReturn(false);
     when(() => storageService.get(any())).thenReturn(null);
-    when(() => storageService.set(any(), any()))
-        .thenAnswer((_) => Future<void>.value());
-    when(() => storageService.remove(any()))
-        .thenAnswer((_) => Future<void>.value());
+    when(
+      () => storageService.set(any(), any()),
+    ).thenAnswer((_) => Future<void>.value());
+    when(
+      () => storageService.remove(any()),
+    ).thenAnswer((_) => Future<void>.value());
   }
 
   @override
@@ -210,8 +210,9 @@ void main() {
         );
         harness.puzzleFromStorageResult = storedPuzzle;
 
-        when(() => harness.storageService.has(StorageKey.puzzle))
-            .thenReturn(true);
+        when(
+          () => harness.storageService.has(StorageKey.puzzle),
+        ).thenReturn(true);
 
         harness.generate();
         check(harness.n).equals(3);
@@ -230,8 +231,9 @@ void main() {
         );
         harness.puzzleFromStorageResult = storedPuzzle;
 
-        when(() => harness.storageService.has(StorageKey.puzzle))
-            .thenReturn(true);
+        when(
+          () => harness.storageService.has(StorageKey.puzzle),
+        ).thenReturn(true);
 
         harness.generate(forceRefresh: true);
         // movesCount should be 0 (fresh board), not 7
@@ -276,8 +278,9 @@ void main() {
         );
         harness.scoresFromStorageResult = [storedScore];
 
-        when(() => harness.storageService.has(StorageKey.scores))
-            .thenReturn(true);
+        when(
+          () => harness.storageService.has(StorageKey.scores),
+        ).thenReturn(true);
 
         harness.generate();
         check(harness.scores.length).equals(1);
@@ -381,15 +384,17 @@ void main() {
       });
 
       test(
-          'calls readyMarathonAdvance + updateScoresInStorage + advanceMarathonSize '
-          'in marathon mode', () {
-        harness = _CoreHarness(gameMode: GameMode.marathon);
-        harness.handlePuzzleSolved();
+        'calls readyMarathonAdvance + updateScoresInStorage + advanceMarathonSize '
+        'in marathon mode',
+        () {
+          harness = _CoreHarness(gameMode: GameMode.marathon);
+          harness.handlePuzzleSolved();
 
-        check(harness.marathonReadyCalled).isTrue();
-        check(harness.scoresUpdated).isTrue();
-        check(harness.marathonAdvanceCalled).isTrue();
-      });
+          check(harness.marathonReadyCalled).isTrue();
+          check(harness.scoresUpdated).isTrue();
+          check(harness.marathonAdvanceCalled).isTrue();
+        },
+      );
     });
   });
 }

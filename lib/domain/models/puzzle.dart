@@ -9,11 +9,8 @@ class Puzzle extends Equatable {
   final List<Tile> tiles;
   final int movesCount;
 
-  const Puzzle({
-    required this.n,
-    required this.tiles,
-    this.movesCount = 0,
-  }) : assert(n < 10);
+  const Puzzle({required this.n, required this.tiles, this.movesCount = 0})
+    : assert(n < 10);
 
   /// List of supported puzzle sizes
   static List<int> supportedPuzzleSizes = [3, 4, 5, 6];
@@ -104,14 +101,10 @@ class Puzzle extends Equatable {
 
   /// Determines if the two tiles are inverted.
   bool _isInversion(Tile a, Tile b) {
-    if (!b.tileIsWhiteSpace && a.value != b.value) {
-      if (b.value < a.value) {
-        return b.currentLocation.compareTo(a.currentLocation) > 0;
-      } else {
-        return a.currentLocation.compareTo(b.currentLocation) > 0;
-      }
-    }
-    return false;
+    if (b.tileIsWhiteSpace || a.value == b.value) return false;
+    return b.value < a.value
+        ? b.currentLocation.compareTo(a.currentLocation) > 0
+        : a.currentLocation.compareTo(b.currentLocation) > 0;
   }
 
   /// Gives the number of inversions in a puzzle given its tile arrangement.
@@ -139,10 +132,7 @@ class Puzzle extends Equatable {
   /// Determines if the puzzle is solvable.
   bool isSolvable() {
     final height = tiles.length ~/ n;
-    assert(
-      n * height == tiles.length,
-      'tiles must be equal to n * height',
-    );
+    assert(n * height == tiles.length, 'tiles must be equal to n * height');
     final inversions = countInversions();
 
     if (n.isOdd) {
@@ -152,11 +142,9 @@ class Puzzle extends Equatable {
     final whitespace = tiles.singleWhere((tile) => tile.tileIsWhiteSpace);
     final whitespaceRow = whitespace.currentLocation.y;
 
-    if (((height - whitespaceRow) + 1).isOdd) {
-      return inversions.isEven;
-    } else {
-      return inversions.isOdd;
-    }
+    return ((height - whitespaceRow) + 1).isOdd
+        ? inversions.isEven
+        : inversions.isOdd;
   }
 
   bool get isSolved => getNumberOfCorrectTiles() == tiles.length - 1;
@@ -183,10 +171,10 @@ class Puzzle extends Equatable {
   }
 
   Map<String, dynamic> toJson() => {
-        'tiles': List<dynamic>.from(tiles.map((x) => x.toJson())),
-        'movesCount': movesCount,
-        'n': n,
-      };
+    'tiles': List<dynamic>.from(tiles.map((x) => x.toJson())),
+    'movesCount': movesCount,
+    'n': n,
+  };
 
   @override
   List<Object?> get props => [n, movesCount, tiles];

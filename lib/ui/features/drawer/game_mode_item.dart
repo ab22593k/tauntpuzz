@@ -15,8 +15,10 @@ class GameModeItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final wc =
-        ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
+    final wc = ScreenTypeHelper(
+      MediaQuery.sizeOf(context).width,
+      0,
+    ).windowClass;
     final colorScheme = Theme.of(context).colorScheme;
 
     return Consumer<PuzzleProvider>(
@@ -35,8 +37,9 @@ class GameModeItem extends StatelessWidget {
                   : () {
                       if (!isSelected) {
                         final stopWatch = Provider.of<StopWatchProvider>(
-                            context,
-                            listen: false);
+                          context,
+                          listen: false,
+                        );
                         stopWatch.stop();
                         puzzleProvider.setGameMode(mode);
                         if (Scaffold.of(context).hasDrawer &&
@@ -45,39 +48,42 @@ class GameModeItem extends StatelessWidget {
                         }
                       }
                     },
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 12,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.zero,
-                  side: BorderSide(
-                    width: isSelected ? 2 : 1,
-                    color: isSelected
+              style:
+                  ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 12,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
+                      side: BorderSide(
+                        width: isSelected ? 2 : 1,
+                        color: isSelected
+                            ? colorScheme.primary
+                            : colorScheme.outlineVariant.withValues(alpha: 0.3),
+                      ),
+                    ),
+                    minimumSize: const Size.fromHeight(48),
+                    backgroundColor: isSelected
                         ? colorScheme.primary
-                        : colorScheme.outlineVariant.withValues(alpha: 0.3),
+                        : Colors.transparent,
+                    foregroundColor: isSelected
+                        ? colorScheme.onPrimary
+                        : colorScheme.onSurface,
+                    elevation: 0,
+                  ).copyWith(
+                    elevation: WidgetStateProperty.resolveWith((_) => 0),
+                    shadowColor: WidgetStateProperty.all(Colors.transparent),
+                    overlayColor: WidgetStateProperty.resolveWith((states) {
+                      if (states.contains(WidgetState.hovered)) {
+                        return (isSelected
+                                ? colorScheme.onPrimary
+                                : colorScheme.onSurface)
+                            .withValues(alpha: 0.08);
+                      }
+                      return null;
+                    }),
                   ),
-                ),
-                minimumSize: const Size.fromHeight(48),
-                backgroundColor:
-                    isSelected ? colorScheme.primary : Colors.transparent,
-                foregroundColor:
-                    isSelected ? colorScheme.onPrimary : colorScheme.onSurface,
-                elevation: 0,
-              ).copyWith(
-                elevation: WidgetStateProperty.resolveWith((_) => 0),
-                shadowColor: WidgetStateProperty.all(Colors.transparent),
-                overlayColor: WidgetStateProperty.resolveWith((states) {
-                  if (states.contains(WidgetState.hovered)) {
-                    return (isSelected
-                            ? colorScheme.onPrimary
-                            : colorScheme.onSurface)
-                        .withValues(alpha: 0.08);
-                  }
-                  return null;
-                }),
-              ),
               child: Row(
                 children: [
                   _modeIcon(isSelected, colorScheme),
@@ -92,13 +98,11 @@ class GameModeItem extends StatelessWidget {
                             color: isSelected
                                 ? colorScheme.onPrimary
                                 : colorScheme.onSurface,
-                            fontWeight:
-                                isSelected ? FontWeight.w700 : FontWeight.w500,
+                            fontWeight: isSelected
+                                ? FontWeight.w700
+                                : FontWeight.w500,
                             fontVariations: [
-                              FontVariation(
-                                'wght',
-                                isSelected ? 700 : 550,
-                              ),
+                              FontVariation('wght', isSelected ? 700 : 550),
                             ],
                           ),
                         ),
@@ -139,25 +143,25 @@ class GameModeItem extends StatelessWidget {
 
     return switch (mode) {
       GameMode.classic => HugeIcon(
-          icon: HugeIcons.strokeRoundedPuzzle,
-          size: 20,
-          color: color,
-        ),
+        icon: HugeIcons.strokeRoundedPuzzle,
+        size: 20,
+        color: color,
+      ),
       GameMode.speedrun => HugeIcon(
-          icon: HugeIcons.strokeRoundedTimer01,
-          size: 20,
-          color: color,
-        ),
+        icon: HugeIcons.strokeRoundedTimer01,
+        size: 20,
+        color: color,
+      ),
       GameMode.blind => HugeIcon(
-          icon: HugeIcons.strokeRoundedEye,
-          size: 20,
-          color: color,
-        ),
+        icon: HugeIcons.strokeRoundedEye,
+        size: 20,
+        color: color,
+      ),
       GameMode.marathon => HugeIcon(
-          icon: HugeIcons.strokeRoundedLink01,
-          size: 20,
-          color: color,
-        ),
+        icon: HugeIcons.strokeRoundedLink01,
+        size: 20,
+        color: color,
+      ),
     };
   }
 }

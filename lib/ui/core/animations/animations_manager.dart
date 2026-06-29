@@ -3,10 +3,7 @@ import 'package:jigsaw/ui/core/animations/position_tween.dart';
 import 'package:jigsaw/ui/core/layout/background_layer_layout.dart';
 import 'package:flutter/material.dart';
 
-enum AnimatedElementType {
-  puzzleBoard,
-  stars,
-}
+enum AnimatedElementType { puzzleBoard, stars }
 
 class AnimatedElement<T> {
   final Tween<T> tween;
@@ -44,10 +41,7 @@ class AnimationsManager {
   static AnimatedElement<Position> bgLayer(BackgroundLayerLayout layer) {
     return AnimatedElement<Position>(
       duration: bgLayerAnimationDuration,
-      tween: PositionTween(
-        begin: layer.outOfViewPosition,
-        end: layer.position,
-      ),
+      tween: PositionTween(begin: layer.outOfViewPosition, end: layer.position),
       curve: Curves.easeOutBack,
     );
   }
@@ -64,16 +58,18 @@ class AnimationsManager {
     curve: Curves.easeInOut,
   );
 
-  static const Duration phraseBubbleAnimationDuration =
-      Duration(milliseconds: 500);
+  static const Duration phraseBubbleAnimationDuration = Duration(
+    milliseconds: 500,
+  );
 
   static const Duration puzzleSolvedDialogDelay = Duration(milliseconds: 500);
 
   static Duration phraseBubbleTotalAnimationDuration =
       phraseBubbleHoldAnimationDuration + phraseBubbleAnimationDuration * 2;
 
-  static const Duration phraseBubbleHoldAnimationDuration =
-      Duration(milliseconds: 1000);
+  static const Duration phraseBubbleHoldAnimationDuration = Duration(
+    milliseconds: 1000,
+  );
 
   static final AnimatedElement<double> phraseBubble = AnimatedElement<double>(
     duration: phraseBubbleAnimationDuration,

@@ -55,9 +55,9 @@ class Tile extends Equatable {
 
   @override
   List<Object?> get props => [
-        value,
-        tileIsWhiteSpace,
-        correctLocation,
-        currentLocation,
-      ];
+    value,
+    tileIsWhiteSpace,
+    correctLocation,
+    currentLocation,
+  ];
 }

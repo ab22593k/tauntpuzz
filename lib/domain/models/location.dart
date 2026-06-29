@@ -10,10 +10,7 @@ class Location extends Equatable implements Comparable<Location> {
   final int x;
   final int y;
 
-  const Location({
-    required this.x,
-    required this.y,
-  });
+  const Location({required this.x, required this.y});
 
   /// Check if a location is located around another
   ///
@@ -55,35 +52,18 @@ class Location extends Equatable implements Comparable<Location> {
 
   @override
   int compareTo(Location other) {
-    if (y < other.y) {
-      return -1;
-    } else if (y > other.y) {
-      return 1;
-    } else {
-      if (x < other.x) {
-        return -1;
-      } else if (x > other.x) {
-        return 1;
-      } else {
-        return 0;
-      }
-    }
+    final yCmp = y.compareTo(other.y);
+    return yCmp != 0 ? yCmp : x.compareTo(other.x);
   }
 
   @override
   List<Object> get props => [x, y];
 
   factory Location.fromJson(Map<String, dynamic> json) {
-    return Location(
-      x: json['x'],
-      y: json['y'],
-    );
+    return Location(x: json['x'], y: json['y']);
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'x': x,
-      'y': y,
-    };
+    return {'x': x, 'y': y};
   }
 }

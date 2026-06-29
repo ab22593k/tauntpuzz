@@ -16,11 +16,14 @@ class GameModeSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final padding = MediaQuery.paddingOf(context);
-    final wc =
-        ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
+    final wc = ScreenTypeHelper(
+      MediaQuery.sizeOf(context).width,
+      0,
+    ).windowClass;
     final colorScheme = Theme.of(context).colorScheme;
-    final double drawerStartPadding =
-        padding.left == 0 ? Spacing.md : padding.left;
+    final double drawerStartPadding = padding.left == 0
+        ? Spacing.md
+        : padding.left;
 
     return Container(
       padding: EdgeInsets.only(
@@ -49,9 +52,9 @@ class GameModeSettings extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             context.l10n.chooseMode,
-            style: AppTextStyles.bodyAdaptive(wc).copyWith(
-              color: colorScheme.onSurface.withValues(alpha: 0.5),
-            ),
+            style: AppTextStyles.bodyAdaptive(
+              wc,
+            ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.5)),
           ),
           const SizedBox(height: 10),
           Column(

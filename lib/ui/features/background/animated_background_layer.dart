@@ -6,10 +6,7 @@ import 'package:flutter/material.dart';
 class AnimatedBackgroundLayer extends StatefulWidget {
   final BackgroundLayerLayout layer;
 
-  const AnimatedBackgroundLayer({
-    super.key,
-    required this.layer,
-  });
+  const AnimatedBackgroundLayer({super.key, required this.layer});
 
   @override
   _AnimatedBackgroundLayerState createState() =>
@@ -29,11 +26,11 @@ class _AnimatedBackgroundLayerState extends State<AnimatedBackgroundLayer>
     );
 
     _position = AnimationsManager.bgLayer(widget.layer).tween.animate(
-          CurvedAnimation(
-            parent: _animationController,
-            curve: AnimationsManager.bgLayer(widget.layer).curve,
-          ),
-        );
+      CurvedAnimation(
+        parent: _animationController,
+        curve: AnimationsManager.bgLayer(widget.layer).curve,
+      ),
+    );
 
     Future.delayed(const Duration(milliseconds: 400), () {
       _animationController.forward();
@@ -51,10 +48,7 @@ class _AnimatedBackgroundLayerState extends State<AnimatedBackgroundLayer>
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _position,
-      child: Image.asset(
-        widget.layer.assetUrl,
-        width: widget.layer.size.width,
-      ),
+      child: Image.asset(widget.layer.assetUrl, width: widget.layer.size.width),
       builder: (c, image) => Positioned(
         left: _position.isCompleted
             ? widget.layer.position.left

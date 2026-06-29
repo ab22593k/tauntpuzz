@@ -45,11 +45,16 @@ class ResetPuzzleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final stopWatchProvider =
-        Provider.of<StopWatchProvider>(context, listen: false);
-    final wc =
-        ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
-    final isExpandedPlus = wc == WindowClass.expanded ||
+    final stopWatchProvider = Provider.of<StopWatchProvider>(
+      context,
+      listen: false,
+    );
+    final wc = ScreenTypeHelper(
+      MediaQuery.sizeOf(context).width,
+      0,
+    ).windowClass;
+    final isExpandedPlus =
+        wc == WindowClass.expanded ||
         wc == WindowClass.large ||
         wc == WindowClass.extraLarge;
 

@@ -35,12 +35,14 @@ class AppDrawer extends StatelessWidget {
           filter: ImageFilter.blur(sigmaY: 16, sigmaX: 16),
           child: LayoutBuilder(
             builder: (context, constraints) {
-              final drawerWidth =
-                  constraints.maxWidth > 600 ? 500.0 : screenSize.width * 0.82;
+              final drawerWidth = constraints.maxWidth > 600
+                  ? 500.0
+                  : screenSize.width * 0.82;
 
               return Container(
                 width: drawerWidth,
-                margin: kIsWeb ||
+                margin:
+                    kIsWeb ||
                         Platform.isAndroid ||
                         Platform.isMacOS ||
                         Platform.isLinux
@@ -48,10 +50,12 @@ class AppDrawer extends StatelessWidget {
                     : EdgeInsets.only(
                         top: screenSize.width > screenSize.height
                             ? padding.bottom
-                            : 0),
+                            : 0,
+                      ),
                 decoration: BoxDecoration(
-                  color:
-                      colorScheme.surfaceContainerLow.withValues(alpha: 0.95),
+                  color: colorScheme.surfaceContainerLow.withValues(
+                    alpha: 0.95,
+                  ),
                   borderRadius: BorderRadius.zero,
                   border: Border(
                     right: BorderSide(
@@ -96,8 +100,10 @@ class _DrawerHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final wc =
-        ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
+    final wc = ScreenTypeHelper(
+      MediaQuery.sizeOf(context).width,
+      0,
+    ).windowClass;
     final colorScheme = Theme.of(context).colorScheme;
 
     return Container(
@@ -125,13 +131,16 @@ class _DrawerHeader extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Jigsaw',
-                    style: (wc == WindowClass.compact
-                            ? AppTextStyles.titleMedium
-                            : AppTextStyles.titleLarge)
-                        .copyWith(
-                      fontVariations: const [FontVariation('wght', 700)],
-                    )),
+                Text(
+                  'Jigsaw',
+                  style:
+                      (wc == WindowClass.compact
+                              ? AppTextStyles.titleMedium
+                              : AppTextStyles.titleLarge)
+                          .copyWith(
+                            fontVariations: const [FontVariation('wght', 700)],
+                          ),
+                ),
                 const SizedBox(height: 1),
                 Text(
                   context.l10n.appSubtitle,

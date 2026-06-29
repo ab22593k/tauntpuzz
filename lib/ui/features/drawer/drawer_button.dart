@@ -42,9 +42,12 @@ class _DrawerButtonState extends State<DrawerButton>
   /// drawer is hidden, the same content levitates into a floating pane —
   /// same destination, different presentation per breakpoint.
   void _openSettings(BuildContext context) {
-    final wc =
-        ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
-    final isExpandedPlus = wc == WindowClass.expanded ||
+    final wc = ScreenTypeHelper(
+      MediaQuery.sizeOf(context).width,
+      0,
+    ).windowClass;
+    final isExpandedPlus =
+        wc == WindowClass.expanded ||
         wc == WindowClass.large ||
         wc == WindowClass.extraLarge;
 
@@ -78,37 +81,44 @@ class _DrawerButtonState extends State<DrawerButton>
           child: ElevatedButton(
             key: DrawerButton._key,
             onPressed: () => _openSettings(context),
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
-              minimumSize: const Size(48, 42),
-              fixedSize: const Size.fromHeight(42),
-              backgroundColor:
-                  colorScheme.surfaceContainer.withValues(alpha: 0.7),
-              foregroundColor: colorScheme.onSurface,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.zero,
-                side: BorderSide(
-                  width: 1,
-                  color: colorScheme.outlineVariant.withValues(alpha: 0.15),
+            style:
+                ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 0,
+                    vertical: 10,
+                  ),
+                  minimumSize: const Size(48, 42),
+                  fixedSize: const Size.fromHeight(42),
+                  backgroundColor: colorScheme.surfaceContainer.withValues(
+                    alpha: 0.7,
+                  ),
+                  foregroundColor: colorScheme.onSurface,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                    side: BorderSide(
+                      width: 1,
+                      color: colorScheme.outlineVariant.withValues(alpha: 0.15),
+                    ),
+                  ),
+                ).copyWith(
+                  elevation: WidgetStateProperty.resolveWith((states) {
+                    return 0;
+                  }),
+                  shadowColor: WidgetStateProperty.all(Colors.transparent),
+                  overlayColor: WidgetStateProperty.resolveWith((states) {
+                    if (states.contains(WidgetState.hovered)) {
+                      return colorScheme.onSurface.withValues(alpha: 0.06);
+                    }
+                    if (states.contains(WidgetState.pressed)) {
+                      return colorScheme.onSurface.withValues(alpha: 0.12);
+                    }
+                    return null;
+                  }),
                 ),
-              ),
-            ).copyWith(
-              elevation: WidgetStateProperty.resolveWith((states) {
-                return 0;
-              }),
-              shadowColor: WidgetStateProperty.all(Colors.transparent),
-              overlayColor: WidgetStateProperty.resolveWith((states) {
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.06);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.12);
-                }
-                return null;
-              }),
+            child: const HugeIcon(
+              icon: HugeIcons.strokeRoundedMenu01,
+              size: 22,
             ),
-            child:
-                const HugeIcon(icon: HugeIcons.strokeRoundedMenu01, size: 22),
           ),
         ),
       ),

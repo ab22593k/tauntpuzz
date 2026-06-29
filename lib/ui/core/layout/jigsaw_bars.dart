@@ -38,8 +38,10 @@ class PuzzleAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final wc =
-        ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
+    final wc = ScreenTypeHelper(
+      MediaQuery.sizeOf(context).width,
+      0,
+    ).windowClass;
     final isWide = wc != WindowClass.compact;
 
     return Container(
@@ -59,16 +61,16 @@ class PuzzleAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       child: Row(
         children: [
-          if (leading != null) leading!,
+          ?leading,
           SizedBox(width: isWide ? 16 : 8),
           Expanded(
             child: subtitle == null
                 ? Text(
                     title!,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontFamily: AppTextStyles.primaryFontFamily,
-                          color: colorScheme.onSurface,
-                        ),
+                      fontFamily: AppTextStyles.primaryFontFamily,
+                      color: colorScheme.onSurface,
+                    ),
                     overflow: TextOverflow.ellipsis,
                   )
                 : Column(
@@ -78,18 +80,16 @@ class PuzzleAppBar extends StatelessWidget implements PreferredSizeWidget {
                       Text(
                         title!,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontFamily: AppTextStyles.primaryFontFamily,
-                              color: colorScheme.onSurface,
-                            ),
+                          fontFamily: AppTextStyles.primaryFontFamily,
+                          color: colorScheme.onSurface,
+                        ),
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 1),
                       Text(
                         subtitle!,
-                        style:
-                            Theme.of(context).textTheme.labelMedium?.copyWith(
-                                  color: colorScheme.onSurfaceVariant,
-                                ),
+                        style: Theme.of(context).textTheme.labelMedium
+                            ?.copyWith(color: colorScheme.onSurfaceVariant),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ],

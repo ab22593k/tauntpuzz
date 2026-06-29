@@ -1,10 +1,4 @@
-enum WindowClass {
-  compact,
-  medium,
-  expanded,
-  large,
-  extraLarge,
-}
+enum WindowClass { compact, medium, expanded, large, extraLarge }
 
 class ScreenTypeHelper {
   final double screenWidth;
@@ -20,37 +14,34 @@ class ScreenTypeHelper {
   bool get isWideLayout => screenWidth > screenHeight;
 
   WindowClass get windowClass => switch (screenWidth) {
-        <= compactMaxWidth => WindowClass.compact,
-        <= mediumMaxWidth => WindowClass.medium,
-        <= expandedMaxWidth => WindowClass.expanded,
-        <= largeMaxWidth => WindowClass.large,
-        _ => WindowClass.extraLarge,
-      };
+    <= compactMaxWidth => WindowClass.compact,
+    <= mediumMaxWidth => WindowClass.medium,
+    <= expandedMaxWidth => WindowClass.expanded,
+    <= largeMaxWidth => WindowClass.large,
+    _ => WindowClass.extraLarge,
+  };
 
   bool get isSinglePanePreferred => switch (windowClass) {
-        WindowClass.compact || WindowClass.medium => true,
-        _ => false,
-      };
+    WindowClass.compact || WindowClass.medium => true,
+    _ => false,
+  };
 
   int get recommendedPaneCount => switch (windowClass) {
-        WindowClass.compact => 1,
-        WindowClass.medium => 1,
-        WindowClass.expanded || WindowClass.large => 2,
-        WindowClass.extraLarge => 2,
-      };
+    WindowClass.compact => 1,
+    WindowClass.medium => 1,
+    WindowClass.expanded || WindowClass.large => 2,
+    WindowClass.extraLarge => 2,
+  };
 
   int get maximumPaneCount => switch (windowClass) {
-        WindowClass.compact => 1,
-        WindowClass.medium => 2,
-        WindowClass.expanded || WindowClass.large => 2,
-        WindowClass.extraLarge => 3,
-      };
+    WindowClass.compact => 1,
+    WindowClass.medium => 2,
+    WindowClass.expanded || WindowClass.large => 2,
+    WindowClass.extraLarge => 3,
+  };
 
   bool get railsVisible => switch (windowClass) {
-        WindowClass.expanded ||
-        WindowClass.large ||
-        WindowClass.extraLarge =>
-          true,
-        _ => false,
-      };
+    WindowClass.expanded || WindowClass.large || WindowClass.extraLarge => true,
+    _ => false,
+  };
 }

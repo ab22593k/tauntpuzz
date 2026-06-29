@@ -26,16 +26,15 @@ class PhraseBubbleLayout implements LayoutDelegate {
   });
 
   Position get position => switch (screenTypeHelper.windowClass) {
-        WindowClass.compact || WindowClass.medium => Position(
-            right: screenTypeHelper.screenWidth * 0.05,
-            top: screenTypeHelper.screenHeight * 0.15,
-          ),
-        WindowClass.expanded ||
-        WindowClass.large ||
-        WindowClass.extraLarge =>
-          Position(
-            right: screenTypeHelper.screenWidth * 0.12,
-            top: screenTypeHelper.screenHeight * 0.20,
-          ),
-      };
+    WindowClass.compact || WindowClass.medium => Position(
+      right: screenTypeHelper.screenWidth * 0.05,
+      top: screenTypeHelper.screenHeight * 0.15,
+    ),
+    WindowClass.expanded ||
+    WindowClass.large ||
+    WindowClass.extraLarge => Position(
+      right: screenTypeHelper.screenWidth * 0.12,
+      top: screenTypeHelper.screenHeight * 0.20,
+    ),
+  };
 }

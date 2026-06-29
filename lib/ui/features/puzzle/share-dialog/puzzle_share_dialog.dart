@@ -24,40 +24,42 @@ class PuzzleSolvedDialog extends StatelessWidget {
 
     return AppAlertDialog(
       insetPadding: const EdgeInsets.symmetric(
-          horizontal: Spacing.screenHPadding, vertical: Spacing.md),
+        horizontal: Spacing.screenHPadding,
+        vertical: Spacing.md,
+      ),
       content: useWideLayout ? _landscapeContent : _portraitContent,
     );
   }
 
   Widget get _puzzleSolvedImage => ClipRRect(
-        borderRadius: BorderRadius.zero,
-        child: Image.asset('assets/images/puzzle-solved/$imageName'),
-      );
+    borderRadius: BorderRadius.zero,
+    child: Image.asset('assets/images/puzzle-solved/$imageName'),
+  );
 
   Widget get _puzzleScoreWidget => PuzzleScore(
-        duration: solvingDuration,
-        movesCount: movesCount,
-        puzzleSize: puzzleSize,
-      );
+    duration: solvingDuration,
+    movesCount: movesCount,
+    puzzleSize: puzzleSize,
+  );
 
   Widget get _portraitContent => ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 500),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _puzzleSolvedImage,
-            const SizedBox(height: Spacing.sm),
-            _puzzleScoreWidget,
-          ],
-        ),
-      );
+    constraints: const BoxConstraints(maxWidth: 500),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _puzzleSolvedImage,
+        const SizedBox(height: Spacing.sm),
+        _puzzleScoreWidget,
+      ],
+    ),
+  );
 
   Widget get _landscapeContent => Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(flex: 3, child: _puzzleSolvedImage),
-          const SizedBox(width: Spacing.md),
-          Expanded(flex: 4, child: _puzzleScoreWidget),
-        ],
-      );
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Expanded(flex: 3, child: _puzzleSolvedImage),
+      const SizedBox(width: Spacing.md),
+      Expanded(flex: 4, child: _puzzleScoreWidget),
+    ],
+  );
 }

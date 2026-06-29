@@ -32,10 +32,12 @@ void main() {
     });
 
     test('Check if a location is located around target location', () {
-      check(targetLocation.isLocatedAround(const Location(x: 1, y: 2)))
-          .isTrue();
-      check(targetLocation.isLocatedAround(const Location(x: 2, y: 2)))
-          .isFalse();
+      check(
+        targetLocation.isLocatedAround(const Location(x: 1, y: 2)),
+      ).isTrue();
+      check(
+        targetLocation.isLocatedAround(const Location(x: 2, y: 2)),
+      ).isFalse();
     });
 
     test('Compare locations - Check if a location before or after another', () {

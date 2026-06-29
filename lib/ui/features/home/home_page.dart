@@ -18,22 +18,15 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        BackgroundStack(
-          size: MediaQuery.sizeOf(context),
-        ),
+        BackgroundStack(size: MediaQuery.sizeOf(context)),
         const JigsawScaffold(
           topBar: PuzzleAppBar(
             leading: DrawerButton(),
             actions: [
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: ResetPuzzleButton(),
-              )
+              Padding(padding: EdgeInsets.all(8.0), child: ResetPuzzleButton()),
             ],
           ),
-          bottomBar: PuzzleToolbar(
-            child: PuzzleHeader(),
-          ),
+          bottomBar: PuzzleToolbar(child: PuzzleHeader()),
           // Adaptive surfacing (MD3 "show and hide"):
           // On expanded+ breakpoints the bottom bar is hidden, so the stats
           // reflow into the top rail region — same information, new surface.
@@ -76,8 +69,8 @@ class _StatsPane extends StatelessWidget {
           Text(
             'Progress',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontFamily: AppTextStyles.primaryFontFamily,
-                ),
+              fontFamily: AppTextStyles.primaryFontFamily,
+            ),
           ),
           const SizedBox(height: Spacing.md),
           const PuzzleHeader(displayMode: HeaderDisplay.sidePane),

@@ -15,8 +15,10 @@ class LatestScores extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final padding = MediaQuery.paddingOf(context);
-    final wc =
-        ScreenTypeHelper(MediaQuery.sizeOf(context).width, 0).windowClass;
+    final wc = ScreenTypeHelper(
+      MediaQuery.sizeOf(context).width,
+      0,
+    ).windowClass;
     final colorScheme = Theme.of(context).colorScheme;
     final double paddingLeft = padding.left == 0 ? Spacing.md : padding.left;
 
@@ -70,8 +72,12 @@ class LatestScores extends StatelessWidget {
     );
   }
 
-  Widget _emptyState(BuildContext context, double paddingLeft, WindowClass wc,
-      ColorScheme colorScheme) {
+  Widget _emptyState(
+    BuildContext context,
+    double paddingLeft,
+    WindowClass wc,
+    ColorScheme colorScheme,
+  ) {
     return Container(
       margin: EdgeInsets.only(
         left: paddingLeft,

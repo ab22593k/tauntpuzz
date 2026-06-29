@@ -340,7 +340,7 @@ void main() {
             value: 1,
             correctLocation: Location(x: 1, y: 1),
             currentLocation: Location(x: 1, y: 1),
-          )
+          ),
         ],
       );
 
@@ -353,12 +353,13 @@ void main() {
             'tileIsWhiteSpace': false,
             'correctLocation': {'x': 1, 'y': 1},
             'currentLocation': {'x': 1, 'y': 1},
-          }
-        ]
+          },
+        ],
       };
 
-      check(const DeepCollectionEquality().equals(puzzle.toJson(), puzzleMap))
-          .isTrue();
+      check(
+        const DeepCollectionEquality().equals(puzzle.toJson(), puzzleMap),
+      ).isTrue();
       check(Puzzle.fromJson(puzzleMap)).equals(puzzle);
     });
   });

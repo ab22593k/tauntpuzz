@@ -60,22 +60,22 @@ class StopWatchProvider with ChangeNotifier {
     if (streamSubscription case var sub? when sub.isPaused) {
       sub.resume();
     } else {
-      streamSubscription = Stream.periodic(
-        const Duration(seconds: 1),
-        (x) => 1 + x++,
-      ).listen((_) {
-        if (isCountDown) {
-          if (countdownRemaining > 0) {
-            countdownRemaining--;
-          }
-        } else {
-          secondsElapsed++;
-        }
-        notifyListeners();
-        if (!isCountDown) {
-          storageService.set(StorageKey.secondsElapsed, secondsElapsed);
-        }
-      });
+      streamSubscription =
+          Stream.periodic(const Duration(seconds: 1), (x) => 1 + x++).listen((
+            _,
+          ) {
+            if (isCountDown) {
+              if (countdownRemaining > 0) {
+                countdownRemaining--;
+              }
+            } else {
+              secondsElapsed++;
+            }
+            notifyListeners();
+            if (!isCountDown) {
+              storageService.set(StorageKey.secondsElapsed, secondsElapsed);
+            }
+          });
     }
   }
 

@@ -43,8 +43,8 @@ class PuzzleStopWatch extends StatelessWidget {
                       color: isCritical
                           ? colorScheme.error
                           : isExpired
-                              ? colorScheme.onSurface.withValues(alpha: 0.4)
-                              : colorScheme.onSurface,
+                          ? colorScheme.onSurface.withValues(alpha: 0.4)
+                          : colorScheme.onSurface,
                     ),
                     const SizedBox(width: 4),
                     _textWidget(
@@ -56,9 +56,7 @@ class PuzzleStopWatch extends StatelessWidget {
                   ],
                 )
               : _textWidget(
-                  DurationHelper.toFormattedTime(
-                    Duration(seconds: remaining),
-                  ),
+                  DurationHelper.toFormattedTime(Duration(seconds: remaining)),
                   isCritical ? colorScheme.error : colorScheme.onSurface,
                 );
         }

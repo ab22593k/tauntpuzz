@@ -21,8 +21,8 @@ class _OrchestratorHarness extends ChangeNotifier with PuzzleMixinOrchestrator {
   _OrchestratorHarness({
     GameMode initialMode = GameMode.classic,
     int initialSize = 3,
-  })  : _gameMode = initialMode,
-        _n = initialSize;
+  }) : _gameMode = initialMode,
+       _n = initialSize;
 
   // ── Storage ──
 
@@ -119,10 +119,12 @@ void main() {
 
     setUp(() {
       harness = _OrchestratorHarness();
-      when(() => harness.storageService.set(any(), any()))
-          .thenAnswer((_) => Future<void>.value());
-      when(() => harness.storageService.remove(any()))
-          .thenAnswer((_) => Future<void>.value());
+      when(
+        () => harness.storageService.set(any(), any()),
+      ).thenAnswer((_) => Future<void>.value());
+      when(
+        () => harness.storageService.remove(any()),
+      ).thenAnswer((_) => Future<void>.value());
     });
 
     tearDown(() {
@@ -143,7 +145,8 @@ void main() {
       test('persists mode to storage', () {
         harness.setGameMode(GameMode.speedrun);
         verify(
-            () => harness.storageService.set(StorageKey.gameMode, 'speedrun'));
+          () => harness.storageService.set(StorageKey.gameMode, 'speedrun'),
+        );
       });
 
       test('does nothing when switching to the same mode', () {
@@ -201,14 +204,17 @@ void main() {
       test('can switch to all game modes', () {
         for (final mode in GameMode.values) {
           final h = _OrchestratorHarness(initialMode: mode);
-          when(() => h.storageService.set(any(), any()))
-              .thenAnswer((_) => Future<void>.value());
-          when(() => h.storageService.remove(any()))
-              .thenAnswer((_) => Future<void>.value());
+          when(
+            () => h.storageService.set(any(), any()),
+          ).thenAnswer((_) => Future<void>.value());
+          when(
+            () => h.storageService.remove(any()),
+          ).thenAnswer((_) => Future<void>.value());
 
           // Switch to a different mode
-          final other =
-              mode == GameMode.classic ? GameMode.speedrun : GameMode.classic;
+          final other = mode == GameMode.classic
+              ? GameMode.speedrun
+              : GameMode.classic;
           h.setGameMode(other);
           check(h.gameMode).equals(other);
         }
@@ -252,10 +258,12 @@ void main() {
       test('works for all supported sizes', () {
         for (final size in Puzzle.supportedPuzzleSizes) {
           final h = _OrchestratorHarness();
-          when(() => h.storageService.set(any(), any()))
-              .thenAnswer((_) => Future<void>.value());
-          when(() => h.storageService.remove(any()))
-              .thenAnswer((_) => Future<void>.value());
+          when(
+            () => h.storageService.set(any(), any()),
+          ).thenAnswer((_) => Future<void>.value());
+          when(
+            () => h.storageService.remove(any()),
+          ).thenAnswer((_) => Future<void>.value());
           h.resetPuzzleSize(size);
           check(h.n).equals(size);
         }

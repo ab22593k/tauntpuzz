@@ -22,10 +22,8 @@ class CorrectTilesCount extends StatelessWidget {
 
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 400),
-          transitionBuilder: (child, anim) => FadeTransition(
-            opacity: anim,
-            child: child,
-          ),
+          transitionBuilder: (child, anim) =>
+              FadeTransition(opacity: anim, child: child),
           child: Row(
             key: ValueKey(correct),
             mainAxisSize: MainAxisSize.min,
@@ -60,33 +58,36 @@ class CorrectTilesCount extends StatelessWidget {
     final color = _progressColor(ratio, colorScheme);
     return switch (ratio) {
       >= 1.0 => Container(
-          width: 14,
-          height: 14,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.zero,
-          ),
-          child: const HugeIcon(
-              icon: HugeIcons.strokeRoundedStarAward01,
-              size: 10,
-              color: Colors.white),
+        width: 14,
+        height: 14,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.zero,
         ),
+        child: const HugeIcon(
+          icon: HugeIcons.strokeRoundedStarAward01,
+          size: 10,
+          color: Colors.white,
+        ),
+      ),
       >= 0.75 => Container(
-          width: 14,
-          height: 14,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.zero,
-            border: Border.all(color: color, width: 1.5),
-          ),
-          child: HugeIcon(
-              icon: HugeIcons.strokeRoundedCheckmarkCircle01,
-              size: 10,
-              color: colorScheme.onSurface.withValues(alpha: 0.54)),
+        width: 14,
+        height: 14,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.zero,
+          border: Border.all(color: color, width: 1.5),
         ),
-      _ => HugeIcon(
+        child: HugeIcon(
           icon: HugeIcons.strokeRoundedCheckmarkCircle01,
-          size: 14,
-          color: color),
+          size: 10,
+          color: colorScheme.onSurface.withValues(alpha: 0.54),
+        ),
+      ),
+      _ => HugeIcon(
+        icon: HugeIcons.strokeRoundedCheckmarkCircle01,
+        size: 14,
+        color: color,
+      ),
     };
   }
 }

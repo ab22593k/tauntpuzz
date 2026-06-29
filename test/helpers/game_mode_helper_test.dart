@@ -61,23 +61,27 @@ void main() {
 
     group('description', () {
       test('returns description for classic', () {
-        check(GameModeHelper.description(GameMode.classic))
-            .equals('Solve at your own pace');
+        check(
+          GameModeHelper.description(GameMode.classic),
+        ).equals('Solve at your own pace');
       });
 
       test('returns description for speedrun', () {
-        check(GameModeHelper.description(GameMode.speedrun))
-            .equals('Beat the countdown');
+        check(
+          GameModeHelper.description(GameMode.speedrun),
+        ).equals('Beat the countdown');
       });
 
       test('returns description for blind', () {
-        check(GameModeHelper.description(GameMode.blind))
-            .equals('Tiles hide — tap to peek');
+        check(
+          GameModeHelper.description(GameMode.blind),
+        ).equals('Tiles hide — tap to peek');
       });
 
       test('returns description for marathon', () {
-        check(GameModeHelper.description(GameMode.marathon))
-            .equals('Chain-solve across sizes');
+        check(
+          GameModeHelper.description(GameMode.marathon),
+        ).equals('Chain-solve across sizes');
       });
     });
   });
