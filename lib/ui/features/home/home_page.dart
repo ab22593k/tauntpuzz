@@ -18,9 +18,14 @@ class HomePage extends StatelessWidget {
     return const JigsawScaffold(
       topBar: PuzzleAppBar(
         leading: DrawerButton(),
-        title: 'Lullaby',
+        title: 'Jigsaw',
         subtitle: 'Slide Puzzle',
-        actions: [ResetPuzzleButton()],
+        actions: [
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: ResetPuzzleButton(),
+          )
+        ],
       ),
       bottomBar: PuzzleToolbar(
         child: PuzzleHeader(),

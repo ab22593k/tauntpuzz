@@ -59,11 +59,10 @@ class PuzzleHeader extends StatelessWidget {
       delay: AnimationsManager.bgLayerAnimationDuration,
       child: switch (displayMode) {
         HeaderDisplay.sidePane => _sidePaneLayout(colorScheme),
-        HeaderDisplay.topRail => _expandedLayout(colorScheme),
         HeaderDisplay.bottomBar
             when wc == WindowClass.compact || wc == WindowClass.medium =>
           _compactLayout(colorScheme),
-        _ => _expandedLayout(colorScheme),
+        _ => const SizedBox.shrink()
       },
     );
   }
@@ -235,59 +234,6 @@ class PuzzleHeader extends StatelessWidget {
     );
   }
 
-  Widget _expandedLayout(ColorScheme colorScheme) {
-    return Row(
-      children: [
-        const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Jigsaw', style: AppTextStyles.headlineSmall),
-            SizedBox(height: 2),
-            Text(
-              'Solve This Slide Puzzle..',
-              style: AppTextStyles.bodyLarge,
-            ),
-          ],
-        ),
-        const Spacer(),
-        _labeledStat(
-          icon: const HugeIcon(
-            icon: HugeIcons.strokeRoundedClock01,
-            size: 16,
-          ),
-          label: 'Time',
-          child: const PuzzleStopWatch(showIcon: false),
-          colorScheme: colorScheme,
-        ),
-        const SizedBox(width: 20),
-        _labeledStat(
-          icon: HugeIcon(
-            icon: HugeIcons.strokeRoundedArrowUpDown,
-            size: 16,
-            color: colorScheme.onSurface.withValues(alpha: 0.6),
-          ),
-          label: 'Moves',
-          child: const MovesCount(),
-          colorScheme: colorScheme,
-        ),
-        const SizedBox(width: 20),
-        _labeledStat(
-          icon: HugeIcon(
-            icon: HugeIcons.strokeRoundedCheckmarkCircle01,
-            size: 16,
-            color: colorScheme.onSurface.withValues(alpha: 0.6),
-          ),
-          label: 'Correct',
-          child: CorrectTilesCount(
-            colorScheme: colorScheme,
-            showIcon: false,
-          ),
-          colorScheme: colorScheme,
-        ),
-      ],
-    );
-  }
-
   /// Vertical stat column for the narrow co-planar side pane (~360dp).
   ///
   /// Each stat is a single row (icon + label + value). Stacks vertically
@@ -367,42 +313,6 @@ class PuzzleHeader extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ],
-    );
-  }
-
-  Widget _labeledStat({
-    required Widget icon,
-    required String label,
-    required Widget child,
-    required ColorScheme colorScheme,
-  }) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        icon,
-        const SizedBox(width: 6),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              label,
-              style: AppTextStyles.labelSmall.copyWith(
-                color: colorScheme.onSurface.withValues(alpha: 0.5),
-                fontVariations: const [FontVariation('wght', 600)],
-              ),
-            ),
-            const SizedBox(height: 1),
-            DefaultTextStyle(
-              style: AppTextStyles.titleMedium.copyWith(
-                color: colorScheme.onSurface,
-                fontVariations: const [FontVariation('wght', 700)],
-              ),
-              child: child,
-            ),
-          ],
         ),
       ],
     );
