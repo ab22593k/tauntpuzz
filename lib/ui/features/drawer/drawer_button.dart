@@ -73,7 +73,7 @@ class _DrawerButtonState extends State<DrawerButton>
       builder: (c, _) => Transform.scale(
         scale: _pulseAnim.value,
         child: Tooltip(
-          message: 'Menu (D)',
+          message: 'Menu',
           preferBelow: false,
           child: ElevatedButton(
             key: DrawerButton._key,

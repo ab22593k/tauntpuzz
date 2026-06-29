@@ -41,10 +41,7 @@ class PuzzleSizeItem extends StatelessWidget {
                       phrasesProvider
                           .setPhraseState(PhraseState.hardPuzzleSelected);
                     }
-                    if (Scaffold.of(context).hasDrawer &&
-                        Scaffold.of(context).isDrawerOpen) {
-                      Navigator.of(context).pop();
-                    }
+                    Navigator.of(context).pop();
                   }
                 },
                 style: ElevatedButton.styleFrom(
