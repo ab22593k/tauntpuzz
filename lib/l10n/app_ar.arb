@@ -94,5 +94,212 @@
   "chooseMode": "اختر تحديًا",
   "@chooseMode": {
     "description": "وصف قسم وضع اللعبة"
+  },
+  "time": "الوقت",
+  "@time": {
+    "description": "تسمية إحصائية الوقت المنقضي"
+  },
+  "moves": "الحركات",
+  "@moves": {
+    "description": "تسمية إحصائية عدد الحركات"
+  },
+  "correct": "صحيح",
+  "@correct": {
+    "description": "تسمية إحصائية عدد المربعات الصحيحة"
+  },
+  "congratsTitle": "تهانينا! لقد حللتها!",
+  "@congratsTitle": {
+    "description": "عنوان حوار حل اللغز"
+  },
+  "congratsSubtitle": "لقد حللت اللغز! شارك نتيجتك لتتحدى أصدقاءك",
+  "@congratsSubtitle": {
+    "description": "نص فرعي لحوار حل اللغز"
+  },
+  "restart": "إعادة",
+  "@restart": {
+    "description": "زر إعادة تشغيل اللغز"
+  },
+  "yes": "نعم",
+  "@yes": {
+    "description": "زر تأكيد في صندوق الحوار"
+  },
+  "cancel": "إلغاء",
+  "@cancel": {
+    "description": "زر إلغاء في صندوق الحوار"
+  },
+  "menu": "القائمة",
+  "@menu": {
+    "description": "تلميح زر القائمة الجانبية"
+  },
+  "progress": "التقدم",
+  "@progress": {
+    "description": "عنوان قسم الإحصائيات"
+  },
+  "range": "النطاق",
+  "@range": {
+    "description": "تسمية منتقي النطاق في وضع الماراثون"
+  },
+  "from": "من",
+  "@from": {
+    "description": "تسمية حجم البداية في وضع الماراثون"
+  },
+  "to": "إلى",
+  "@to": {
+    "description": "تسمية حجم النهاية في وضع الماراثون"
+  },
+  "gameModeClassic": "كلاسيكي",
+  "@gameModeClassic": {
+    "description": "اسم وضع اللعبة الكلاسيكي"
+  },
+  "gameModeSpeedrun": "السرعة",
+  "@gameModeSpeedrun": {
+    "description": "اسم وضع لعبة السرعة"
+  },
+  "gameModeBlind": "أعمى",
+  "@gameModeBlind": {
+    "description": "اسم وضع اللعبة الأعمى"
+  },
+  "gameModeMarathon": "ماراثون",
+  "@gameModeMarathon": {
+    "description": "اسم وضع لعبة الماراثون"
+  },
+  "gameModeClassicDesc": "حل بالسرعة التي تناسبك",
+  "@gameModeClassicDesc": {
+    "description": "وصف وضع اللعبة الكلاسيكي"
+  },
+  "gameModeSpeedrunDesc": "تغلب على المؤقت",
+  "@gameModeSpeedrunDesc": {
+    "description": "وصف وضع لعبة السرعة"
+  },
+  "gameModeBlindDesc": "المربعات تختبئ — اضغط لتكشف",
+  "@gameModeBlindDesc": {
+    "description": "وصف وضع اللعبة الأعمى"
+  },
+  "gameModeMarathonDesc": "حل متسلسل عبر الأحجام",
+  "@gameModeMarathonDesc": {
+    "description": "وصف وضع لعبة الماراثون"
+  },
+  "movesCountLabel": "{count} حركة",
+  "@movesCountLabel": {
+    "description": "عرض عدد الحركات في حوار النتيجة",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "phraseGoodLuck": "حظ سعيد!",
+  "@phraseGoodLuck": {
+    "description": "عبارة تشجيع عند بدء اللغز"
+  },
+  "phraseYouCanDoIt": "يمكنك فعلها!",
+  "@phraseYouCanDoIt": {
+    "description": "عبارة تشجيع عند بدء اللغز"
+  },
+  "phraseIBelieveInYou": "أنا أؤمن بك!",
+  "@phraseIBelieveInYou": {
+    "description": "عبارة تشجيع عند بدء اللغز"
+  },
+  "phraseKeepGoing": "استمر!",
+  "@phraseKeepGoing": {
+    "description": "عبارة تشجيع عند الأداء الجيد"
+  },
+  "phraseYoureDoingGreat": "أنت تبلي بلاءً حسنًا!",
+  "@phraseYoureDoingGreat": {
+    "description": "عبارة تشجيع عند الأداء الجيد"
+  },
+  "phraseNotMuchLeft": "بقي القليل!",
+  "@phraseNotMuchLeft": {
+    "description": "عبارة تشجيع عند الأداء الجيد"
+  },
+  "phraseYouAreAmazing": "أنت رائع!",
+  "@phraseYouAreAmazing": {
+    "description": "عبارة احتفال عند حل اللغز"
+  },
+  "phraseYouAreAwesome": "أنت مذهل!",
+  "@phraseYouAreAwesome": {
+    "description": "عبارة احتفال عند حل اللغز"
+  },
+  "phraseWowYouDidIt": "واو! لقد فعلتها!",
+  "@phraseWowYouDidIt": {
+    "description": "عبارة احتفال عند حل اللغز"
+  },
+  "phraseSureYouCanHandle": "هل أنت متأكد أنك تستطيع التعامل مع كل هذا؟!",
+  "@phraseSureYouCanHandle": {
+    "description": "عبارة مرحة عند اختيار لغز صعب"
+  },
+  "phraseWOWThatsNotEasy": "واو! هذا ليس سهلاً!",
+  "@phraseWOWThatsNotEasy": {
+    "description": "عبارة مرحة عند اختيار لغز صعب"
+  },
+  "phraseEasyIsBoring": "السهل ممل",
+  "@phraseEasyIsBoring": {
+    "description": "عبارة مرحة عند اختيار لغز صعب"
+  },
+  "phraseThisIsTakingTooLong": "هذا يستغرق وقتًا طويلاً!",
+  "@phraseThisIsTakingTooLong": {
+    "description": "عبارة تشجيع عندما يستغرق اللغز وقتًا"
+  },
+  "phraseDontLoseHope": "لا تفقد الأمل",
+  "@phraseDontLoseHope": {
+    "description": "عبارة تشجيع عندما يستغرق اللغز وقتًا"
+  },
+  "phraseBetterLateThanNever": "أن تصل متأخرًا أفضل من ألا تصل أبدًا",
+  "@phraseBetterLateThanNever": {
+    "description": "عبارة تشجيع عندما يستغرق اللغز وقتًا"
+  },
+  "dashIntro": "مرحبًا! أنا داش",
+  "@dashIntro": {
+    "description": "تعريف تميمة داش"
+  },
+  "dashMascotOf": "التميمة لـ Flutter و Dart",
+  "@dashMascotOf": {
+    "description": "يشرح داش ما يمثله"
+  },
+  "dashBuiltWith": "وهذا ما تم بناء هذا التطبيق به!",
+  "@dashBuiltWith": {
+    "description": "يذكر داش أن التطبيق مبني بـ Flutter/Dart"
+  },
+  "dashAstronaut": "وأنا رائد فضاء هنا",
+  "@dashAstronaut": {
+    "description": "يشرح داش دوره"
+  },
+  "dashCallMeJigsaw": "لذا يمكنكم مناداتي جيغسو",
+  "@dashCallMeJigsaw": {
+    "description": "يقترح داش اسمه المستعار"
+  },
+  "dashStopPoking": "يمكنك التوقف عن ضربي الآن",
+  "@dashStopPoking": {
+    "description": "داش منزعج من اللمسات المتكررة"
+  },
+  "dashPlayInstead": "لماذا لا تلعب باللغز بدلاً من ذلك؟!",
+  "@dashPlayInstead": {
+    "description": "يقترح داش اللعب بدلاً من اللمس"
+  },
+  "dashAnnoying": "لقد بدأت تزعجني!",
+  "@dashAnnoying": {
+    "description": "داش يزداد انزعاجًا"
+  },
+  "dashNeverMind": "آه! لا يهم!",
+  "@dashNeverMind": {
+    "description": "داش يتخلى عن انزعاجه"
+  },
+  "dashKeepDoingThis": "على الأرجح ستستمر في فعل هذا",
+  "@dashKeepDoingThis": {
+    "description": "داش مستسلم لللمسات المستمرة"
+  },
+  "dashStartOver": "يمكنني البدء من جديد كما تعلم!!",
+  "@dashStartOver": {
+    "description": "داش يهدد بإعادة تعيين حواره"
+  },
+  "dashNahDidntStartOver": "لا لم أبدأ من جديد",
+  "@dashNahDidntStartOver": {
+    "description": "داش يعترف أنه لم يعيد التعيين"
+  },
+  "dashNowIWill": "الآن سأفعل...",
+  "@dashNowIWill": {
+    "description": "داش سيعيد التعيين الآن"
+  },
+  "dashStillDidnt": "ما زلت لم أفعل",
+  "@dashStillDidnt": {
+    "description": "داش لم يعيد التعيين بعد"
   }
 }

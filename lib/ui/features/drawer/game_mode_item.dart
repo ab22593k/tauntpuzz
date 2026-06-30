@@ -1,5 +1,6 @@
 import 'package:jigsaw/domain/models/game_mode.dart';
 import 'package:jigsaw/helpers/game_mode_helper.dart';
+import 'package:jigsaw/helpers/localizations_ext.dart';
 import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
 import 'package:jigsaw/ui/core/app_text_styles.dart';
 import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_provider.dart';
@@ -93,7 +94,7 @@ class GameModeItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          GameModeHelper.displayName(mode),
+                          GameModeHelper.localizedName(mode, context.l10n),
                           style: AppTextStyles.labelLarge.copyWith(
                             color: isSelected
                                 ? colorScheme.onPrimary
@@ -108,7 +109,10 @@ class GameModeItem extends StatelessWidget {
                         ),
                         const SizedBox(height: 1),
                         Text(
-                          GameModeHelper.description(mode),
+                          GameModeHelper.localizedDescription(
+                            mode,
+                            context.l10n,
+                          ),
                           style: AppTextStyles.bodyAdaptive(wc).copyWith(
                             color: isSelected
                                 ? colorScheme.onPrimary.withValues(alpha: 0.7)

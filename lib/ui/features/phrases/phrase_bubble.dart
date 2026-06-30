@@ -1,3 +1,4 @@
+import 'package:jigsaw/helpers/localizations_ext.dart';
 import 'package:jigsaw/ui/core/layout/phrase_bubble_layout.dart';
 import 'package:jigsaw/ui/core/layout/spacing.dart';
 import 'package:jigsaw/ui/core/app_text_styles.dart';
@@ -73,7 +74,7 @@ class PhraseBubble extends StatelessWidget {
           ),
           child: Consumer<PhrasesProvider>(
             builder: (c, phrasesProvider, _) {
-              String phrase = phrasesProvider.getPhrase(state);
+              String phrase = phrasesProvider.getPhrase(state, c.l10n);
 
               return Text(
                 phrase,

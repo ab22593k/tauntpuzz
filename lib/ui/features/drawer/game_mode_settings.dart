@@ -101,7 +101,7 @@ class _MarathonRangeSelector extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Range',
+                  context.l10n.range,
                   style: AppTextStyles.labelSmall.copyWith(
                     color: colorScheme.onSurface.withValues(alpha: 0.6),
                   ),
@@ -111,7 +111,7 @@ class _MarathonRangeSelector extends StatelessWidget {
                   children: [
                     Expanded(
                       child: _SizeDropdown(
-                        label: 'From',
+                        label: context.l10n.from,
                         value: startSize,
                         sizes: sizes,
                         onChanged: (v) {
@@ -134,7 +134,7 @@ class _MarathonRangeSelector extends StatelessWidget {
                     ),
                     Expanded(
                       child: _SizeDropdown(
-                        label: 'To',
+                        label: context.l10n.to,
                         value: endSize,
                         sizes: sizes,
                         onChanged: (v) {

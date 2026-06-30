@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:jigsaw/helpers/localizations_ext.dart';
 import 'package:jigsaw/ui/core/layout/panes.dart';
 import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
 import 'package:jigsaw/ui/features/drawer/app_drawer.dart';
@@ -76,7 +77,7 @@ class _DrawerButtonState extends State<DrawerButton>
       builder: (c, _) => Transform.scale(
         scale: _pulseAnim.value,
         child: Tooltip(
-          message: 'Menu',
+          message: context.l10n.menu,
           preferBelow: false,
           child: ElevatedButton(
             key: DrawerButton._key,

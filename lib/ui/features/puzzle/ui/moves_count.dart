@@ -1,3 +1,4 @@
+import 'package:jigsaw/helpers/localizations_ext.dart';
 import 'package:jigsaw/ui/core/app_text_styles.dart';
 import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_provider.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class MovesCount extends StatelessWidget {
       selector: (c, puzzleProvider) => puzzleProvider.movesCount,
       builder: (c, int movesCount, _) => RichText(
         text: TextSpan(
-          text: 'Moves: ',
+          text: '${c.l10n.moves}: ',
           style: AppTextStyles.labelMedium.copyWith(
             color: colorScheme.onSurface,
           ),

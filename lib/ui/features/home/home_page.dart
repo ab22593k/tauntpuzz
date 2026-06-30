@@ -1,3 +1,4 @@
+import 'package:jigsaw/helpers/localizations_ext.dart';
 import 'package:jigsaw/ui/core/app_text_styles.dart';
 import 'package:jigsaw/ui/core/layout/jigsaw_bars.dart';
 import 'package:jigsaw/ui/core/layout/jigsaw_scaffold.dart';
@@ -67,7 +68,7 @@ class _StatsPane extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            'Progress',
+            context.l10n.progress,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontFamily: AppTextStyles.primaryFontFamily,
             ),

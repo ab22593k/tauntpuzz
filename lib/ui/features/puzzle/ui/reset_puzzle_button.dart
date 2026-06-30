@@ -94,7 +94,7 @@ class ResetPuzzleButton extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 16),
             child: Tooltip(
-              message: 'Reset',
+              message: context.l10n.reset,
               child: FloatingActionButton.small(
                 key: const ValueKey('reset_button'),
                 onPressed: () =>

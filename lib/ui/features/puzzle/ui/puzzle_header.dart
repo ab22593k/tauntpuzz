@@ -1,6 +1,8 @@
 import 'package:jigsaw/domain/models/game_mode.dart';
 import 'package:jigsaw/domain/models/puzzle.dart';
+import 'package:jigsaw/generated/app_localizations.dart';
 import 'package:jigsaw/helpers/game_mode_helper.dart';
+import 'package:jigsaw/helpers/localizations_ext.dart';
 import 'package:jigsaw/ui/core/animations/animations_manager.dart';
 import 'package:jigsaw/ui/core/animations/fade_in_transition.dart';
 import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
@@ -45,12 +47,14 @@ class PuzzleHeader extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final puzzleProvider = context.watch<PuzzleProvider>();
 
+    final l10n = context.l10n;
+
     if (puzzleProvider.gameMode == GameMode.marathon) {
       return FadeInTransition(
         delay: AnimationsManager.bgLayerAnimationDuration,
         child: displayMode == HeaderDisplay.sidePane
-            ? _marathonPane(colorScheme, puzzleProvider)
-            : _marathonHeader(colorScheme, puzzleProvider),
+            ? _marathonPane(colorScheme, puzzleProvider, l10n)
+            : _marathonHeader(colorScheme, puzzleProvider, l10n),
       );
     }
 
@@ -60,7 +64,7 @@ class PuzzleHeader extends StatelessWidget {
     return FadeInTransition(
       delay: AnimationsManager.bgLayerAnimationDuration,
       child: switch (displayMode) {
-        HeaderDisplay.sidePane => _sidePaneLayout(colorScheme),
+        HeaderDisplay.sidePane => _sidePaneLayout(colorScheme, l10n),
         HeaderDisplay.bottomBar
             when wc == WindowClass.compact || wc == WindowClass.medium =>
           _compactLayout(colorScheme),
@@ -72,6 +76,7 @@ class PuzzleHeader extends StatelessWidget {
   Widget _marathonHeader(
     ColorScheme colorScheme,
     PuzzleProvider puzzleProvider,
+    AppLocalizations l10n,
   ) {
     final currentSize = puzzleProvider.n;
     final endSize = puzzleProvider.marathonEndSize ?? currentSize;
@@ -89,7 +94,7 @@ class PuzzleHeader extends StatelessWidget {
         ),
         const SizedBox(width: 6),
         Text(
-          GameModeHelper.displayName(GameMode.marathon),
+          GameModeHelper.localizedName(GameMode.marathon, l10n),
           style: AppTextStyles.labelSmall.copyWith(
             color: colorScheme.onSurface.withValues(alpha: 0.6),
             fontVariations: const [FontVariation('wght', 600)],
@@ -155,7 +160,11 @@ class PuzzleHeader extends StatelessWidget {
 
   /// Marathon progress for the narrow side pane — wraps chips vertically
   /// and shows just the linked-mode indicator + a compact progress column.
-  Widget _marathonPane(ColorScheme colorScheme, PuzzleProvider puzzleProvider) {
+  Widget _marathonPane(
+    ColorScheme colorScheme,
+    PuzzleProvider puzzleProvider,
+    AppLocalizations l10n,
+  ) {
     final currentSize = puzzleProvider.n;
     final endSize = puzzleProvider.marathonEndSize ?? currentSize;
     final sizes = Puzzle.supportedPuzzleSizes;
@@ -176,7 +185,7 @@ class PuzzleHeader extends StatelessWidget {
             ),
             const SizedBox(width: 6),
             Text(
-              GameModeHelper.displayName(GameMode.marathon),
+              GameModeHelper.localizedName(GameMode.marathon, l10n),
               style: AppTextStyles.labelSmall.copyWith(
                 color: colorScheme.onSurface.withValues(alpha: 0.6),
                 fontVariations: const [FontVariation('wght', 600)],
@@ -242,13 +251,13 @@ class PuzzleHeader extends StatelessWidget {
   ///
   /// Each stat is a single row (icon + label + value). Stacks vertically
   /// instead of the horizontal spread used in [_expandedLayout].
-  Widget _sidePaneLayout(ColorScheme colorScheme) {
+  Widget _sidePaneLayout(ColorScheme colorScheme, AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _labeledStatRow(
           icon: const HugeIcon(icon: HugeIcons.strokeRoundedClock01, size: 16),
-          label: 'Time',
+          label: l10n.time,
           child: const PuzzleStopWatch(showIcon: false),
           colorScheme: colorScheme,
         ),
@@ -259,7 +268,7 @@ class PuzzleHeader extends StatelessWidget {
             size: 16,
             color: colorScheme.onSurface.withValues(alpha: 0.6),
           ),
-          label: 'Moves',
+          label: l10n.moves,
           child: const MovesCount(),
           colorScheme: colorScheme,
         ),
@@ -270,7 +279,7 @@ class PuzzleHeader extends StatelessWidget {
             size: 16,
             color: colorScheme.onSurface.withValues(alpha: 0.6),
           ),
-          label: 'Correct',
+          label: l10n.correct,
           child: CorrectTilesCount(colorScheme: colorScheme, showIcon: false),
           colorScheme: colorScheme,
         ),

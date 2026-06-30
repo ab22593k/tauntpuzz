@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:jigsaw/generated/app_localizations.dart';
 import 'package:jigsaw/ui/core/layout/phrase_bubble_layout.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -19,53 +20,54 @@ import 'package:flutter/cupertino.dart';
 /// which advance sequentially through the `dashTappedPhrases` list via an
 /// incrementing [dashTapCount].
 class PhrasesProvider with ChangeNotifier {
-  static const List<String> puzzleStartedPhrases = [
-    'Good luck!',
-    'You can do it!',
-    'I believe in you!',
+  static final List<String Function(AppLocalizations)> puzzleStartedPhrases = [
+    (l) => l.phraseGoodLuck,
+    (l) => l.phraseYouCanDoIt,
+    (l) => l.phraseIBelieveInYou,
   ];
 
-  static const List<String> doingGreatPhrases = [
-    'Keep going!',
-    'You\'r doing great!',
-    'Not much left!',
+  static final List<String Function(AppLocalizations)> doingGreatPhrases = [
+    (l) => l.phraseKeepGoing,
+    (l) => l.phraseYoureDoingGreat,
+    (l) => l.phraseNotMuchLeft,
   ];
 
-  static const List<String> puzzleSolvedPhrases = [
-    'You Are AMAZING!',
-    'You Are AWESOME!',
-    'Wow! You Did It!',
+  static final List<String Function(AppLocalizations)> puzzleSolvedPhrases = [
+    (l) => l.phraseYouAreAmazing,
+    (l) => l.phraseYouAreAwesome,
+    (l) => l.phraseWowYouDidIt,
   ];
 
-  static const List<String> hardPuzzlePhrases = [
-    'You sure you can handle all of that?!',
-    'WOW! That\'s not easy!',
-    'Easy is boring 😉',
+  static final List<String Function(AppLocalizations)> hardPuzzlePhrases = [
+    (l) => l.phraseSureYouCanHandle,
+    (l) => l.phraseWOWThatsNotEasy,
+    (l) => l.phraseEasyIsBoring,
   ];
 
-  static const List<String> puzzleTakingTooLongPhrases = [
-    'This is taking too long!',
-    'Don\'t lose hope',
-    'Better late than never',
+  static final List<String Function(AppLocalizations)>
+  puzzleTakingTooLongPhrases = [
+    (l) => l.phraseThisIsTakingTooLong,
+    (l) => l.phraseDontLoseHope,
+    (l) => l.phraseBetterLateThanNever,
   ];
 
-  static const List<String> dashTappedPhrases = [
-    'Hi! I\'m Dash',
-    'The mascot for Flutter 💙 & Dart',
-    'Which is what this app is built with!',
-    'And I\'m an astronaut here',
-    'So you can call me Jigsaw',
-    'You can stop poking me now 😃',
-    'Why don\'t you play with the puzzle instead???',
-    'You\'re starting to annoy me!',
-    'Argh! Never mind!',
-    'You\'ll probably keep doing this 😒',
-    'I can start over you know!!',
-    'Hi! I\'m Dash',
-    'Nah I didn\'t start over',
-    'Now I will...',
-    'Hi! I\'m Dash',
-    'Still didn\'t',
+  static final List<String Function(AppLocalizations)> dashTappedPhrases = [
+    (l) => l.dashIntro,
+    (l) => l.dashMascotOf,
+    (l) => l.dashBuiltWith,
+    (l) => l.dashAstronaut,
+    (l) => l.dashCallMeJigsaw,
+    (l) => l.dashStopPoking,
+    (l) => l.dashPlayInstead,
+    (l) => l.dashAnnoying,
+    (l) => l.dashNeverMind,
+    (l) => l.dashKeepDoingThis,
+    (l) => l.dashStartOver,
+    (l) => l.dashIntro,
+    (l) => l.dashNahDidntStartOver,
+    (l) => l.dashNowIWill,
+    (l) => l.dashIntro,
+    (l) => l.dashStillDidnt,
   ];
 
   static final Random random = Random();
@@ -74,18 +76,18 @@ class PhrasesProvider with ChangeNotifier {
 
   int dashTapCount = -1;
 
-  String getPhrase(PhraseState phraseState) {
+  String getPhrase(PhraseState phraseState, AppLocalizations l10n) {
     assert(phraseState != PhraseState.none);
     return switch (phraseState) {
       PhraseState.puzzleStarted =>
-        puzzleStartedPhrases[random.nextInt(puzzleStartedPhrases.length)],
+        puzzleStartedPhrases[random.nextInt(puzzleStartedPhrases.length)](l10n),
       PhraseState.puzzleSolved =>
-        puzzleSolvedPhrases[random.nextInt(puzzleSolvedPhrases.length)],
+        puzzleSolvedPhrases[random.nextInt(puzzleSolvedPhrases.length)](l10n),
       PhraseState.hardPuzzleSelected =>
-        hardPuzzlePhrases[random.nextInt(hardPuzzlePhrases.length)],
+        hardPuzzlePhrases[random.nextInt(hardPuzzlePhrases.length)](l10n),
       PhraseState.doingGreat =>
-        doingGreatPhrases[random.nextInt(doingGreatPhrases.length)],
-      PhraseState.dashTapped => dashTappedPhrases[dashTapCount],
+        doingGreatPhrases[random.nextInt(doingGreatPhrases.length)](l10n),
+      PhraseState.dashTapped => dashTappedPhrases[dashTapCount](l10n),
       PhraseState.none || PhraseState.puzzleTakingTooLong => '',
     };
   }

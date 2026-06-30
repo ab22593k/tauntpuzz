@@ -1,4 +1,5 @@
 import 'package:jigsaw/domain/models/game_mode.dart';
+import 'package:jigsaw/generated/app_localizations.dart';
 
 /// Constants and helpers shared across the game mode system.
 class GameModeHelper {
@@ -27,4 +28,22 @@ class GameModeHelper {
     GameMode.blind => 'Tiles hide — tap to peek',
     GameMode.marathon => 'Chain-solve across sizes',
   };
+
+  /// Localized name for a game mode.
+  static String localizedName(GameMode mode, AppLocalizations l10n) =>
+      switch (mode) {
+        GameMode.classic => l10n.gameModeClassic,
+        GameMode.speedrun => l10n.gameModeSpeedrun,
+        GameMode.blind => l10n.gameModeBlind,
+        GameMode.marathon => l10n.gameModeMarathon,
+      };
+
+  /// Localized description for a game mode.
+  static String localizedDescription(GameMode mode, AppLocalizations l10n) =>
+      switch (mode) {
+        GameMode.classic => l10n.gameModeClassicDesc,
+        GameMode.speedrun => l10n.gameModeSpeedrunDesc,
+        GameMode.blind => l10n.gameModeBlindDesc,
+        GameMode.marathon => l10n.gameModeMarathonDesc,
+      };
 }

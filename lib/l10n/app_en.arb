@@ -94,5 +94,212 @@
   "chooseMode": "Select a challenge variant",
   "@chooseMode": {
     "description": "Game mode section description"
+  },
+  "time": "Time",
+  "@time": {
+    "description": "Stat label for elapsed time"
+  },
+  "moves": "Moves",
+  "@moves": {
+    "description": "Stat label for move count"
+  },
+  "correct": "Correct",
+  "@correct": {
+    "description": "Stat label for correct tile count"
+  },
+  "congratsTitle": "Congrats! You did it!",
+  "@congratsTitle": {
+    "description": "Puzzle solved dialog title"
+  },
+  "congratsSubtitle": "You solved the puzzle! Share your score to challenge your friends",
+  "@congratsSubtitle": {
+    "description": "Puzzle solved dialog subtitle"
+  },
+  "restart": "Restart",
+  "@restart": {
+    "description": "Restart puzzle button label"
+  },
+  "yes": "Yes",
+  "@yes": {
+    "description": "Alert dialog confirm button"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Alert dialog cancel button"
+  },
+  "menu": "Menu",
+  "@menu": {
+    "description": "Drawer menu button tooltip"
+  },
+  "progress": "Progress",
+  "@progress": {
+    "description": "Stats pane section title"
+  },
+  "range": "Range",
+  "@range": {
+    "description": "Marathon mode range selector label"
+  },
+  "from": "From",
+  "@from": {
+    "description": "Marathon mode start size label"
+  },
+  "to": "To",
+  "@to": {
+    "description": "Marathon mode end size label"
+  },
+  "gameModeClassic": "Classic",
+  "@gameModeClassic": {
+    "description": "Classic game mode name"
+  },
+  "gameModeSpeedrun": "Speedrun",
+  "@gameModeSpeedrun": {
+    "description": "Speedrun game mode name"
+  },
+  "gameModeBlind": "Blind",
+  "@gameModeBlind": {
+    "description": "Blind game mode name"
+  },
+  "gameModeMarathon": "Marathon",
+  "@gameModeMarathon": {
+    "description": "Marathon game mode name"
+  },
+  "gameModeClassicDesc": "Solve at your own pace",
+  "@gameModeClassicDesc": {
+    "description": "Classic game mode description"
+  },
+  "gameModeSpeedrunDesc": "Beat the countdown",
+  "@gameModeSpeedrunDesc": {
+    "description": "Speedrun game mode description"
+  },
+  "gameModeBlindDesc": "Tiles hide — tap to peek",
+  "@gameModeBlindDesc": {
+    "description": "Blind game mode description"
+  },
+  "gameModeMarathonDesc": "Chain-solve across sizes",
+  "@gameModeMarathonDesc": {
+    "description": "Marathon game mode description"
+  },
+  "movesCountLabel": "{count} Moves",
+  "@movesCountLabel": {
+    "description": "Moves count display in score dialog",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "phraseGoodLuck": "Good luck!",
+  "@phraseGoodLuck": {
+    "description": "Encouragement phrase when puzzle starts"
+  },
+  "phraseYouCanDoIt": "You can do it!",
+  "@phraseYouCanDoIt": {
+    "description": "Encouragement phrase when puzzle starts"
+  },
+  "phraseIBelieveInYou": "I believe in you!",
+  "@phraseIBelieveInYou": {
+    "description": "Encouragement phrase when puzzle starts"
+  },
+  "phraseKeepGoing": "Keep going!",
+  "@phraseKeepGoing": {
+    "description": "Encouragement phrase when doing well"
+  },
+  "phraseYoureDoingGreat": "You''re doing great!",
+  "@phraseYoureDoingGreat": {
+    "description": "Encouragement phrase when doing well"
+  },
+  "phraseNotMuchLeft": "Not much left!",
+  "@phraseNotMuchLeft": {
+    "description": "Encouragement phrase when doing well"
+  },
+  "phraseYouAreAmazing": "You Are AMAZING!",
+  "@phraseYouAreAmazing": {
+    "description": "Celebration phrase when puzzle solved"
+  },
+  "phraseYouAreAwesome": "You Are AWESOME!",
+  "@phraseYouAreAwesome": {
+    "description": "Celebration phrase when puzzle solved"
+  },
+  "phraseWowYouDidIt": "Wow! You Did It!",
+  "@phraseWowYouDidIt": {
+    "description": "Celebration phrase when puzzle solved"
+  },
+  "phraseSureYouCanHandle": "You sure you can handle all of that?!",
+  "@phraseSureYouCanHandle": {
+    "description": "Playful phrase when hard puzzle selected"
+  },
+  "phraseWOWThatsNotEasy": "WOW! That''s not easy!",
+  "@phraseWOWThatsNotEasy": {
+    "description": "Playful phrase when hard puzzle selected"
+  },
+  "phraseEasyIsBoring": "Easy is boring",
+  "@phraseEasyIsBoring": {
+    "description": "Playful phrase when hard puzzle selected"
+  },
+  "phraseThisIsTakingTooLong": "This is taking too long!",
+  "@phraseThisIsTakingTooLong": {
+    "description": "Encouragement phrase when puzzle takes long"
+  },
+  "phraseDontLoseHope": "Don''t lose hope",
+  "@phraseDontLoseHope": {
+    "description": "Encouragement phrase when puzzle takes long"
+  },
+  "phraseBetterLateThanNever": "Better late than never",
+  "@phraseBetterLateThanNever": {
+    "description": "Encouragement phrase when puzzle takes long"
+  },
+  "dashIntro": "Hi! I''m Dash",
+  "@dashIntro": {
+    "description": "Dash mascot introduction"
+  },
+  "dashMascotOf": "The mascot for Flutter & Dart",
+  "@dashMascotOf": {
+    "description": "Dash describes what he represents"
+  },
+  "dashBuiltWith": "Which is what this app is built with!",
+  "@dashBuiltWith": {
+    "description": "Dash mentions the app is built with Flutter/Dart"
+  },
+  "dashAstronaut": "And I''m an astronaut here",
+  "@dashAstronaut": {
+    "description": "Dash explains his role"
+  },
+  "dashCallMeJigsaw": "So you can call me Jigsaw",
+  "@dashCallMeJigsaw": {
+    "description": "Dash suggests his nickname"
+  },
+  "dashStopPoking": "You can stop poking me now",
+  "@dashStopPoking": {
+    "description": "Dash annoyed by repeated taps"
+  },
+  "dashPlayInstead": "Why don''t you play with the puzzle instead???",
+  "@dashPlayInstead": {
+    "description": "Dash suggests playing instead of tapping"
+  },
+  "dashAnnoying": "You''re starting to annoy me!",
+  "@dashAnnoying": {
+    "description": "Dash getting annoyed"
+  },
+  "dashNeverMind": "Argh! Never mind!",
+  "@dashNeverMind": {
+    "description": "Dash gives up being annoyed"
+  },
+  "dashKeepDoingThis": "You''ll probably keep doing this",
+  "@dashKeepDoingThis": {
+    "description": "Dash resigned to continued tapping"
+  },
+  "dashStartOver": "I can start over you know!!",
+  "@dashStartOver": {
+    "description": "Dash threatens to reset his dialogue"
+  },
+  "dashNahDidntStartOver": "Nah I didn''t start over",
+  "@dashNahDidntStartOver": {
+    "description": "Dash admits he didn't reset"
+  },
+  "dashNowIWill": "Now I will...",
+  "@dashNowIWill": {
+    "description": "Dash will reset now"
+  },
+  "dashStillDidnt": "Still didn''t",
+  "@dashStillDidnt": {
+    "description": "Dash still hasn't reset"
   }
 }

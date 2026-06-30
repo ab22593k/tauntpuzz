@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:jigsaw/helpers/localizations_ext.dart';
 import 'package:jigsaw/ui/core/layout/spacing.dart';
 import 'package:jigsaw/ui/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +80,7 @@ class AppAlertDialog extends StatelessWidget {
                                   }
                                   Navigator.of(context).pop();
                                 },
-                                child: const Text('Yes'),
+                                child: Text(context.l10n.yes),
                               ),
                             ),
                             const SizedBox(width: Spacing.sm),
@@ -88,7 +89,7 @@ class AppAlertDialog extends StatelessWidget {
                                 onPressed:
                                     onCancel ??
                                     () => Navigator.of(context).pop(),
-                                child: const Text('Cancel'),
+                                child: Text(context.l10n.cancel),
                               ),
                             ),
                           ],

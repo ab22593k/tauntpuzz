@@ -132,7 +132,7 @@ class _DrawerHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Jigsaw',
+                  context.l10n.appTitle,
                   style:
                       (wc == WindowClass.compact
                               ? AppTextStyles.titleMedium

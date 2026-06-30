@@ -94,5 +94,212 @@
   "chooseMode": "Choisissez un défi",
   "@chooseMode": {
     "description": "Description de la section mode de jeu"
+  },
+  "time": "Temps",
+  "@time": {
+    "description": "Étiquette pour le temps écoulé"
+  },
+  "moves": "Coups",
+  "@moves": {
+    "description": "Étiquette pour le nombre de coups"
+  },
+  "correct": "Correct",
+  "@correct": {
+    "description": "Étiquette pour le nombre de tuiles correctes"
+  },
+  "congratsTitle": "Félicitations ! Vous avez réussi !",
+  "@congratsTitle": {
+    "description": "Titre du dialogue de puzzle résolu"
+  },
+  "congratsSubtitle": "Vous avez résolu le puzzle ! Partagez votre score pour défier vos amis",
+  "@congratsSubtitle": {
+    "description": "Sous-titre du dialogue de puzzle résolu"
+  },
+  "restart": "Recommencer",
+  "@restart": {
+    "description": "Bouton pour recommencer le puzzle"
+  },
+  "yes": "Oui",
+  "@yes": {
+    "description": "Bouton de confirmation de la boîte de dialogue"
+  },
+  "cancel": "Annuler",
+  "@cancel": {
+    "description": "Bouton d'annulation de la boîte de dialogue"
+  },
+  "menu": "Menu",
+  "@menu": {
+    "description": "Info-bulle du bouton du menu"
+  },
+  "progress": "Progression",
+  "@progress": {
+    "description": "Titre de la section des statistiques"
+  },
+  "range": "Plage",
+  "@range": {
+    "description": "Étiquette du sélecteur de plage en mode Marathon"
+  },
+  "from": "De",
+  "@from": {
+    "description": "Étiquette de la taille de départ en mode Marathon"
+  },
+  "to": "À",
+  "@to": {
+    "description": "Étiquette de la taille de fin en mode Marathon"
+  },
+  "gameModeClassic": "Classique",
+  "@gameModeClassic": {
+    "description": "Nom du mode de jeu classique"
+  },
+  "gameModeSpeedrun": "Speedrun",
+  "@gameModeSpeedrun": {
+    "description": "Nom du mode de jeu Speedrun"
+  },
+  "gameModeBlind": "Aveugle",
+  "@gameModeBlind": {
+    "description": "Nom du mode de jeu aveugle"
+  },
+  "gameModeMarathon": "Marathon",
+  "@gameModeMarathon": {
+    "description": "Nom du mode de jeu Marathon"
+  },
+  "gameModeClassicDesc": "Résolvez à votre rythme",
+  "@gameModeClassicDesc": {
+    "description": "Description du mode classique"
+  },
+  "gameModeSpeedrunDesc": "Battez le chronomètre",
+  "@gameModeSpeedrunDesc": {
+    "description": "Description du mode Speedrun"
+  },
+  "gameModeBlindDesc": "Les tuiles se cachent — appuyez pour voir",
+  "@gameModeBlindDesc": {
+    "description": "Description du mode aveugle"
+  },
+  "gameModeMarathonDesc": "Enchaînez les tailles",
+  "@gameModeMarathonDesc": {
+    "description": "Description du mode Marathon"
+  },
+  "movesCountLabel": "{count} Coups",
+  "@movesCountLabel": {
+    "description": "Affichage du nombre de coups dans le dialogue de score",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "phraseGoodLuck": "Bonne chance !",
+  "@phraseGoodLuck": {
+    "description": "Phrase d'encouragement au début du puzzle"
+  },
+  "phraseYouCanDoIt": "Tu peux le faire !",
+  "@phraseYouCanDoIt": {
+    "description": "Phrase d'encouragement au début du puzzle"
+  },
+  "phraseIBelieveInYou": "Je crois en toi !",
+  "@phraseIBelieveInYou": {
+    "description": "Phrase d'encouragement au début du puzzle"
+  },
+  "phraseKeepGoing": "Continue comme ça !",
+  "@phraseKeepGoing": {
+    "description": "Phrase d'encouragement quand ça va bien"
+  },
+  "phraseYoureDoingGreat": "Tu fais du bon travail !",
+  "@phraseYoureDoingGreat": {
+    "description": "Phrase d'encouragement quand ça va bien"
+  },
+  "phraseNotMuchLeft": "Presque fini !",
+  "@phraseNotMuchLeft": {
+    "description": "Phrase d'encouragement quand ça va bien"
+  },
+  "phraseYouAreAmazing": "Tu es INCROYABLE !",
+  "@phraseYouAreAmazing": {
+    "description": "Phrase de célébration quand le puzzle est résolu"
+  },
+  "phraseYouAreAwesome": "Tu es GÉNIAL !",
+  "@phraseYouAreAwesome": {
+    "description": "Phrase de célébration quand le puzzle est résolu"
+  },
+  "phraseWowYouDidIt": "Ouah ! Tu l''as fait !",
+  "@phraseWowYouDidIt": {
+    "description": "Phrase de célébration quand le puzzle est résolu"
+  },
+  "phraseSureYouCanHandle": "T''es sûr de pouvoir gérer tout ça ?!",
+  "@phraseSureYouCanHandle": {
+    "description": "Phrase ludique quand un grand puzzle est sélectionné"
+  },
+  "phraseWOWThatsNotEasy": "OUAH ! C''est pas facile !",
+  "@phraseWOWThatsNotEasy": {
+    "description": "Phrase ludique quand un grand puzzle est sélectionné"
+  },
+  "phraseEasyIsBoring": "Facile c''est ennuyeux",
+  "@phraseEasyIsBoring": {
+    "description": "Phrase ludique quand un grand puzzle est sélectionné"
+  },
+  "phraseThisIsTakingTooLong": "Ça prend trop de temps !",
+  "@phraseThisIsTakingTooLong": {
+    "description": "Phrase d'encouragement quand le puzzle prend du temps"
+  },
+  "phraseDontLoseHope": "Ne perds pas espoir",
+  "@phraseDontLoseHope": {
+    "description": "Phrase d'encouragement quand le puzzle prend du temps"
+  },
+  "phraseBetterLateThanNever": "Mieux vaut tard que jamais",
+  "@phraseBetterLateThanNever": {
+    "description": "Phrase d'encouragement quand le puzzle prend du temps"
+  },
+  "dashIntro": "Salut ! Je suis Dash",
+  "@dashIntro": {
+    "description": "Présentation du maschotte Dash"
+  },
+  "dashMascotOf": "La mascotte de Flutter & Dart",
+  "@dashMascotOf": {
+    "description": "Dash explique ce qu'il représente"
+  },
+  "dashBuiltWith": "Et c''est avec ça que cette appli est construite !",
+  "@dashBuiltWith": {
+    "description": "Dash mentionne que l'appli est construite avec Flutter/Dart"
+  },
+  "dashAstronaut": "Et je suis un astronaute ici",
+  "@dashAstronaut": {
+    "description": "Dash explique son rôle"
+  },
+  "dashCallMeJigsaw": "Vous pouvez m''appeler Jigsaw",
+  "@dashCallMeJigsaw": {
+    "description": "Dash suggère son surnom"
+  },
+  "dashStopPoking": "Tu peux arrêter de me tapoter maintenant",
+  "@dashStopPoking": {
+    "description": "Dash agacé par les tapotements répétés"
+  },
+  "dashPlayInstead": "Pourquoi tu ne joues pas avec le puzzle à la place ???",
+  "@dashPlayInstead": {
+    "description": "Dash suggère de jouer plutôt que de tapoter"
+  },
+  "dashAnnoying": "Tu commences à m''énerver !",
+  "@dashAnnoying": {
+    "description": "Dash devient agacé"
+  },
+  "dashNeverMind": "Argh ! Laisse tomber !",
+  "@dashNeverMind": {
+    "description": "Dash abandonne son agacement"
+  },
+  "dashKeepDoingThis": "Tu vas probablement continuer à faire ça",
+  "@dashKeepDoingThis": {
+    "description": "Dash résigné aux tapotements continus"
+  },
+  "dashStartOver": "Je peux recommencer tu sais !!",
+  "@dashStartOver": {
+    "description": "Dash menace de réinitialiser son dialogue"
+  },
+  "dashNahDidntStartOver": "Nan j''ai pas recommencé",
+  "@dashNahDidntStartOver": {
+    "description": "Dash admet qu'il n'a pas réinitialisé"
+  },
+  "dashNowIWill": "Maintenant je vais le faire...",
+  "@dashNowIWill": {
+    "description": "Dash va réinitialiser maintenant"
+  },
+  "dashStillDidnt": "Toujours pas",
+  "@dashStillDidnt": {
+    "description": "Dash n'a toujours pas réinitialisé"
   }
 }

@@ -243,6 +243,312 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select a challenge variant'**
   String get chooseMode;
+
+  /// Stat label for elapsed time
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get time;
+
+  /// Stat label for move count
+  ///
+  /// In en, this message translates to:
+  /// **'Moves'**
+  String get moves;
+
+  /// Stat label for correct tile count
+  ///
+  /// In en, this message translates to:
+  /// **'Correct'**
+  String get correct;
+
+  /// Puzzle solved dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Congrats! You did it!'**
+  String get congratsTitle;
+
+  /// Puzzle solved dialog subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'You solved the puzzle! Share your score to challenge your friends'**
+  String get congratsSubtitle;
+
+  /// Restart puzzle button label
+  ///
+  /// In en, this message translates to:
+  /// **'Restart'**
+  String get restart;
+
+  /// Alert dialog confirm button
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get yes;
+
+  /// Alert dialog cancel button
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// Drawer menu button tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Menu'**
+  String get menu;
+
+  /// Stats pane section title
+  ///
+  /// In en, this message translates to:
+  /// **'Progress'**
+  String get progress;
+
+  /// Marathon mode range selector label
+  ///
+  /// In en, this message translates to:
+  /// **'Range'**
+  String get range;
+
+  /// Marathon mode start size label
+  ///
+  /// In en, this message translates to:
+  /// **'From'**
+  String get from;
+
+  /// Marathon mode end size label
+  ///
+  /// In en, this message translates to:
+  /// **'To'**
+  String get to;
+
+  /// Classic game mode name
+  ///
+  /// In en, this message translates to:
+  /// **'Classic'**
+  String get gameModeClassic;
+
+  /// Speedrun game mode name
+  ///
+  /// In en, this message translates to:
+  /// **'Speedrun'**
+  String get gameModeSpeedrun;
+
+  /// Blind game mode name
+  ///
+  /// In en, this message translates to:
+  /// **'Blind'**
+  String get gameModeBlind;
+
+  /// Marathon game mode name
+  ///
+  /// In en, this message translates to:
+  /// **'Marathon'**
+  String get gameModeMarathon;
+
+  /// Classic game mode description
+  ///
+  /// In en, this message translates to:
+  /// **'Solve at your own pace'**
+  String get gameModeClassicDesc;
+
+  /// Speedrun game mode description
+  ///
+  /// In en, this message translates to:
+  /// **'Beat the countdown'**
+  String get gameModeSpeedrunDesc;
+
+  /// Blind game mode description
+  ///
+  /// In en, this message translates to:
+  /// **'Tiles hide — tap to peek'**
+  String get gameModeBlindDesc;
+
+  /// Marathon game mode description
+  ///
+  /// In en, this message translates to:
+  /// **'Chain-solve across sizes'**
+  String get gameModeMarathonDesc;
+
+  /// Moves count display in score dialog
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Moves'**
+  String movesCountLabel(Object count);
+
+  /// Encouragement phrase when puzzle starts
+  ///
+  /// In en, this message translates to:
+  /// **'Good luck!'**
+  String get phraseGoodLuck;
+
+  /// Encouragement phrase when puzzle starts
+  ///
+  /// In en, this message translates to:
+  /// **'You can do it!'**
+  String get phraseYouCanDoIt;
+
+  /// Encouragement phrase when puzzle starts
+  ///
+  /// In en, this message translates to:
+  /// **'I believe in you!'**
+  String get phraseIBelieveInYou;
+
+  /// Encouragement phrase when doing well
+  ///
+  /// In en, this message translates to:
+  /// **'Keep going!'**
+  String get phraseKeepGoing;
+
+  /// Encouragement phrase when doing well
+  ///
+  /// In en, this message translates to:
+  /// **'You\'\'re doing great!'**
+  String get phraseYoureDoingGreat;
+
+  /// Encouragement phrase when doing well
+  ///
+  /// In en, this message translates to:
+  /// **'Not much left!'**
+  String get phraseNotMuchLeft;
+
+  /// Celebration phrase when puzzle solved
+  ///
+  /// In en, this message translates to:
+  /// **'You Are AMAZING!'**
+  String get phraseYouAreAmazing;
+
+  /// Celebration phrase when puzzle solved
+  ///
+  /// In en, this message translates to:
+  /// **'You Are AWESOME!'**
+  String get phraseYouAreAwesome;
+
+  /// Celebration phrase when puzzle solved
+  ///
+  /// In en, this message translates to:
+  /// **'Wow! You Did It!'**
+  String get phraseWowYouDidIt;
+
+  /// Playful phrase when hard puzzle selected
+  ///
+  /// In en, this message translates to:
+  /// **'You sure you can handle all of that?!'**
+  String get phraseSureYouCanHandle;
+
+  /// Playful phrase when hard puzzle selected
+  ///
+  /// In en, this message translates to:
+  /// **'WOW! That\'\'s not easy!'**
+  String get phraseWOWThatsNotEasy;
+
+  /// Playful phrase when hard puzzle selected
+  ///
+  /// In en, this message translates to:
+  /// **'Easy is boring'**
+  String get phraseEasyIsBoring;
+
+  /// Encouragement phrase when puzzle takes long
+  ///
+  /// In en, this message translates to:
+  /// **'This is taking too long!'**
+  String get phraseThisIsTakingTooLong;
+
+  /// Encouragement phrase when puzzle takes long
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'\'t lose hope'**
+  String get phraseDontLoseHope;
+
+  /// Encouragement phrase when puzzle takes long
+  ///
+  /// In en, this message translates to:
+  /// **'Better late than never'**
+  String get phraseBetterLateThanNever;
+
+  /// Dash mascot introduction
+  ///
+  /// In en, this message translates to:
+  /// **'Hi! I\'\'m Dash'**
+  String get dashIntro;
+
+  /// Dash describes what he represents
+  ///
+  /// In en, this message translates to:
+  /// **'The mascot for Flutter & Dart'**
+  String get dashMascotOf;
+
+  /// Dash mentions the app is built with Flutter/Dart
+  ///
+  /// In en, this message translates to:
+  /// **'Which is what this app is built with!'**
+  String get dashBuiltWith;
+
+  /// Dash explains his role
+  ///
+  /// In en, this message translates to:
+  /// **'And I\'\'m an astronaut here'**
+  String get dashAstronaut;
+
+  /// Dash suggests his nickname
+  ///
+  /// In en, this message translates to:
+  /// **'So you can call me Jigsaw'**
+  String get dashCallMeJigsaw;
+
+  /// Dash annoyed by repeated taps
+  ///
+  /// In en, this message translates to:
+  /// **'You can stop poking me now'**
+  String get dashStopPoking;
+
+  /// Dash suggests playing instead of tapping
+  ///
+  /// In en, this message translates to:
+  /// **'Why don\'\'t you play with the puzzle instead???'**
+  String get dashPlayInstead;
+
+  /// Dash getting annoyed
+  ///
+  /// In en, this message translates to:
+  /// **'You\'\'re starting to annoy me!'**
+  String get dashAnnoying;
+
+  /// Dash gives up being annoyed
+  ///
+  /// In en, this message translates to:
+  /// **'Argh! Never mind!'**
+  String get dashNeverMind;
+
+  /// Dash resigned to continued tapping
+  ///
+  /// In en, this message translates to:
+  /// **'You\'\'ll probably keep doing this'**
+  String get dashKeepDoingThis;
+
+  /// Dash threatens to reset his dialogue
+  ///
+  /// In en, this message translates to:
+  /// **'I can start over you know!!'**
+  String get dashStartOver;
+
+  /// Dash admits he didn't reset
+  ///
+  /// In en, this message translates to:
+  /// **'Nah I didn\'\'t start over'**
+  String get dashNahDidntStartOver;
+
+  /// Dash will reset now
+  ///
+  /// In en, this message translates to:
+  /// **'Now I will...'**
+  String get dashNowIWill;
+
+  /// Dash still hasn't reset
+  ///
+  /// In en, this message translates to:
+  /// **'Still didn\'\'t'**
+  String get dashStillDidnt;
 }
 
 class _AppLocalizationsDelegate

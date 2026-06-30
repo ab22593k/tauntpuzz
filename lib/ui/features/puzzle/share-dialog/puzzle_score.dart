@@ -36,13 +36,10 @@ class PuzzleScore extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Congrats! You did it!',
-              style: AppTextStyles.displaySmall,
-            ),
+            Text(context.l10n.congratsTitle, style: AppTextStyles.displaySmall),
             const SizedBox(height: Spacing.xs),
             Text(
-              'You solved the puzzle! Share your score to challenge your friends',
+              context.l10n.congratsSubtitle,
               style: TextStyle(
                 color: colorScheme.onSurface.withValues(alpha: 0.7),
               ),
@@ -64,7 +61,10 @@ class PuzzleScore extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: Text('$movesCount Moves', style: AppTextStyles.h1Bold),
+                  child: Text(
+                    context.l10n.movesCountLabel(movesCount),
+                    style: AppTextStyles.h1Bold,
+                  ),
                 ),
               ],
             ),
@@ -76,7 +76,7 @@ class PuzzleScore extends StatelessWidget {
             Expanded(
               child: ElevatedButton.icon(
                 onPressed: () => Navigator.of(context).pop(),
-                label: const Text('Restart'),
+                label: Text(context.l10n.restart),
                 icon: const HugeIcon(icon: HugeIcons.strokeRoundedRefresh01),
               ),
             ),
