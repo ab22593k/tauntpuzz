@@ -175,7 +175,7 @@ class _PaneDragHandleState extends State<PaneDragHandle> {
             height: 32,
             decoration: BoxDecoration(
               color: colorScheme.outlineVariant.withValues(alpha: 0.3),
-              borderRadius: BorderRadius.circular(2),
+              borderRadius: BorderRadius.zero,
             ),
             child: widget.isCollapsed
                 ? Icon(
@@ -193,12 +193,7 @@ class _PaneDragHandleState extends State<PaneDragHandle> {
 
 /// An MD3 pane divider used between co-planar panes.
 Widget paneDivider(BuildContext context) {
-  final colorScheme = Theme.of(context).colorScheme;
-  return VerticalDivider(
-    width: 1,
-    thickness: 1,
-    color: colorScheme.outlineVariant.withValues(alpha: 0.2),
-  );
+  return const SizedBox(width: 24);
 }
 
 /// A floating pane displayed above other panes, like a dialog or popover.
@@ -245,17 +240,10 @@ class FloatingPane extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               color: colorScheme.surfaceContainerHigh,
-              borderRadius: BorderRadius.circular(28),
-              boxShadow: [
-                BoxShadow(
-                  color: colorScheme.shadow.withValues(alpha: 0.2),
-                  blurRadius: 32,
-                  offset: const Offset(0, 8),
-                ),
-              ],
+              borderRadius: BorderRadius.zero,
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(28),
+              borderRadius: BorderRadius.zero,
               child: Material(color: Colors.transparent, child: child),
             ),
           ),
@@ -294,17 +282,10 @@ class DockedPane extends StatelessWidget {
         margin: EdgeInsets.only(bottom: padding.bottom),
         decoration: BoxDecoration(
           color: colorScheme.surfaceContainerHigh,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-          boxShadow: [
-            BoxShadow(
-              color: colorScheme.shadow.withValues(alpha: 0.15),
-              blurRadius: 16,
-              offset: const Offset(0, -4),
-            ),
-          ],
+          borderRadius: BorderRadius.zero,
         ),
         child: ClipRRect(
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+          borderRadius: BorderRadius.zero,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -314,7 +295,7 @@ class DockedPane extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(vertical: 8),
                 decoration: BoxDecoration(
                   color: colorScheme.outlineVariant,
-                  borderRadius: BorderRadius.circular(2),
+                  borderRadius: BorderRadius.zero,
                 ),
               ),
               Flexible(child: child),

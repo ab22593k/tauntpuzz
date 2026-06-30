@@ -23,7 +23,6 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final padding = MediaQuery.paddingOf(context);
     final screenSize = MediaQuery.sizeOf(context);
-    final isWide = screenSize.width > 600;
     double drawerStartPadding = padding.left == 0 ? Spacing.md : padding.left;
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -57,12 +56,6 @@ class AppDrawer extends StatelessWidget {
                     alpha: 0.95,
                   ),
                   borderRadius: BorderRadius.zero,
-                  border: Border(
-                    right: BorderSide(
-                      width: isWide ? 1 : 1,
-                      color: colorScheme.outlineVariant.withValues(alpha: 0.15),
-                    ),
-                  ),
                 ),
                 child: Column(
                   children: [

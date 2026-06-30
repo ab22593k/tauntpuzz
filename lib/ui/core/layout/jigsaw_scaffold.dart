@@ -357,26 +357,6 @@ class _JigsawScaffoldState extends State<JigsawScaffold> {
           horizontal: Spacing.screenHPadding,
           vertical: Spacing.xs,
         ),
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: isTop
-                ? BorderSide(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.outlineVariant.withValues(alpha: 0.08),
-                    width: 0.5,
-                  )
-                : BorderSide.none,
-            top: !isTop
-                ? BorderSide(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.outlineVariant.withValues(alpha: 0.08),
-                    width: 0.5,
-                  )
-                : BorderSide.none,
-          ),
-        ),
         child: child,
       ),
     );

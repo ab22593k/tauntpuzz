@@ -189,11 +189,6 @@ class _ThemeButtonState extends State<_ThemeButton>
           colorScheme.onPrimary,
           value,
         )!;
-        final borderColor = Color.lerp(
-          colorScheme.outlineVariant.withValues(alpha: 0.5),
-          colorScheme.primary,
-          value,
-        )!;
         final iconScale = 1.0 + (1.0 - _scaleAnimation.value) * 0.15;
 
         return Material(
@@ -204,9 +199,6 @@ class _ThemeButtonState extends State<_ThemeButton>
             borderRadius: BorderRadius.zero,
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              decoration: BoxDecoration(
-                border: Border.all(color: borderColor, width: 1),
-              ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [

@@ -33,10 +33,7 @@ class AppAlertDialog extends StatelessWidget {
       contentPadding: const EdgeInsets.all(0),
       scrollable: true,
       insetPadding: insetPadding,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.zero,
-        side: BorderSide(color: colorScheme.outlineVariant, width: 0.5),
-      ),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
       content: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
@@ -53,7 +50,7 @@ class AppAlertDialog extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.zero,
-                  color: colorScheme.surfaceContainerLowest,
+                  color: colorScheme.surfaceContainer.withValues(alpha: 0.7),
                 ),
                 child:
                     content ??
@@ -65,8 +62,12 @@ class AppAlertDialog extends StatelessWidget {
                             title!,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: AppTextStyles.bodyLarge.copyWith(
-                              height: 1.5,
+                            style: TextStyle(
+                              fontFamily: AppTextStyles.primaryFontFamily,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w400,
+                              height: 1.2,
+                              color: colorScheme.onSurface,
                             ),
                           ),
                         const SizedBox(height: 40),
@@ -89,6 +90,20 @@ class AppAlertDialog extends StatelessWidget {
                                 onPressed:
                                     onCancel ??
                                     () => Navigator.of(context).pop(),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.transparent,
+                                  foregroundColor: colorScheme.onSurface,
+                                  elevation: 0,
+                                  shadowColor: Colors.transparent,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero,
+                                    side: BorderSide(
+                                      color: colorScheme.outlineVariant
+                                          .withValues(alpha: 0.15),
+                                      width: 0.5,
+                                    ),
+                                  ),
+                                ),
                                 child: Text(context.l10n.cancel),
                               ),
                             ),

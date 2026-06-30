@@ -94,12 +94,8 @@ class _DrawerButtonState extends State<DrawerButton>
                     alpha: 0.7,
                   ),
                   foregroundColor: colorScheme.onSurface,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.zero,
-                    side: BorderSide(
-                      width: 1,
-                      color: colorScheme.outlineVariant.withValues(alpha: 0.15),
-                    ),
                   ),
                 ).copyWith(
                   elevation: WidgetStateProperty.resolveWith((states) {

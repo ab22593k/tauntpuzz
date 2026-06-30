@@ -93,9 +93,6 @@ class _MarathonRangeSelector extends StatelessWidget {
             decoration: BoxDecoration(
               color: colorScheme.surfaceContainerLow,
               borderRadius: BorderRadius.zero,
-              border: Border.all(
-                color: colorScheme.outlineVariant.withValues(alpha: 0.2),
-              ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,12 +185,7 @@ class _SizeDropdown extends StatelessWidget {
         const SizedBox(height: 4),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.zero,
-            border: Border.all(
-              color: colorScheme.outlineVariant.withValues(alpha: 0.3),
-            ),
-          ),
+          decoration: const BoxDecoration(borderRadius: BorderRadius.zero),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<int>(
               value: value,

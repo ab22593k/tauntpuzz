@@ -51,14 +51,6 @@ class PuzzleAppBar extends StatelessWidget implements PreferredSizeWidget {
         right: 4,
         top: MediaQuery.paddingOf(context).top,
       ),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: colorScheme.outlineVariant.withValues(alpha: 0.12),
-            width: 0.5,
-          ),
-        ),
-      ),
       child: Row(
         children: [
           ?leading,
@@ -153,12 +145,6 @@ class PuzzleToolbar extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: colorScheme.surfaceContainerLow.withValues(alpha: 0.92),
-        border: Border(
-          top: BorderSide(
-            color: colorScheme.outlineVariant.withValues(alpha: 0.12),
-            width: 0.5,
-          ),
-        ),
       ),
       child: child,
     );

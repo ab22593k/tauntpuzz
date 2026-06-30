@@ -54,16 +54,8 @@ class PuzzleSizeItem extends StatelessWidget {
                 style:
                     ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 10),
-                      shape: RoundedRectangleBorder(
+                      shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.zero,
-                        side: BorderSide(
-                          width: isSelected ? 2 : 1,
-                          color: isSelected
-                              ? colorScheme.primary
-                              : colorScheme.outlineVariant.withValues(
-                                  alpha: 0.3,
-                                ),
-                        ),
                       ),
                       minimumSize: const Size.fromHeight(48),
                       backgroundColor: isSelected

@@ -88,10 +88,6 @@ class LatestScores extends StatelessWidget {
       decoration: BoxDecoration(
         color: colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.zero,
-        border: Border.all(
-          color: colorScheme.outlineVariant.withValues(alpha: 0.15),
-          width: 1,
-        ),
       ),
       child: Column(
         children: [

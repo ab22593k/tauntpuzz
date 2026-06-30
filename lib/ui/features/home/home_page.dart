@@ -59,21 +59,26 @@ class _StatsPane extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: Spacing.sm,
-        vertical: Spacing.md,
+        vertical: Spacing.xl,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
             context.l10n.progress,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            style: TextStyle(
               fontFamily: AppTextStyles.primaryFontFamily,
+              fontSize: 32,
+              fontWeight: FontWeight.w400,
+              height: 1.2,
+              color: colorScheme.onSurface,
             ),
           ),
-          const SizedBox(height: Spacing.md),
+          const SizedBox(height: Spacing.lg),
           const PuzzleHeader(displayMode: HeaderDisplay.sidePane),
         ],
       ),

@@ -1,16 +1,10 @@
-import 'dart:io';
-
 import 'package:jigsaw/helpers/duration_helper.dart';
-import 'package:jigsaw/helpers/file_helper.dart';
 import 'package:jigsaw/helpers/localizations_ext.dart';
 import 'package:jigsaw/helpers/share_score_helper.dart';
 import 'package:jigsaw/ui/core/layout/spacing.dart';
 import 'package:jigsaw/ui/core/app_text_styles.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:share_plus/share_plus.dart';
 
 class PuzzleScore extends StatelessWidget {
   final Duration duration;
@@ -83,46 +77,17 @@ class PuzzleScore extends StatelessWidget {
             const SizedBox(width: Spacing.sm),
             Expanded(
               child: ElevatedButton.icon(
-                onPressed: () async {
-                  try {
-                    if (kIsWeb) {
-                      await ShareScoreHelper.openLink(
-                        ShareScoreHelper.getTwitterShareLink(
-                          movesCount,
-                          duration,
-                          tilesCount,
-                        ),
-                      );
-                    } else {
-                      File file = await FileHelper.getFileFromUrl(
-                        ShareScoreHelper.getPuzzleSolvedImageUrl(puzzleSize),
-                      );
-                      await SharePlus.instance.share(
-                        ShareParams(
-                          files: [XFile(file.path)],
-                          text: ShareScoreHelper.getPuzzleSolvedTextMobile(
-                            movesCount,
-                            duration,
-                            tilesCount,
-                          ),
-                        ),
-                      );
-                    }
-                  } catch (e) {
-                    await ShareScoreHelper.openLink(
-                      ShareScoreHelper.getTwitterShareLink(
-                        movesCount,
-                        duration,
-                        tilesCount,
-                      ),
-                    );
-                    rethrow;
-                  }
+                onPressed: () {
+                  ShareScoreHelper.openLink(
+                    ShareScoreHelper.getTwitterShareLink(
+                      movesCount,
+                      duration,
+                      tilesCount,
+                    ),
+                  );
                 },
                 label: Text(context.l10n.share),
-                icon: kIsWeb
-                    ? const FaIcon(FontAwesomeIcons.twitter)
-                    : const HugeIcon(icon: HugeIcons.strokeRoundedShare01),
+                icon: const HugeIcon(icon: HugeIcons.strokeRoundedShare01),
               ),
             ),
           ],

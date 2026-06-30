@@ -123,14 +123,6 @@ class _LanguageButton extends StatelessWidget {
         borderRadius: BorderRadius.zero,
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 8),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: isSelected
-                  ? colorScheme.primary
-                  : colorScheme.outlineVariant.withValues(alpha: 0.5),
-              width: 1,
-            ),
-          ),
           child: Center(
             child: Text(
               label,

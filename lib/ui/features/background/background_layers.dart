@@ -9,6 +9,7 @@ class BackgroundLayers {
     BackgroundLayerType.topLeftPlanet,
     BackgroundLayerType.bottomLeftPlanet,
     BackgroundLayerType.bottomRightPlanet,
+    BackgroundLayerType.bottomBgPlanet,
   ];
 
   List<BackgroundLayerLayout> call(Size size) {
