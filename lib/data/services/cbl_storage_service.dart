@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:jigsaw/data/services/storage_service.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:xdg_directories/xdg_directories.dart' as xdg;
 
 class KConfigStorageService implements StorageService {
   final Map<String, dynamic> _cache = {};
@@ -27,9 +28,7 @@ class KConfigStorageService implements StorageService {
       final appDir = await getApplicationDocumentsDirectory();
       _kconfigFile = File('${appDir.path}/jigsawrc');
     } else {
-      final configDir =
-          Platform.environment['XDG_CONFIG_HOME'] ?? '$home/.config';
-      _kconfigFile = File('$configDir/jigsawrc');
+      _kconfigFile = File('${xdg.configHome.path}/jigsawrc');
     }
     if (await _kconfigFile!.exists()) {
       final content = await _kconfigFile!.readAsString();
