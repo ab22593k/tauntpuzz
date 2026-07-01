@@ -8,8 +8,9 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 
 void main() {
   usePathUrlStrategy();
-  setupServiceLocator();
   runZonedGuarded<Future<void>>(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    setupServiceLocator();
     final StorageService storageService = getIt<StorageService>();
     await storageService.init();
 
