@@ -84,10 +84,6 @@ class _EndToEndAppState extends State<_EndToEndApp> {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
 /// Pumps the app and waits for the initial render. Uses `pump()` instead of
 /// `pumpAndSettle()` to avoid hanging on the continuously animating background
 /// layers (stars + parallax layers).
@@ -129,10 +125,6 @@ int movesCount(WidgetTester tester) {
   final provider = Provider.of<PuzzleProvider>(context, listen: false);
   return provider.movesCount;
 }
-
-// ---------------------------------------------------------------------------
-// Tests
-// ---------------------------------------------------------------------------
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

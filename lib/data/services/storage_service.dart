@@ -1,3 +1,10 @@
+/// Application directory/namespace name used across storage paths.
+///
+/// Used on Linux as the subdirectory under XDG base directories
+/// (e.g. `~/.local/share/jigsaw/`, `~/.cache/jigsaw/`) and as the
+/// KConfig-style data file name (`jigsawrc`).
+const String appStorageDirName = 'jigsaw';
+
 class StorageKey {
   static const String puzzle = 'puzzle';
   static const String secondsElapsed = 'secondsElapsed';

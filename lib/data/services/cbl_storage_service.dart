@@ -26,9 +26,10 @@ class KConfigStorageService implements StorageService {
     final home = Platform.environment['HOME'];
     if (home == null) {
       final appDir = await getApplicationDocumentsDirectory();
-      _kconfigFile = File('${appDir.path}/jigsawrc');
+      _kconfigFile = File('${appDir.path}/${appStorageDirName}rc');
     } else {
-      _kconfigFile = File('${xdg.configHome.path}/jigsawrc');
+      await xdg.dataHome.create(recursive: true);
+      _kconfigFile = File('${xdg.dataHome.path}/${appStorageDirName}rc');
     }
     if (await _kconfigFile!.exists()) {
       final content = await _kconfigFile!.readAsString();
