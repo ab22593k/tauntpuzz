@@ -1,12 +1,12 @@
 import 'dart:developer';
 import 'dart:math' show Random;
 
-import 'package:jigsaw/domain/models/game_mode.dart';
-import 'package:jigsaw/domain/models/location.dart';
-import 'package:jigsaw/domain/models/puzzle.dart';
-import 'package:jigsaw/domain/models/score.dart';
-import 'package:jigsaw/domain/models/tile.dart';
-import 'package:jigsaw/data/services/storage_service.dart';
+import 'package:leafy/domain/models/game_mode.dart';
+import 'package:leafy/domain/models/location.dart';
+import 'package:leafy/domain/models/puzzle.dart';
+import 'package:leafy/domain/models/score.dart';
+import 'package:leafy/domain/models/tile.dart';
+import 'package:leafy/data/services/storage_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 

@@ -1,5 +1,5 @@
-import 'package:jigsaw/ui/core/app_text_styles.dart';
-import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
+import 'package:leafy/ui/core/app_text_styles.dart';
+import 'package:leafy/ui/core/layout/screen_type_helper.dart';
 import 'package:flutter/material.dart';
 
 /// MD3 small app bar (64dp) following spec tokens:
@@ -100,12 +100,12 @@ class PuzzleAppBar extends StatelessWidget implements PreferredSizeWidget {
 /// - `container.color`: `surface-container`
 /// - Active indicator `secondary` / inactive `on-surface-variant`
 /// - No elevation
-class JigsawNavigationBar extends StatelessWidget {
+class LeafyNavigationBar extends StatelessWidget {
   final List<NavigationDestination> destinations;
   final int selectedIndex;
   final ValueChanged<int>? onDestinationSelected;
 
-  const JigsawNavigationBar({
+  const LeafyNavigationBar({
     super.key,
     required this.destinations,
     required this.selectedIndex,

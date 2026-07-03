@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:jigsaw/domain/models/game_mode.dart';
+import 'package:leafy/domain/models/game_mode.dart';
 
 class Score {
   final int secondsElapsed;

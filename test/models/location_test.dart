@@ -1,4 +1,4 @@
-import 'package:jigsaw/domain/models/location.dart';
+import 'package:leafy/domain/models/location.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:checks/checks.dart';
 

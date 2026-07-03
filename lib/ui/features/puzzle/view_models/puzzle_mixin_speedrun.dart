@@ -1,4 +1,4 @@
-import 'package:jigsaw/helpers/game_mode_helper.dart';
+import 'package:leafy/helpers/game_mode_helper.dart';
 import 'package:flutter/foundation.dart';
 
 /// Mixin that adds speedrun puzzle mode fields (countdown override and

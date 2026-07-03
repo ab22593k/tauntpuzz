@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Brand color tokens for the Jigsaw puzzle app.
+/// Brand color tokens for the Leafy puzzle app.
 ///
 /// The [brandSeed] is the single key color that seeds the Material 3
 /// color system. Per the M3 "Customizing Material" spec, it generates
@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 /// deterministic fallback that preserves the app's identity regardless
 /// of platform dynamic-color support.
 class AppColors {
-  /// The brand key color. A near-black anchors the "Jigsaw" space
+  /// The brand key color. A near-black anchors the "Leafy" space
   /// aesthetic; seeding M3 with it yields tonal palettes that stay
   /// neutral and high-contrast in both light and dark.
   static const Color brandSeed = Color(0xff1b1b1b);

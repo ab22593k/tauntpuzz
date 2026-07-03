@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:jigsaw/ui/features/background/stars_painter.dart';
-import 'package:jigsaw/ui/core/layout/layout_delegate.dart';
-import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
+import 'package:leafy/ui/features/background/stars_painter.dart';
+import 'package:leafy/ui/core/layout/layout_delegate.dart';
+import 'package:leafy/ui/core/layout/screen_type_helper.dart';
 import 'package:flutter/material.dart';
 
 class StarsLayout implements LayoutDelegate {

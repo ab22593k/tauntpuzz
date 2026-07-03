@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
-import 'package:jigsaw/ui/core/error_screen.dart';
-import 'package:jigsaw/ui/features/home/home_page.dart';
+import 'package:leafy/ui/core/error_screen.dart';
+import 'package:leafy/ui/features/home/home_page.dart';
 
 class AppRouter {
   AppRouter._();

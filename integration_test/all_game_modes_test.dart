@@ -5,17 +5,17 @@ import 'package:flutter_checks/flutter_checks.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:provider/provider.dart';
 
-import 'package:jigsaw/data/services/storage_service.dart';
-import 'package:jigsaw/domain/models/game_mode.dart';
-import 'package:jigsaw/generated/app_localizations.dart';
-import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_provider.dart';
-import 'package:jigsaw/ui/features/puzzle/view_models/stop_watch_provider.dart';
-import 'package:jigsaw/ui/features/phrases/view_models/phrases_provider.dart';
-import 'package:jigsaw/ui/core/locale_provider.dart';
-import 'package:jigsaw/ui/core/theme_provider.dart';
-import 'package:jigsaw/ui/core/app_theme.dart';
-import 'package:jigsaw/ui/features/puzzle/ui/puzzle_view.dart';
-import 'package:jigsaw/ui/features/drawer/app_drawer.dart';
+import 'package:leafy/data/services/storage_service.dart';
+import 'package:leafy/domain/models/game_mode.dart';
+import 'package:leafy/generated/app_localizations.dart';
+import 'package:leafy/ui/features/puzzle/view_models/puzzle_provider.dart';
+import 'package:leafy/ui/features/puzzle/view_models/stop_watch_provider.dart';
+import 'package:leafy/ui/features/phrases/view_models/phrases_provider.dart';
+import 'package:leafy/ui/core/locale_provider.dart';
+import 'package:leafy/ui/core/theme_provider.dart';
+import 'package:leafy/ui/core/app_theme.dart';
+import 'package:leafy/ui/features/puzzle/ui/puzzle_view.dart';
+import 'package:leafy/ui/features/drawer/app_drawer.dart';
 
 /// In-memory storage service for integration tests.
 class _InMemoryStorage implements StorageService {

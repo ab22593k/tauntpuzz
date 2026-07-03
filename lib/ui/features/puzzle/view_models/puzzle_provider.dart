@@ -2,16 +2,16 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:math' show Random;
 
-import 'package:jigsaw/domain/models/game_mode.dart';
-import 'package:jigsaw/domain/models/puzzle.dart';
-import 'package:jigsaw/domain/models/score.dart';
-import 'package:jigsaw/domain/models/tile.dart';
-import 'package:jigsaw/data/services/storage_service.dart';
-import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_mixin_blind.dart';
-import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_mixin_core.dart';
-import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_mixin_marathon.dart';
-import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_mixin_orchestrator.dart';
-import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_mixin_speedrun.dart';
+import 'package:leafy/domain/models/game_mode.dart';
+import 'package:leafy/domain/models/puzzle.dart';
+import 'package:leafy/domain/models/score.dart';
+import 'package:leafy/domain/models/tile.dart';
+import 'package:leafy/data/services/storage_service.dart';
+import 'package:leafy/ui/features/puzzle/view_models/puzzle_mixin_blind.dart';
+import 'package:leafy/ui/features/puzzle/view_models/puzzle_mixin_core.dart';
+import 'package:leafy/ui/features/puzzle/view_models/puzzle_mixin_marathon.dart';
+import 'package:leafy/ui/features/puzzle/view_models/puzzle_mixin_orchestrator.dart';
+import 'package:leafy/ui/features/puzzle/view_models/puzzle_mixin_speedrun.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 

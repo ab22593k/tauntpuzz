@@ -1,5 +1,5 @@
-import 'package:jigsaw/domain/models/game_mode.dart';
-import 'package:jigsaw/generated/app_localizations.dart';
+import 'package:leafy/domain/models/game_mode.dart';
+import 'package:leafy/generated/app_localizations.dart';
 
 /// Constants and helpers shared across the game mode system.
 class GameModeHelper {

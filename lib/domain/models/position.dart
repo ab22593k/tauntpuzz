@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:jigsaw/ui/core/animations/position_tween.dart';
+import 'package:leafy/ui/core/animations/position_tween.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 

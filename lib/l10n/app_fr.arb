@@ -1,5 +1,5 @@
 {
-  "appTitle": "Jigsaw",
+  "appTitle": "Leafy",
   "@appTitle": {
     "description": "Le titre de l'application"
   },
@@ -262,8 +262,8 @@
   "@dashAstronaut": {
     "description": "Dash explique son rôle"
   },
-  "dashCallMeJigsaw": "Vous pouvez m''appeler Jigsaw",
-  "@dashCallMeJigsaw": {
+  "dashCallMeLeafy": "Vous pouvez m''appeler Leafy",
+  "@dashCallMeLeafy": {
     "description": "Dash suggère son surnom"
   },
   "dashStopPoking": "Tu peux arrêter de me tapoter maintenant",

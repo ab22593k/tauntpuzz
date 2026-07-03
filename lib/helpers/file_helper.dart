@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:jigsaw/data/services/storage_service.dart';
+import 'package:leafy/data/services/storage_service.dart';
 import 'package:path_provider/path_provider.dart' as path;
 import 'package:xdg_directories/xdg_directories.dart' as xdg;
 
@@ -28,7 +28,7 @@ class FileHelper {
   /// Returns a type [File] from a url
   ///
   /// Writes the file's binary data to the platform-appropriate cache location.
-  /// On Linux, uses `xdgCacheHome` (~/.cache/jigsaw/); on other platforms,
+  /// On Linux, uses `xdgCacheHome` (~/.cache/leafy/); on other platforms,
   /// falls back to the system temporary directory.
   /// Returns the written file.
   static Future<File> getFileFromUrl(String url) async {

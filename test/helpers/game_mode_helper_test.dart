@@ -1,6 +1,6 @@
 import 'package:checks/checks.dart';
-import 'package:jigsaw/domain/models/game_mode.dart';
-import 'package:jigsaw/helpers/game_mode_helper.dart';
+import 'package:leafy/domain/models/game_mode.dart';
+import 'package:leafy/helpers/game_mode_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

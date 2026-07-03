@@ -1,9 +1,9 @@
 /// Application directory/namespace name used across storage paths.
 ///
 /// Used on Linux as the subdirectory under XDG base directories
-/// (e.g. `~/.local/share/jigsaw/`, `~/.cache/jigsaw/`) and as the
-/// KConfig-style data file name (`jigsawrc`).
-const String appStorageDirName = 'jigsaw';
+/// (e.g. `~/.local/share/leafy/`, `~/.cache/leafy/`) and as the
+/// KConfig-style data file name (`leafyrc`).
+const String appStorageDirName = 'leafy';
 
 class StorageKey {
   static const String puzzle = 'puzzle';

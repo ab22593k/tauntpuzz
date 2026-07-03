@@ -262,8 +262,8 @@
   "@dashAstronaut": {
     "description": "يشرح داش دوره"
   },
-  "dashCallMeJigsaw": "لذا يمكنكم مناداتي جيغسو",
-  "@dashCallMeJigsaw": {
+  "dashCallMeLeafy": "لذا يمكنكم مناداتي جيغسو",
+  "@dashCallMeLeafy": {
     "description": "يقترح داش اسمه المستعار"
   },
   "dashStopPoking": "يمكنك التوقف عن ضربي الآن",

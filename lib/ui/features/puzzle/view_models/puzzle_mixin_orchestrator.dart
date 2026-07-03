@@ -1,6 +1,6 @@
-import 'package:jigsaw/domain/models/game_mode.dart';
-import 'package:jigsaw/domain/models/puzzle.dart';
-import 'package:jigsaw/data/services/storage_service.dart';
+import 'package:leafy/domain/models/game_mode.dart';
+import 'package:leafy/domain/models/puzzle.dart';
+import 'package:leafy/data/services/storage_service.dart';
 import 'package:flutter/foundation.dart';
 
 /// Mixin that orchestrates game-mode switching and puzzle-size changes across

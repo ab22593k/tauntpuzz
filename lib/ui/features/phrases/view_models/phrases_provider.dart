@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:jigsaw/generated/app_localizations.dart';
-import 'package:jigsaw/ui/core/layout/phrase_bubble_layout.dart';
+import 'package:leafy/generated/app_localizations.dart';
+import 'package:leafy/ui/core/layout/phrase_bubble_layout.dart';
 import 'package:flutter/cupertino.dart';
 
 /// Provides contextual encouragement phrases displayed in the
@@ -56,7 +56,7 @@ class PhrasesProvider with ChangeNotifier {
     (l) => l.dashMascotOf,
     (l) => l.dashBuiltWith,
     (l) => l.dashAstronaut,
-    (l) => l.dashCallMeJigsaw,
+    (l) => l.dashCallMeLeafy,
     (l) => l.dashStopPoking,
     (l) => l.dashPlayInstead,
     (l) => l.dashAnnoying,

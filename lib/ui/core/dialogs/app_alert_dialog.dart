@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import 'package:jigsaw/helpers/localizations_ext.dart';
-import 'package:jigsaw/ui/core/layout/spacing.dart';
-import 'package:jigsaw/ui/core/app_text_styles.dart';
+import 'package:leafy/helpers/localizations_ext.dart';
+import 'package:leafy/ui/core/layout/spacing.dart';
+import 'package:leafy/ui/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class AppAlertDialog extends StatelessWidget {

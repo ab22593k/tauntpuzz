@@ -1,5 +1,5 @@
-import 'package:jigsaw/ui/core/layout/background_layer_layout.dart';
-import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
+import 'package:leafy/ui/core/layout/background_layer_layout.dart';
+import 'package:leafy/ui/core/layout/screen_type_helper.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundLayers {

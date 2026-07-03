@@ -1,15 +1,15 @@
-import 'package:jigsaw/helpers/localizations_ext.dart';
-import 'package:jigsaw/ui/core/app_text_styles.dart';
-import 'package:jigsaw/ui/core/layout/jigsaw_bars.dart';
-import 'package:jigsaw/ui/core/layout/jigsaw_scaffold.dart';
-import 'package:jigsaw/ui/core/layout/panes.dart';
-import 'package:jigsaw/ui/core/layout/spacing.dart';
-import 'package:jigsaw/ui/features/background/background_stack.dart';
-import 'package:jigsaw/ui/features/drawer/app_drawer.dart';
-import 'package:jigsaw/ui/features/drawer/drawer_button.dart';
-import 'package:jigsaw/ui/features/puzzle/ui/puzzle_header.dart';
-import 'package:jigsaw/ui/features/puzzle/ui/puzzle_view.dart';
-import 'package:jigsaw/ui/features/puzzle/ui/reset_puzzle_button.dart';
+import 'package:leafy/helpers/localizations_ext.dart';
+import 'package:leafy/ui/core/app_text_styles.dart';
+import 'package:leafy/ui/core/layout/bars.dart';
+import 'package:leafy/ui/core/layout/scaffold.dart';
+import 'package:leafy/ui/core/layout/panes.dart';
+import 'package:leafy/ui/core/layout/spacing.dart';
+import 'package:leafy/ui/features/background/background_stack.dart';
+import 'package:leafy/ui/features/drawer/app_drawer.dart';
+import 'package:leafy/ui/features/drawer/drawer_button.dart';
+import 'package:leafy/ui/features/puzzle/ui/puzzle_header.dart';
+import 'package:leafy/ui/features/puzzle/ui/puzzle_view.dart';
+import 'package:leafy/ui/features/puzzle/ui/reset_puzzle_button.dart';
 import 'package:flutter/material.dart' hide DrawerButton;
 
 class HomePage extends StatelessWidget {
@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
     return Stack(
       children: [
         BackgroundStack(size: MediaQuery.sizeOf(context)),
-        const JigsawScaffold(
+        const LeafyScaffold(
           topBar: PuzzleAppBar(
             leading: DrawerButton(),
             actions: [

@@ -1,4 +1,4 @@
-import 'package:jigsaw/ui/core/animations/animations_manager.dart';
+import 'package:leafy/ui/core/animations/animations_manager.dart';
 import 'package:flutter/material.dart';
 
 class FadeInTransition extends StatefulWidget {

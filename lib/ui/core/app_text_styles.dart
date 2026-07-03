@@ -1,4 +1,4 @@
-import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
+import 'package:leafy/ui/core/layout/screen_type_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

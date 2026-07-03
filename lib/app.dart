@@ -1,18 +1,18 @@
 import 'dart:io';
 
-import 'package:jigsaw/generated/app_localizations.dart';
-import 'package:jigsaw/router/router_config.dart';
-import 'package:jigsaw/ui/core/app_theme.dart';
-import 'package:jigsaw/ui/core/theme_provider.dart';
-import 'package:jigsaw/ui/core/theme_transition.dart';
-import 'package:jigsaw/domain/models/puzzle.dart';
-import 'package:jigsaw/ui/features/background/background_layers.dart';
-import 'package:jigsaw/ui/core/layout/background_layer_layout.dart';
-import 'package:jigsaw/ui/core/locale_provider.dart';
-import 'package:jigsaw/ui/features/phrases/view_models/phrases_provider.dart';
-import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_provider.dart';
-import 'package:jigsaw/ui/features/puzzle/view_models/stop_watch_provider.dart';
-import 'package:jigsaw/data/services/storage_service.dart';
+import 'package:leafy/generated/app_localizations.dart';
+import 'package:leafy/router/router_config.dart';
+import 'package:leafy/ui/core/app_theme.dart';
+import 'package:leafy/ui/core/theme_provider.dart';
+import 'package:leafy/ui/core/theme_transition.dart';
+import 'package:leafy/domain/models/puzzle.dart';
+import 'package:leafy/ui/features/background/background_layers.dart';
+import 'package:leafy/ui/core/layout/background_layer_layout.dart';
+import 'package:leafy/ui/core/locale_provider.dart';
+import 'package:leafy/ui/features/phrases/view_models/phrases_provider.dart';
+import 'package:leafy/ui/features/puzzle/view_models/puzzle_provider.dart';
+import 'package:leafy/ui/features/puzzle/view_models/stop_watch_provider.dart';
+import 'package:leafy/data/services/storage_service.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
@@ -105,7 +105,7 @@ class _AppState extends State<App> {
                         return MaterialApp.router(
                           key: ValueKey(localeKey),
                           debugShowCheckedModeBanner: false,
-                          title: 'Jigsaw',
+                          title: 'Leafy',
                           theme: animatedTheme,
                           themeMode: ThemeMode.light,
                           routerConfig: AppRouter.router,

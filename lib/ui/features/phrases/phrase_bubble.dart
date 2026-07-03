@@ -1,8 +1,8 @@
-import 'package:jigsaw/helpers/localizations_ext.dart';
-import 'package:jigsaw/ui/core/layout/phrase_bubble_layout.dart';
-import 'package:jigsaw/ui/core/layout/spacing.dart';
-import 'package:jigsaw/ui/core/app_text_styles.dart';
-import 'package:jigsaw/ui/features/phrases/view_models/phrases_provider.dart';
+import 'package:leafy/helpers/localizations_ext.dart';
+import 'package:leafy/ui/core/layout/phrase_bubble_layout.dart';
+import 'package:leafy/ui/core/layout/spacing.dart';
+import 'package:leafy/ui/core/app_text_styles.dart';
+import 'package:leafy/ui/features/phrases/view_models/phrases_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,6 +1,6 @@
-import 'package:jigsaw/ui/core/layout/panes.dart';
-import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
-import 'package:jigsaw/ui/core/layout/spacing.dart';
+import 'package:leafy/ui/core/layout/panes.dart';
+import 'package:leafy/ui/core/layout/screen_type_helper.dart';
+import 'package:leafy/ui/core/layout/spacing.dart';
 import 'package:flutter/material.dart';
 
 /// MD3 Scaffold — a fundamental UI design structure that provides a standard
@@ -42,7 +42,7 @@ import 'package:flutter/material.dart';
 /// | **Expanded** | 840–1199 | AppBar | leading rail, opt. trailing | 2 (opt. 1) |
 /// | **Large** | 1200–1599 | AppBar | leading + trailing rail | 2 (opt. 1) |
 /// | **Extra-large** | 1600+ | AppBar | leading + trailing rail | 2–3 |
-class JigsawScaffold extends StatefulWidget {
+class LeafyScaffold extends StatefulWidget {
   // ── Bars ────────────────────────────────────────────────────────────────
 
   /// Top app bar — sits below the safety region, frames the top of the screen.
@@ -96,7 +96,7 @@ class JigsawScaffold extends StatefulWidget {
   /// FAB — placed in the bottom-right rail region per MD3.
   final Widget? floatingActionButton;
 
-  const JigsawScaffold({
+  const LeafyScaffold({
     super.key,
     this.topBar,
     this.bottomBar,
@@ -120,10 +120,10 @@ class JigsawScaffold extends StatefulWidget {
   });
 
   @override
-  State<JigsawScaffold> createState() => _JigsawScaffoldState();
+  State<LeafyScaffold> createState() => _LeafyScaffoldState();
 }
 
-class _JigsawScaffoldState extends State<JigsawScaffold> {
+class _LeafyScaffoldState extends State<LeafyScaffold> {
   bool _secondaryCollapsed = false;
 
   /// Persistent pane width memory — survives breakpoint changes per MD3 spec.

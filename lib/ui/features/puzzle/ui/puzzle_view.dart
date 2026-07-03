@@ -1,9 +1,9 @@
-import 'package:jigsaw/ui/core/layout/puzzle_layout.dart';
-import 'package:jigsaw/ui/core/layout/screen_type_helper.dart';
-import 'package:jigsaw/ui/core/layout/spacing.dart';
-import 'package:jigsaw/ui/features/puzzle/board/puzzle_board.dart';
-import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_provider.dart';
-import 'package:jigsaw/ui/features/puzzle/view_models/stop_watch_provider.dart';
+import 'package:leafy/ui/core/layout/puzzle_layout.dart';
+import 'package:leafy/ui/core/layout/screen_type_helper.dart';
+import 'package:leafy/ui/core/layout/spacing.dart';
+import 'package:leafy/ui/features/puzzle/board/puzzle_board.dart';
+import 'package:leafy/ui/features/puzzle/view_models/puzzle_provider.dart';
+import 'package:leafy/ui/features/puzzle/view_models/stop_watch_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

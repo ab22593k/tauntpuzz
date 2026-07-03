@@ -1,6 +1,6 @@
-import 'package:jigsaw/domain/models/position.dart';
-import 'package:jigsaw/ui/core/animations/position_tween.dart';
-import 'package:jigsaw/ui/core/layout/background_layer_layout.dart';
+import 'package:leafy/domain/models/position.dart';
+import 'package:leafy/ui/core/animations/position_tween.dart';
+import 'package:leafy/ui/core/layout/background_layer_layout.dart';
 import 'package:flutter/material.dart';
 
 enum AnimatedElementType { puzzleBoard, stars }

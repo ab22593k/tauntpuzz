@@ -1,10 +1,10 @@
-import 'package:jigsaw/domain/models/tile.dart';
-import 'package:jigsaw/ui/core/animations/animations_manager.dart';
-import 'package:jigsaw/ui/core/layout/phrase_bubble_layout.dart';
-import 'package:jigsaw/ui/features/puzzle/share-dialog/puzzle_share_dialog.dart';
-import 'package:jigsaw/ui/features/phrases/view_models/phrases_provider.dart';
-import 'package:jigsaw/ui/features/puzzle/view_models/puzzle_provider.dart';
-import 'package:jigsaw/ui/features/puzzle/view_models/stop_watch_provider.dart';
+import 'package:leafy/domain/models/tile.dart';
+import 'package:leafy/ui/core/animations/animations_manager.dart';
+import 'package:leafy/ui/core/layout/phrase_bubble_layout.dart';
+import 'package:leafy/ui/features/puzzle/share-dialog/puzzle_share_dialog.dart';
+import 'package:leafy/ui/features/phrases/view_models/phrases_provider.dart';
+import 'package:leafy/ui/features/puzzle/view_models/puzzle_provider.dart';
+import 'package:leafy/ui/features/puzzle/view_models/stop_watch_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

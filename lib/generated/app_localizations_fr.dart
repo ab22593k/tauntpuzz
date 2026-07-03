@@ -9,7 +9,7 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
-  String get appTitle => 'Jigsaw';
+  String get appTitle => 'Leafy';
 
   @override
   String get appSubtitle => 'Puzzle Glissant';
@@ -209,7 +209,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dashAstronaut => 'Et je suis un astronaute ici';
 
   @override
-  String get dashCallMeJigsaw => 'Vous pouvez m\'appeler Jigsaw';
+  String get dashCallMeLeafy => 'Vous pouvez m\'appeler Leafy';
 
   @override
   String get dashStopPoking => 'Tu peux arrêter de me tapoter maintenant';

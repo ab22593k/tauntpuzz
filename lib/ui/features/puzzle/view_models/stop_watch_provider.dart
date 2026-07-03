@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:jigsaw/data/services/storage_service.dart';
+import 'package:leafy/data/services/storage_service.dart';
 import 'package:flutter/cupertino.dart';
 
 /// Manages the puzzle timer using a periodic stream.
