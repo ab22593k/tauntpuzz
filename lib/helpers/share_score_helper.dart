@@ -36,6 +36,7 @@ class ShareScoreHelper {
     Duration duration,
     int tilesCount,
   ) {
-    return '$twitterIntentUrl?text=${getPuzzleSolvedText(movesCount, duration, tilesCount)}';
+    final text = getPuzzleSolvedText(movesCount, duration, tilesCount);
+    return '$twitterIntentUrl?text=${Uri.encodeQueryComponent(text)}';
   }
 }

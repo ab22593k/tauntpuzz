@@ -27,7 +27,7 @@ void main() {
       );
 
       check(twitterShareLink).equals(
-        'https://twitter.com/intent/tweet?text=I just solved this 8-Tile Leafy slide puzzle in 08:20 with 55 moves!',
+        'https://twitter.com/intent/tweet?text=I+just+solved+this+8-Tile+Leafy+slide+puzzle+in+08%3A20+with+55+moves%21',
       );
     });
   });

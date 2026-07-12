@@ -12,17 +12,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-class PuzzleBoard extends StatelessWidget {
+class PuzzleBoard extends StatefulWidget {
   final double containerWidth;
   final WindowClass windowClass;
 
-  PuzzleBoard({
+  const PuzzleBoard({
     super.key,
     required this.containerWidth,
     this.windowClass = WindowClass.expanded,
   });
 
+  @override
+  State<PuzzleBoard> createState() => _PuzzleBoardState();
+}
+
+class _PuzzleBoardState extends State<PuzzleBoard> {
   final FocusNode keyboardListenerFocusNode = FocusNode();
+
+  @override
+  void dispose() {
+    keyboardListenerFocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,15 +81,15 @@ class PuzzleBoard extends StatelessWidget {
                 FocusScope.of(context).requestFocus(keyboardListenerFocusNode);
               }
               final isSolved = puzzleProvider.puzzle.isSolved;
-              final tileWidth = containerWidth / puzzleProvider.n;
+              final tileWidth = widget.containerWidth / puzzleProvider.n;
               final isBlind = puzzleProvider.gameMode == GameMode.blind;
               final tilesBlinded = puzzleProvider.tilesBlinded;
 
               return Center(
                 child: Container(
                   key: const ValueKey('puzzle_board'),
-                  width: containerWidth,
-                  height: containerWidth,
+                  width: widget.containerWidth,
+                  height: widget.containerWidth,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.zero,
                     color: colorScheme.surfaceContainer,

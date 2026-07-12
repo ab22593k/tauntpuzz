@@ -66,7 +66,13 @@ class KConfigStorageService implements StorageService {
   @override
   dynamic get(String key) {
     if (_useKConfig) return _cache[key];
-    return _prefs!.get(key);
+    final value = _prefs!.get(key);
+    if (value is! String) return value;
+    try {
+      return json.decode(value);
+    } catch (_) {
+      return value;
+    }
   }
 
   @override
