@@ -15,7 +15,7 @@ class PuzzleSolvedDialog extends StatelessWidget {
     required this.movesCount,
   });
 
-  String get imageName => 'solved-${puzzleSize}x$puzzleSize.png';
+  String get imageName => 'solved.jpg';
 
   @override
   Widget build(BuildContext context) {

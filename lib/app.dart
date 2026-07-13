@@ -5,7 +5,6 @@ import 'package:leafy/router/router_config.dart';
 import 'package:leafy/ui/core/app_theme.dart';
 import 'package:leafy/ui/core/theme_provider.dart';
 import 'package:leafy/ui/core/theme_transition.dart';
-import 'package:leafy/domain/models/puzzle.dart';
 import 'package:leafy/ui/features/background/background_layers.dart';
 import 'package:leafy/ui/core/layout/background_layer_layout.dart';
 import 'package:leafy/ui/core/locale_provider.dart';
@@ -57,14 +56,10 @@ class _AppState extends State<App> {
         );
       }
 
-      for (int size in Puzzle.supportedPuzzleSizes) {
-        precacheImage(
-          Image.asset(
-            'assets/images/puzzle-solved/solved-${size}x$size.png',
-          ).image,
-          context,
-        );
-      }
+      precacheImage(
+        Image.asset('assets/images/solved/solved.jpg').image,
+        context,
+      );
     }
     _isInit = false;
     super.didChangeDependencies();
