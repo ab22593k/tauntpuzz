@@ -3,48 +3,70 @@ import 'dart:developer';
 import 'dart:math' show Random;
 
 import 'package:leafy/domain/models/game_mode.dart';
+import 'package:leafy/domain/models/location.dart';
 import 'package:leafy/domain/models/puzzle.dart';
 import 'package:leafy/domain/models/score.dart';
 import 'package:leafy/domain/models/tile.dart';
 import 'package:leafy/data/services/storage_service.dart';
-import 'package:leafy/ui/features/puzzle/view_models/puzzle_mixin_blind.dart';
-import 'package:leafy/ui/features/puzzle/view_models/puzzle_mixin_core.dart';
-import 'package:leafy/ui/features/puzzle/view_models/puzzle_mixin_marathon.dart';
-import 'package:leafy/ui/features/puzzle/view_models/puzzle_mixin_orchestrator.dart';
-import 'package:leafy/ui/features/puzzle/view_models/puzzle_mixin_speedrun.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:leafy/ui/features/puzzle/view_models/game_mode_strategy.dart';
+import 'package:leafy/ui/features/puzzle/view_models/classic_game_mode_strategy.dart';
+import 'package:leafy/ui/features/puzzle/view_models/speedrun_game_mode_strategy.dart';
+import 'package:leafy/ui/features/puzzle/view_models/blind_game_mode_strategy.dart';
+import 'package:leafy/ui/features/puzzle/view_models/marathon_game_mode_strategy.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-class PuzzleProvider
-    with
-        ChangeNotifier,
-        PuzzleMixinSpeedrun,
-        PuzzleMixinBlind,
-        PuzzleMixinMarathon,
-        PuzzleMixinCore,
-        PuzzleMixinOrchestrator {
+/// Provides puzzle state + game-mode-specific lifecycle via strategy pattern.
+///
+/// ## Architecture
+/// Each [GameMode] has a corresponding [GameModeStrategy] that holds
+/// mode-specific state (blind, marathon, speedrun) and responds to lifecycle
+/// events (puzzle generated, tile moved, solved, mode activate/deactivate).
+///
+/// Adding a new mode:
+/// 1. Add a [GameMode] enum value
+/// 2. Create a strategy class extending [GameModeStrategy]
+/// 3. Register it in [_strategies]
+/// 4. Add exhaustive cases in [GameModeHelper], drawer badges, icons, etc.
+class PuzzleProvider extends ChangeNotifier implements GameModeStrategyHost {
+  // ──────────────────────────────────────────────
+  // Strategy registry
+  // ──────────────────────────────────────────────
+
+  final Map<GameMode, GameModeStrategy> _strategies;
+
+  GameModeStrategy get _strategy => _strategies[gameMode]!;
+
+  // ──────────────────────────────────────────────
+  // Constructor
+  // ──────────────────────────────────────────────
+
+  PuzzleProvider(this.storageService)
+    : _strategies = {
+        GameMode.classic: ClassicGameModeStrategy(),
+        GameMode.speedrun: SpeedrunGameModeStrategy(),
+        GameMode.blind: BlindGameModeStrategy(),
+        GameMode.marathon: MarathonGameModeStrategy(),
+      } {
+    _restoreGameMode();
+    _strategy.onActivate(this);
+  }
+
   @override
   final StorageService storageService;
-
-  PuzzleProvider(this.storageService) {
-    _restoreGameMode();
-  }
 
   /// One dimensional size of the puzzle => size = n x n (Default = 4x4)
   @override
   int n = Puzzle.supportedPuzzleSizes[1];
 
   /// Random value used in shuffling tiles
-  @override
   final Random random = Random();
 
   /// List of tiles of the puzzle
   late List<Tile> _tiles;
 
-  @override
   List<Tile> get tiles => _tiles;
 
-  @override
   set tiles(List<Tile> v) {
     _tiles = v;
     _invalidateBoardState();
@@ -71,7 +93,6 @@ class PuzzleProvider
   GameMode _gameMode = GameMode.classic;
   @override
   GameMode get gameMode => _gameMode;
-  @override
   set gameMode(GameMode v) => _gameMode = v;
   bool get isModeLocked => movesCount > 0;
 
@@ -89,7 +110,6 @@ class PuzzleProvider
   // ──────────────────────────────────────────────
 
   /// Getter for puzzle object
-  @override
   Puzzle get puzzle => Puzzle(n: n, tiles: tiles, movesCount: movesCount);
 
   void _invalidateBoardState() {
@@ -97,8 +117,6 @@ class PuzzleProvider
     _cachedCorrectTilesCount = null;
   }
 
-  /// Invalidates cached board state. Called by mixins after tile mutations.
-  @override
   void invalidateBoardState() => _invalidateBoardState();
 
   int? _cachedCorrectTilesCount;
@@ -135,7 +153,6 @@ class PuzzleProvider
   // Scores
   // ──────────────────────────────────────────────
 
-  @override
   List<Score> scores = <Score>[];
 
   static const int maxStorableScores = 10;
@@ -165,7 +182,6 @@ class PuzzleProvider
     }
   }
 
-  @override
   List<Score> getScoresFromStorage() {
     List<Score> storedScores = [];
     try {
@@ -185,7 +201,6 @@ class PuzzleProvider
   // Puzzle storage
   // ──────────────────────────────────────────────
 
-  @override
   Puzzle? getPuzzleFromStorage() {
     try {
       final puzzleData = storageService.get(StorageKey.puzzle);
@@ -199,7 +214,7 @@ class PuzzleProvider
 
   @override
   void dispose() {
-    resetBlindState();
+    _strategy.onDeactivate(this);
     super.dispose();
   }
 
@@ -211,5 +226,169 @@ class PuzzleProvider
       log('Error updating puzzle in storage');
       log('$e');
     }
+  }
+
+  // ──────────────────────────────────────────────
+  // Mode-specific state delegation
+  // ──────────────────────────────────────────────
+
+  // Speedrun
+
+  @override
+  int stopWatchSecondsOverride = 0;
+
+  int get speedrunCountdownSeconds => _strategy.speedrunCountdownSeconds;
+
+  // Blind
+
+  bool get tilesBlinded => _strategy.tilesBlinded;
+  Set<Location> get blindRevealedTiles => _strategy.blindRevealedTiles;
+  bool isTileRevealed(Location location) => _strategy.isTileRevealed(location);
+  void revealBlindTile(Location location) =>
+      _strategy.revealBlindTile(location);
+  void startBlindTimer() => _strategy.startBlindTimer();
+  void resetBlindState() => _strategy.resetBlindState();
+
+  // Marathon
+
+  int? get marathonStartSize => _strategy.marathonStartSize;
+  int? get marathonEndSize => _strategy.marathonEndSize;
+  bool get marathonRetried => _strategy.marathonRetried;
+  bool get isMarathonComplete => _strategy.isMarathonComplete;
+  void setMarathonRange(int start, int end) =>
+      _strategy.setMarathonRange(start, end);
+  void resetMarathonState() => _strategy.resetMarathonState();
+  void readyMarathonAdvance() => _strategy.readyMarathonAdvance();
+  void advanceMarathonSize() => _strategy.advanceMarathonSize(this);
+
+  // ──────────────────────────────────────────────
+  // Core puzzle logic (inlined from PuzzleMixinCore)
+  // ──────────────────────────────────────────────
+
+  /// Action that switches the [Location]'s => [Position]'s of the tile
+  /// dragged by the user & the whitespace tile.
+  /// This causes the [tile.position] getter to get the correct position
+  /// based on new [Location]'s.
+  void swapTilesAndUpdatePuzzle(Tile tile) {
+    final movedTileIndex = tiles.indexWhere(
+      (ctile) => ctile.currentLocation == tile.currentLocation,
+    );
+    final whiteSpaceTileIndex = tiles.indexWhere(
+      (tile) => tile.tileIsWhiteSpace,
+    );
+    // Store instances of the moved tile and the white space tile
+    // before changing their locations
+    final movedTile = tiles[movedTileIndex];
+    final whiteSpaceTile = tiles[whiteSpaceTileIndex];
+
+    tiles[movedTileIndex] = tiles[movedTileIndex].copyWith(
+      currentLocation: whiteSpaceTile.currentLocation,
+    );
+    tiles[whiteSpaceTileIndex] = whiteSpaceTile.copyWith(
+      currentLocation: movedTile.currentLocation,
+    );
+
+    invalidateBoardState();
+
+    log(
+      'Number of correct tiles ${puzzle.getNumberOfCorrectTiles()} | Is solved: ${puzzle.isSolved}',
+    );
+
+    if (tiles[movedTileIndex].isAtCorrectLocation) {
+      if (puzzle.isSolved) {
+        HapticFeedback.vibrate();
+        handlePuzzleSolved();
+      } else {
+        HapticFeedback.mediumImpact();
+      }
+    }
+
+    movesCount++;
+    _strategy.onTileMoved(this);
+    updatePuzzleInStorage();
+    notifyListeners();
+  }
+
+  /// Generates tiles with shuffle. Restores from storage unless
+  /// [forceRefresh] is true.
+  @override
+  void generate({bool forceRefresh = false}) {
+    if (storageService.has(StorageKey.scores)) {
+      scores = getScoresFromStorage();
+    }
+    // Set tiles & size from locale storage only if they exist and there is
+    // no forceRefresh flag (for reset)
+    if (storageService.has(StorageKey.puzzle) && !forceRefresh) {
+      final stored = getPuzzleFromStorage();
+      if (stored != null) {
+        tiles = stored.tiles;
+        n = stored.n;
+        movesCount = stored.movesCount;
+        return;
+      }
+    }
+    movesCount = 0;
+    _generateNew();
+    updatePuzzleInStorage();
+    _strategy.onPuzzleGenerated(this);
+    notifyListeners();
+  }
+
+  void _generateNew() {
+    final tilesCorrectLocations = Puzzle.generateTileCorrectLocations(n);
+    final tilesCurrentLocations = List<Location>.from(tilesCorrectLocations);
+
+    tiles = Puzzle.getTilesFromLocations(
+      correctLocations: tilesCorrectLocations,
+      currentLocations: tilesCurrentLocations,
+    );
+
+    while (!puzzle.isSolvable() || puzzle.getNumberOfCorrectTiles() != 0) {
+      tilesCurrentLocations.shuffle(random);
+
+      tiles = Puzzle.getTilesFromLocations(
+        correctLocations: tilesCorrectLocations,
+        currentLocations: tilesCurrentLocations,
+      );
+
+      invalidateBoardState();
+    }
+  }
+
+  /// Called when a puzzle is solved. Saves scores then delegates
+  /// mode-specific behavior to the active strategy.
+  void handlePuzzleSolved() {
+    updateScoresInStorage();
+    _strategy.onPuzzleSolved(this);
+  }
+
+  // ──────────────────────────────────────────────
+  // Orchestration (inlined from PuzzleMixinOrchestrator)
+  // ──────────────────────────────────────────────
+
+  /// Switches to the given [mode], resets mode-specific state, and
+  /// generates a fresh puzzle board.
+  void setGameMode(GameMode mode) {
+    if (_gameMode == mode) return;
+    final old = _strategy;
+    _gameMode = mode;
+    old.onDeactivate(this);
+    storageService.set(StorageKey.gameMode, mode.name);
+    movesCount = 0;
+    stopWatchSecondsOverride = 0;
+    storageService.remove(StorageKey.puzzle);
+    generate(forceRefresh: true);
+    _strategy.onActivate(this);
+    notifyListeners();
+  }
+
+  /// Resets the board to the given [size] and generates a fresh puzzle.
+  void resetPuzzleSize(int size) {
+    assert(Puzzle.supportedPuzzleSizes.contains(size));
+    n = size;
+    movesCount = 0;
+    stopWatchSecondsOverride = 0;
+    storageService.remove(StorageKey.puzzle);
+    generate(forceRefresh: true);
   }
 }

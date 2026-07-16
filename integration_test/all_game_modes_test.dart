@@ -1,21 +1,18 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide DrawerButton;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:checks/checks.dart';
 import 'package:flutter_checks/flutter_checks.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:leafy/data/services/storage_service.dart';
 import 'package:leafy/domain/models/game_mode.dart';
 import 'package:leafy/generated/app_localizations.dart';
-import 'package:leafy/ui/features/puzzle/view_models/puzzle_provider.dart';
-import 'package:leafy/ui/features/puzzle/view_models/stop_watch_provider.dart';
-import 'package:leafy/ui/features/phrases/view_models/phrases_provider.dart';
-import 'package:leafy/ui/core/locale_provider.dart';
-import 'package:leafy/ui/core/theme_provider.dart';
+import 'package:leafy/ui/features/puzzle/view_models/puzzle_notifier.dart';
 import 'package:leafy/ui/core/app_theme.dart';
 import 'package:leafy/ui/features/puzzle/ui/puzzle_view.dart';
 import 'package:leafy/ui/features/drawer/app_drawer.dart';
+import 'package:leafy/ui/features/drawer/drawer_button.dart';
 
 /// In-memory storage service for integration tests.
 class _InMemoryStorage implements StorageService {
@@ -48,37 +45,26 @@ class _InMemoryStorage implements StorageService {
 
 /// Wraps the real [PuzzleView] and [AppDrawer] with the same providers and
 /// localization configuration used by the production app.
-class _EndToEndApp extends StatefulWidget {
+class _EndToEndApp extends StatelessWidget {
   final StorageService storageService;
 
   const _EndToEndApp({required this.storageService});
 
   @override
-  State<_EndToEndApp> createState() => _EndToEndAppState();
-}
-
-class _EndToEndAppState extends State<_EndToEndApp> {
-  @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => PuzzleProvider(widget.storageService)..generate(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => StopWatchProvider(widget.storageService)..init(),
-        ),
-        ChangeNotifierProvider(create: (_) => PhrasesProvider()),
-        ChangeNotifierProvider(create: (_) => LocaleProvider()),
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
-      ],
+    return ProviderScope(
+      overrides: [storageServiceProvider.overrideWithValue(storageService)],
       child: MaterialApp(
         key: const ValueKey('test_app'),
         debugShowCheckedModeBanner: false,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         theme: AppTheme.light(),
-        home: const Scaffold(drawer: AppDrawer(), body: PuzzleView()),
+        home: Scaffold(
+          drawer: const AppDrawer(),
+          appBar: AppBar(leading: const DrawerButton()),
+          body: const PuzzleView(),
+        ),
       ),
     );
   }
@@ -119,11 +105,11 @@ Future<void> switchSize(WidgetTester tester, int size) async {
   await tester.pump(const Duration(seconds: 1));
 }
 
-/// Returns the current moves count from the PuzzleProvider.
+/// Returns the current moves count from the PuzzleNotifier.
 int movesCount(WidgetTester tester) {
   final context = tester.element(find.byType(PuzzleView));
-  final provider = Provider.of<PuzzleProvider>(context, listen: false);
-  return provider.movesCount;
+  final container = ProviderScope.containerOf(context);
+  return container.read(puzzleProvider).movesCount;
 }
 
 void main() {

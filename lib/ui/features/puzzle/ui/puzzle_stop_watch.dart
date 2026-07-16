@@ -1,11 +1,11 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:leafy/helpers/duration_helper.dart';
 import 'package:leafy/ui/core/app_text_styles.dart';
-import 'package:leafy/ui/features/puzzle/view_models/stop_watch_provider.dart';
+import 'package:leafy/ui/features/puzzle/view_models/stop_watch_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:provider/provider.dart';
 
-class PuzzleStopWatch extends StatelessWidget {
+class PuzzleStopWatch extends ConsumerWidget {
   final bool showIcon;
 
   const PuzzleStopWatch({super.key, this.showIcon = true});
@@ -21,68 +21,57 @@ class PuzzleStopWatch extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final sw = ref.watch(stopWatchProvider);
 
-    return Consumer<StopWatchProvider>(
-      builder: (c, stopWatchProvider, _) {
-        // Speedrun countdown display
-        if (stopWatchProvider.isCountDown) {
-          final remaining = stopWatchProvider.countdownRemaining;
-          final isCritical = remaining <= 10 && remaining > 0;
-          final isExpired = remaining <= 0;
+    if (sw.isCountDown) {
+      final remaining = sw.countdownRemaining;
+      final isCritical = remaining <= 10 && remaining > 0;
+      final isExpired = remaining <= 0;
 
-          return showIcon
-              ? Row(
-                  children: [
-                    HugeIcon(
-                      icon: isExpired
-                          ? HugeIcons.strokeRoundedStopWatch
-                          : HugeIcons.strokeRoundedTimer01,
-                      size: 16,
-                      color: isCritical
-                          ? colorScheme.error
-                          : isExpired
-                          ? colorScheme.onSurface.withValues(alpha: 0.4)
-                          : colorScheme.onSurface,
-                    ),
-                    const SizedBox(width: 4),
-                    _textWidget(
-                      DurationHelper.toFormattedTime(
-                        Duration(seconds: remaining),
-                      ),
-                      isCritical ? colorScheme.error : colorScheme.onSurface,
-                    ),
-                  ],
-                )
-              : _textWidget(
+      return showIcon
+          ? Row(
+              children: [
+                HugeIcon(
+                  icon: isExpired
+                      ? HugeIcons.strokeRoundedStopWatch
+                      : HugeIcons.strokeRoundedTimer01,
+                  size: 16,
+                  color: isCritical
+                      ? colorScheme.error
+                      : isExpired
+                      ? colorScheme.onSurface.withValues(alpha: 0.4)
+                      : colorScheme.onSurface,
+                ),
+                const SizedBox(width: 4),
+                _textWidget(
                   DurationHelper.toFormattedTime(Duration(seconds: remaining)),
                   isCritical ? colorScheme.error : colorScheme.onSurface,
-                );
-        }
+                ),
+              ],
+            )
+          : _textWidget(
+              DurationHelper.toFormattedTime(Duration(seconds: remaining)),
+              isCritical ? colorScheme.error : colorScheme.onSurface,
+            );
+    }
 
-        // Classic count-up display
-        final duration = Duration(seconds: stopWatchProvider.secondsElapsed);
-
-        return showIcon
-            ? Row(
-                children: [
-                  const HugeIcon(
-                    icon: HugeIcons.strokeRoundedClock01,
-                    size: 16,
-                  ),
-                  const SizedBox(width: 4),
-                  _textWidget(
-                    DurationHelper.toFormattedTime(duration),
-                    colorScheme.onSurface,
-                  ),
-                ],
-              )
-            : _textWidget(
+    final duration = Duration(seconds: sw.secondsElapsed);
+    return showIcon
+        ? Row(
+            children: [
+              const HugeIcon(icon: HugeIcons.strokeRoundedClock01, size: 16),
+              const SizedBox(width: 4),
+              _textWidget(
                 DurationHelper.toFormattedTime(duration),
                 colorScheme.onSurface,
-              );
-      },
-    );
+              ),
+            ],
+          )
+        : _textWidget(
+            DurationHelper.toFormattedTime(duration),
+            colorScheme.onSurface,
+          );
   }
 }

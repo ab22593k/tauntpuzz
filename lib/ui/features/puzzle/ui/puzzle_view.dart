@@ -1,36 +1,37 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:leafy/ui/core/layout/puzzle_layout.dart';
 import 'package:leafy/ui/core/layout/screen_type_helper.dart';
 import 'package:leafy/ui/core/layout/spacing.dart';
 import 'package:leafy/ui/features/puzzle/board/puzzle_board.dart';
-import 'package:leafy/ui/features/puzzle/view_models/puzzle_provider.dart';
-import 'package:leafy/ui/features/puzzle/view_models/stop_watch_provider.dart';
+import 'package:leafy/ui/features/puzzle/view_models/puzzle_notifier.dart';
+import 'package:leafy/ui/features/puzzle/view_models/stop_watch_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class PuzzleView extends StatefulWidget {
+class PuzzleView extends ConsumerStatefulWidget {
   const PuzzleView({super.key});
 
   @override
-  State<PuzzleView> createState() => _PuzzleViewState();
+  ConsumerState<PuzzleView> createState() => _PuzzleViewState();
 }
 
-class _PuzzleViewState extends State<PuzzleView> {
-  late PuzzleProvider puzzleProvider;
-  late StopWatchProvider stopWatchProvider;
+class _PuzzleViewState extends ConsumerState<PuzzleView> {
+  /// Cached notifier — accessing [ref] inside [dispose] is unsafe because the
+  /// widget may already be unmounted. Stash the reference in [initState].
+  late final StopWatchNotifier _stopWatchNotifier;
 
   @override
   void initState() {
-    puzzleProvider = Provider.of<PuzzleProvider>(context, listen: false);
-    stopWatchProvider = Provider.of<StopWatchProvider>(context, listen: false);
-    if (puzzleProvider.hasStarted) {
-      stopWatchProvider.start();
-    }
     super.initState();
+    _stopWatchNotifier = ref.read(stopWatchProvider.notifier);
+    final puzzleState = ref.read(puzzleProvider);
+    if (puzzleState.hasStarted) {
+      _stopWatchNotifier.start();
+    }
   }
 
   @override
   void dispose() {
-    stopWatchProvider.cancel();
+    _stopWatchNotifier.cancel();
     super.dispose();
   }
 

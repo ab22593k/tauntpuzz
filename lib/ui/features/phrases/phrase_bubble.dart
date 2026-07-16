@@ -1,20 +1,21 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:leafy/helpers/localizations_ext.dart';
 import 'package:leafy/ui/core/layout/phrase_bubble_layout.dart';
 import 'package:leafy/ui/core/layout/spacing.dart';
 import 'package:leafy/ui/core/app_text_styles.dart';
-import 'package:leafy/ui/features/phrases/view_models/phrases_provider.dart';
+import 'package:leafy/ui/features/phrases/view_models/phrases_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class PhraseBubble extends StatelessWidget {
+class PhraseBubble extends ConsumerWidget {
   final PhraseState state;
 
   const PhraseBubble({super.key, required this.state})
     : assert(state != PhraseState.none);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final phrasesNotifier = ref.read(phrasesProvider.notifier);
 
     return Stack(
       clipBehavior: Clip.none,
@@ -72,22 +73,18 @@ class PhraseBubble extends StatelessWidget {
               ),
             ],
           ),
-          child: Consumer<PhrasesProvider>(
-            builder: (c, phrasesProvider, _) {
-              String phrase = phrasesProvider.getPhrase(state, c.l10n);
-
-              return Text(
-                phrase,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.h2.copyWith(
-                  color: colorScheme.onPrimary,
-                  fontWeight: FontWeight.w700,
-                  fontSize: phrase.length > 20 ? 16 : 20,
-                ),
-              );
-            },
-          ),
+          child: ref.watch(phrasesProvider).phraseState != PhraseState.none
+              ? Text(
+                  phrasesNotifier.getPhrase(state, context.l10n),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.h2.copyWith(
+                    color: colorScheme.onPrimary,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
+                )
+              : const SizedBox.shrink(),
         ),
       ],
     );

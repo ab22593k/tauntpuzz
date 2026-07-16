@@ -1,34 +1,30 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:leafy/helpers/localizations_ext.dart';
 import 'package:leafy/ui/core/app_text_styles.dart';
-import 'package:leafy/ui/features/puzzle/view_models/puzzle_provider.dart';
+import 'package:leafy/ui/features/puzzle/view_models/puzzle_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class MovesCount extends StatelessWidget {
+class MovesCount extends ConsumerWidget {
   const MovesCount({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final movesCount = ref.watch(puzzleProvider.select((s) => s.movesCount));
 
-    return Selector<PuzzleProvider, int>(
-      selector: (c, puzzleProvider) => puzzleProvider.movesCount,
-      builder: (c, int movesCount, _) => RichText(
-        text: TextSpan(
-          text: '${c.l10n.moves}: ',
-          style: AppTextStyles.labelMedium.copyWith(
-            color: colorScheme.onSurface,
-          ),
-          children: <TextSpan>[
-            TextSpan(
-              text: '$movesCount',
-              style: AppTextStyles.labelMedium.copyWith(
-                color: colorScheme.onSurface,
-                fontVariations: const [FontVariation('wght', 700)],
-              ),
+    return RichText(
+      text: TextSpan(
+        text: '${context.l10n.moves}: ',
+        style: AppTextStyles.labelMedium.copyWith(color: colorScheme.onSurface),
+        children: <TextSpan>[
+          TextSpan(
+            text: '$movesCount',
+            style: AppTextStyles.labelMedium.copyWith(
+              color: colorScheme.onSurface,
+              fontVariations: const [FontVariation('wght', 700)],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

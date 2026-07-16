@@ -1,0 +1,455 @@
+import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:leafy/domain/models/game_mode.dart';
+import 'package:leafy/domain/models/location.dart';
+import 'package:leafy/domain/models/puzzle.dart';
+import 'package:leafy/domain/models/score.dart';
+import 'package:leafy/domain/models/tile.dart';
+import 'package:leafy/helpers/game_mode_helper.dart';
+import 'package:leafy/data/services/storage_service.dart';
+import 'package:leafy/ui/features/puzzle/view_models/game_mode_strategy.dart';
+import 'package:leafy/ui/features/puzzle/view_models/classic_game_mode_strategy.dart';
+import 'package:leafy/ui/features/puzzle/view_models/speedrun_game_mode_strategy.dart';
+import 'package:leafy/ui/features/puzzle/view_models/blind_game_mode_strategy.dart';
+import 'package:leafy/ui/features/puzzle/view_models/marathon_game_mode_strategy.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:math' show Random;
+
+final storageServiceProvider = Provider<StorageService>((ref) {
+  throw UnimplementedError('Must override in ProviderScope');
+});
+
+// ────────────────────────────────────────────────────
+// Puzzle state
+// ────────────────────────────────────────────────────
+
+@immutable
+class PuzzleState {
+  final int n;
+  final List<Tile> tiles;
+  final int movesCount;
+  final GameMode gameMode;
+  final List<Score> scores;
+  final int stopWatchSecondsOverride;
+
+  // Blind state
+  final bool tilesBlinded;
+  final Set<Location> blindRevealedTiles;
+
+  // Marathon state
+  final int? marathonStartSize;
+  final int? marathonEndSize;
+  final bool marathonRetried;
+
+  const PuzzleState({
+    this.n = 4,
+    this.tiles = const [],
+    this.movesCount = 0,
+    this.gameMode = GameMode.classic,
+    this.scores = const [],
+    this.stopWatchSecondsOverride = 0,
+    this.tilesBlinded = false,
+    this.blindRevealedTiles = const {},
+    this.marathonStartSize,
+    this.marathonEndSize,
+    this.marathonRetried = false,
+  });
+
+  Puzzle get puzzle => Puzzle(n: n, tiles: tiles, movesCount: movesCount);
+
+  List<Tile> get tilesWithoutWhitespace =>
+      tiles.where((t) => !t.tileIsWhiteSpace).toList(growable: false);
+
+  int get correctTilesCount =>
+      tiles.where((t) => t.isAtCorrectLocation && !t.tileIsWhiteSpace).length;
+
+  bool get hasStarted => movesCount > 0;
+
+  bool get isMarathonComplete =>
+      gameMode == GameMode.marathon &&
+      marathonEndSize != null &&
+      n >= marathonEndSize!;
+
+  bool get isModeLocked => movesCount > 0;
+
+  int get speedrunCountdownSeconds =>
+      GameModeHelper.speedrunCountdownSeconds(n);
+
+  bool isTileRevealed(Location location) =>
+      blindRevealedTiles.contains(location);
+
+  PuzzleState copyWith({
+    int? n,
+    List<Tile>? tiles,
+    int? movesCount,
+    GameMode? gameMode,
+    List<Score>? scores,
+    int? stopWatchSecondsOverride,
+    bool? tilesBlinded,
+    Set<Location>? blindRevealedTiles,
+    int? marathonStartSize,
+    int? marathonEndSize,
+    bool? marathonRetried,
+  }) {
+    return PuzzleState(
+      n: n ?? this.n,
+      tiles: tiles ?? this.tiles,
+      movesCount: movesCount ?? this.movesCount,
+      gameMode: gameMode ?? this.gameMode,
+      scores: scores ?? this.scores,
+      stopWatchSecondsOverride:
+          stopWatchSecondsOverride ?? this.stopWatchSecondsOverride,
+      tilesBlinded: tilesBlinded ?? this.tilesBlinded,
+      blindRevealedTiles: blindRevealedTiles ?? this.blindRevealedTiles,
+      marathonStartSize: marathonStartSize ?? this.marathonStartSize,
+      marathonEndSize: marathonEndSize ?? this.marathonEndSize,
+      marathonRetried: marathonRetried ?? this.marathonRetried,
+    );
+  }
+}
+
+// ────────────────────────────────────────────────────
+// Puzzle notifier
+// ────────────────────────────────────────────────────
+
+class PuzzleNotifier extends Notifier<PuzzleState>
+    implements GameModeStrategyHost {
+  final Random _random = Random();
+  Timer? _blindTimer;
+  Timer? _initTimer;
+  late final Map<GameMode, GameModeStrategy> _strategies;
+
+  /// Cached storage service — accessing [ref] inside [ref.onDispose] is
+  /// unsafe because Riverpod prohibits reading other providers during
+  /// life-cycles. Cache it once in [build] and reuse everywhere.
+  late final StorageService _storageService;
+
+  // ── GameModeStrategyHost ──
+
+  @override
+  GameMode get gameMode => state.gameMode;
+
+  @override
+  int get n => state.n;
+
+  @override
+  set n(int v) => _emit(state.copyWith(n: v));
+
+  @override
+  int get movesCount => state.movesCount;
+
+  @override
+  set movesCount(int v) => _emit(state.copyWith(movesCount: v));
+
+  @override
+  int get stopWatchSecondsOverride => state.stopWatchSecondsOverride;
+
+  @override
+  set stopWatchSecondsOverride(int v) =>
+      _emit(state.copyWith(stopWatchSecondsOverride: v));
+
+  @override
+  StorageService get storageService => _storageService;
+
+  @override
+  void notifyListeners() {} // state reassignment triggers Riverpod rebuilds
+
+  // ── Build ──
+
+  @override
+  PuzzleState build() {
+    _strategies = {
+      GameMode.classic: ClassicGameModeStrategy(),
+      GameMode.speedrun: SpeedrunGameModeStrategy(),
+      GameMode.blind: BlindGameModeStrategy(),
+      GameMode.marathon: MarathonGameModeStrategy(),
+    };
+    _storageService = ref.read(storageServiceProvider);
+    ref.onDispose(() {
+      _blindTimer?.cancel();
+      _initTimer?.cancel();
+      // Deactivate only the active strategy — iterating all strategies
+      // during onDispose can trigger Riverpod lifecycle assertions when
+      // strategies access host storage.
+      try {
+        _strategies[state.gameMode]?.onDeactivate(this);
+      } catch (_) {}
+    });
+
+    final storedGameMode = _storageService.get(StorageKey.gameMode);
+    GameMode initialMode = GameMode.classic;
+    if (storedGameMode != null) {
+      initialMode = GameMode.values.byName(storedGameMode);
+    }
+    _strategies[initialMode]!.onActivate(this);
+    _initTimer = Timer(Duration.zero, generate);
+    return PuzzleState(gameMode: initialMode);
+  }
+
+  void _emit(PuzzleState next) {
+    state = next;
+  }
+
+  // ── Score storage helpers ──
+
+  @override
+  void updateScoresInStorage() {
+    final storage = _storageService;
+    final seconds = state.stopWatchSecondsOverride > 0
+        ? state.stopWatchSecondsOverride
+        : (storage.get(StorageKey.secondsElapsed) ?? 0);
+    final newScore = Score(
+      movesCount: state.movesCount,
+      puzzleSize: state.n,
+      secondsElapsed: seconds,
+      gameMode: state.gameMode,
+    );
+    try {
+      final savedScores = _getScoresFromStorage();
+      final scores = savedScores.length >= 10
+          ? [...savedScores.sublist(1), newScore]
+          : [...savedScores, newScore];
+      _emit(state.copyWith(scores: scores));
+      storage.set(StorageKey.scores, Score.toJsonList(scores));
+    } catch (e) {
+      storage.remove(StorageKey.scores);
+      log('Error updating scores in storage $e');
+    }
+  }
+
+  List<Score> _getScoresFromStorage() {
+    try {
+      final data = _storageService.get(StorageKey.scores);
+      if (data != null) return Score.fromJsonList(data);
+    } catch (e) {
+      log('Error retrieving scores from storage');
+      log('$e');
+    }
+    return [];
+  }
+
+  @override
+  void updatePuzzleInStorage() {
+    try {
+      _storageService.set(StorageKey.puzzle, state.puzzle.toJson());
+    } catch (e) {
+      log('Error updating puzzle in storage');
+      log('$e');
+    }
+  }
+
+  Puzzle? _getPuzzleFromStorage() {
+    try {
+      final data = _storageService.get(StorageKey.puzzle);
+      return Puzzle.fromJson(json.decode(json.encode(data)));
+    } catch (e) {
+      log('Error in local storage, clearing data...');
+      _storageService.clear();
+      return null;
+    }
+  }
+
+  // ── Core puzzle logic ──
+
+  void swapTilesAndUpdatePuzzle(Tile tile) {
+    final tiles = List<Tile>.of(state.tiles);
+    final movedIdx = tiles.indexWhere(
+      (ct) => ct.currentLocation == tile.currentLocation,
+    );
+    final wsIdx = tiles.indexWhere((t) => t.tileIsWhiteSpace);
+    if (movedIdx == -1 || wsIdx == -1) return;
+
+    final moved = tiles[movedIdx];
+    final ws = tiles[wsIdx];
+    tiles[movedIdx] = moved.copyWith(currentLocation: ws.currentLocation);
+    tiles[wsIdx] = ws.copyWith(currentLocation: moved.currentLocation);
+
+    final isSolved = Puzzle(
+      n: state.n,
+      tiles: tiles,
+      movesCount: state.movesCount + 1,
+    ).isSolved;
+    if (tiles[movedIdx].isAtCorrectLocation) {
+      if (isSolved) {
+        HapticFeedback.vibrate();
+        _handlePuzzleSolved(tiles);
+      } else {
+        HapticFeedback.mediumImpact();
+      }
+    }
+
+    _emit(state.copyWith(tiles: tiles, movesCount: state.movesCount + 1));
+    _strategies[state.gameMode]!.onTileMoved(this);
+    updatePuzzleInStorage();
+  }
+
+  @override
+  void generate({bool forceRefresh = false}) {
+    final storage = _storageService;
+    if (storage.has(StorageKey.scores)) {
+      final saved = _getScoresFromStorage();
+      if (saved.isNotEmpty) _emit(state.copyWith(scores: saved));
+    }
+    if (storage.has(StorageKey.puzzle) && !forceRefresh) {
+      final stored = _getPuzzleFromStorage();
+      if (stored != null) {
+        _emit(
+          state.copyWith(
+            tiles: stored.tiles,
+            n: stored.n,
+            movesCount: stored.movesCount,
+          ),
+        );
+        return;
+      }
+    }
+    _generateNew();
+    updatePuzzleInStorage();
+    _strategies[state.gameMode]!.onPuzzleGenerated(this);
+  }
+
+  void _generateNew() {
+    final correctLocations = Puzzle.generateTileCorrectLocations(state.n);
+    var currentLocations = List<Location>.from(correctLocations);
+    var tiles = Puzzle.getTilesFromLocations(
+      correctLocations: correctLocations,
+      currentLocations: currentLocations,
+    );
+    var puzzle = Puzzle(n: state.n, tiles: tiles, movesCount: 0);
+
+    while (!puzzle.isSolvable() || puzzle.getNumberOfCorrectTiles() != 0) {
+      currentLocations = List<Location>.from(correctLocations)
+        ..shuffle(_random);
+      tiles = Puzzle.getTilesFromLocations(
+        correctLocations: correctLocations,
+        currentLocations: currentLocations,
+      );
+      puzzle = Puzzle(n: state.n, tiles: tiles, movesCount: 0);
+    }
+
+    _emit(
+      state.copyWith(tiles: tiles, movesCount: 0, stopWatchSecondsOverride: 0),
+    );
+  }
+
+  void _handlePuzzleSolved(List<Tile> tiles) {
+    updateScoresInStorage();
+    _strategies[state.gameMode]!.onPuzzleSolved(this);
+  }
+
+  // ── Keyboard ──
+
+  void handleKeyboardEvent(KeyEvent event) {
+    if (event case KeyDownEvent(:var physicalKey)) {
+      final tile = switch (physicalKey) {
+        PhysicalKeyboardKey.arrowDown => state.puzzle.tileTopOfWhitespace,
+        PhysicalKeyboardKey.arrowUp => state.puzzle.tileBottomOfWhitespace,
+        PhysicalKeyboardKey.arrowLeft => state.puzzle.tileRightOfWhitespace,
+        PhysicalKeyboardKey.arrowRight => state.puzzle.tileLeftOfWhitespace,
+        _ => null,
+      };
+      if (tile case var t?) swapTilesAndUpdatePuzzle(t);
+    }
+  }
+
+  // ── Game mode switching ──
+
+  void setGameMode(GameMode mode) {
+    if (state.gameMode == mode) return;
+    final old = _strategies[state.gameMode]!;
+    old.onDeactivate(this);
+    _emit(
+      state.copyWith(
+        gameMode: mode,
+        movesCount: 0,
+        stopWatchSecondsOverride: 0,
+      ),
+    );
+    _storageService.set(StorageKey.gameMode, mode.name);
+    _storageService.remove(StorageKey.puzzle);
+    generate(forceRefresh: true);
+    _strategies[mode]!.onActivate(this);
+  }
+
+  void resetPuzzleSize(int size) {
+    assert(Puzzle.supportedPuzzleSizes.contains(size));
+    _emit(state.copyWith(n: size, movesCount: 0, stopWatchSecondsOverride: 0));
+    _storageService.remove(StorageKey.puzzle);
+    generate(forceRefresh: true);
+  }
+
+  // ── Blind mode timer ──
+
+  void startBlindTimer() {
+    _blindTimer?.cancel();
+    final delay = GameModeHelper.blindHideDelaySeconds(state.n);
+    _blindTimer = Timer(Duration(seconds: delay), () {
+      _emit(state.copyWith(tilesBlinded: true, blindRevealedTiles: const {}));
+    });
+  }
+
+  void revealBlindTile(Location location) {
+    if (!state.tilesBlinded) return;
+    final revealed = {...state.blindRevealedTiles, location};
+    _emit(state.copyWith(blindRevealedTiles: revealed));
+    Future.delayed(const Duration(milliseconds: 1500), () {
+      final nextRevealed = Set<Location>.from(state.blindRevealedTiles)
+        ..remove(location);
+      _emit(state.copyWith(blindRevealedTiles: nextRevealed));
+    });
+  }
+
+  void resetBlindState() {
+    _blindTimer?.cancel();
+    _blindTimer = null;
+    _emit(state.copyWith(tilesBlinded: false, blindRevealedTiles: const {}));
+  }
+
+  // ── Marathon mode helpers ──
+
+  void setMarathonRange(int start, int end) {
+    _emit(state.copyWith(marathonStartSize: start, marathonEndSize: end));
+    _storageService.set(StorageKey.marathonStartSize, start);
+    _storageService.set(StorageKey.marathonEndSize, end);
+  }
+
+  void resetMarathonState() {
+    _emit(
+      state.copyWith(
+        marathonStartSize: null,
+        marathonEndSize: null,
+        marathonRetried: false,
+      ),
+    );
+    if (state.gameMode != GameMode.marathon) {
+      _storageService.remove(StorageKey.marathonStartSize);
+      _storageService.remove(StorageKey.marathonEndSize);
+    }
+  }
+
+  void readyMarathonAdvance() {}
+
+  void advanceMarathonSize() {
+    final sizes = Puzzle.supportedPuzzleSizes;
+    final idx = sizes.indexOf(state.n);
+    final endSize = state.marathonEndSize;
+    if (idx < sizes.length - 1 && (endSize == null || state.n < endSize)) {
+      _emit(
+        state.copyWith(
+          n: sizes[idx + 1],
+          movesCount: 0,
+          stopWatchSecondsOverride: 0,
+        ),
+      );
+      _storageService.remove(StorageKey.puzzle);
+      generate(forceRefresh: true);
+    }
+  }
+}
+
+final puzzleProvider = NotifierProvider<PuzzleNotifier, PuzzleState>(
+  PuzzleNotifier.new,
+);

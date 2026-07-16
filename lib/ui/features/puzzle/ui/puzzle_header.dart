@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:leafy/domain/models/game_mode.dart';
 import 'package:leafy/domain/models/puzzle.dart';
 import 'package:leafy/generated/app_localizations.dart';
@@ -9,58 +10,37 @@ import 'package:leafy/ui/core/layout/screen_type_helper.dart';
 import 'package:leafy/ui/features/puzzle/ui/correct_tiles_count.dart';
 import 'package:leafy/ui/features/puzzle/ui/moves_count.dart';
 import 'package:leafy/ui/features/puzzle/ui/puzzle_stop_watch.dart';
-import 'package:leafy/ui/features/puzzle/view_models/puzzle_provider.dart';
+import 'package:leafy/ui/features/puzzle/view_models/puzzle_notifier.dart';
 import 'package:leafy/ui/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:provider/provider.dart';
 
-/// Where the header is surfaced in the adaptive layout.
-///
-/// Per MD3 "show and hide" strategy (Designing Interfaces Ch.4 "Responsive
-/// Disclosure"): the same stats reflow between surfaces as breakpoints change.
-enum HeaderDisplay {
-  /// Compact stat row for the bottom toolbar (compact/medium breakpoints).
-  bottomBar,
+enum HeaderDisplay { bottomBar, topRail, sidePane }
 
-  /// Inline labeled stats for the top rail region (expanded+ breakpoints,
-  /// where the bottom bar is hidden).
-  topRail,
-
-  /// Vertical stat column for the co-planar side pane (expanded+).
-  /// The pane is narrow (~360dp), so stats stack vertically instead of
-  /// spreading horizontally.
-  sidePane,
-}
-
-class PuzzleHeader extends StatelessWidget {
+class PuzzleHeader extends ConsumerWidget {
   final HeaderDisplay displayMode;
 
   const PuzzleHeader({super.key, this.displayMode = HeaderDisplay.bottomBar});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final wc = ScreenTypeHelper(
       MediaQuery.sizeOf(context).width,
       0,
     ).windowClass;
     final colorScheme = Theme.of(context).colorScheme;
-    final puzzleProvider = context.watch<PuzzleProvider>();
-
+    final puzzleState = ref.watch(puzzleProvider);
     final l10n = context.l10n;
 
-    if (puzzleProvider.gameMode == GameMode.marathon) {
+    if (puzzleState.gameMode == GameMode.marathon) {
       return FadeInTransition(
         delay: AnimationsManager.bgLayerAnimationDuration,
         child: displayMode == HeaderDisplay.sidePane
-            ? _marathonPane(colorScheme, puzzleProvider, l10n)
-            : _marathonHeader(colorScheme, puzzleProvider, l10n),
+            ? _marathonPane(colorScheme, puzzleState, l10n)
+            : _marathonHeader(colorScheme, puzzleState, l10n),
       );
     }
 
-    // Adaptive surfacing: bottom bar uses compact stats on compact/medium;
-    // top rail uses the labeled expanded layout where the bottom bar hides;
-    // side pane uses a vertical stat column for the narrow co-planar pane.
     return FadeInTransition(
       delay: AnimationsManager.bgLayerAnimationDuration,
       child: switch (displayMode) {
@@ -75,11 +55,11 @@ class PuzzleHeader extends StatelessWidget {
 
   Widget _marathonHeader(
     ColorScheme colorScheme,
-    PuzzleProvider puzzleProvider,
+    PuzzleState puzzleState,
     AppLocalizations l10n,
   ) {
-    final currentSize = puzzleProvider.n;
-    final endSize = puzzleProvider.marathonEndSize ?? currentSize;
+    final currentSize = puzzleState.n;
+    final endSize = puzzleState.marathonEndSize ?? currentSize;
     final sizes = Puzzle.supportedPuzzleSizes;
     final currentIdx = sizes.indexOf(currentSize);
     final endIdx = sizes.indexOf(endSize);
@@ -158,15 +138,13 @@ class PuzzleHeader extends StatelessWidget {
     );
   }
 
-  /// Marathon progress for the narrow side pane — wraps chips vertically
-  /// and shows just the linked-mode indicator + a compact progress column.
   Widget _marathonPane(
     ColorScheme colorScheme,
-    PuzzleProvider puzzleProvider,
+    PuzzleState puzzleState,
     AppLocalizations l10n,
   ) {
-    final currentSize = puzzleProvider.n;
-    final endSize = puzzleProvider.marathonEndSize ?? currentSize;
+    final currentSize = puzzleState.n;
+    final endSize = puzzleState.marathonEndSize ?? currentSize;
     final sizes = Puzzle.supportedPuzzleSizes;
     final currentIdx = sizes.indexOf(currentSize);
     final endIdx = sizes.indexOf(endSize);
@@ -247,10 +225,6 @@ class PuzzleHeader extends StatelessWidget {
     );
   }
 
-  /// Vertical stat column for the narrow co-planar side pane (~360dp).
-  ///
-  /// Each stat is a single row (icon + label + value). Stacks vertically
-  /// instead of the horizontal spread used in [_expandedLayout].
   Widget _sidePaneLayout(ColorScheme colorScheme, AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -287,7 +261,6 @@ class PuzzleHeader extends StatelessWidget {
     );
   }
 
-  /// A single horizontal row for a labeled stat in the side pane.
   Widget _labeledStatRow({
     required Widget icon,
     required String label,

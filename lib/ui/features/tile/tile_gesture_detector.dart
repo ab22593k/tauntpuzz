@@ -1,14 +1,15 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:leafy/domain/models/game_mode.dart';
 import 'package:leafy/domain/models/tile.dart';
 import 'package:leafy/ui/core/animations/animations_manager.dart';
 import 'package:leafy/ui/core/layout/phrase_bubble_layout.dart';
 import 'package:leafy/ui/features/puzzle/share-dialog/puzzle_share_dialog.dart';
-import 'package:leafy/ui/features/phrases/view_models/phrases_provider.dart';
-import 'package:leafy/ui/features/puzzle/view_models/puzzle_provider.dart';
-import 'package:leafy/ui/features/puzzle/view_models/stop_watch_provider.dart';
+import 'package:leafy/ui/features/phrases/view_models/phrases_notifier.dart';
+import 'package:leafy/ui/features/puzzle/view_models/puzzle_notifier.dart';
+import 'package:leafy/ui/features/puzzle/view_models/stop_watch_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class TileGestureDetector extends StatelessWidget {
+class TileGestureDetector extends ConsumerWidget {
   final Tile tile;
   final Widget tileContent;
 
@@ -20,57 +21,57 @@ class TileGestureDetector extends StatelessWidget {
 
   Future<void> _showPuzzleSolvedDialog(
     BuildContext context,
-    PuzzleProvider puzzleProvider,
+    WidgetRef ref,
     int secondsElapsed,
   ) async {
+    final puzzleState = ref.read(puzzleProvider);
     await showDialog(
       context: context,
       builder: (c) {
         return PuzzleSolvedDialog(
-          puzzleSize: puzzleProvider.n,
-          movesCount: puzzleProvider.movesCount,
+          puzzleSize: puzzleState.n,
+          movesCount: puzzleState.movesCount,
           solvingDuration: Duration(seconds: secondsElapsed),
         );
       },
     );
   }
 
-  void _swapTilesAndUpdatePuzzle(
-    BuildContext context,
-    PuzzleProvider puzzleProvider,
-    StopWatchProvider stopWatchProvider,
-    PhrasesProvider phrasesProvider,
-  ) {
-    puzzleProvider.swapTilesAndUpdatePuzzle(tile);
+  void _swapTilesAndUpdatePuzzle(BuildContext context, WidgetRef ref) {
+    ref.read(puzzleProvider.notifier).swapTilesAndUpdatePuzzle(tile);
 
-    // Handle Phrases
-    if (puzzleProvider.movesCount == 1) {
-      // Configure speedrun countdown on first move
-      if (puzzleProvider.gameMode.name == 'speedrun' &&
-          !stopWatchProvider.isCountDown) {
-        final seconds = puzzleProvider.speedrunCountdownSeconds;
-        stopWatchProvider.configureCountdown(seconds);
+    final puzzleState = ref.read(puzzleProvider);
+
+    if (puzzleState.movesCount == 1) {
+      if (puzzleState.gameMode == GameMode.speedrun) {
+        final seconds = puzzleState.speedrunCountdownSeconds;
+        ref.read(stopWatchProvider.notifier).configureCountdown(seconds);
       }
-      stopWatchProvider.start();
-      phrasesProvider.setPhraseState(PhraseState.puzzleStarted);
-    } else if (puzzleProvider.puzzle.isSolved) {
-      phrasesProvider.setPhraseState(PhraseState.puzzleSolved);
+      ref.read(stopWatchProvider.notifier).start();
+      ref
+          .read(phrasesProvider.notifier)
+          .setPhraseState(PhraseState.puzzleStarted);
+    } else if (puzzleState.puzzle.isSolved) {
+      ref
+          .read(phrasesProvider.notifier)
+          .setPhraseState(PhraseState.puzzleSolved);
       Future.delayed(AnimationsManager.phraseBubbleTotalAnimationDuration, () {
-        phrasesProvider.setPhraseState(PhraseState.none);
+        if (!context.mounted) return;
+        ref.read(phrasesProvider.notifier).setPhraseState(PhraseState.none);
       });
 
       Future.delayed(AnimationsManager.puzzleSolvedDialogDelay, () {
         if (!context.mounted) return;
-        int secondsElapsed = stopWatchProvider.secondsElapsed;
-        stopWatchProvider.stop();
-        _showPuzzleSolvedDialog(context, puzzleProvider, secondsElapsed).then((
-          _,
-        ) {
-          puzzleProvider.generate(forceRefresh: true);
+        int secondsElapsed = ref.read(stopWatchProvider).secondsElapsed;
+        ref.read(stopWatchProvider.notifier).stop();
+        _showPuzzleSolvedDialog(context, ref, secondsElapsed).then((_) {
+          if (!context.mounted) return;
+          ref.read(puzzleProvider.notifier).generate(forceRefresh: true);
         });
       });
     } else {
-      if (phrasesProvider.phraseState case var state
+      final phrasesState = ref.read(phrasesProvider);
+      if (phrasesState.phraseState case var state
           when state != PhraseState.none) {
         if (state
             case PhraseState.puzzleStarted ||
@@ -79,84 +80,62 @@ class TileGestureDetector extends StatelessWidget {
           Future.delayed(
             AnimationsManager.phraseBubbleTotalAnimationDuration,
             () {
-              phrasesProvider.setPhraseState(PhraseState.none);
+              if (!context.mounted) return;
+              ref
+                  .read(phrasesProvider.notifier)
+                  .setPhraseState(PhraseState.none);
             },
           );
         } else {
-          phrasesProvider.setPhraseState(PhraseState.none);
+          ref.read(phrasesProvider.notifier).setPhraseState(PhraseState.none);
         }
       }
     }
   }
 
   @override
-  Widget build(BuildContext context) {
-    PuzzleProvider puzzleProvider = Provider.of<PuzzleProvider>(
-      context,
-      listen: false,
-    );
-    StopWatchProvider stopWatchProvider = Provider.of<StopWatchProvider>(
-      context,
-      listen: false,
-    );
-    PhrasesProvider phrasesProvider = Provider.of<PhrasesProvider>(
-      context,
-      listen: false,
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final puzzleState = ref.read(puzzleProvider);
 
     return IgnorePointer(
-      ignoring: tile.tileIsWhiteSpace || puzzleProvider.puzzle.isSolved,
+      ignoring: tile.tileIsWhiteSpace || puzzleState.puzzle.isSolved,
       child: GestureDetector(
         key: ValueKey('tile_${tile.value}'),
         onHorizontalDragEnd: (details) {
           bool canMoveRight =
               details.velocity.pixelsPerSecond.dx >= 0 &&
-              puzzleProvider.puzzle.tileIsLeftOfWhiteSpace(tile);
+              puzzleState.puzzle.tileIsLeftOfWhiteSpace(tile);
           bool canMoveLeft =
               details.velocity.pixelsPerSecond.dx <= 0 &&
-              puzzleProvider.puzzle.tileIsRightOfWhiteSpace(tile);
-          bool tileIsMovable = puzzleProvider.puzzle.tileIsMovable(tile);
+              puzzleState.puzzle.tileIsRightOfWhiteSpace(tile);
+          bool tileIsMovable = puzzleState.puzzle.tileIsMovable(tile);
           if (tileIsMovable && (canMoveLeft || canMoveRight)) {
-            _swapTilesAndUpdatePuzzle(
-              context,
-              puzzleProvider,
-              stopWatchProvider,
-              phrasesProvider,
-            );
+            _swapTilesAndUpdatePuzzle(context, ref);
           }
         },
         onVerticalDragEnd: (details) {
           bool canMoveUp =
               details.velocity.pixelsPerSecond.dy <= 0 &&
-              puzzleProvider.puzzle.tileIsBottomOfWhiteSpace(tile);
+              puzzleState.puzzle.tileIsBottomOfWhiteSpace(tile);
           bool canMoveDown =
               details.velocity.pixelsPerSecond.dy >= 0 &&
-              puzzleProvider.puzzle.tileIsTopOfWhiteSpace(tile);
-          bool tileIsMovable = puzzleProvider.puzzle.tileIsMovable(tile);
+              puzzleState.puzzle.tileIsTopOfWhiteSpace(tile);
+          bool tileIsMovable = puzzleState.puzzle.tileIsMovable(tile);
           if (tileIsMovable && (canMoveUp || canMoveDown)) {
-            _swapTilesAndUpdatePuzzle(
-              context,
-              puzzleProvider,
-              stopWatchProvider,
-              phrasesProvider,
-            );
+            _swapTilesAndUpdatePuzzle(context, ref);
           }
         },
         onTap: () {
-          // In blind mode, tap first reveals the tile, then moves it if possible
-          if (puzzleProvider.gameMode.name == 'blind' &&
-              puzzleProvider.tilesBlinded &&
-              !puzzleProvider.isTileRevealed(tile.currentLocation)) {
-            puzzleProvider.revealBlindTile(tile.currentLocation);
+          if (puzzleState.gameMode == GameMode.blind &&
+              puzzleState.tilesBlinded &&
+              !puzzleState.isTileRevealed(tile.currentLocation)) {
+            ref
+                .read(puzzleProvider.notifier)
+                .revealBlindTile(tile.currentLocation);
           }
-          bool tileIsMovable = puzzleProvider.puzzle.tileIsMovable(tile);
+          bool tileIsMovable = puzzleState.puzzle.tileIsMovable(tile);
           if (tileIsMovable) {
-            _swapTilesAndUpdatePuzzle(
-              context,
-              puzzleProvider,
-              stopWatchProvider,
-              phrasesProvider,
-            );
+            _swapTilesAndUpdatePuzzle(context, ref);
           }
         },
         child: tileContent,

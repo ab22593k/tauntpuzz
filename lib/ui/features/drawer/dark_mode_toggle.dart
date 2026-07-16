@@ -1,13 +1,13 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:leafy/helpers/localizations_ext.dart';
 import 'package:leafy/ui/core/app_text_styles.dart';
 import 'package:leafy/ui/core/layout/screen_type_helper.dart';
 import 'package:leafy/ui/core/layout/spacing.dart';
-import 'package:leafy/ui/core/theme_provider.dart';
+import 'package:leafy/ui/core/providers/theme_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:provider/provider.dart';
 
-class DarkModeToggle extends StatelessWidget {
+class DarkModeToggle extends ConsumerWidget {
   const DarkModeToggle({super.key});
 
   static const _themeOptions = [
@@ -17,14 +17,14 @@ class DarkModeToggle extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final wc = ScreenTypeHelper(
       MediaQuery.sizeOf(context).width,
       0,
     ).windowClass;
     final padding = MediaQuery.paddingOf(context);
     final drawerStartPadding = padding.left == 0 ? Spacing.md : padding.left;
-    final themeProvider = context.watch<ThemeProvider>();
+    final themeState = ref.watch(themeProvider);
     final colorScheme = Theme.of(context).colorScheme;
 
     return Container(
@@ -62,7 +62,7 @@ class DarkModeToggle extends StatelessWidget {
           Row(
             children: List.generate(_themeOptions.length, (index) {
               final option = _themeOptions[index];
-              final isSelected = themeProvider.mode == option.mode;
+              final isSelected = themeState.mode == option.mode;
               final label = _labelFor(context, option.mode);
               return Expanded(
                 child: Padding(
@@ -76,7 +76,7 @@ class DarkModeToggle extends StatelessWidget {
                     isSelected: isSelected,
                     onTap: () {
                       if (isSelected) return;
-                      themeProvider.setMode(option.mode);
+                      ref.read(themeProvider.notifier).setMode(option.mode);
                     },
                   ),
                 ),

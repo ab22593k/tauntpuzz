@@ -1,14 +1,14 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:leafy/generated/app_localizations.dart';
 import 'package:leafy/helpers/localizations_ext.dart';
 import 'package:leafy/ui/core/app_text_styles.dart';
 import 'package:leafy/ui/core/layout/screen_type_helper.dart';
 import 'package:leafy/ui/core/layout/spacing.dart';
-import 'package:leafy/ui/core/locale_provider.dart';
+import 'package:leafy/ui/core/providers/locale_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:provider/provider.dart';
 
-class LanguagePicker extends StatelessWidget {
+class LanguagePicker extends ConsumerWidget {
   const LanguagePicker({super.key});
 
   static const _languages = [
@@ -18,14 +18,14 @@ class LanguagePicker extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final wc = ScreenTypeHelper(
       MediaQuery.sizeOf(context).width,
       0,
     ).windowClass;
     final padding = MediaQuery.paddingOf(context);
     final drawerStartPadding = padding.left == 0 ? Spacing.md : padding.left;
-    final localeProvider = context.watch<LocaleProvider>();
+    final localeState = ref.watch(localeProvider);
     final colorScheme = Theme.of(context).colorScheme;
 
     return Container(
@@ -64,7 +64,7 @@ class LanguagePicker extends StatelessWidget {
             children: [
               ...List.generate(_languages.length, (index) {
                 final lang = _languages[index];
-                final currentCode = localeProvider.locale?.languageCode;
+                final currentCode = localeState.locale?.languageCode;
                 final isSelected =
                     currentCode == lang.code ||
                     (currentCode == null &&
@@ -80,7 +80,9 @@ class LanguagePicker extends StatelessWidget {
                       isSelected: isSelected,
                       onTap: () {
                         if (isSelected) return;
-                        localeProvider.setLocale(Locale(lang.code));
+                        ref
+                            .read(localeProvider.notifier)
+                            .setLocale(Locale(lang.code));
                       },
                     ),
                   ),

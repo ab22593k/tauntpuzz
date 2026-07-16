@@ -1,48 +1,41 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:leafy/ui/core/app_text_styles.dart';
-import 'package:leafy/ui/features/puzzle/view_models/puzzle_provider.dart';
+import 'package:leafy/ui/features/puzzle/view_models/puzzle_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:provider/provider.dart';
 
-class CorrectTilesCount extends StatelessWidget {
+class CorrectTilesCount extends ConsumerWidget {
   final ColorScheme? colorScheme;
   final bool showIcon;
 
   const CorrectTilesCount({super.key, this.colorScheme, this.showIcon = true});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final cs = colorScheme ?? Theme.of(context).colorScheme;
+    final state = ref.watch(puzzleProvider);
+    final total = state.tiles.length - 1;
+    final correct = state.correctTilesCount;
+    final ratio = total > 0 ? correct / total : 0.0;
 
-    return Consumer<PuzzleProvider>(
-      builder: (c, puzzleProvider, _) {
-        final total = puzzleProvider.puzzle.tiles.length - 1;
-        final correct = puzzleProvider.correctTilesCount;
-        final ratio = total > 0 ? correct / total : 0.0;
-
-        return AnimatedSwitcher(
-          duration: const Duration(milliseconds: 400),
-          transitionBuilder: (child, anim) =>
-              FadeTransition(opacity: anim, child: child),
-          child: Row(
-            key: ValueKey(correct),
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (showIcon) ...[
-                _progressIcon(ratio, cs),
-                const SizedBox(width: 4),
-              ],
-              Text(
-                '$correct/$total',
-                style: AppTextStyles.labelSmall.copyWith(
-                  color: _progressColor(ratio, cs),
-                  fontVariations: const [FontVariation('wght', 700)],
-                ),
-              ),
-            ],
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 400),
+      transitionBuilder: (child, anim) =>
+          FadeTransition(opacity: anim, child: child),
+      child: Row(
+        key: ValueKey(correct),
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (showIcon) ...[_progressIcon(ratio, cs), const SizedBox(width: 4)],
+          Text(
+            '$correct/$total',
+            style: AppTextStyles.labelSmall.copyWith(
+              color: _progressColor(ratio, cs),
+              fontVariations: const [FontVariation('wght', 700)],
+            ),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 

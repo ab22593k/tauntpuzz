@@ -3,31 +3,25 @@ import 'dart:io';
 import 'package:leafy/generated/app_localizations.dart';
 import 'package:leafy/router/router_config.dart';
 import 'package:leafy/ui/core/app_theme.dart';
-import 'package:leafy/ui/core/theme_provider.dart';
 import 'package:leafy/ui/core/theme_transition.dart';
+import 'package:leafy/ui/core/providers/theme_notifier.dart';
+import 'package:leafy/ui/core/providers/locale_notifier.dart';
 import 'package:leafy/ui/features/background/background_layers.dart';
 import 'package:leafy/ui/core/layout/background_layer_layout.dart';
-import 'package:leafy/ui/core/locale_provider.dart';
-import 'package:leafy/ui/features/phrases/view_models/phrases_provider.dart';
-import 'package:leafy/ui/features/puzzle/view_models/puzzle_provider.dart';
-import 'package:leafy/ui/features/puzzle/view_models/stop_watch_provider.dart';
-import 'package:leafy/data/services/storage_service.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class App extends StatefulWidget {
-  final StorageService storageService;
-
-  const App({super.key, required this.storageService});
+class App extends ConsumerStatefulWidget {
+  const App({super.key});
 
   @override
-  State<App> createState() => _AppState();
+  ConsumerState<App> createState() => _AppState();
 }
 
-class _AppState extends State<App> {
+class _AppState extends ConsumerState<App> {
   @override
   void initState() {
     if (!kIsWeb && Platform.isMacOS) {
@@ -55,7 +49,6 @@ class _AppState extends State<App> {
           context,
         );
       }
-
       precacheImage(
         Image.asset('assets/images/solved/solved.jpg').image,
         context,
@@ -67,57 +60,36 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => PuzzleProvider(widget.storageService)..generate(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => StopWatchProvider(widget.storageService)..init(),
-        ),
-        ChangeNotifierProvider(create: (_) => PhrasesProvider()),
-        ChangeNotifierProvider(create: (_) => LocaleProvider()),
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
-      ],
-      child: SafeArea(
-        child: Consumer<LocaleProvider>(
-          builder: (context, localeProvider, _) {
-            final localeKey = localeProvider.locale?.languageCode ?? 'system';
-            return Consumer<ThemeProvider>(
-              builder: (context, themeProvider, _) {
-                return DynamicColorBuilder(
-                  builder: (dynamicLight, dynamicDark) {
-                    final lightTheme = AppTheme.light(
-                      dynamicLight: dynamicLight,
-                    );
-                    final darkTheme = AppTheme.dark(dynamicDark: dynamicDark);
+    final localeState = ref.watch(localeProvider);
+    final themeState = ref.watch(themeProvider);
+    final localeKey = localeState.locale?.languageCode ?? 'system';
 
-                    return ThemeTransitionBuilder(
-                      lightTheme: lightTheme,
-                      darkTheme: darkTheme,
-                      themeMode: themeProvider.mode,
-                      builder: (context, animatedTheme) {
-                        return MaterialApp.router(
-                          key: ValueKey(localeKey),
-                          debugShowCheckedModeBanner: false,
-                          title: 'Leafy',
-                          theme: animatedTheme,
-                          themeMode: ThemeMode.light,
-                          routerConfig: AppRouter.router,
-                          locale: localeProvider.locale,
-                          localizationsDelegates:
-                              AppLocalizations.localizationsDelegates,
-                          supportedLocales: AppLocalizations.supportedLocales,
-                        );
-                      },
-                    );
-                  },
-                );
-              },
+    return DynamicColorBuilder(
+      builder: (dynamicLight, dynamicDark) {
+        final lightTheme = AppTheme.light(dynamicLight: dynamicLight);
+        final darkTheme = AppTheme.dark(dynamicDark: dynamicDark);
+
+        return ThemeTransitionBuilder(
+          lightTheme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: themeState.mode,
+          builder: (context, animatedTheme) {
+            return SafeArea(
+              child: MaterialApp.router(
+                key: ValueKey(localeKey),
+                debugShowCheckedModeBanner: false,
+                title: 'Leafy',
+                theme: animatedTheme,
+                themeMode: ThemeMode.light,
+                routerConfig: AppRouter.router,
+                locale: localeState.locale,
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+              ),
             );
           },
-        ),
-      ),
+        );
+      },
     );
   }
 }
