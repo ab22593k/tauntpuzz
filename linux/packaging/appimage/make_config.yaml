@@ -1,0 +1,11 @@
+display_name: Leafy
+
+icon: assets/app-icon-with-dash-ltr.png
+keywords:
+  - Puzzle
+  - Game
+generic_name: Musical Puzzle Game
+categories:
+  - Game
+startup_notify: true
+include: []

@@ -1,0 +1,21 @@
+display_name: Leafy
+package_name: leafy
+maintainer:
+  name: Abdulwahab
+  email: ab22593K@gmail.com
+priority: optional
+section: games
+installed_size: 102400
+essential: false
+icon: assets/app-icon-with-dash-ltr.png
+postinstall_scripts:
+  - echo "Leafy installed successfully"
+postuninstall_scripts:
+  - echo "Leafy uninstalled"
+keywords:
+  - Puzzle
+  - Game
+generic_name: Musical Puzzle Game
+categories:
+  - Game
+startup_notify: true
