@@ -37,7 +37,6 @@ class _DrawerButtonState extends State<DrawerButton>
     super.dispose();
   }
 
-  /// Adaptive surfacing (MD3 "levitate" strategy):
   /// On compact/medium the settings open as a navigation drawer (the
   /// docked pane slides in from the leading edge). On expanded+ where the
   /// drawer is hidden, the same content levitates into a floating pane —

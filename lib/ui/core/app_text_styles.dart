@@ -9,87 +9,87 @@ class AppTextStyles {
     fontSize: 28,
     fontWeight: FontWeight.w700,
     height: 1.0,
-    letterSpacing: 0,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get tileMobile => const TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w700,
     height: 1.0,
-    letterSpacing: 0,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get title => const TextStyle(
     fontSize: 25,
     fontWeight: FontWeight.w400,
     height: 32 / 25,
-    letterSpacing: 0,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get h1 => const TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w700,
     height: 24 / 18,
-    letterSpacing: 0,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get h1Bold => const TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w700,
     height: 24 / 18,
-    letterSpacing: 0,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get h2 => const TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w400,
     height: 22 / 16,
-    letterSpacing: 0,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get h3 => const TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w700,
     height: 24 / 18,
-    letterSpacing: 0,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get body => const TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
     height: 20 / 14,
-    letterSpacing: 0,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get bodyBold => const TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w700,
     height: 20 / 14,
-    letterSpacing: 0,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get bodySm =>
-      const TextStyle(fontSize: 14, letterSpacing: 0);
+      const TextStyle(fontSize: 14, letterSpacing: -0.5);
 
   static TextStyle get bodyXs => const TextStyle(
     fontSize: 11,
     fontWeight: FontWeight.w400,
     height: 16 / 11,
-    letterSpacing: 0.5,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get bodyXxs => const TextStyle(
     fontSize: 10,
     fontWeight: FontWeight.w400,
     height: 12 / 10,
-    letterSpacing: 0.5,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get button => const TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w600,
     height: 1,
-    letterSpacing: 0.5,
+    letterSpacing: -0.5,
     fontFamily: 'OpenDyslexic',
   );
 
@@ -97,112 +97,112 @@ class AppTextStyles {
     fontSize: 12,
     fontWeight: FontWeight.w600,
     height: 1,
-    letterSpacing: 0.25,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get displayLarge => const TextStyle(
     fontSize: 56,
     fontWeight: FontWeight.w400,
     height: 1.1,
-    letterSpacing: -0.25,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get displayMedium => const TextStyle(
     fontSize: 45,
     fontWeight: FontWeight.w400,
     height: 52 / 45,
-    letterSpacing: 0,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get displaySmall => const TextStyle(
     fontSize: 36,
     fontWeight: FontWeight.w400,
     height: 44 / 36,
-    letterSpacing: 0,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get headlineLarge => const TextStyle(
     fontSize: 32,
     fontWeight: FontWeight.w400,
     height: 1.2,
-    letterSpacing: -0.25,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get headlineMedium => const TextStyle(
     fontSize: 32,
     fontWeight: FontWeight.w400,
     height: 40 / 32,
-    letterSpacing: 0,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get headlineSmall => const TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.w400,
     height: 32 / 24,
-    letterSpacing: 0,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get titleLarge => const TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w700,
     height: 24 / 18,
-    letterSpacing: 0,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get titleMedium => const TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w500,
     height: 1.5,
-    letterSpacing: 0.1,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get titleSmall => const TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w600,
     height: 16 / 12,
-    letterSpacing: 0.1,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get labelLarge => const TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w500,
     height: 20 / 14,
-    letterSpacing: 0.1,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get labelMedium => const TextStyle(
     fontSize: 11,
     fontWeight: FontWeight.w500,
     height: 16 / 11,
-    letterSpacing: 0.5,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get labelSmall => const TextStyle(
     fontSize: 11,
     fontWeight: FontWeight.w600,
     height: 1.4,
-    letterSpacing: 1.6,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get bodyLarge => const TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
     height: 1.6,
-    letterSpacing: 0,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get bodyMedium => const TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
     height: 1.6,
-    letterSpacing: 0,
+    letterSpacing: -0.5,
   );
 
   static TextStyle get bodySmall => const TextStyle(
     fontSize: 11,
     fontWeight: FontWeight.w400,
     height: 16 / 11,
-    letterSpacing: 0,
+    letterSpacing: -0.5,
   );
 
   static TextStyle tileAdaptive(WindowClass wc) => switch (wc) {

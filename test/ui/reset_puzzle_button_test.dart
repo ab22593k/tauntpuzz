@@ -35,6 +35,7 @@ Widget Function() buildTest({required double screenWidth}) {
     when(() => storage.get(any())).thenReturn(null);
     when(() => storage.set(any(), any())).thenAnswer((_) async {});
     when(() => storage.remove(any())).thenAnswer((_) async {});
+    when(() => storage.clear()).thenAnswer((_) async {});
 
     return ProviderScope(
       overrides: [storageServiceProvider.overrideWithValue(storage)],

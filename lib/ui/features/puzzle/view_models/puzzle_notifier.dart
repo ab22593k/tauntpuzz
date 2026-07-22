@@ -123,7 +123,6 @@ class PuzzleNotifier extends Notifier<PuzzleState>
     implements GameModeStrategyHost {
   final Random _random = Random();
   Timer? _blindTimer;
-  Timer? _initTimer;
   late final Map<GameMode, GameModeStrategy> _strategies;
 
   /// Cached storage service — accessing [ref] inside [ref.onDispose] is
@@ -174,7 +173,6 @@ class PuzzleNotifier extends Notifier<PuzzleState>
     _storageService = ref.read(storageServiceProvider);
     ref.onDispose(() {
       _blindTimer?.cancel();
-      _initTimer?.cancel();
       // Deactivate only the active strategy — iterating all strategies
       // during onDispose can trigger Riverpod lifecycle assertions when
       // strategies access host storage.
@@ -189,8 +187,46 @@ class PuzzleNotifier extends Notifier<PuzzleState>
       initialMode = GameMode.values.byName(storedGameMode);
     }
     _strategies[initialMode]!.onActivate(this);
-    _initTimer = Timer(Duration.zero, generate);
-    return PuzzleState(gameMode: initialMode);
+
+    final savedScores = _getScoresFromStorage();
+
+    final storedPuzzle = _getPuzzleFromStorage();
+    if (storedPuzzle != null) {
+      return PuzzleState(
+        gameMode: initialMode,
+        tiles: storedPuzzle.tiles,
+        n: storedPuzzle.n,
+        movesCount: storedPuzzle.movesCount,
+        scores: savedScores,
+      );
+    }
+
+    final correctLocations = Puzzle.generateTileCorrectLocations(4);
+    var currentLocations = List<Location>.from(correctLocations)
+      ..shuffle(_random);
+    var tiles = Puzzle.getTilesFromLocations(
+      correctLocations: correctLocations,
+      currentLocations: currentLocations,
+    );
+    var puzzle = Puzzle(n: 4, tiles: tiles, movesCount: 0);
+    while (!puzzle.isSolvable() || puzzle.getNumberOfCorrectTiles() != 0) {
+      currentLocations = List<Location>.from(correctLocations)
+        ..shuffle(_random);
+      tiles = Puzzle.getTilesFromLocations(
+        correctLocations: correctLocations,
+        currentLocations: currentLocations,
+      );
+      puzzle = Puzzle(n: 4, tiles: tiles, movesCount: 0);
+    }
+
+    updatePuzzleInStorage();
+    _strategies[initialMode]!.onPuzzleGenerated(this);
+
+    return PuzzleState(
+      gameMode: initialMode,
+      tiles: tiles,
+      scores: savedScores,
+    );
   }
 
   void _emit(PuzzleState next) {

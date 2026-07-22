@@ -34,6 +34,7 @@ class MockStorageService extends Mock implements StorageService {}
   when(() => storage.get(any())).thenReturn(null);
   when(() => storage.set(any(), any())).thenAnswer((_) => Future<void>.value());
   when(() => storage.remove(any())).thenAnswer((_) => Future<void>.value());
+  when(() => storage.clear()).thenAnswer((_) => Future<void>.value());
 
   final container = ProviderContainer(
     overrides: [storageServiceProvider.overrideWithValue(storage)],

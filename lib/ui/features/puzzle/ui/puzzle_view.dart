@@ -25,7 +25,7 @@ class _PuzzleViewState extends ConsumerState<PuzzleView> {
     _stopWatchNotifier = ref.read(stopWatchProvider.notifier);
     final puzzleState = ref.read(puzzleProvider);
     if (puzzleState.hasStarted) {
-      _stopWatchNotifier.start();
+      Future(() => _stopWatchNotifier.start());
     }
   }
 
