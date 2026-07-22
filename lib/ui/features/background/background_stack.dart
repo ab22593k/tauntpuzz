@@ -1,6 +1,6 @@
-import 'package:leafy/ui/features/background/background_layers.dart';
-import 'package:leafy/ui/features/background/animated_background_layer.dart';
-import 'package:leafy/ui/features/background/stars.dart';
+import 'package:leafz/ui/features/background/background_layers.dart';
+import 'package:leafz/ui/features/background/animated_background_layer.dart';
+import 'package:leafz/ui/features/background/stars.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundStack extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:checks/checks.dart';
-import 'package:leafy/helpers/share_score_helper.dart';
+import 'package:leafz/helpers/share_score_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -15,7 +15,7 @@ void main() {
       );
 
       check(puzzleSolvedText).equals(
-        'I just solved this $tilesCount-Tile Leafy slide puzzle in 08:20 with 55 moves!',
+        'I just solved this $tilesCount-Tile Leafz slide puzzle in 08:20 with 55 moves!',
       );
     });
 
@@ -27,7 +27,7 @@ void main() {
       );
 
       check(twitterShareLink).equals(
-        'https://twitter.com/intent/tweet?text=I+just+solved+this+8-Tile+Leafy+slide+puzzle+in+08%3A20+with+55+moves%21',
+        'https://twitter.com/intent/tweet?text=I+just+solved+this+8-Tile+Leafz+slide+puzzle+in+08%3A20+with+55+moves%21',
       );
     });
   });

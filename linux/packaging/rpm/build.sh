@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Builds leafy as an RPM package.
+# Builds leafz as an RPM package.
 #
 # fastforge 0.6.9 has a bug in its RPM maker — this script does it correctly.
 #
 # Usage:
 #   ./linux/packaging/rpm/build.sh
 
-NAME="leafy"
+NAME="leafz"
 VERSION="1.1.0"
 SUMMARY="organiq puzzle where the pieces hum a forgotten melody"
 LICENSE="MIT"
 VENDOR="maintainer"
 PACKAGER="Abdulwahab <ab22593K@gmail.com>"
-URL="https://github.com/ab22593k/leafy"
+URL="https://github.com/ab22593k/leafz"
 ICON="assets/app-icon-with-dash-ltr.png"
 
 ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
@@ -45,14 +45,14 @@ PKG_DIR="$RPMBUILD/_pkg"
 rm -rf "$PKG_DIR"
 SRC_DIR="$PKG_DIR/${NAME}-${VERSION}"
 mkdir -p "$SRC_DIR/$NAME"
-cp -r "$BUNDLE/leafy" "$SRC_DIR/$NAME/"
+cp -r "$BUNDLE/leafz" "$SRC_DIR/$NAME/"
 cp -r "$BUNDLE/data"  "$SRC_DIR/$NAME/"
 cp -r "$BUNDLE/lib"   "$SRC_DIR/$NAME/"
 
 cat > "$SRC_DIR/${NAME}.desktop" <<DESKTOP
 [Desktop Entry]
 Type=Application
-Name=Leafy
+Name=Leafz
 GenericName=Musical Puzzle Game
 Icon=${NAME}
 Exec=${NAME} %U

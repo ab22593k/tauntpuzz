@@ -1,5 +1,5 @@
-import 'package:leafy/domain/models/game_mode.dart';
-import 'package:leafy/ui/features/puzzle/view_models/game_mode_strategy.dart';
+import 'package:leafz/domain/models/game_mode.dart';
+import 'package:leafz/ui/features/puzzle/view_models/game_mode_strategy.dart';
 
 /// No special behavior beyond the core tile-swapping puzzle.
 class ClassicGameModeStrategy extends GameModeStrategy {

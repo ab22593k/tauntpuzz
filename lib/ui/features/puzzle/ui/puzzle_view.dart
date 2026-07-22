@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:leafy/ui/core/layout/puzzle_layout.dart';
-import 'package:leafy/ui/core/layout/screen_type_helper.dart';
-import 'package:leafy/ui/core/layout/spacing.dart';
-import 'package:leafy/ui/features/puzzle/board/puzzle_board.dart';
-import 'package:leafy/ui/features/puzzle/view_models/puzzle_notifier.dart';
-import 'package:leafy/ui/features/puzzle/view_models/stop_watch_notifier.dart';
+import 'package:leafz/ui/core/layout/puzzle_layout.dart';
+import 'package:leafz/ui/core/layout/screen_type_helper.dart';
+import 'package:leafz/ui/core/layout/spacing.dart';
+import 'package:leafz/ui/features/puzzle/board/puzzle_board.dart';
+import 'package:leafz/ui/features/puzzle/view_models/puzzle_notifier.dart';
+import 'package:leafz/ui/features/puzzle/view_models/stop_watch_notifier.dart';
 import 'package:flutter/material.dart';
 
 class PuzzleView extends ConsumerStatefulWidget {

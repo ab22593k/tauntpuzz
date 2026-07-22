@@ -1,4 +1,4 @@
-import 'package:leafy/domain/models/position.dart';
+import 'package:leafz/domain/models/position.dart';
 import 'package:flutter/animation.dart';
 
 class PositionTween extends Tween<Position> {

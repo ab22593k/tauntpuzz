@@ -1,6 +1,6 @@
-import 'package:leafy/domain/models/position.dart';
-import 'package:leafy/ui/core/layout/layout_delegate.dart';
-import 'package:leafy/ui/core/layout/screen_type_helper.dart';
+import 'package:leafz/domain/models/position.dart';
+import 'package:leafz/ui/core/layout/layout_delegate.dart';
+import 'package:leafz/ui/core/layout/screen_type_helper.dart';
 import 'package:flutter/cupertino.dart';
 
 enum BackgroundLayerType {

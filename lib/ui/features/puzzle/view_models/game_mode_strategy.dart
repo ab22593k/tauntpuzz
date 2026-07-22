@@ -1,11 +1,11 @@
-import 'package:leafy/data/services/storage_service.dart';
-import 'package:leafy/domain/models/game_mode.dart';
-import 'package:leafy/domain/models/location.dart';
+import 'package:leafz/data/services/storage_service.dart';
+import 'package:leafz/domain/models/game_mode.dart';
+import 'package:leafz/domain/models/location.dart';
 
-/// Minimal surface that [PuzzleProvider] exposes to [GameModeStrategy] instances.
+/// Minimal surface that [PuzzleNotifier] exposes to [GameModeStrategy] instances.
 ///
 /// Breaking this out avoids a circular import between `game_mode_strategy.dart`
-/// and `puzzle_provider.dart`.
+/// and `puzzle_notifier.dart`.
 abstract class GameModeStrategyHost {
   GameMode get gameMode;
   int get n;

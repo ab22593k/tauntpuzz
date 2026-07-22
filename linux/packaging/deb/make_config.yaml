@@ -1,5 +1,5 @@
-display_name: Leafy
-package_name: leafy
+display_name: Leafz
+package_name: leafz
 maintainer:
   name: Abdulwahab
   email: ab22593K@gmail.com
@@ -9,9 +9,9 @@ installed_size: 102400
 essential: false
 icon: assets/app-icon-with-dash-ltr.png
 postinstall_scripts:
-  - echo "Leafy installed successfully"
+  - echo "Leafz installed successfully"
 postuninstall_scripts:
-  - echo "Leafy uninstalled"
+  - echo "Leafz uninstalled"
 keywords:
   - Puzzle
   - Game

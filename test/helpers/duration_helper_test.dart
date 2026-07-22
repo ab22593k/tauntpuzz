@@ -1,5 +1,5 @@
 import 'package:checks/checks.dart';
-import 'package:leafy/helpers/duration_helper.dart';
+import 'package:leafz/helpers/duration_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

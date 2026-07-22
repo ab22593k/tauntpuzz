@@ -103,7 +103,7 @@ abstract class AppLocalizations {
   /// The application title
   ///
   /// In en, this message translates to:
-  /// **'Leafy'**
+  /// **'Leafz'**
   String get appTitle;
 
   /// The application subtitle
@@ -493,8 +493,8 @@ abstract class AppLocalizations {
   /// Dash suggests his nickname
   ///
   /// In en, this message translates to:
-  /// **'So you can call me Leafy'**
-  String get dashCallMeLeafy;
+  /// **'So you can call me Leafz'**
+  String get dashCallMeLeafz;
 
   /// Dash annoyed by repeated taps
   ///

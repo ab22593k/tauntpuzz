@@ -1,4 +1,4 @@
-import 'package:leafy/ui/core/animations/animations_manager.dart';
+import 'package:leafz/ui/core/animations/animations_manager.dart';
 import 'package:flutter/material.dart';
 
 class PulseTransition extends StatefulWidget {

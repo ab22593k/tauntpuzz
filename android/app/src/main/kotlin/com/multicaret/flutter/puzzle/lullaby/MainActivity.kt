@@ -1,4 +1,4 @@
-package com.multicaret.flutter.puzzle.leafy
+package com.multicaret.flutter.puzzle.leafz
 
 import io.flutter.embedding.android.FlutterActivity
 

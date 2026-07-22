@@ -1,5 +1,5 @@
 {
-  "appTitle": "Leafy",
+  "appTitle": "Leafz",
   "@appTitle": {
     "description": "The application title"
   },
@@ -262,8 +262,8 @@
   "@dashAstronaut": {
     "description": "Dash explains his role"
   },
-  "dashCallMeLeafy": "So you can call me Leafy",
-  "@dashCallMeLeafy": {
+  "dashCallMeLeafz": "So you can call me Leafz",
+  "@dashCallMeLeafz": {
     "description": "Dash suggests his nickname"
   },
   "dashStopPoking": "You can stop poking me now",

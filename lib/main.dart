@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:leafy/app.dart';
-import 'package:leafy/data/services/service_locator.dart';
-import 'package:leafy/data/services/storage_service.dart';
-import 'package:leafy/ui/features/puzzle/view_models/puzzle_notifier.dart'
+import 'package:leafz/app.dart';
+import 'package:leafz/data/services/cbl_storage_service.dart';
+import 'package:leafz/data/services/storage_service.dart';
+import 'package:leafz/ui/features/puzzle/view_models/puzzle_notifier.dart'
     show storageServiceProvider;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,8 +13,7 @@ void main() {
   usePathUrlStrategy();
   runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    setupServiceLocator();
-    final StorageService storageService = getIt<StorageService>();
+    final StorageService storageService = KConfigStorageService();
     await storageService.init();
 
     runApp(

@@ -1,25 +1,29 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:leafy/domain/models/game_mode.dart';
-import 'package:leafy/domain/models/location.dart';
-import 'package:leafy/domain/models/puzzle.dart';
-import 'package:leafy/domain/models/score.dart';
-import 'package:leafy/domain/models/tile.dart';
-import 'package:leafy/helpers/game_mode_helper.dart';
-import 'package:leafy/data/services/storage_service.dart';
-import 'package:leafy/ui/features/puzzle/view_models/game_mode_strategy.dart';
-import 'package:leafy/ui/features/puzzle/view_models/classic_game_mode_strategy.dart';
-import 'package:leafy/ui/features/puzzle/view_models/speedrun_game_mode_strategy.dart';
-import 'package:leafy/ui/features/puzzle/view_models/blind_game_mode_strategy.dart';
-import 'package:leafy/ui/features/puzzle/view_models/marathon_game_mode_strategy.dart';
+import 'package:leafz/domain/models/game_mode.dart';
+import 'package:leafz/domain/models/location.dart';
+import 'package:leafz/domain/models/puzzle.dart';
+import 'package:leafz/domain/models/score.dart';
+import 'package:leafz/domain/models/tile.dart';
+import 'package:leafz/helpers/game_mode_helper.dart';
+import 'package:leafz/ui/core/animations/animations_manager.dart';
+import 'package:leafz/data/services/storage_service.dart';
+import 'package:leafz/ui/features/puzzle/view_models/game_mode_strategy.dart';
+import 'package:leafz/ui/features/puzzle/view_models/classic_game_mode_strategy.dart';
+import 'package:leafz/ui/features/puzzle/view_models/speedrun_game_mode_strategy.dart';
+import 'package:leafz/ui/features/puzzle/view_models/blind_game_mode_strategy.dart';
+import 'package:leafz/ui/features/puzzle/view_models/marathon_game_mode_strategy.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:math' show Random;
 
 final storageServiceProvider = Provider<StorageService>((ref) {
-  throw UnimplementedError('Must override in ProviderScope');
+  throw StateError(
+    'StorageService not provided. '
+    'Override with KConfigStorageService() in main.dart\'s ProviderScope.',
+  );
 });
 
 // ────────────────────────────────────────────────────
@@ -206,12 +210,22 @@ class PuzzleNotifier extends Notifier<PuzzleState>
       puzzleSize: state.n,
       secondsElapsed: seconds,
       gameMode: state.gameMode,
+      timestamp: DateTime.now(),
     );
     try {
       final savedScores = _getScoresFromStorage();
-      final scores = savedScores.length >= 10
-          ? [...savedScores.sublist(1), newScore]
-          : [...savedScores, newScore];
+      // Sort by timestamp ascending (oldest first), then keep the 10 most
+      // recent. Pre-migration scores with null timestamp are treated as
+      // the oldest via [DateTime(0)] and get dropped first.
+      final sorted = [...savedScores, newScore]
+        ..sort(
+          (a, b) => (a.timestamp ?? DateTime(0)).compareTo(
+            b.timestamp ?? DateTime(0),
+          ),
+        );
+      final scores = sorted.length > 10
+          ? sorted.sublist(sorted.length - 10)
+          : sorted;
       _emit(state.copyWith(scores: scores));
       storage.set(StorageKey.scores, Score.toJsonList(scores));
     } catch (e) {
@@ -395,7 +409,7 @@ class PuzzleNotifier extends Notifier<PuzzleState>
     if (!state.tilesBlinded) return;
     final revealed = {...state.blindRevealedTiles, location};
     _emit(state.copyWith(blindRevealedTiles: revealed));
-    Future.delayed(const Duration(milliseconds: 1500), () {
+    Future.delayed(AnimationsManager.blindRevealAutoHide, () {
       final nextRevealed = Set<Location>.from(state.blindRevealedTiles)
         ..remove(location);
       _emit(state.copyWith(blindRevealedTiles: nextRevealed));

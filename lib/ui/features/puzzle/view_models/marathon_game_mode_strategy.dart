@@ -1,7 +1,7 @@
-import 'package:leafy/data/services/storage_service.dart';
-import 'package:leafy/domain/models/game_mode.dart';
-import 'package:leafy/domain/models/puzzle.dart';
-import 'package:leafy/ui/features/puzzle/view_models/game_mode_strategy.dart';
+import 'package:leafz/data/services/storage_service.dart';
+import 'package:leafz/domain/models/game_mode.dart';
+import 'package:leafz/domain/models/puzzle.dart';
+import 'package:leafz/ui/features/puzzle/view_models/game_mode_strategy.dart';
 
 /// Chain-solve across a user-defined size range.
 ///

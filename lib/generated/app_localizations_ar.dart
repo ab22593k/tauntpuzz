@@ -208,7 +208,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get dashAstronaut => 'وأنا رائد فضاء هنا';
 
   @override
-  String get dashCallMeLeafy => 'لذا يمكنكم مناداتي جيغسو';
+  String get dashCallMeLeafz => 'لذا يمكنكم مناداتي جيغسو';
 
   @override
   String get dashStopPoking => 'يمكنك التوقف عن ضربي الآن';

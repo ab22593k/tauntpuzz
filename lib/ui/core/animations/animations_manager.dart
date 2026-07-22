@@ -1,6 +1,6 @@
-import 'package:leafy/domain/models/position.dart';
-import 'package:leafy/ui/core/animations/position_tween.dart';
-import 'package:leafy/ui/core/layout/background_layer_layout.dart';
+import 'package:leafz/domain/models/position.dart';
+import 'package:leafz/ui/core/animations/position_tween.dart';
+import 'package:leafz/ui/core/layout/background_layer_layout.dart';
 import 'package:flutter/material.dart';
 
 enum AnimatedElementType { puzzleBoard, stars }
@@ -70,6 +70,22 @@ class AnimationsManager {
   static const Duration phraseBubbleHoldAnimationDuration = Duration(
     milliseconds: 1000,
   );
+
+  /// Tile movement animation (swap position in the puzzle grid).
+  static final AnimatedElement<double> tileMove = AnimatedElement<double>(
+    duration: const Duration(milliseconds: 150),
+    tween: Tween<double>(begin: 0, end: 1),
+    curve: Curves.easeInOut,
+  );
+
+  /// Theme transition duration (light ↔ dark mode switch).
+  static const Duration themeTransition = Duration(milliseconds: 400);
+
+  /// Delay before background layers begin their entrance animation.
+  static const Duration bgLayerEntryDelay = Duration(milliseconds: 400);
+
+  /// How long a revealed blind-mode tile stays visible before auto-hiding.
+  static const Duration blindRevealAutoHide = Duration(milliseconds: 1500);
 
   static final AnimatedElement<double> phraseBubble = AnimatedElement<double>(
     duration: phraseBubbleAnimationDuration,

@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:leafy/generated/app_localizations.dart';
-import 'package:leafy/ui/core/layout/phrase_bubble_layout.dart'
+import 'package:leafz/generated/app_localizations.dart';
+import 'package:leafz/ui/core/layout/phrase_bubble_layout.dart'
     show PhraseState;
 
 @immutable
@@ -54,7 +54,7 @@ class PhrasesNotifier extends Notifier<PhrasesState> {
     _phr((l) => l.dashMascotOf),
     _phr((l) => l.dashBuiltWith),
     _phr((l) => l.dashAstronaut),
-    _phr((l) => l.dashCallMeLeafy),
+    _phr((l) => l.dashCallMeLeafz),
     _phr((l) => l.dashStopPoking),
     _phr((l) => l.dashPlayInstead),
     _phr((l) => l.dashAnnoying),

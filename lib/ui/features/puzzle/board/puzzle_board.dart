@@ -1,14 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:leafy/domain/models/game_mode.dart';
-import 'package:leafy/ui/core/animations/animations_manager.dart';
-import 'package:leafy/ui/core/animations/pulse_transition.dart';
-import 'package:leafy/ui/core/animations/scale_up_transition.dart';
-import 'package:leafy/ui/core/layout/screen_type_helper.dart';
-import 'package:leafy/ui/features/tile/tile_animated_positioned.dart';
-import 'package:leafy/ui/features/tile/tile_content.dart';
-import 'package:leafy/ui/features/tile/tile_gesture_detector.dart';
-import 'package:leafy/ui/features/puzzle/view_models/puzzle_notifier.dart';
-import 'package:leafy/ui/features/puzzle/view_models/stop_watch_notifier.dart';
+import 'package:leafz/domain/models/game_mode.dart';
+import 'package:leafz/ui/core/animations/animations_manager.dart';
+import 'package:leafz/ui/core/animations/pulse_transition.dart';
+import 'package:leafz/ui/core/animations/scale_up_transition.dart';
+import 'package:leafz/ui/core/layout/screen_type_helper.dart';
+import 'package:leafz/ui/features/tile/tile_animated_positioned.dart';
+import 'package:leafz/ui/features/tile/tile_content.dart';
+import 'package:leafz/ui/features/tile/tile_gesture_detector.dart';
+import 'package:leafz/ui/features/puzzle/view_models/puzzle_notifier.dart';
+import 'package:leafz/ui/features/puzzle/view_models/stop_watch_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -45,8 +45,7 @@ class _PuzzleBoardState extends ConsumerState<PuzzleBoard> {
     final tilesBlinded = puzzleState.tilesBlinded;
 
     return ScaleUpTransition(
-      duration: const Duration(milliseconds: 700),
-      curve: Curves.easeOutBack,
+      // Uses AnimationsManager.scaleUp defaults for duration & curve.
       delay: AnimationsManager.bgLayerAnimationDuration,
       child: KeyboardListener(
         onKeyEvent: (event) {

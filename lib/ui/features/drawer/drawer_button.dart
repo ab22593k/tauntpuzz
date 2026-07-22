@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:leafy/helpers/localizations_ext.dart';
-import 'package:leafy/ui/core/layout/panes.dart';
-import 'package:leafy/ui/core/layout/screen_type_helper.dart';
-import 'package:leafy/ui/features/drawer/app_drawer.dart';
+import 'package:leafz/helpers/localizations_ext.dart';
+import 'package:leafz/ui/core/layout/panes.dart';
+import 'package:leafz/ui/core/layout/screen_type_helper.dart';
+import 'package:leafz/ui/features/drawer/app_drawer.dart';
 
 class DrawerButton extends StatefulWidget {
   const DrawerButton({super.key});

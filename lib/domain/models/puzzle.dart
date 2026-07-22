@@ -1,5 +1,5 @@
-import 'package:leafy/domain/models/location.dart';
-import 'package:leafy/domain/models/tile.dart';
+import 'package:leafz/domain/models/location.dart';
+import 'package:leafz/domain/models/tile.dart';
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 

@@ -1,4 +1,4 @@
-import 'package:leafy/generated/app_localizations.dart';
+import 'package:leafz/generated/app_localizations.dart';
 import 'package:flutter/widgets.dart';
 
 extension LocalizationsExt on BuildContext {

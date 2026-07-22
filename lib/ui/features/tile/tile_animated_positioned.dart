@@ -1,4 +1,5 @@
-import 'package:leafy/domain/models/tile.dart';
+import 'package:leafz/domain/models/tile.dart';
+import 'package:leafz/ui/core/animations/animations_manager.dart';
 import 'package:flutter/material.dart';
 
 class TileAnimatedPositioned extends StatelessWidget {
@@ -18,8 +19,8 @@ class TileAnimatedPositioned extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedPositioned(
-      duration: const Duration(milliseconds: 150),
-      curve: Curves.easeInOut,
+      duration: AnimationsManager.tileMove.duration,
+      curve: AnimationsManager.tileMove.curve,
       width: tileWidth,
       height: tileWidth,
       left: (tile.currentLocation.x - 1) * tileWidth,

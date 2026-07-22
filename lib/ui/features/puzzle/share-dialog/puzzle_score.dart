@@ -1,8 +1,8 @@
-import 'package:leafy/helpers/duration_helper.dart';
-import 'package:leafy/helpers/localizations_ext.dart';
-import 'package:leafy/helpers/share_score_helper.dart';
-import 'package:leafy/ui/core/layout/spacing.dart';
-import 'package:leafy/ui/core/app_text_styles.dart';
+import 'package:leafz/helpers/duration_helper.dart';
+import 'package:leafz/helpers/localizations_ext.dart';
+import 'package:leafz/helpers/share_score_helper.dart';
+import 'package:leafz/ui/core/layout/spacing.dart';
+import 'package:leafz/ui/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 

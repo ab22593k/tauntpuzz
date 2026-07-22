@@ -1,12 +1,15 @@
-import 'package:leafy/domain/models/game_mode.dart';
-import 'package:leafy/generated/app_localizations.dart';
+import 'package:leafz/domain/models/game_mode.dart';
+import 'package:leafz/generated/app_localizations.dart';
 
 /// Constants and helpers shared across the game mode system.
 class GameModeHelper {
   /// Speedrun: seconds allocated per puzzle size.
   /// Formula: max(60, size² × 15 - 60)
-  static int speedrunCountdownSeconds(int puzzleSize) =>
-      [60, 180, 300, 480][puzzleSize - 3];
+  /// Returns 60 for unsupported sizes (defensive against edge cases).
+  static int speedrunCountdownSeconds(int puzzleSize) {
+    final idx = (puzzleSize - 3).clamp(0, 3);
+    return [60, 180, 300, 480][idx];
+  }
 
   /// Blind: seconds before tile numbers are hidden.
   /// Formula: size × 5 + (size - 3) × 5

@@ -1,9 +1,10 @@
 import 'dart:async';
 
-import 'package:leafy/domain/models/game_mode.dart';
-import 'package:leafy/domain/models/location.dart';
-import 'package:leafy/helpers/game_mode_helper.dart';
-import 'package:leafy/ui/features/puzzle/view_models/game_mode_strategy.dart';
+import 'package:leafz/domain/models/game_mode.dart';
+import 'package:leafz/domain/models/location.dart';
+import 'package:leafz/helpers/game_mode_helper.dart';
+import 'package:leafz/ui/core/animations/animations_manager.dart';
+import 'package:leafz/ui/features/puzzle/view_models/game_mode_strategy.dart';
 
 /// Tile numbers hide after a short delay; tap to reveal momentarily.
 class BlindGameModeStrategy extends GameModeStrategy {
@@ -61,7 +62,7 @@ class BlindGameModeStrategy extends GameModeStrategy {
     if (!_tilesBlinded) return;
     _blindRevealedTiles.add(location);
     _host?.notifyListeners();
-    Future.delayed(const Duration(milliseconds: 1500), () {
+    Future.delayed(AnimationsManager.blindRevealAutoHide, () {
       _blindRevealedTiles.remove(location);
       _host?.notifyListeners();
     });

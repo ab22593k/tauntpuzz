@@ -1,4 +1,4 @@
-import 'package:leafy/domain/models/tile.dart';
+import 'package:leafz/domain/models/tile.dart';
 import 'package:equatable/equatable.dart';
 
 /// 2-dimensional Location model

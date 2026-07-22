@@ -1,3 +1,4 @@
+import 'package:leafz/ui/core/animations/animations_manager.dart';
 import 'package:flutter/material.dart';
 
 class ThemeTransitionBuilder extends StatefulWidget {
@@ -13,7 +14,7 @@ class ThemeTransitionBuilder extends StatefulWidget {
     required this.lightTheme,
     required this.darkTheme,
     required this.themeMode,
-    this.duration = const Duration(milliseconds: 400),
+    this.duration = AnimationsManager.themeTransition,
   });
 
   @override

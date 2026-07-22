@@ -1,5 +1,5 @@
-import 'package:leafy/ui/core/layout/screen_type_helper.dart';
-import 'package:leafy/ui/core/layout/spacing.dart';
+import 'package:leafz/ui/core/layout/screen_type_helper.dart';
+import 'package:leafz/ui/core/layout/spacing.dart';
 
 class PuzzleLayout {
   final ScreenTypeHelper screenTypeHelper;

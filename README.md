@@ -1,4 +1,4 @@
-# leafy
+# leafz
 
 A new Flutter project.
 

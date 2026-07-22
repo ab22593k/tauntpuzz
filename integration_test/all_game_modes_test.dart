@@ -5,14 +5,14 @@ import 'package:flutter_checks/flutter_checks.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:leafy/data/services/storage_service.dart';
-import 'package:leafy/domain/models/game_mode.dart';
-import 'package:leafy/generated/app_localizations.dart';
-import 'package:leafy/ui/features/puzzle/view_models/puzzle_notifier.dart';
-import 'package:leafy/ui/core/app_theme.dart';
-import 'package:leafy/ui/features/puzzle/ui/puzzle_view.dart';
-import 'package:leafy/ui/features/drawer/app_drawer.dart';
-import 'package:leafy/ui/features/drawer/drawer_button.dart';
+import 'package:leafz/data/services/storage_service.dart';
+import 'package:leafz/domain/models/game_mode.dart';
+import 'package:leafz/generated/app_localizations.dart';
+import 'package:leafz/ui/features/puzzle/view_models/puzzle_notifier.dart';
+import 'package:leafz/ui/core/app_theme.dart';
+import 'package:leafz/ui/features/puzzle/ui/puzzle_view.dart';
+import 'package:leafz/ui/features/drawer/app_drawer.dart';
+import 'package:leafz/ui/features/drawer/drawer_button.dart';
 
 /// In-memory storage service for integration tests.
 class _InMemoryStorage implements StorageService {

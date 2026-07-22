@@ -1,6 +1,6 @@
-import 'package:leafy/ui/core/dialogs/app_alert_dialog.dart';
-import 'package:leafy/ui/core/layout/spacing.dart';
-import 'package:leafy/ui/features/puzzle/share-dialog/puzzle_score.dart';
+import 'package:leafz/ui/core/dialogs/app_alert_dialog.dart';
+import 'package:leafz/ui/core/layout/spacing.dart';
+import 'package:leafz/ui/features/puzzle/share-dialog/puzzle_score.dart';
 import 'package:flutter/material.dart';
 
 class PuzzleSolvedDialog extends StatelessWidget {

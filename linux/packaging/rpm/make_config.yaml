@@ -1,4 +1,4 @@
-display_name: Leafy
+display_name: Leafz
 
 icon: assets/app-icon-with-dash-ltr.png
 
@@ -8,7 +8,7 @@ vendor: maintainer
 packager: Abdulwahab
 packager_email: ab22593K@gmail.com
 license: MIT
-url: https://github.com/ab22593k/leafy
+url: https://github.com/ab22593k/leafz
 
 keywords:
   - Puzzle

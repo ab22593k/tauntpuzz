@@ -1,13 +1,13 @@
 import 'dart:io';
 
-import 'package:leafy/generated/app_localizations.dart';
-import 'package:leafy/router/router_config.dart';
-import 'package:leafy/ui/core/app_theme.dart';
-import 'package:leafy/ui/core/theme_transition.dart';
-import 'package:leafy/ui/core/providers/theme_notifier.dart';
-import 'package:leafy/ui/core/providers/locale_notifier.dart';
-import 'package:leafy/ui/features/background/background_layers.dart';
-import 'package:leafy/ui/core/layout/background_layer_layout.dart';
+import 'package:leafz/generated/app_localizations.dart';
+import 'package:leafz/router/router_config.dart';
+import 'package:leafz/ui/core/app_theme.dart';
+import 'package:leafz/ui/core/theme_transition.dart';
+import 'package:leafz/ui/core/providers/theme_notifier.dart';
+import 'package:leafz/ui/core/providers/locale_notifier.dart';
+import 'package:leafz/ui/features/background/background_layers.dart';
+import 'package:leafz/ui/core/layout/background_layer_layout.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
@@ -78,9 +78,10 @@ class _AppState extends ConsumerState<App> {
               child: MaterialApp.router(
                 key: ValueKey(localeKey),
                 debugShowCheckedModeBanner: false,
-                title: 'Leafy',
+                title: 'Leafz',
                 theme: animatedTheme,
-                themeMode: ThemeMode.light,
+                darkTheme: animatedTheme,
+                themeMode: themeState.mode,
                 routerConfig: AppRouter.router,
                 locale: localeState.locale,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,

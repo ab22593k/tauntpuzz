@@ -1,4 +1,4 @@
-import 'package:leafy/helpers/duration_helper.dart';
+import 'package:leafz/helpers/duration_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -27,7 +27,7 @@ class ShareScoreHelper {
     Duration duration,
     int tilesCount,
   ) {
-    return 'I just solved this $tilesCount-Tile Leafy slide puzzle in ${DurationHelper.toFormattedTime(duration)} with $movesCount moves!';
+    return 'I just solved this $tilesCount-Tile Leafz slide puzzle in ${DurationHelper.toFormattedTime(duration)} with $movesCount moves!';
   }
 
   /// Get the link to Twitter with text and url params filled based on score

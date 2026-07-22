@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:leafy/domain/models/game_mode.dart';
-import 'package:leafy/helpers/game_mode_helper.dart';
-import 'package:leafy/helpers/localizations_ext.dart';
-import 'package:leafy/ui/core/layout/screen_type_helper.dart';
-import 'package:leafy/ui/core/app_text_styles.dart';
-import 'package:leafy/ui/features/puzzle/view_models/puzzle_notifier.dart';
-import 'package:leafy/ui/features/puzzle/view_models/stop_watch_notifier.dart';
+import 'package:leafz/domain/models/game_mode.dart';
+import 'package:leafz/helpers/game_mode_helper.dart';
+import 'package:leafz/helpers/localizations_ext.dart';
+import 'package:leafz/ui/core/layout/screen_type_helper.dart';
+import 'package:leafz/ui/core/app_text_styles.dart';
+import 'package:leafz/ui/features/puzzle/view_models/puzzle_notifier.dart';
+import 'package:leafz/ui/features/puzzle/view_models/stop_watch_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 
