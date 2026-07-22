@@ -97,6 +97,7 @@ class _TileContentState extends State<TileContent>
       '${widget.tile.value}',
       style: AppTextStyles.tileAdaptive(wc).copyWith(
         fontSize: PuzzleLayout.tileTextSize(wc, widget.puzzleSize),
+        fontWeight: FontWeight.w900,
         color: colorScheme.onSurface,
       ),
     );

@@ -37,7 +37,7 @@ class AppColorsDark {
   static const Color stellarWhite = Color(0xffe2e2e2);
 
   static const Color glassSurface = Color(0xB21F1F1F);
-  static const Color glassBorder = Color(0x40474747);
+  static const Color glassBorder = Color(0x26474747);
 
   static const Color surfaceDim = Color(0xff131313);
   static const Color surfaceBright = Color(0xff393939);

@@ -28,11 +28,9 @@ class HomePage extends StatelessWidget {
             ],
           ),
           bottomBar: PuzzleToolbar(child: PuzzleHeader()),
-          // Adaptive surfacing (MD3 "show and hide"):
           // On expanded+ breakpoints the bottom bar is hidden, so the stats
           // reflow into the top rail region — same information, new surface.
           topRail: PuzzleHeader(displayMode: HeaderDisplay.topRail),
-          // Supporting pane (MD3 canonical "supporting pane" example):
           // On expanded+ a co-planar stats panel surfaces the labeled stats
           // alongside the focused puzzle board. The puzzle stays single-pane
           // (immersive) on compact/medium per MD3 "single-pane layouts focus

@@ -188,7 +188,7 @@ class AppTheme {
       colorScheme: colorScheme,
       scaffoldBackgroundColor: scaffoldBackground,
       appBarTheme: AppBarTheme(systemOverlayStyle: systemOverlay),
-      textTheme: const TextTheme(
+      textTheme: TextTheme(
         displayLarge: AppTextStyles.displayLarge,
         displayMedium: AppTextStyles.displayMedium,
         displaySmall: AppTextStyles.displaySmall,

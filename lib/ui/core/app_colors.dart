@@ -53,7 +53,7 @@ class AppColors {
   static const Color stellarWhite = Color(0xffffffff);
 
   static const Color glassSurface = Color(0xB2EEEEEE);
-  static const Color glassBorder = Color(0x40C6C6C6);
+  static const Color glassBorder = Color(0x26C6C6C6);
 
   static const Color surfaceDim = Color(0xffdadada);
   static const Color surfaceBright = Color(0xfffafafa);

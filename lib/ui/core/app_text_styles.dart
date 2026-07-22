@@ -1,254 +1,208 @@
-import 'package:leafz/ui/core/layout/screen_type_helper.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:leafz/ui/core/layout/screen_type_helper.dart';
 
 class AppTextStyles {
-  static const String primaryFontFamily = 'PaytoneOne';
-  static const String secondaryFontFamily = 'Montserrat';
+  static const String primaryFontFamily = 'OpenDyslexic';
+  static const String secondaryFontFamily = 'OpenDyslexic';
 
-  static const TextStyle tile = TextStyle(
-    fontFamily: primaryFontFamily,
+  static TextStyle get tile => const TextStyle(
     fontSize: 28,
     fontWeight: FontWeight.w700,
     height: 1.0,
     letterSpacing: 0,
   );
 
-  static const TextStyle tileMobile = TextStyle(
-    fontFamily: primaryFontFamily,
+  static TextStyle get tileMobile => const TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w700,
     height: 1.0,
     letterSpacing: 0,
   );
 
-  static const TextStyle title = TextStyle(
-    fontFamily: primaryFontFamily,
+  static TextStyle get title => const TextStyle(
     fontSize: 25,
     fontWeight: FontWeight.w400,
     height: 32 / 25,
     letterSpacing: 0,
   );
 
-  static const TextStyle h1 = TextStyle(
-    fontFamily: secondaryFontFamily,
+  static TextStyle get h1 => const TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w700,
     height: 24 / 18,
     letterSpacing: 0,
-    fontVariations: [FontVariation('wght', 700)],
   );
 
-  static const TextStyle h1Bold = TextStyle(
-    fontFamily: secondaryFontFamily,
+  static TextStyle get h1Bold => const TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w700,
     height: 24 / 18,
     letterSpacing: 0,
-    fontVariations: [FontVariation('wght', 700)],
   );
 
-  static const TextStyle h2 = TextStyle(
-    fontFamily: secondaryFontFamily,
+  static TextStyle get h2 => const TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w400,
     height: 22 / 16,
     letterSpacing: 0,
-    fontVariations: [FontVariation('wght', 420)],
   );
 
-  static const TextStyle h3 = TextStyle(
-    fontFamily: secondaryFontFamily,
+  static TextStyle get h3 => const TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w700,
     height: 24 / 18,
     letterSpacing: 0,
-    fontVariations: [FontVariation('wght', 700)],
   );
 
-  static const TextStyle body = TextStyle(
-    fontFamily: secondaryFontFamily,
+  static TextStyle get body => const TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
     height: 20 / 14,
     letterSpacing: 0,
-    fontVariations: [FontVariation('wght', 410)],
   );
 
-  static const TextStyle bodyBold = TextStyle(
-    fontFamily: secondaryFontFamily,
+  static TextStyle get bodyBold => const TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w700,
     height: 20 / 14,
     letterSpacing: 0,
-    fontVariations: [FontVariation('wght', 700)],
   );
 
-  static const TextStyle bodySm = TextStyle(
-    fontFamily: secondaryFontFamily,
-    fontSize: 14,
-    letterSpacing: 0,
-    fontVariations: [FontVariation('wght', 415)],
-  );
+  static TextStyle get bodySm =>
+      const TextStyle(fontSize: 14, letterSpacing: 0);
 
-  static const TextStyle bodyXs = TextStyle(
-    fontFamily: secondaryFontFamily,
+  static TextStyle get bodyXs => const TextStyle(
     fontSize: 11,
     fontWeight: FontWeight.w400,
     height: 16 / 11,
     letterSpacing: 0.5,
-    fontVariations: [FontVariation('wght', 425)],
   );
 
-  static const TextStyle bodyXxs = TextStyle(
-    fontFamily: secondaryFontFamily,
+  static TextStyle get bodyXxs => const TextStyle(
     fontSize: 10,
     fontWeight: FontWeight.w400,
     height: 12 / 10,
     letterSpacing: 0.5,
-    fontVariations: [FontVariation('wght', 450)],
   );
 
-  static const TextStyle button = TextStyle(
-    fontFamily: primaryFontFamily,
+  static TextStyle get button => const TextStyle(
     fontSize: 14,
+    fontWeight: FontWeight.w600,
     height: 1,
     letterSpacing: 0.5,
+    fontFamily: 'OpenDyslexic',
   );
 
-  static const TextStyle buttonSm = TextStyle(
-    fontFamily: primaryFontFamily,
+  static TextStyle get buttonSm => const TextStyle(
     fontSize: 12,
+    fontWeight: FontWeight.w600,
     height: 1,
     letterSpacing: 0.25,
   );
 
-  static const TextStyle displayLarge = TextStyle(
-    fontFamily: primaryFontFamily,
-    fontSize: 57,
+  static TextStyle get displayLarge => const TextStyle(
+    fontSize: 56,
     fontWeight: FontWeight.w400,
-    height: 64 / 57,
+    height: 1.1,
     letterSpacing: -0.25,
   );
 
-  static const TextStyle displayMedium = TextStyle(
-    fontFamily: primaryFontFamily,
+  static TextStyle get displayMedium => const TextStyle(
     fontSize: 45,
     fontWeight: FontWeight.w400,
     height: 52 / 45,
     letterSpacing: 0,
   );
 
-  static const TextStyle displaySmall = TextStyle(
-    fontFamily: primaryFontFamily,
+  static TextStyle get displaySmall => const TextStyle(
     fontSize: 36,
     fontWeight: FontWeight.w400,
     height: 44 / 36,
     letterSpacing: 0,
   );
 
-  static const TextStyle headlineLarge = TextStyle(
-    fontFamily: primaryFontFamily,
-    fontSize: 56,
-    fontWeight: FontWeight.w700,
-    height: 64 / 56,
+  static TextStyle get headlineLarge => const TextStyle(
+    fontSize: 32,
+    fontWeight: FontWeight.w400,
+    height: 1.2,
     letterSpacing: -0.25,
   );
 
-  static const TextStyle headlineMedium = TextStyle(
-    fontFamily: primaryFontFamily,
+  static TextStyle get headlineMedium => const TextStyle(
     fontSize: 32,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w400,
     height: 40 / 32,
     letterSpacing: 0,
   );
 
-  static const TextStyle headlineSmall = TextStyle(
-    fontFamily: primaryFontFamily,
+  static TextStyle get headlineSmall => const TextStyle(
     fontSize: 24,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w400,
     height: 32 / 24,
     letterSpacing: 0,
   );
 
-  static const TextStyle titleLarge = TextStyle(
-    fontFamily: secondaryFontFamily,
+  static TextStyle get titleLarge => const TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w700,
     height: 24 / 18,
     letterSpacing: 0,
-    fontVariations: [FontVariation('wght', 700)],
   );
 
-  static const TextStyle titleMedium = TextStyle(
-    fontFamily: secondaryFontFamily,
-    fontSize: 14,
-    fontWeight: FontWeight.w600,
-    height: 20 / 14,
+  static TextStyle get titleMedium => const TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+    height: 1.5,
     letterSpacing: 0.1,
-    fontVariations: [FontVariation('wght', 650)],
   );
 
-  static const TextStyle titleSmall = TextStyle(
-    fontFamily: secondaryFontFamily,
+  static TextStyle get titleSmall => const TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w600,
     height: 16 / 12,
     letterSpacing: 0.1,
-    fontVariations: [FontVariation('wght', 600)],
   );
 
-  static const TextStyle labelLarge = TextStyle(
-    fontFamily: primaryFontFamily,
+  static TextStyle get labelLarge => const TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w500,
     height: 20 / 14,
     letterSpacing: 0.1,
   );
 
-  static const TextStyle labelMedium = TextStyle(
-    fontFamily: secondaryFontFamily,
+  static TextStyle get labelMedium => const TextStyle(
     fontSize: 11,
     fontWeight: FontWeight.w500,
     height: 16 / 11,
     letterSpacing: 0.5,
-    fontVariations: [FontVariation('wght', 520)],
   );
 
-  static const TextStyle labelSmall = TextStyle(
-    fontFamily: secondaryFontFamily,
+  static TextStyle get labelSmall => const TextStyle(
     fontSize: 11,
-    fontWeight: FontWeight.w500,
-    height: 16 / 11,
-    letterSpacing: 1.0,
-    fontVariations: [FontVariation('wght', 540)],
+    fontWeight: FontWeight.w600,
+    height: 1.4,
+    letterSpacing: 1.6,
   );
 
-  static const TextStyle bodyLarge = TextStyle(
-    fontFamily: secondaryFontFamily,
+  static TextStyle get bodyLarge => const TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    height: 20 / 14,
+    height: 1.6,
     letterSpacing: 0,
-    fontVariations: [FontVariation('wght', 410)],
   );
 
-  static const TextStyle bodyMedium = TextStyle(
-    fontFamily: secondaryFontFamily,
-    fontSize: 12,
+  static TextStyle get bodyMedium => const TextStyle(
+    fontSize: 14,
     fontWeight: FontWeight.w400,
-    height: 16 / 12,
+    height: 1.6,
     letterSpacing: 0,
-    fontVariations: [FontVariation('wght', 415)],
   );
 
-  static const TextStyle bodySmall = TextStyle(
-    fontFamily: secondaryFontFamily,
+  static TextStyle get bodySmall => const TextStyle(
     fontSize: 11,
     fontWeight: FontWeight.w400,
     height: 16 / 11,
     letterSpacing: 0,
-    fontVariations: [FontVariation('wght', 425)],
   );
 
   static TextStyle tileAdaptive(WindowClass wc) => switch (wc) {

@@ -62,10 +62,6 @@ class ResetPuzzleButton extends ConsumerWidget {
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.zero,
               ),
-              icon: const HugeIcon(
-                icon: HugeIcons.strokeRoundedRefresh03,
-                size: 18,
-              ),
               label: Text(context.l10n.reset, style: AppTextStyles.button),
             ),
           ),

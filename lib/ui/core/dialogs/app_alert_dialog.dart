@@ -41,7 +41,7 @@ class AppAlertDialog extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.zero,
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaY: 12, sigmaX: 12),
+              filter: ImageFilter.blur(sigmaY: 20, sigmaX: 20),
               child: Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(

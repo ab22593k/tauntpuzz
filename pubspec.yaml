@@ -64,6 +64,16 @@ flutter:
     - family: Montserrat
       fonts:
         - asset: assets/fonts/Montserrat/Montserrat-Variable.ttf
+    - family: OpenDyslexic
+      fonts:
+        - asset: assets/fonts/OpenDyslexic/OpenDyslexic-Regular.ttf
+        - asset: assets/fonts/OpenDyslexic/OpenDyslexic-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/OpenDyslexic/OpenDyslexic-Italic.ttf
+          style: italic
+        - asset: assets/fonts/OpenDyslexic/OpenDyslexic-BoldItalic.ttf
+          weight: 700
+          style: italic
 
 flutter_icons:
   android: "launcher_icon"

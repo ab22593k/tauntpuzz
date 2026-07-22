@@ -31,7 +31,7 @@ class AppDrawer extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.zero,
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaY: 16, sigmaX: 16),
+          filter: ImageFilter.blur(sigmaY: 20, sigmaX: 20),
           child: LayoutBuilder(
             builder: (context, constraints) {
               final drawerWidth = constraints.maxWidth > 600
@@ -115,9 +115,7 @@ class _DrawerHeader extends StatelessWidget {
               color: colorScheme.primary,
               borderRadius: BorderRadius.zero,
             ),
-            child: const Center(
-              child: Text('D', style: AppTextStyles.titleMedium),
-            ),
+            child: Center(child: Text('D', style: AppTextStyles.titleMedium)),
           ),
           const SizedBox(width: 12),
           Expanded(

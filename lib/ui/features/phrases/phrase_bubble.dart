@@ -28,7 +28,8 @@ class PhraseBubble extends ConsumerWidget {
             height: 12,
             decoration: BoxDecoration(
               color: colorScheme.primary,
-              shape: BoxShape.circle,
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.zero,
             ),
           ),
         ),
@@ -40,7 +41,8 @@ class PhraseBubble extends ConsumerWidget {
             height: 8,
             decoration: BoxDecoration(
               color: colorScheme.primary,
-              shape: BoxShape.circle,
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.zero,
             ),
           ),
         ),
@@ -52,7 +54,8 @@ class PhraseBubble extends ConsumerWidget {
             height: 4,
             decoration: BoxDecoration(
               color: colorScheme.primary,
-              shape: BoxShape.circle,
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.zero,
             ),
           ),
         ),
@@ -67,9 +70,9 @@ class PhraseBubble extends ConsumerWidget {
             borderRadius: BorderRadius.zero,
             boxShadow: [
               BoxShadow(
-                color: colorScheme.primary.withValues(alpha: 0.15),
-                blurRadius: 8,
-                offset: const Offset(0, 4),
+                color: colorScheme.onSurface.withValues(alpha: 0.04),
+                blurRadius: 40,
+                spreadRadius: 0,
               ),
             ],
           ),
