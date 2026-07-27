@@ -52,9 +52,7 @@ class AppDrawer extends StatelessWidget {
                             : 0,
                       ),
                 decoration: BoxDecoration(
-                  color: colorScheme.surfaceContainerLow.withValues(
-                    alpha: 0.95,
-                  ),
+                  color: colorScheme.surfaceContainer.withValues(alpha: 0.7),
                   borderRadius: BorderRadius.zero,
                 ),
                 child: Column(
@@ -102,9 +100,9 @@ class _DrawerHeader extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(
         left: drawerStartPadding,
-        right: Spacing.md,
-        top: Spacing.md,
-        bottom: Spacing.sm,
+        right: Spacing.xl,
+        top: Spacing.xl,
+        bottom: Spacing.lg,
       ),
       child: Row(
         children: [
@@ -115,7 +113,14 @@ class _DrawerHeader extends StatelessWidget {
               color: colorScheme.primary,
               borderRadius: BorderRadius.zero,
             ),
-            child: Center(child: Text('D', style: AppTextStyles.titleMedium)),
+            child: Center(
+              child: Text(
+                'D',
+                style: AppTextStyles.headlineLarge.copyWith(
+                  color: colorScheme.onPrimary,
+                ),
+              ),
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(

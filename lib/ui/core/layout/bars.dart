@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:leafz/ui/core/app_text_styles.dart';
 import 'package:leafz/ui/core/layout/screen_type_helper.dart';
 import 'package:flutter/material.dart';
@@ -136,17 +137,23 @@ class PuzzleToolbar extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final padding = MediaQuery.paddingOf(context);
 
-    return Container(
-      padding: EdgeInsets.only(
-        left: 16,
-        right: 16,
-        top: 8,
-        bottom: 8 + padding.bottom,
+    return ClipRRect(
+      borderRadius: BorderRadius.zero,
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+        child: Container(
+          padding: EdgeInsets.only(
+            left: 16,
+            right: 16,
+            top: 8,
+            bottom: 8 + padding.bottom,
+          ),
+          decoration: BoxDecoration(
+            color: colorScheme.surfaceContainer.withValues(alpha: 0.7),
+          ),
+          child: child,
+        ),
       ),
-      decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerLow.withValues(alpha: 0.92),
-      ),
-      child: child,
     );
   }
 }

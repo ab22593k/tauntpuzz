@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 /// Whether a pane has a fixed width or flexes with available space.
@@ -239,12 +240,22 @@ class FloatingPane extends StatelessWidget {
               maxHeight: height ?? MediaQuery.sizeOf(context).height * 0.8,
             ),
             decoration: BoxDecoration(
-              color: colorScheme.surfaceContainerHigh,
+              color: colorScheme.surfaceContainer.withValues(alpha: 0.7),
               borderRadius: BorderRadius.zero,
+              boxShadow: [
+                BoxShadow(
+                  color: colorScheme.onSurface.withValues(alpha: 0.04),
+                  blurRadius: 40,
+                  spreadRadius: 0,
+                ),
+              ],
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.zero,
-              child: Material(color: Colors.transparent, child: child),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                child: Material(color: Colors.transparent, child: child),
+              ),
             ),
           ),
         ),
@@ -281,25 +292,35 @@ class DockedPane extends StatelessWidget {
         constraints: const BoxConstraints(maxWidth: 640),
         margin: EdgeInsets.only(bottom: padding.bottom),
         decoration: BoxDecoration(
-          color: colorScheme.surfaceContainerHigh,
+          color: colorScheme.surfaceContainer.withValues(alpha: 0.7),
           borderRadius: BorderRadius.zero,
+          boxShadow: [
+            BoxShadow(
+              color: colorScheme.onSurface.withValues(alpha: 0.04),
+              blurRadius: 40,
+              spreadRadius: 0,
+            ),
+          ],
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.zero,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 32,
-                height: 4,
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                decoration: BoxDecoration(
-                  color: colorScheme.outlineVariant,
-                  borderRadius: BorderRadius.zero,
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 32,
+                  height: 4,
+                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  decoration: BoxDecoration(
+                    color: colorScheme.outlineVariant.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.zero,
+                  ),
                 ),
-              ),
-              Flexible(child: child),
-            ],
+                Flexible(child: child),
+              ],
+            ),
           ),
         ),
       ),

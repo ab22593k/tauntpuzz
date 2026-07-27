@@ -186,7 +186,15 @@ class _SizeDropdown extends StatelessWidget {
         const SizedBox(height: 4),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8),
-          decoration: const BoxDecoration(borderRadius: BorderRadius.zero),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.zero,
+            border: Border(
+              bottom: BorderSide(
+                color: colorScheme.outlineVariant.withValues(alpha: 0.15),
+                width: 1,
+              ),
+            ),
+          ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<int>(
               value: value,

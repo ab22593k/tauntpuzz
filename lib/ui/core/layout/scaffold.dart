@@ -3,35 +3,11 @@ import 'package:leafz/ui/core/layout/screen_type_helper.dart';
 import 'package:leafz/ui/core/layout/spacing.dart';
 import 'package:flutter/material.dart';
 
-/// MD3 Scaffold — a fundamental UI design structure that provides a standard
+/// Fundamental UI design structure that provides a standard
 /// platform for assembling key components.
 ///
-/// Per the MD3 spec, the scaffold structures every piece of an adaptive layout
+/// The scaffold structures every piece of an adaptive layout
 /// into **bars**, **rails**, and **panes**:
-///
-/// ```
-/// ┌─────────────────────────────────────────────┐
-/// │            safety region (top)               │
-/// ├─────────────────────────────────────────────┤
-/// │                  top bar                     │
-/// ├──────┬───────────────────────────────┬──────┤
-/// │      │         top rail (opt.)        │      │
-/// │      ├───────────────────────────────┤      │
-/// │  L   │                               │  T   │
-/// │  e   │          panes (1–3)          │  r   │
-/// │  a   │                               │  a   │
-/// │  d   │                               │  i   │
-/// │  i   │                               │  l   │
-/// │  n   │                               │  i   │
-/// │  g   │                               │  n   │
-/// │      ├───────────────────────────────┤      │
-/// │ rail │       bottom rail (opt.)       │ rail │
-/// ├──────┴───────────────────────────────┴──────┤
-/// │                bottom bar                    │
-/// ├─────────────────────────────────────────────┤
-/// │          safety region (bottom)              │
-/// └─────────────────────────────────────────────┘
-/// ```
 ///
 /// ## Breakpoint adaptation (per MD3 Scaffold + Panes spec)
 ///
@@ -43,16 +19,12 @@ import 'package:flutter/material.dart';
 /// | **Large** | 1200–1599 | AppBar | leading + trailing rail | 2 (opt. 1) |
 /// | **Extra-large** | 1600+ | AppBar | leading + trailing rail | 2–3 |
 class LeafzScaffold extends StatefulWidget {
-  // ── Bars ────────────────────────────────────────────────────────────────
-
   /// Top app bar — sits below the safety region, frames the top of the screen.
   final PreferredSizeWidget? topBar;
 
   /// Bottom navigation bar — sits above the safety region on compact/medium.
   /// Hidden on expanded+ where the leading rail takes over navigation.
   final Widget? bottomBar;
-
-  // ── Rails ───────────────────────────────────────────────────────────────
 
   /// Leading rail — typically a [NavigationRail]. Shown on medium+ screens.
   /// On compact, navigation is handled by [bottomBar] + [drawer].
@@ -67,8 +39,6 @@ class LeafzScaffold extends StatefulWidget {
 
   /// Bottom rail region — floats above the bottom bar (toolbars, FABs).
   final Widget? bottomRail;
-
-  // ── Panes ───────────────────────────────────────────────────────────────
 
   /// Primary pane — always visible, flexible.
   final Widget body;
@@ -87,8 +57,6 @@ class LeafzScaffold extends StatefulWidget {
   final double? tertiaryFixedWidth;
   final int primaryPaneFlex;
   final int secondaryPaneFlex;
-
-  // ── Drawer (compact/medium navigation) ───────────────────────────────────
 
   /// Drawer content — slides from the leading edge on compact/medium.
   final Widget? drawer;
@@ -144,8 +112,6 @@ class _LeafzScaffoldState extends State<LeafzScaffold> {
     );
   }
 
-  // ── Scaffold assembly ───────────────────────────────────────────────────
-
   Widget _buildScaffold(BuildContext context, WindowClass wc) {
     final showBottomBar = _shouldShowBottomBar(wc);
     final showDrawer = _shouldShowDrawer(wc);
@@ -162,8 +128,6 @@ class _LeafzScaffoldState extends State<LeafzScaffold> {
 
     return _withRails(wc, scaffold);
   }
-
-  // ── Body: panes + top/bottom rail regions ───────────────────────────────
 
   Widget _buildBody(BuildContext context, WindowClass wc) {
     final panes = _buildPanes(context, wc);
@@ -184,8 +148,6 @@ class _LeafzScaffoldState extends State<LeafzScaffold> {
 
     return Column(children: children);
   }
-
-  // ── Pane builder (co-planar / split / fixed-and-flexible / three-pane) ──
 
   Widget _buildPanes(BuildContext context, WindowClass wc) {
     final showSecondary = _shouldShowSecondary(wc) && !_secondaryCollapsed;
@@ -218,9 +180,7 @@ class _LeafzScaffoldState extends State<LeafzScaffold> {
     return PaneLayout.split;
   }
 
-  // ── Split-pane: 50/50 with centered spacer ──────────────────────────────
-  //
-  // Per MD3: "A split-pane layout keeps the spacer visually centered.
+  // "A split-pane layout keeps the spacer visually centered.
   // It's best for foldable devices and dynamic layouts."
   // Both panes are flexible and default to 50% width.
 
@@ -240,9 +200,7 @@ class _LeafzScaffoldState extends State<LeafzScaffold> {
     );
   }
 
-  // ── Fixed-and-flexible: one fixed + one flexible pane ───────────────────
-  //
-  // Per MD3: "This layout is common for expanded, large, and extra-large
+  // "This layout is common for expanded, large, and extra-large
   // breakpoints. The fixed pane is often temporary, used for side sheets
   // or lists with light information density."
   // The drag handle can fully collapse and expand the fixed pane.
@@ -304,9 +262,7 @@ class _LeafzScaffoldState extends State<LeafzScaffold> {
     return Row(children: panes);
   }
 
-  // ── Three-pane: two panes + side sheet (extra-large only) ───────────────
-  //
-  // Per MD3: "The extra-large breakpoint supports using a standard side sheet
+  // "The extra-large breakpoint supports using a standard side sheet
   // as a third pane. Fixed panes recommended at 412dp; side sheets max 400dp."
 
   Widget _buildThreePane(WindowClass wc) {
@@ -330,8 +286,6 @@ class _LeafzScaffoldState extends State<LeafzScaffold> {
     );
   }
 
-  // ── Rails wrapper ─────────────────────────────────────────────────────
-
   Widget _withRails(WindowClass wc, Widget scaffold) {
     final showLeading = _shouldShowLeadingRail(wc);
     final showTrailing = _shouldShowTrailingRail(wc);
@@ -347,8 +301,6 @@ class _LeafzScaffoldState extends State<LeafzScaffold> {
     );
   }
 
-  // ── Rail region (top/bottom floating controls) ──────────────────────────
-
   Widget _railRegion(Widget child, {required bool isTop}) {
     return Material(
       color: Colors.transparent,
@@ -361,8 +313,6 @@ class _LeafzScaffoldState extends State<LeafzScaffold> {
       ),
     );
   }
-
-  // ── Breakpoint visibility rules ─────────────────────────────────────────
 
   bool _shouldShowBottomBar(WindowClass wc) {
     if (widget.bottomBar == null) return false;
@@ -404,8 +354,7 @@ class _LeafzScaffoldState extends State<LeafzScaffold> {
   bool _shouldShowSecondary(WindowClass wc) {
     if (widget.secondaryPane == null) return false;
     return switch (wc) {
-      WindowClass.compact => false,
-      WindowClass.medium ||
+      WindowClass.compact || WindowClass.medium => false,
       WindowClass.expanded ||
       WindowClass.large ||
       WindowClass.extraLarge => true,
@@ -417,8 +366,6 @@ class _LeafzScaffoldState extends State<LeafzScaffold> {
     return wc == WindowClass.extraLarge;
   }
 
-  // ── Utilities ─────────────────────────────────────────────────────────
-
   Widget _paneArea(WindowClass wc, Widget child) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: Spacing.screenHPaddingFor(wc)),
@@ -427,7 +374,7 @@ class _LeafzScaffoldState extends State<LeafzScaffold> {
   }
 }
 
-/// Creates an MD3 [NavigationRail] that adapts its extended state to the
+/// Creates a [NavigationRail] that adapts its extended state to the
 /// breakpoint: collapsed on medium, extended on expanded+.
 class AdaptiveNavigationRail extends StatelessWidget {
   final int selectedIndex;
