@@ -60,38 +60,48 @@ class LanguagePicker extends ConsumerWidget {
             ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.5)),
           ),
           const SizedBox(height: 10),
-          Row(
-            children: [
-              ...List.generate(_languages.length, (index) {
-                final lang = _languages[index];
-                final currentCode = localeState.locale?.languageCode;
-                final isSelected =
-                    currentCode == lang.code ||
-                    (currentCode == null &&
-                        AppLocalizations.of(context)?.localeName == lang.code);
-                return Expanded(
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.only(
-                      end: index < _languages.length - 1 ? Spacing.xs / 2 : 0,
-                      start: index > 0 ? Spacing.xs / 2 : 0,
-                    ),
-                    child: _LanguageButton(
-                      label: lang.label,
-                      isSelected: isSelected,
-                      onTap: () {
-                        if (isSelected) return;
-                        ref
-                            .read(localeProvider.notifier)
-                            .setLocale(Locale(lang.code));
-                      },
-                    ),
-                  ),
-                );
-              }),
-            ],
-          ),
+          _languageOptions(context, ref, wc, colorScheme, localeState),
         ],
       ),
+    );
+  }
+
+  Widget _languageOptions(
+    BuildContext context,
+    WidgetRef ref,
+    WindowClass wc,
+    ColorScheme colorScheme,
+    LocaleState localeState,
+  ) {
+    return Row(
+      children: [
+        ...List.generate(_languages.length, (index) {
+          final lang = _languages[index];
+          final currentCode = localeState.locale?.languageCode;
+          final isSelected =
+              currentCode == lang.code ||
+              (currentCode == null &&
+                  AppLocalizations.of(context)?.localeName == lang.code);
+          return Expanded(
+            child: Padding(
+              padding: EdgeInsetsDirectional.only(
+                end: index < _languages.length - 1 ? Spacing.xs / 2 : 0,
+                start: index > 0 ? Spacing.xs / 2 : 0,
+              ),
+              child: _LanguageButton(
+                label: lang.label,
+                isSelected: isSelected,
+                onTap: () {
+                  if (isSelected) return;
+                  ref
+                      .read(localeProvider.notifier)
+                      .setLocale(Locale(lang.code));
+                },
+              ),
+            ),
+          );
+        }),
+      ],
     );
   }
 }

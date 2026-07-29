@@ -20,44 +20,18 @@ class PhraseBubble extends ConsumerWidget {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        Positioned(
+        _cornerSquare(
           right: -12,
           top: -4,
-          child: Container(
-            width: 12,
-            height: 12,
-            decoration: BoxDecoration(
-              color: colorScheme.primary,
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.zero,
-            ),
-          ),
+          size: 12,
+          color: colorScheme.primary,
         ),
-        Positioned(
-          right: -21,
-          top: -8,
-          child: Container(
-            width: 8,
-            height: 8,
-            decoration: BoxDecoration(
-              color: colorScheme.primary,
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.zero,
-            ),
-          ),
-        ),
-        Positioned(
+        _cornerSquare(right: -21, top: -8, size: 8, color: colorScheme.primary),
+        _cornerSquare(
           right: -28,
           top: -11,
-          child: Container(
-            width: 4,
-            height: 4,
-            decoration: BoxDecoration(
-              color: colorScheme.primary,
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.zero,
-            ),
-          ),
+          size: 4,
+          color: colorScheme.primary,
         ),
         Container(
           padding: const EdgeInsets.symmetric(
@@ -90,6 +64,27 @@ class PhraseBubble extends ConsumerWidget {
               : const SizedBox.shrink(),
         ),
       ],
+    );
+  }
+
+  Widget _cornerSquare({
+    required double right,
+    required double top,
+    required double size,
+    required Color color,
+  }) {
+    return Positioned(
+      right: right,
+      top: top,
+      child: Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          color: color,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.zero,
+        ),
+      ),
     );
   }
 }

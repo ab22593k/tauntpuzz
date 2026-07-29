@@ -29,70 +29,73 @@ class PuzzleSizeSettings extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        children: _buildSizeSections(context, wc, colorScheme),
+      ),
+    );
+  }
+
+  List<Widget> _buildSizeSections(
+    BuildContext context,
+    WindowClass wc,
+    ColorScheme colorScheme,
+  ) {
+    return [
+      Row(
         children: [
-          Row(
-            children: [
-              HugeIcon(
-                icon: HugeIcons.strokeRoundedGrid02,
-                size: 16,
-                color: colorScheme.onSurface.withValues(alpha: 0.6),
-              ),
-              const SizedBox(width: 6),
-              Text(
-                context.l10n.puzzleSize,
-                style: AppTextStyles.titleAdaptive(wc),
-              ),
-            ],
+          HugeIcon(
+            icon: HugeIcons.strokeRoundedGrid02,
+            size: 16,
+            color: colorScheme.onSurface.withValues(alpha: 0.6),
           ),
-          const SizedBox(height: 4),
-          Row(
-            spacing: 4.0,
-            children: [
-              Text(
-                context.l10n.chooseGrid,
-                style: AppTextStyles.bodyAdaptive(
-                  wc,
-                ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.5)),
-              ),
-              const SizedBox(height: 2),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: colorScheme.errorContainer.withValues(alpha: 0.3),
-                  borderRadius: BorderRadius.zero,
-                ),
-                child: Text(
-                  context.l10n.resetsProgress,
-                  style: AppTextStyles.labelAdaptive(wc).copyWith(
-                    color: colorScheme.error.withValues(alpha: 0.8),
-                    fontStyle: FontStyle.italic,
-                    fontVariations: const [FontVariation('wght', 600)],
-                  ),
-                ),
-              ),
-            ],
+          const SizedBox(width: 6),
+          Text(context.l10n.puzzleSize, style: AppTextStyles.titleAdaptive(wc)),
+        ],
+      ),
+      const SizedBox(height: 4),
+      Row(
+        spacing: 4.0,
+        children: [
+          Text(
+            context.l10n.chooseGrid,
+            style: AppTextStyles.bodyAdaptive(
+              wc,
+            ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.5)),
           ),
-          const SizedBox(height: 12),
-          Row(
-            children: List.generate(
-              Puzzle.supportedPuzzleSizes.length,
-              (index) => Expanded(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.only(
-                    end: index < Puzzle.supportedPuzzleSizes.length - 1
-                        ? Spacing.xs / 2
-                        : 0,
-                    start: index > 0 ? Spacing.xs / 2 : 0,
-                  ),
-                  child: PuzzleSizeItem(
-                    size: Puzzle.supportedPuzzleSizes[index],
-                  ),
-                ),
+          const SizedBox(height: 2),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+            decoration: BoxDecoration(
+              color: colorScheme.errorContainer.withValues(alpha: 0.3),
+              borderRadius: BorderRadius.zero,
+            ),
+            child: Text(
+              context.l10n.resetsProgress,
+              style: AppTextStyles.labelAdaptive(wc).copyWith(
+                color: colorScheme.error.withValues(alpha: 0.8),
+                fontStyle: FontStyle.italic,
+                fontVariations: const [FontVariation('wght', 600)],
               ),
             ),
           ),
         ],
       ),
-    );
+      const SizedBox(height: 12),
+      Row(
+        children: List.generate(
+          Puzzle.supportedPuzzleSizes.length,
+          (index) => Expanded(
+            child: Padding(
+              padding: EdgeInsetsDirectional.only(
+                end: index < Puzzle.supportedPuzzleSizes.length - 1
+                    ? Spacing.xs / 2
+                    : 0,
+                start: index > 0 ? Spacing.xs / 2 : 0,
+              ),
+              child: PuzzleSizeItem(size: Puzzle.supportedPuzzleSizes[index]),
+            ),
+          ),
+        ),
+      ),
+    ];
   }
 }

@@ -181,6 +181,22 @@ class AppTheme {
     required Color overlayTint,
     required SystemUiOverlayStyle systemOverlay,
   }) {
+    return _buildThemeData(
+      colorScheme: colorScheme,
+      brightness: brightness,
+      scaffoldBackground: scaffoldBackground,
+      overlayTint: overlayTint,
+      systemOverlay: systemOverlay,
+    );
+  }
+
+  static ThemeData _buildThemeData({
+    required ColorScheme colorScheme,
+    required Brightness brightness,
+    required Color scaffoldBackground,
+    required Color overlayTint,
+    required SystemUiOverlayStyle systemOverlay,
+  }) {
     return ThemeData(
       useMaterial3: true,
       brightness: brightness,

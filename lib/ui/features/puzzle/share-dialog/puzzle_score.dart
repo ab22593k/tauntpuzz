@@ -39,58 +39,66 @@ class PuzzleScore extends StatelessWidget {
               ),
             ),
             const SizedBox(height: Spacing.sm),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      const HugeIcon(icon: HugeIcons.strokeRoundedClock01),
-                      const SizedBox(width: 5),
-                      Text(
-                        DurationHelper.toFormattedTime(duration),
-                        style: AppTextStyles.h1Bold,
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    context.l10n.movesCountLabel(movesCount),
-                    style: AppTextStyles.h1Bold,
-                  ),
-                ),
-              ],
-            ),
+            _statsRow(context, colorScheme),
             const SizedBox(height: Spacing.md),
           ],
         ),
-        Row(
-          children: [
-            Expanded(
-              child: ElevatedButton.icon(
-                onPressed: () => Navigator.of(context).pop(),
-                label: Text(context.l10n.restart),
-                icon: const HugeIcon(icon: HugeIcons.strokeRoundedRefresh01),
+        _actionButtons(context),
+      ],
+    );
+  }
+
+  Widget _statsRow(BuildContext context, ColorScheme colorScheme) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Row(
+            children: [
+              const HugeIcon(icon: HugeIcons.strokeRoundedClock01),
+              const SizedBox(width: 5),
+              Text(
+                DurationHelper.toFormattedTime(duration),
+                style: AppTextStyles.h1Bold,
               ),
-            ),
-            const SizedBox(width: Spacing.sm),
-            Expanded(
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  ShareScoreHelper.openLink(
-                    ShareScoreHelper.getTwitterShareLink(
-                      movesCount,
-                      duration,
-                      tilesCount,
-                    ),
-                  );
-                },
-                label: Text(context.l10n.share),
-                icon: const HugeIcon(icon: HugeIcons.strokeRoundedShare01),
-              ),
-            ),
-          ],
+            ],
+          ),
+        ),
+        Expanded(
+          child: Text(
+            context.l10n.movesCountLabel(movesCount),
+            style: AppTextStyles.h1Bold,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _actionButtons(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: ElevatedButton.icon(
+            onPressed: () => Navigator.of(context).pop(),
+            label: Text(context.l10n.restart),
+            icon: const HugeIcon(icon: HugeIcons.strokeRoundedRefresh01),
+          ),
+        ),
+        const SizedBox(width: Spacing.sm),
+        Expanded(
+          child: ElevatedButton.icon(
+            onPressed: () {
+              ShareScoreHelper.openLink(
+                ShareScoreHelper.getTwitterShareLink(
+                  movesCount,
+                  duration,
+                  tilesCount,
+                ),
+              );
+            },
+            label: Text(context.l10n.share),
+            icon: const HugeIcon(icon: HugeIcons.strokeRoundedShare01),
+          ),
         ),
       ],
     );

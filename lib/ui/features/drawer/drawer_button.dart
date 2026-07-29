@@ -97,19 +97,9 @@ class _DrawerButtonState extends State<DrawerButton>
                     borderRadius: BorderRadius.zero,
                   ),
                 ).copyWith(
-                  elevation: WidgetStateProperty.resolveWith((states) {
-                    return 0;
-                  }),
+                  elevation: _zeroElevation(),
                   shadowColor: WidgetStateProperty.all(Colors.transparent),
-                  overlayColor: WidgetStateProperty.resolveWith((states) {
-                    if (states.contains(WidgetState.hovered)) {
-                      return colorScheme.onSurface.withValues(alpha: 0.06);
-                    }
-                    if (states.contains(WidgetState.pressed)) {
-                      return colorScheme.onSurface.withValues(alpha: 0.12);
-                    }
-                    return null;
-                  }),
+                  overlayColor: _buttonOverlayColor(colorScheme),
                 ),
             child: const HugeIcon(
               icon: HugeIcons.strokeRoundedMenu01,
@@ -119,5 +109,21 @@ class _DrawerButtonState extends State<DrawerButton>
         ),
       ),
     );
+  }
+
+  WidgetStateProperty<Color?> _buttonOverlayColor(ColorScheme colorScheme) {
+    return WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.hovered)) {
+        return colorScheme.onSurface.withValues(alpha: 0.06);
+      }
+      if (states.contains(WidgetState.pressed)) {
+        return colorScheme.onSurface.withValues(alpha: 0.12);
+      }
+      return null;
+    });
+  }
+
+  WidgetStateProperty<double?> _zeroElevation() {
+    return WidgetStateProperty.resolveWith((_) => 0);
   }
 }

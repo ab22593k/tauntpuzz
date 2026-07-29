@@ -201,6 +201,10 @@ class PuzzleNotifier extends Notifier<PuzzleState>
       );
     }
 
+    return _initializePuzzle(initialMode, savedScores);
+  }
+
+  PuzzleState _initializePuzzle(GameMode initialMode, List<Score> savedScores) {
     final correctLocations = Puzzle.generateTileCorrectLocations(4);
     var currentLocations = List<Location>.from(correctLocations)
       ..shuffle(_random);

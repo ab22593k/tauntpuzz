@@ -213,8 +213,34 @@ class _LeafzScaffoldState extends State<LeafzScaffold> {
 
     final panes = <Widget>[Expanded(child: _paneArea(wc, widget.body))];
 
-    if (!_secondaryCollapsed) {
+    panes.addAll(
+      _buildPaneResizer(
+        isCollapsed: _secondaryCollapsed,
+        fixedWidth: fixedWidth,
+        wc: wc,
+      ),
+    );
+
+    if (showTertiary) {
+      panes.add(paneDivider(context));
       panes.add(
+        SizedBox(
+          width: widget.tertiaryFixedWidth ?? PaneSnapPoints.sideSheetMax,
+          child: _paneArea(wc, widget.tertiaryPane!),
+        ),
+      );
+    }
+
+    return Row(children: panes);
+  }
+
+  List<Widget> _buildPaneResizer({
+    required bool isCollapsed,
+    required double fixedWidth,
+    required WindowClass wc,
+  }) {
+    if (!isCollapsed) {
+      return [
         PaneDragHandle(
           currentWidth: fixedWidth,
           onTap: () => setState(() => _secondaryCollapsed = true),
@@ -233,33 +259,18 @@ class _LeafzScaffoldState extends State<LeafzScaffold> {
             }
           },
         ),
-      );
-      panes.add(
         SizedBox(
           width: _secondaryWidth ?? fixedWidth,
           child: _paneArea(wc, widget.secondaryPane!),
         ),
-      );
-    } else {
-      panes.add(
-        PaneDragHandle(
-          isCollapsed: true,
-          onTap: () => setState(() => _secondaryCollapsed = false),
-        ),
-      );
+      ];
     }
-
-    if (showTertiary) {
-      panes.add(paneDivider(context));
-      panes.add(
-        SizedBox(
-          width: widget.tertiaryFixedWidth ?? PaneSnapPoints.sideSheetMax,
-          child: _paneArea(wc, widget.tertiaryPane!),
-        ),
-      );
-    }
-
-    return Row(children: panes);
+    return [
+      PaneDragHandle(
+        isCollapsed: true,
+        onTap: () => setState(() => _secondaryCollapsed = false),
+      ),
+    ];
   }
 
   // "The extra-large breakpoint supports using a standard side sheet

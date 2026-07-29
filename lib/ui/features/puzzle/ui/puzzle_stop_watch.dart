@@ -29,49 +29,45 @@ class PuzzleStopWatch extends ConsumerWidget {
       final remaining = sw.countdownRemaining;
       final isCritical = remaining <= 10 && remaining > 0;
       final isExpired = remaining <= 0;
+      final text = DurationHelper.toFormattedTime(Duration(seconds: remaining));
+      final textColor = isCritical ? colorScheme.error : colorScheme.onSurface;
+      final iconColor = isCritical
+          ? colorScheme.error
+          : isExpired
+          ? colorScheme.onSurface.withValues(alpha: 0.4)
+          : colorScheme.onSurface;
 
-      return showIcon
-          ? Row(
-              children: [
-                HugeIcon(
-                  icon: isExpired
-                      ? HugeIcons.strokeRoundedStopWatch
-                      : HugeIcons.strokeRoundedTimer01,
-                  size: 16,
-                  color: isCritical
-                      ? colorScheme.error
-                      : isExpired
-                      ? colorScheme.onSurface.withValues(alpha: 0.4)
-                      : colorScheme.onSurface,
-                ),
-                const SizedBox(width: 4),
-                _textWidget(
-                  DurationHelper.toFormattedTime(Duration(seconds: remaining)),
-                  isCritical ? colorScheme.error : colorScheme.onSurface,
-                ),
-              ],
-            )
-          : _textWidget(
-              DurationHelper.toFormattedTime(Duration(seconds: remaining)),
-              isCritical ? colorScheme.error : colorScheme.onSurface,
-            );
+      return _timerDisplay(
+        icon: HugeIcon(
+          icon: isExpired
+              ? HugeIcons.strokeRoundedStopWatch
+              : HugeIcons.strokeRoundedTimer01,
+          size: 16,
+          color: iconColor,
+        ),
+        text: text,
+        textColor: textColor,
+      );
     }
 
-    final duration = Duration(seconds: sw.secondsElapsed);
-    return showIcon
-        ? Row(
-            children: [
-              const HugeIcon(icon: HugeIcons.strokeRoundedClock01, size: 16),
-              const SizedBox(width: 4),
-              _textWidget(
-                DurationHelper.toFormattedTime(duration),
-                colorScheme.onSurface,
-              ),
-            ],
-          )
-        : _textWidget(
-            DurationHelper.toFormattedTime(duration),
-            colorScheme.onSurface,
-          );
+    final text = DurationHelper.toFormattedTime(
+      Duration(seconds: sw.secondsElapsed),
+    );
+    return _timerDisplay(
+      icon: const HugeIcon(icon: HugeIcons.strokeRoundedClock01, size: 16),
+      text: text,
+      textColor: colorScheme.onSurface,
+    );
+  }
+
+  Widget _timerDisplay({
+    required Widget icon,
+    required String text,
+    required Color textColor,
+  }) {
+    if (!showIcon) return _textWidget(text, textColor);
+    return Row(
+      children: [icon, const SizedBox(width: 4), _textWidget(text, textColor)],
+    );
   }
 }

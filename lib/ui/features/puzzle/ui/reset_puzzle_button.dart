@@ -47,35 +47,24 @@ class ResetPuzzleButton extends ConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
     ref.watch(puzzleProvider); // trigger rebuild on state changes
 
-    if (isExpandedPlus) {
-      return FadeInTransition(
-        delay: AnimationsManager.bgLayerAnimationDuration,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 12),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 200),
-            child: FloatingActionButton.extended(
-              key: const ValueKey('reset_button'),
-              onPressed: () => initResetPuzzle(context, ref),
-              backgroundColor: colorScheme.primary,
-              foregroundColor: colorScheme.onPrimary,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.zero,
-              ),
-              label: Text(context.l10n.reset, style: AppTextStyles.button),
-            ),
-          ),
-        ),
-      );
-    }
-
     return FadeInTransition(
       delay: AnimationsManager.bgLayerAnimationDuration,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 16),
-        child: Tooltip(
-          message: context.l10n.reset,
-          child: FloatingActionButton.small(
+      child: _buildButtonContent(context, ref, isExpandedPlus, colorScheme),
+    );
+  }
+
+  Widget _buildButtonContent(
+    BuildContext context,
+    WidgetRef ref,
+    bool isExpandedPlus,
+    ColorScheme colorScheme,
+  ) {
+    if (isExpandedPlus) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 12),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 200),
+          child: FloatingActionButton.extended(
             key: const ValueKey('reset_button'),
             onPressed: () => initResetPuzzle(context, ref),
             backgroundColor: colorScheme.primary,
@@ -83,10 +72,25 @@ class ResetPuzzleButton extends ConsumerWidget {
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.zero,
             ),
-            child: const HugeIcon(
-              icon: HugeIcons.strokeRoundedRefresh03,
-              size: 18,
-            ),
+            label: Text(context.l10n.reset, style: AppTextStyles.button),
+          ),
+        ),
+      );
+    }
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 16),
+      child: Tooltip(
+        message: context.l10n.reset,
+        child: FloatingActionButton.small(
+          key: const ValueKey('reset_button'),
+          onPressed: () => initResetPuzzle(context, ref),
+          backgroundColor: colorScheme.primary,
+          foregroundColor: colorScheme.onPrimary,
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+          child: const HugeIcon(
+            icon: HugeIcons.strokeRoundedRefresh03,
+            size: 18,
           ),
         ),
       ),

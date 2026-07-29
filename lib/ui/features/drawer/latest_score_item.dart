@@ -84,45 +84,57 @@ class LatestScoreItem extends StatelessWidget {
             ),
           ],
           const Spacer(),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              HugeIcon(
-                icon: HugeIcons.strokeRoundedClock01,
-                size: 11,
-                color: colorScheme.onSurface.withValues(alpha: 0.4),
-              ),
-              const SizedBox(width: 3),
-              Text(
-                DurationHelper.toFormattedTime(
-                  Duration(seconds: score.secondsElapsed),
-                ),
-                style: AppTextStyles.labelAdaptive(
-                  wc,
-                ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.7)),
-              ),
-            ],
-          ),
-          const SizedBox(width: 12),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              HugeIcon(
-                icon: HugeIcons.strokeRoundedArrowUpDown,
-                size: 11,
-                color: colorScheme.onSurface.withValues(alpha: 0.4),
-              ),
-              const SizedBox(width: 3),
-              Text(
-                '${score.movesCount}',
-                style: AppTextStyles.labelAdaptive(
-                  wc,
-                ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.7)),
-              ),
-            ],
-          ),
+          _scoreDetails(wc: wc, colorScheme: colorScheme),
         ],
       ),
+    );
+  }
+
+  Widget _scoreDetails({
+    required WindowClass wc,
+    required ColorScheme colorScheme,
+  }) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            HugeIcon(
+              icon: HugeIcons.strokeRoundedClock01,
+              size: 11,
+              color: colorScheme.onSurface.withValues(alpha: 0.4),
+            ),
+            const SizedBox(width: 3),
+            Text(
+              DurationHelper.toFormattedTime(
+                Duration(seconds: score.secondsElapsed),
+              ),
+              style: AppTextStyles.labelAdaptive(
+                wc,
+              ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.7)),
+            ),
+          ],
+        ),
+        const SizedBox(width: 12),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            HugeIcon(
+              icon: HugeIcons.strokeRoundedArrowUpDown,
+              size: 11,
+              color: colorScheme.onSurface.withValues(alpha: 0.4),
+            ),
+            const SizedBox(width: 3),
+            Text(
+              '${score.movesCount}',
+              style: AppTextStyles.labelAdaptive(
+                wc,
+              ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.7)),
+            ),
+          ],
+        ),
+      ],
     );
   }
 

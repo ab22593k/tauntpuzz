@@ -58,39 +58,69 @@ class PuzzleAppBar extends StatelessWidget implements PreferredSizeWidget {
           SizedBox(width: isWide ? 16 : 8),
           Expanded(
             child: subtitle == null
-                ? Text(
-                    title ?? '',
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontFamily: AppTextStyles.primaryFontFamily,
-                      color: colorScheme.onSurface,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  )
-                : Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title ?? '',
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontFamily: AppTextStyles.primaryFontFamily,
-                          color: colorScheme.onSurface,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 1),
-                      Text(
-                        subtitle!,
-                        style: Theme.of(context).textTheme.labelMedium
-                            ?.copyWith(color: colorScheme.onSurfaceVariant),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
+                ? _AppBarTitle(title: title ?? '', color: colorScheme.onSurface)
+                : _AppBarTitleSubtitle(
+                    title: title ?? '',
+                    subtitle: subtitle!,
+                    titleColor: colorScheme.onSurface,
+                    subtitleColor: colorScheme.onSurfaceVariant,
                   ),
           ),
           if (actions.isNotEmpty) ...actions,
         ],
       ),
+    );
+  }
+}
+
+class _AppBarTitle extends StatelessWidget {
+  final String title;
+  final Color color;
+
+  const _AppBarTitle({required this.title, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+        fontFamily: AppTextStyles.primaryFontFamily,
+        color: color,
+      ),
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+}
+
+class _AppBarTitleSubtitle extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final Color titleColor;
+  final Color subtitleColor;
+
+  const _AppBarTitleSubtitle({
+    required this.title,
+    required this.subtitle,
+    required this.titleColor,
+    required this.subtitleColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _AppBarTitle(title: title, color: titleColor),
+        const SizedBox(height: 1),
+        Text(
+          subtitle,
+          style: Theme.of(
+            context,
+          ).textTheme.labelMedium?.copyWith(color: subtitleColor),
+          overflow: TextOverflow.ellipsis,
+        ),
+      ],
     );
   }
 }

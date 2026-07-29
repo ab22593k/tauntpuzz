@@ -25,57 +25,7 @@ class PuzzleSizeItem extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        AnimatedContainer(
-          duration: const Duration(milliseconds: 250),
-          curve: Curves.easeOut,
-          child: ElevatedButton(
-            key: ValueKey('puzzle_size_$size'),
-            onPressed: () {
-              if (!isSelected) {
-                ref.read(puzzleProvider.notifier).resetPuzzleSize(size);
-                ref.read(stopWatchProvider.notifier).stop();
-                if (size > 4) {
-                  ref
-                      .read(phrasesProvider.notifier)
-                      .setPhraseState(PhraseState.hardPuzzleSelected);
-                }
-                Navigator.of(context).pop();
-              }
-            },
-            style:
-                ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero,
-                  ),
-                  minimumSize: const Size.fromHeight(48),
-                  backgroundColor: isSelected
-                      ? colorScheme.primary
-                      : Colors.transparent,
-                  elevation: 0,
-                ).copyWith(
-                  elevation: WidgetStateProperty.resolveWith((states) {
-                    return 0;
-                  }),
-                  shadowColor: WidgetStateProperty.all(Colors.transparent),
-                ),
-            child: Text(
-              '$size\u00d7$size',
-              style: AppTextStyles.labelLarge.copyWith(
-                color: isSelected
-                    ? colorScheme.onPrimary
-                    : colorScheme.onSurface,
-                fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400,
-                fontVariations: [
-                  FontVariation(
-                    'wght',
-                    isSelected ? (wc == WindowClass.expanded ? 700 : 650) : 550,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+        _sizeButton(context, ref, isSelected, size, colorScheme, wc),
         const SizedBox(height: 4),
         Text(
           '${(size * size) - 1}',
@@ -84,6 +34,65 @@ class PuzzleSizeItem extends ConsumerWidget {
           ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.4)),
         ),
       ],
+    );
+  }
+
+  Widget _sizeButton(
+    BuildContext context,
+    WidgetRef ref,
+    bool isSelected,
+    int size,
+    ColorScheme colorScheme,
+    WindowClass wc,
+  ) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeOut,
+      child: ElevatedButton(
+        key: ValueKey('puzzle_size_$size'),
+        onPressed: () {
+          if (!isSelected) {
+            ref.read(puzzleProvider.notifier).resetPuzzleSize(size);
+            ref.read(stopWatchProvider.notifier).stop();
+            if (size > 4) {
+              ref
+                  .read(phrasesProvider.notifier)
+                  .setPhraseState(PhraseState.hardPuzzleSelected);
+            }
+            Navigator.of(context).pop();
+          }
+        },
+        style:
+            ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.zero,
+              ),
+              minimumSize: const Size.fromHeight(48),
+              backgroundColor: isSelected
+                  ? colorScheme.primary
+                  : Colors.transparent,
+              elevation: 0,
+            ).copyWith(
+              elevation: WidgetStateProperty.resolveWith((states) {
+                return 0;
+              }),
+              shadowColor: WidgetStateProperty.all(Colors.transparent),
+            ),
+        child: Text(
+          '$size\u00d7$size',
+          style: AppTextStyles.labelLarge.copyWith(
+            color: isSelected ? colorScheme.onPrimary : colorScheme.onSurface,
+            fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400,
+            fontVariations: [
+              FontVariation(
+                'wght',
+                isSelected ? (wc == WindowClass.expanded ? 700 : 650) : 550,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

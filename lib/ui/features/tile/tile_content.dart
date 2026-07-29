@@ -48,6 +48,27 @@ class _TileContentState extends State<TileContent>
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
+    return _wrapWithHoverScale(
+      Padding(
+        padding: const EdgeInsets.all(1.5),
+        child: Container(
+          decoration: BoxDecoration(
+            color: widget.tile.isAtCorrectLocation
+                ? colorScheme.surfaceContainerHighest
+                : colorScheme.surfaceContainerLow,
+            borderRadius: BorderRadius.zero,
+            border: Border.all(
+              color: colorScheme.outlineVariant.withValues(alpha: 0.2),
+              width: 0.5,
+            ),
+          ),
+          child: Center(child: _buildTileLabel(colorScheme)),
+        ),
+      ),
+    );
+  }
+
+  Widget _wrapWithHoverScale(Widget child) {
     return MouseRegion(
       onEnter: (_) {
         if (!widget.isPuzzleSolved) {
@@ -59,25 +80,7 @@ class _TileContentState extends State<TileContent>
           _animationController.reverse();
         }
       },
-      child: ScaleTransition(
-        scale: _scale,
-        child: Padding(
-          padding: const EdgeInsets.all(1.5),
-          child: Container(
-            decoration: BoxDecoration(
-              color: widget.tile.isAtCorrectLocation
-                  ? colorScheme.surfaceContainerHighest
-                  : colorScheme.surfaceContainerLow,
-              borderRadius: BorderRadius.zero,
-              border: Border.all(
-                color: colorScheme.outlineVariant.withValues(alpha: 0.2),
-                width: 0.5,
-              ),
-            ),
-            child: Center(child: _buildTileLabel(colorScheme)),
-          ),
-        ),
-      ),
+      child: ScaleTransition(scale: _scale, child: child),
     );
   }
 

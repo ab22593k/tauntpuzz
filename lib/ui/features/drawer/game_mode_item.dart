@@ -77,51 +77,7 @@ class GameModeItem extends ConsumerWidget {
                   return null;
                 }),
               ),
-          child: Row(
-            children: [
-              _modeIcon(isSelected, colorScheme),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      GameModeHelper.localizedName(mode, context.l10n),
-                      style: AppTextStyles.labelLarge.copyWith(
-                        color: isSelected
-                            ? colorScheme.onPrimary
-                            : colorScheme.onSurface,
-                        fontWeight: isSelected
-                            ? FontWeight.w700
-                            : FontWeight.w500,
-                        fontVariations: [
-                          FontVariation('wght', isSelected ? 700 : 550),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 1),
-                    Text(
-                      GameModeHelper.localizedDescription(mode, context.l10n),
-                      style: AppTextStyles.bodyAdaptive(wc).copyWith(
-                        color: isSelected
-                            ? colorScheme.onPrimary.withValues(alpha: 0.7)
-                            : colorScheme.onSurface.withValues(alpha: 0.45),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              if (isSelected)
-                Padding(
-                  padding: const EdgeInsets.only(left: 4),
-                  child: HugeIcon(
-                    icon: HugeIcons.strokeRoundedCheckmarkCircle01,
-                    size: 16,
-                    color: colorScheme.onPrimary,
-                  ),
-                ),
-            ],
-          ),
+          child: _buildItemBody(context, isSelected, colorScheme, wc),
         ),
       ),
     );
@@ -154,5 +110,56 @@ class GameModeItem extends ConsumerWidget {
         color: color,
       ),
     };
+  }
+
+  Widget _buildItemBody(
+    BuildContext context,
+    bool isSelected,
+    ColorScheme colorScheme,
+    WindowClass wc,
+  ) {
+    return Row(
+      children: [
+        _modeIcon(isSelected, colorScheme),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                GameModeHelper.localizedName(mode, context.l10n),
+                style: AppTextStyles.labelLarge.copyWith(
+                  color: isSelected
+                      ? colorScheme.onPrimary
+                      : colorScheme.onSurface,
+                  fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                  fontVariations: [
+                    FontVariation('wght', isSelected ? 700 : 550),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 1),
+              Text(
+                GameModeHelper.localizedDescription(mode, context.l10n),
+                style: AppTextStyles.bodyAdaptive(wc).copyWith(
+                  color: isSelected
+                      ? colorScheme.onPrimary.withValues(alpha: 0.7)
+                      : colorScheme.onSurface.withValues(alpha: 0.45),
+                ),
+              ),
+            ],
+          ),
+        ),
+        if (isSelected)
+          Padding(
+            padding: const EdgeInsets.only(left: 4),
+            child: HugeIcon(
+              icon: HugeIcons.strokeRoundedCheckmarkCircle01,
+              size: 16,
+              color: colorScheme.onPrimary,
+            ),
+          ),
+      ],
+    );
   }
 }

@@ -52,70 +52,73 @@ class AppAlertDialog extends StatelessWidget {
                   borderRadius: BorderRadius.zero,
                   color: colorScheme.surfaceContainer.withValues(alpha: 0.7),
                 ),
-                child:
-                    content ??
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        if (title != null)
-                          Text(
-                            title!,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontFamily: AppTextStyles.primaryFontFamily,
-                              fontSize: 22,
-                              fontWeight: FontWeight.w400,
-                              height: 1.2,
-                              color: colorScheme.onSurface,
-                            ),
-                          ),
-                        const SizedBox(height: 40),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  if (onConfirm != null) {
-                                    onConfirm!();
-                                  }
-                                  Navigator.of(context).pop();
-                                },
-                                child: Text(context.l10n.yes),
-                              ),
-                            ),
-                            const SizedBox(width: Spacing.sm),
-                            Expanded(
-                              child: ElevatedButton(
-                                onPressed:
-                                    onCancel ??
-                                    () => Navigator.of(context).pop(),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.transparent,
-                                  foregroundColor: colorScheme.onSurface,
-                                  elevation: 0,
-                                  shadowColor: Colors.transparent,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.zero,
-                                    side: BorderSide(
-                                      color: colorScheme.outlineVariant
-                                          .withValues(alpha: 0.15),
-                                      width: 0.5,
-                                    ),
-                                  ),
-                                ),
-                                child: Text(context.l10n.cancel),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                child: content ?? _buildBody(context, colorScheme),
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildBody(BuildContext context, ColorScheme colorScheme) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        if (title != null)
+          Text(
+            title!,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontFamily: AppTextStyles.primaryFontFamily,
+              fontSize: 22,
+              fontWeight: FontWeight.w400,
+              height: 1.2,
+              color: colorScheme.onSurface,
+            ),
+          ),
+        const SizedBox(height: 40),
+        _buildButtonRow(context, colorScheme),
+      ],
+    );
+  }
+
+  Widget _buildButtonRow(BuildContext context, ColorScheme colorScheme) {
+    return Row(
+      children: [
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {
+              if (onConfirm != null) {
+                onConfirm!();
+              }
+              Navigator.of(context).pop();
+            },
+            child: Text(context.l10n.yes),
+          ),
+        ),
+        const SizedBox(width: Spacing.sm),
+        Expanded(
+          child: ElevatedButton(
+            onPressed: onCancel ?? () => Navigator.of(context).pop(),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              foregroundColor: colorScheme.onSurface,
+              elevation: 0,
+              shadowColor: Colors.transparent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.zero,
+                side: BorderSide(
+                  color: colorScheme.outlineVariant.withValues(alpha: 0.15),
+                  width: 0.5,
+                ),
+              ),
+            ),
+            child: Text(context.l10n.cancel),
+          ),
+        ),
+      ],
     );
   }
 }

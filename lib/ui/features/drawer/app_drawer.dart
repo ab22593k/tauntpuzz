@@ -19,6 +19,10 @@ import 'package:hugeicons/hugeicons.dart';
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 
+  Widget _drawerHeader(double drawerStartPadding) {
+    return _DrawerHeader(drawerStartPadding: drawerStartPadding);
+  }
+
   @override
   Widget build(BuildContext context) {
     final padding = MediaQuery.paddingOf(context);
@@ -57,7 +61,7 @@ class AppDrawer extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    _DrawerHeader(drawerStartPadding: drawerStartPadding),
+                    _drawerHeader(drawerStartPadding),
                     const Expanded(
                       child: SingleChildScrollView(
                         child: Column(
@@ -106,55 +110,71 @@ class _DrawerHeader extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            width: 36,
-            height: 36,
-            decoration: BoxDecoration(
-              color: colorScheme.primary,
-              borderRadius: BorderRadius.zero,
-            ),
-            child: Center(
-              child: Text(
-                'D',
-                style: AppTextStyles.headlineLarge.copyWith(
-                  color: colorScheme.onPrimary,
-                ),
-              ),
-            ),
-          ),
+          _buildLogo(colorScheme),
           const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  context.l10n.appTitle,
-                  style:
-                      (wc == WindowClass.compact
-                              ? AppTextStyles.titleMedium
-                              : AppTextStyles.titleLarge)
-                          .copyWith(
-                            fontVariations: const [FontVariation('wght', 700)],
-                          ),
-                ),
-                const SizedBox(height: 1),
-                Text(
-                  context.l10n.appSubtitle,
-                  style: AppTextStyles.bodyAdaptive(wc).copyWith(
-                    fontVariations: const [FontVariation('wght', 400)],
-                  ),
-                ),
-              ],
-            ),
+          _buildTitleSection(context, wc, colorScheme),
+          _buildCloseButton(context, colorScheme),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLogo(ColorScheme colorScheme) {
+    return Container(
+      width: 36,
+      height: 36,
+      decoration: BoxDecoration(
+        color: colorScheme.primary,
+        borderRadius: BorderRadius.zero,
+      ),
+      child: Center(
+        child: Text(
+          'D',
+          style: AppTextStyles.headlineLarge.copyWith(
+            color: colorScheme.onPrimary,
           ),
-          IconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            icon: const HugeIcon(icon: HugeIcons.strokeRoundedCancel01),
-            style: IconButton.styleFrom(
-              foregroundColor: colorScheme.onSurface.withValues(alpha: 0.7),
-            ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTitleSection(
+    BuildContext context,
+    WindowClass wc,
+    ColorScheme colorScheme,
+  ) {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            context.l10n.appTitle,
+            style:
+                (wc == WindowClass.compact
+                        ? AppTextStyles.titleMedium
+                        : AppTextStyles.titleLarge)
+                    .copyWith(
+                      fontVariations: const [FontVariation('wght', 700)],
+                    ),
+          ),
+          const SizedBox(height: 1),
+          Text(
+            context.l10n.appSubtitle,
+            style: AppTextStyles.bodyAdaptive(
+              wc,
+            ).copyWith(fontVariations: const [FontVariation('wght', 400)]),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildCloseButton(BuildContext context, ColorScheme colorScheme) {
+    return IconButton(
+      onPressed: () => Navigator.of(context).pop(),
+      icon: const HugeIcon(icon: HugeIcons.strokeRoundedCancel01),
+      style: IconButton.styleFrom(
+        foregroundColor: colorScheme.onSurface.withValues(alpha: 0.7),
       ),
     );
   }

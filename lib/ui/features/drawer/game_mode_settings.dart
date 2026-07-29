@@ -35,27 +35,9 @@ class GameModeSettings extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              HugeIcon(
-                icon: HugeIcons.strokeRoundedGameController01,
-                size: 16,
-                color: colorScheme.onSurface.withValues(alpha: 0.6),
-              ),
-              const SizedBox(width: 6),
-              Text(
-                context.l10n.gameMode,
-                style: AppTextStyles.titleAdaptive(wc),
-              ),
-            ],
-          ),
+          _buildHeader(context, wc, colorScheme),
           const SizedBox(height: 4),
-          Text(
-            context.l10n.chooseMode,
-            style: AppTextStyles.bodyAdaptive(
-              wc,
-            ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.5)),
-          ),
+          _buildSubtitle(context, wc, colorScheme),
           const SizedBox(height: 10),
           Column(
             children: [
@@ -65,6 +47,37 @@ class GameModeSettings extends ConsumerWidget {
           const _MarathonRangeSelector(),
         ],
       ),
+    );
+  }
+
+  Widget _buildHeader(
+    BuildContext context,
+    WindowClass wc,
+    ColorScheme colorScheme,
+  ) {
+    return Row(
+      children: [
+        HugeIcon(
+          icon: HugeIcons.strokeRoundedGameController01,
+          size: 16,
+          color: colorScheme.onSurface.withValues(alpha: 0.6),
+        ),
+        const SizedBox(width: 6),
+        Text(context.l10n.gameMode, style: AppTextStyles.titleAdaptive(wc)),
+      ],
+    );
+  }
+
+  Widget _buildSubtitle(
+    BuildContext context,
+    WindowClass wc,
+    ColorScheme colorScheme,
+  ) {
+    return Text(
+      context.l10n.chooseMode,
+      style: AppTextStyles.bodyAdaptive(
+        wc,
+      ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.5)),
     );
   }
 }
@@ -103,55 +116,69 @@ class _MarathonRangeSelector extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 8),
-            Row(
-              children: [
-                Expanded(
-                  child: _SizeDropdown(
-                    label: context.l10n.from,
-                    value: startSize,
-                    sizes: sizes,
-                    onChanged: (v) {
-                      if (v > endSize) return;
-                      ref
-                          .read(puzzleProvider.notifier)
-                          .setMarathonRange(v, endSize);
-                      if (puzzleState.n < v || puzzleState.n > endSize) {
-                        ref.read(puzzleProvider.notifier).resetPuzzleSize(v);
-                      }
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: HugeIcon(
-                    icon: HugeIcons.strokeRoundedArrowRight01,
-                    size: 16,
-                    color: colorScheme.onSurface.withValues(alpha: 0.4),
-                  ),
-                ),
-                Expanded(
-                  child: _SizeDropdown(
-                    label: context.l10n.to,
-                    value: endSize,
-                    sizes: sizes,
-                    onChanged: (v) {
-                      if (v < startSize) return;
-                      ref
-                          .read(puzzleProvider.notifier)
-                          .setMarathonRange(startSize, v);
-                      if (puzzleState.n < startSize || puzzleState.n > v) {
-                        ref
-                            .read(puzzleProvider.notifier)
-                            .resetPuzzleSize(startSize);
-                      }
-                    },
-                  ),
-                ),
-              ],
+            _marathonRangeSliders(
+              context,
+              ref,
+              colorScheme,
+              startSize,
+              endSize,
+              sizes,
+              puzzleState,
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _marathonRangeSliders(
+    BuildContext context,
+    WidgetRef ref,
+    ColorScheme colorScheme,
+    int startSize,
+    int endSize,
+    List<int> sizes,
+    PuzzleState puzzleState,
+  ) {
+    return Row(
+      children: [
+        Expanded(
+          child: _SizeDropdown(
+            label: context.l10n.from,
+            value: startSize,
+            sizes: sizes,
+            onChanged: (v) {
+              if (v > endSize) return;
+              ref.read(puzzleProvider.notifier).setMarathonRange(v, endSize);
+              if (puzzleState.n < v || puzzleState.n > endSize) {
+                ref.read(puzzleProvider.notifier).resetPuzzleSize(v);
+              }
+            },
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: HugeIcon(
+            icon: HugeIcons.strokeRoundedArrowRight01,
+            size: 16,
+            color: colorScheme.onSurface.withValues(alpha: 0.4),
+          ),
+        ),
+        Expanded(
+          child: _SizeDropdown(
+            label: context.l10n.to,
+            value: endSize,
+            sizes: sizes,
+            onChanged: (v) {
+              if (v < startSize) return;
+              ref.read(puzzleProvider.notifier).setMarathonRange(startSize, v);
+              if (puzzleState.n < startSize || puzzleState.n > v) {
+                ref.read(puzzleProvider.notifier).resetPuzzleSize(startSize);
+              }
+            },
+          ),
+        ),
+      ],
     );
   }
 }

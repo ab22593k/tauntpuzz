@@ -59,30 +59,7 @@ class DarkModeToggle extends ConsumerWidget {
             ).copyWith(color: colorScheme.onSurface.withValues(alpha: 0.5)),
           ),
           const SizedBox(height: 10),
-          Row(
-            children: List.generate(_themeOptions.length, (index) {
-              final option = _themeOptions[index];
-              final isSelected = themeState.mode == option.mode;
-              final label = _labelFor(context, option.mode);
-              return Expanded(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.only(
-                    end: index < _themeOptions.length - 1 ? Spacing.xs / 2 : 0,
-                    start: index > 0 ? Spacing.xs / 2 : 0,
-                  ),
-                  child: _ThemeButton(
-                    iconBuilder: _iconFor(option.mode),
-                    label: label,
-                    isSelected: isSelected,
-                    onTap: () {
-                      if (isSelected) return;
-                      ref.read(themeProvider.notifier).setMode(option.mode);
-                    },
-                  ),
-                ),
-              );
-            }),
-          ),
+          _buildThemeOptionsRow(context, themeState, ref),
         ],
       ),
     );
@@ -93,6 +70,37 @@ class DarkModeToggle extends ConsumerWidget {
     ThemeMode.dark => context.l10n.darkTheme,
     ThemeMode.system => context.l10n.systemTheme,
   };
+
+  Widget _buildThemeOptionsRow(
+    BuildContext context,
+    ThemeState themeState,
+    WidgetRef ref,
+  ) {
+    return Row(
+      children: List.generate(_themeOptions.length, (index) {
+        final option = _themeOptions[index];
+        final isSelected = themeState.mode == option.mode;
+        final label = _labelFor(context, option.mode);
+        return Expanded(
+          child: Padding(
+            padding: EdgeInsetsDirectional.only(
+              end: index < _themeOptions.length - 1 ? Spacing.xs / 2 : 0,
+              start: index > 0 ? Spacing.xs / 2 : 0,
+            ),
+            child: _ThemeButton(
+              iconBuilder: _iconFor(option.mode),
+              label: label,
+              isSelected: isSelected,
+              onTap: () {
+                if (isSelected) return;
+                ref.read(themeProvider.notifier).setMode(option.mode);
+              },
+            ),
+          ),
+        );
+      }),
+    );
+  }
 }
 
 class _ThemeOption {
@@ -172,59 +180,60 @@ class _ThemeButtonState extends State<_ThemeButton>
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
     return TweenAnimationBuilder<double>(
       tween: Tween(begin: 0, end: widget.isSelected ? 1.0 : 0.0),
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
-      builder: (context, value, child) {
-        final background = Color.lerp(
-          Colors.transparent,
-          colorScheme.primary,
-          value,
-        )!;
-        final foreground = Color.lerp(
-          colorScheme.onSurface,
-          colorScheme.onPrimary,
-          value,
-        )!;
-        final iconScale = 1.0 + (1.0 - _scaleAnimation.value) * 0.15;
+      builder: (_, value, _) => _buildAnimatedContent(value),
+    );
+  }
 
-        return Material(
-          color: background,
-          borderRadius: BorderRadius.zero,
-          child: InkWell(
-            onTap: widget.onTap,
-            borderRadius: BorderRadius.zero,
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  AnimatedBuilder(
-                    animation: _scaleAnimation,
-                    builder: (context, child) {
-                      return Transform.scale(
-                        scale: iconScale,
-                        child: widget.iconBuilder(foreground),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    widget.label,
-                    style: AppTextStyles.labelMedium.copyWith(
-                      color: foreground,
-                      fontVariations: const [FontVariation('wght', 600)],
-                    ),
-                  ),
-                ],
+  Widget _buildAnimatedContent(double value) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final background = Color.lerp(
+      Colors.transparent,
+      colorScheme.primary,
+      value,
+    )!;
+    final foreground = Color.lerp(
+      colorScheme.onSurface,
+      colorScheme.onPrimary,
+      value,
+    )!;
+    final iconScale = 1.0 + (1.0 - _scaleAnimation.value) * 0.15;
+
+    return Material(
+      color: background,
+      borderRadius: BorderRadius.zero,
+      child: InkWell(
+        onTap: widget.onTap,
+        borderRadius: BorderRadius.zero,
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AnimatedBuilder(
+                animation: _scaleAnimation,
+                builder: (context, child) {
+                  return Transform.scale(
+                    scale: iconScale,
+                    child: widget.iconBuilder(foreground),
+                  );
+                },
               ),
-            ),
+              const SizedBox(height: 4),
+              Text(
+                widget.label,
+                style: AppTextStyles.labelMedium.copyWith(
+                  color: foreground,
+                  fontVariations: const [FontVariation('wght', 600)],
+                ),
+              ),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
