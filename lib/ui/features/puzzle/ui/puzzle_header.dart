@@ -67,19 +67,7 @@ class PuzzleHeader extends ConsumerWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        HugeIcon(
-          icon: HugeIcons.strokeRoundedLink01,
-          size: 16,
-          color: colorScheme.onSurface.withValues(alpha: 0.6),
-        ),
-        const SizedBox(width: 6),
-        Text(
-          GameModeHelper.localizedName(GameMode.marathon, l10n),
-          style: AppTextStyles.labelSmall.copyWith(
-            color: colorScheme.onSurface.withValues(alpha: 0.6),
-            fontVariations: const [FontVariation('wght', 600)],
-          ),
-        ),
+        _marathonLabel(colorScheme, l10n),
         const SizedBox(width: 4),
         Text(
           '\u2022',
@@ -88,52 +76,7 @@ class PuzzleHeader extends ConsumerWidget {
           ),
         ),
         const SizedBox(width: 4),
-        ...List.generate(endIdx + 1, (i) {
-          final size = sizes[i];
-          final isDone = i < currentIdx;
-          final isCurrent = i == currentIdx;
-          return Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (i > 0)
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 2),
-                  child: Text(
-                    '\u2192',
-                    style: AppTextStyles.labelSmall.copyWith(
-                      color: colorScheme.onSurface.withValues(alpha: 0.2),
-                    ),
-                  ),
-                ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
-                decoration: BoxDecoration(
-                  color: isCurrent
-                      ? colorScheme.primary.withValues(alpha: 0.15)
-                      : isDone
-                      ? colorScheme.tertiary.withValues(alpha: 0.15)
-                      : Colors.transparent,
-                  border: isCurrent
-                      ? Border.all(
-                          color: colorScheme.primary.withValues(alpha: 0.3),
-                        )
-                      : null,
-                ),
-                child: Text(
-                  '$size\u00d7$size',
-                  style: AppTextStyles.labelSmall.copyWith(
-                    color: isDone
-                        ? colorScheme.tertiary
-                        : isCurrent
-                        ? colorScheme.primary
-                        : colorScheme.onSurface.withValues(alpha: 0.3),
-                    fontVariations: [const FontVariation('wght', 700)],
-                  ),
-                ),
-              ),
-            ],
-          );
-        }),
+        ..._marathonChips(colorScheme, endIdx, currentIdx, sizes),
       ],
     );
   }
@@ -153,56 +96,86 @@ class PuzzleHeader extends ConsumerWidget {
       spacing: 4,
       runSpacing: 6,
       children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            HugeIcon(
-              icon: HugeIcons.strokeRoundedLink01,
-              size: 16,
-              color: colorScheme.onSurface.withValues(alpha: 0.6),
-            ),
-            const SizedBox(width: 6),
-            Text(
-              GameModeHelper.localizedName(GameMode.marathon, l10n),
-              style: AppTextStyles.labelSmall.copyWith(
-                color: colorScheme.onSurface.withValues(alpha: 0.6),
-                fontVariations: const [FontVariation('wght', 600)],
-              ),
-            ),
-          ],
-        ),
-        ...List.generate(endIdx + 1, (i) {
-          final size = sizes[i];
-          final isDone = i < currentIdx;
-          final isCurrent = i == currentIdx;
-          return Container(
-            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
-            decoration: BoxDecoration(
-              color: isCurrent
-                  ? colorScheme.primary.withValues(alpha: 0.15)
-                  : isDone
-                  ? colorScheme.tertiary.withValues(alpha: 0.15)
-                  : Colors.transparent,
-              border: isCurrent
-                  ? Border.all(
-                      color: colorScheme.primary.withValues(alpha: 0.3),
-                    )
-                  : null,
-            ),
-            child: Text(
-              '$size\u00d7$size',
-              style: AppTextStyles.labelSmall.copyWith(
-                color: isDone
-                    ? colorScheme.tertiary
-                    : isCurrent
-                    ? colorScheme.primary
-                    : colorScheme.onSurface.withValues(alpha: 0.3),
-                fontVariations: [const FontVariation('wght', 700)],
-              ),
-            ),
-          );
-        }),
+        _marathonLabel(colorScheme, l10n),
+        ..._marathonChips(colorScheme, endIdx, currentIdx, sizes),
       ],
+    );
+  }
+
+  Widget _marathonLabel(ColorScheme colorScheme, AppLocalizations l10n) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        HugeIcon(
+          icon: HugeIcons.strokeRoundedLink01,
+          size: 16,
+          color: colorScheme.onSurface.withValues(alpha: 0.6),
+        ),
+        const SizedBox(width: 6),
+        Text(
+          GameModeHelper.localizedName(GameMode.marathon, l10n),
+          style: AppTextStyles.labelSmall.copyWith(
+            color: colorScheme.onSurface.withValues(alpha: 0.6),
+            fontVariations: const [FontVariation('wght', 600)],
+          ),
+        ),
+      ],
+    );
+  }
+
+  List<Widget> _marathonChips(
+    ColorScheme colorScheme,
+    int endIdx,
+    int currentIdx,
+    List<int> sizes,
+  ) {
+    return List.generate(endIdx + 1, (i) {
+      final size = sizes[i];
+      final isDone = i < currentIdx;
+      final isCurrent = i == currentIdx;
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (i > 0)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 2),
+              child: Text(
+                '\u2192',
+                style: AppTextStyles.labelSmall.copyWith(
+                  color: colorScheme.onSurface.withValues(alpha: 0.2),
+                ),
+              ),
+            ),
+          _marathonChip(size, isDone, isCurrent, colorScheme),
+        ],
+      );
+    });
+  }
+
+  Widget _marathonChip(int size, bool isDone, bool isCurrent, ColorScheme cs) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+      decoration: BoxDecoration(
+        color: isCurrent
+            ? cs.primary.withValues(alpha: 0.15)
+            : isDone
+            ? cs.tertiary.withValues(alpha: 0.15)
+            : Colors.transparent,
+        border: isCurrent
+            ? Border.all(color: cs.primary.withValues(alpha: 0.3))
+            : null,
+      ),
+      child: Text(
+        '$size\u00d7$size',
+        style: AppTextStyles.labelSmall.copyWith(
+          color: isDone
+              ? cs.tertiary
+              : isCurrent
+              ? cs.primary
+              : cs.onSurface.withValues(alpha: 0.3),
+          fontVariations: const [FontVariation('wght', 700)],
+        ),
+      ),
     );
   }
 
