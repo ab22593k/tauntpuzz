@@ -37,6 +37,24 @@ class TileGestureDetector extends ConsumerWidget {
     );
   }
 
+  void _handlePuzzleSolved(BuildContext context, WidgetRef ref) {
+    ref.read(phrasesProvider.notifier).setPhraseState(PhraseState.puzzleSolved);
+    Future.delayed(AnimationsManager.phraseBubbleTotalAnimationDuration, () {
+      if (!context.mounted) return;
+      ref.read(phrasesProvider.notifier).setPhraseState(PhraseState.none);
+    });
+
+    Future.delayed(AnimationsManager.puzzleSolvedDialogDelay, () {
+      if (!context.mounted) return;
+      int secondsElapsed = ref.read(stopWatchProvider).secondsElapsed;
+      ref.read(stopWatchProvider.notifier).stop();
+      _showPuzzleSolvedDialog(context, ref, secondsElapsed).then((_) {
+        if (!context.mounted) return;
+        ref.read(puzzleProvider.notifier).generate(forceRefresh: true);
+      });
+    });
+  }
+
   void _swapTilesAndUpdatePuzzle(BuildContext context, WidgetRef ref) {
     ref.read(puzzleProvider.notifier).swapTilesAndUpdatePuzzle(tile);
 
@@ -52,23 +70,7 @@ class TileGestureDetector extends ConsumerWidget {
           .read(phrasesProvider.notifier)
           .setPhraseState(PhraseState.puzzleStarted);
     } else if (puzzleState.puzzle.isSolved) {
-      ref
-          .read(phrasesProvider.notifier)
-          .setPhraseState(PhraseState.puzzleSolved);
-      Future.delayed(AnimationsManager.phraseBubbleTotalAnimationDuration, () {
-        if (!context.mounted) return;
-        ref.read(phrasesProvider.notifier).setPhraseState(PhraseState.none);
-      });
-
-      Future.delayed(AnimationsManager.puzzleSolvedDialogDelay, () {
-        if (!context.mounted) return;
-        int secondsElapsed = ref.read(stopWatchProvider).secondsElapsed;
-        ref.read(stopWatchProvider.notifier).stop();
-        _showPuzzleSolvedDialog(context, ref, secondsElapsed).then((_) {
-          if (!context.mounted) return;
-          ref.read(puzzleProvider.notifier).generate(forceRefresh: true);
-        });
-      });
+      _handlePuzzleSolved(context, ref);
     } else {
       final phrasesState = ref.read(phrasesProvider);
       if (phrasesState.phraseState case var state
