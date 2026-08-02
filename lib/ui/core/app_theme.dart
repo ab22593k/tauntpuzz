@@ -4,9 +4,9 @@ import 'package:leafz/ui/core/app_colors.dart';
 import 'package:leafz/ui/core/app_colors_dark.dart';
 import 'package:leafz/ui/core/app_text_styles.dart';
 
-/// Material 3 theme layer for the Leafz app.
+/// Material theme layer for the Leafz app.
 ///
-/// Implements the M3 "Customizing Material" customization model:
+/// Implements the "Customizing Material" customization model:
 ///
 /// 1. **Brand seed** — [AppColors.brandSeed] is the single key color that
 ///    defines the brand. It seeds the fallback brand color scheme.
@@ -30,10 +30,6 @@ class AppTheme {
   /// Brand key color, exposed for tooling (e.g. Material Theme Builder
   /// parity checks) and as the `seedColor` on fallback schemes.
   static const Color brandSeed = AppColors.brandSeed;
-
-  // ---------------------------------------------------------------------------
-  // Fallback brand color schemes (M3: always ship a fallback)
-  // ---------------------------------------------------------------------------
 
   /// The deterministic light scheme, seeded from [brandSeed].
   ///
@@ -127,10 +123,6 @@ class AppTheme {
     onTertiaryFixed: AppColorsDark.onTertiaryFixed,
     onTertiaryFixedVariant: AppColorsDark.onTertiaryFixedVariant,
   );
-
-  // ---------------------------------------------------------------------------
-  // Theme resolution — maps dynamic color onto the custom theme
-  // ---------------------------------------------------------------------------
 
   /// Builds the light [ThemeData].
   ///

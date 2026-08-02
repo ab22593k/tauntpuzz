@@ -36,7 +36,7 @@ enum PaneAdaptation {
   reflow,
 }
 
-/// The type of multi-pane layout, per MD3 spec.
+/// The type of multi-pane layout.
 enum PaneLayout {
   /// One flexible pane extending to fit available width.
   /// Recommended for compact and medium breakpoints.
@@ -55,7 +55,7 @@ enum PaneLayout {
   threePane,
 }
 
-/// Recommended snap widths for pane resizing, per MD3 spec.
+/// Recommended snap widths for pane resizing.
 class PaneSnapPoints {
   /// Recommended fixed pane width at extra-large breakpoint.
   static const double fixedPane = 412;
@@ -64,7 +64,7 @@ class PaneSnapPoints {
   static const double sideSheetMax = 400;
 
   /// Recommended custom snap width.
-  static const double narrow = 360;
+  static const double narrow = 460;
 
   /// Recommended custom snap width.
   static const double standard = 412;
@@ -99,8 +99,7 @@ class PaneConfig {
   });
 }
 
-/// Determines the recommended [PaneLayout] for a given breakpoint,
-/// per the MD3 panes spec.
+/// Determines the recommended [PaneLayout] for a given breakpoint.
 PaneLayout recommendedPaneLayout({
   required int paneCount,
   required bool isExtraLarge,
@@ -113,14 +112,6 @@ PaneLayout recommendedPaneLayout({
 }
 
 /// A draggable handle for resizing panes.
-///
-/// Per MD3 spec:
-/// - In a split-pane layout, both flexible panes can be freely adjusted
-///   or snap to certain widths (360dp, 412dp).
-/// - In a fixed-and-flexible layout, the drag handle can fully collapse
-///   and expand the fixed pane.
-/// - The drag handle should toggle between layout sizes when selected
-///   (tap, double tap, or long press).
 class PaneDragHandle extends StatefulWidget {
   final VoidCallback? onTap;
   final ValueChanged<double>? onDrag;
@@ -192,7 +183,7 @@ class _PaneDragHandleState extends State<PaneDragHandle> {
   }
 }
 
-/// An MD3 pane divider used between co-planar panes.
+/// An pane divider used between co-planar panes.
 Widget paneDivider(BuildContext context) {
   return const SizedBox(width: 24);
 }

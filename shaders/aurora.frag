@@ -132,8 +132,9 @@ void main() {
   float vig = smoothstep(1.4, 0.35, length(p));
   col *= mix(1.0, 0.55 + 0.45 * vig, uDark);
 
-  // Faint film grain — stronger in dark theme.
-  col += (hash21(fragCoord + uTime) - 0.5) * mix(0.012, 0.03, uDark);
+  // Faint film grain — stronger in dark theme. Kept subtle so it reads as
+  // organic texture rather than shimmering through the frosted puzzle glass.
+  col += (hash21(fragCoord + vec2(0.0, uTime)) - 0.5) * mix(0.006, 0.016, uDark);
 
   fragColor = vec4(col, 1.0);
 }

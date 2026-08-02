@@ -9,6 +9,7 @@
 .history
 .svn/
 dist/
+.cache/
 
 # IntelliJ related
 *.iml

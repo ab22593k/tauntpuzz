@@ -60,7 +60,7 @@ class _StatsPane extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: Spacing.sm,
+        horizontal: Spacing.md,
         vertical: Spacing.xl,
       ),
       child: Column(

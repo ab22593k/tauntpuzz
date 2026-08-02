@@ -1,3 +1,5 @@
+import 'dart:ui' show ImageFilter;
+
 import 'package:leafz/domain/models/tile.dart';
 import 'package:leafz/ui/core/animations/animations_manager.dart';
 import 'package:leafz/ui/core/layout/puzzle_layout.dart';
@@ -49,20 +51,32 @@ class _TileContentState extends State<TileContent>
     final colorScheme = Theme.of(context).colorScheme;
 
     return _wrapWithHoverScale(
-      Padding(
-        padding: const EdgeInsets.all(1.5),
-        child: Container(
-          decoration: BoxDecoration(
-            color: widget.tile.isAtCorrectLocation
-                ? colorScheme.surfaceContainerHighest
-                : colorScheme.surfaceContainerLow,
-            borderRadius: BorderRadius.zero,
-            border: Border.all(
-              color: colorScheme.outlineVariant.withValues(alpha: 0.2),
-              width: 0.5,
+      // Mirror the board's frosted-glass treatment on each tile: a GPU
+      // [BackdropFilter] blur softens whatever sits behind the piece and the
+      // translucent surface lets the aurora shader glow through every tile.
+      ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
+          child: Padding(
+            padding: const EdgeInsets.all(1.5),
+            child: Container(
+              decoration: BoxDecoration(
+                // Correctly-placed tiles get a slightly more opaque fill to
+                // reinforce their locked-in state.
+                color:
+                    (widget.tile.isAtCorrectLocation
+                            ? colorScheme.surfaceContainerHighest
+                            : colorScheme.surfaceContainerLow)
+                        .withValues(alpha: 0.72),
+                borderRadius: BorderRadius.zero,
+                border: Border.all(
+                  color: colorScheme.outlineVariant.withValues(alpha: 0.15),
+                  width: 0.5,
+                ),
+              ),
+              child: Center(child: _buildTileLabel(colorScheme)),
             ),
           ),
-          child: Center(child: _buildTileLabel(colorScheme)),
         ),
       ),
     );

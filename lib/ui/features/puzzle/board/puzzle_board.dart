@@ -1,3 +1,5 @@
+import 'dart:ui' show ImageFilter;
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:leafz/domain/models/game_mode.dart';
 import 'package:leafz/ui/core/animations/animations_manager.dart';
@@ -103,43 +105,59 @@ class _PuzzleBoardState extends ConsumerState<PuzzleBoard> {
         }
 
         return Center(
-          child: Container(
-            key: const ValueKey('puzzle_board'),
-            width: widget.containerWidth,
-            height: widget.containerWidth,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.zero,
-              color: colorScheme.surfaceContainer,
-            ),
-            child: Stack(
-              children: List.generate(
-                puzzleState.tilesWithoutWhitespace.length,
-                (index) {
-                  final tile = puzzleState.tilesWithoutWhitespace[index];
-                  final tileIsMovable = puzzleState.puzzle.tileIsMovable(tile);
-                  final isBlindContentHidden =
-                      isBlind &&
-                      tilesBlinded &&
-                      !puzzleState.isTileRevealed(tile.currentLocation) &&
-                      !isSolved;
-                  return TileAnimatedPositioned(
-                    tile: tile,
-                    puzzleSize: puzzleState.n,
-                    tileWidth: tileWidth,
-                    tileGestureDetector: TileGestureDetector(
-                      tile: tile,
-                      tileContent: PulseTransition(
-                        isActive: tileIsMovable && !isSolved,
-                        child: TileContent(
+          child: ClipRect(
+            // Frosted-glass panel: a real GPU [BackdropFilter] blur softens the
+            // animated aurora shader behind the board, and the translucent
+            // surface lets that nebula glow through. This surfaces the
+            // fragment-shader background inside the puzzle while a scrim of
+            // surfaceContainer keeps the numbered tiles legible.
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
+              child: Container(
+                key: const ValueKey('puzzle_board'),
+                width: widget.containerWidth,
+                height: widget.containerWidth,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.zero,
+                  color: colorScheme.surfaceContainer.withValues(alpha: 0.55),
+                  border: Border.all(
+                    color: colorScheme.outlineVariant.withValues(alpha: 0.18),
+                    width: 1,
+                  ),
+                ),
+                child: Stack(
+                  children: List.generate(
+                    puzzleState.tilesWithoutWhitespace.length,
+                    (index) {
+                      final tile = puzzleState.tilesWithoutWhitespace[index];
+                      final tileIsMovable = puzzleState.puzzle.tileIsMovable(
+                        tile,
+                      );
+                      final isBlindContentHidden =
+                          isBlind &&
+                          tilesBlinded &&
+                          !puzzleState.isTileRevealed(tile.currentLocation) &&
+                          !isSolved;
+                      return TileAnimatedPositioned(
+                        tile: tile,
+                        puzzleSize: puzzleState.n,
+                        tileWidth: tileWidth,
+                        tileGestureDetector: TileGestureDetector(
                           tile: tile,
-                          isPuzzleSolved: isSolved,
-                          puzzleSize: puzzleState.n,
-                          isBlindContentHidden: isBlindContentHidden,
+                          tileContent: PulseTransition(
+                            isActive: tileIsMovable && !isSolved,
+                            child: TileContent(
+                              tile: tile,
+                              isPuzzleSolved: isSolved,
+                              puzzleSize: puzzleState.n,
+                              isBlindContentHidden: isBlindContentHidden,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  );
-                },
+                      );
+                    },
+                  ),
+                ),
               ),
             ),
           ),
