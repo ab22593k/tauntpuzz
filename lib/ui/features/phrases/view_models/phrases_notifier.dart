@@ -4,7 +4,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:leafz/generated/app_localizations.dart';
 import 'package:leafz/ui/core/layout/phrase_bubble_layout.dart'
-    show PhraseState;
+    show
+        PhraseState,
+        PhraseStateDashTapped,
+        PhraseStateDoingGreat,
+        PhraseStateHardPuzzleSelected,
+        PhraseStateNone,
+        PhraseStatePuzzleSolved,
+        PhraseStatePuzzleStarted,
+        PhraseStatePuzzleTakingTooLong;
 
 @immutable
 class PhrasesState {
@@ -74,24 +82,23 @@ class PhrasesNotifier extends Notifier<PhrasesState> {
   static final Random _random = Random();
 
   String getPhrase(PhraseState phraseState, AppLocalizations l10n) {
-    if (phraseState == PhraseState.none) return '';
     return switch (phraseState) {
-      PhraseState.puzzleStarted =>
+      PhraseStatePuzzleStarted() =>
         _puzzleStarted[_random.nextInt(_puzzleStarted.length)](l10n),
-      PhraseState.puzzleSolved =>
+      PhraseStatePuzzleSolved() =>
         _puzzleSolved[_random.nextInt(_puzzleSolved.length)](l10n),
-      PhraseState.hardPuzzleSelected =>
+      PhraseStateHardPuzzleSelected() =>
         _hardPuzzle[_random.nextInt(_hardPuzzle.length)](l10n),
-      PhraseState.doingGreat =>
+      PhraseStateDoingGreat() =>
         _doingGreat[_random.nextInt(_doingGreat.length)](l10n),
-      PhraseState.dashTapped => _dashTapped[state.dashTapCount](l10n),
-      PhraseState.none || PhraseState.puzzleTakingTooLong => '',
+      PhraseStateDashTapped() => _dashTapped[state.dashTapCount](l10n),
+      PhraseStateNone() || PhraseStatePuzzleTakingTooLong() => '',
     };
   }
 
   void setPhraseState(PhraseState newState) {
     int nextDash = state.dashTapCount;
-    if (newState == PhraseState.dashTapped) {
+    if (newState is PhraseStateDashTapped) {
       nextDash = nextDash >= _dashTapped.length - 1 ? 0 : nextDash + 1;
     }
     state = state.copyWith(phraseState: newState, dashTapCount: nextDash);

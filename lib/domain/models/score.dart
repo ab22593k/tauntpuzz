@@ -28,14 +28,14 @@ class Score {
       secondsElapsed: json['secondsElapsed'],
       movesCount: json['movesCount'],
       puzzleSize: json['puzzleSize'],
-      gameMode: json['gameMode'] != null
-          ? GameMode.values.byName(json['gameMode'])
-          : GameMode.classic,
-      timestamp: json['timestamp'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(
-              (json['timestamp'] as num).toInt(),
-            )
-          : null,
+      gameMode: switch (json['gameMode']) {
+        String name => GameMode.values.byName(name),
+        _ => GameMode.classic,
+      },
+      timestamp: switch (json['timestamp']) {
+        num ms => DateTime.fromMillisecondsSinceEpoch(ms.toInt()),
+        _ => null,
+      },
     );
   }
 

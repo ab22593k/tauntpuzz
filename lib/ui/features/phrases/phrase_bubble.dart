@@ -10,7 +10,7 @@ class PhraseBubble extends ConsumerWidget {
   final PhraseState state;
 
   const PhraseBubble({super.key, required this.state})
-    : assert(state != PhraseState.none);
+    : assert(state is! PhraseStateNone);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -50,7 +50,7 @@ class PhraseBubble extends ConsumerWidget {
               ),
             ],
           ),
-          child: ref.watch(phrasesProvider).phraseState != PhraseState.none
+          child: ref.watch(phrasesProvider).phraseState is! PhraseStateNone
               ? Text(
                   phrasesNotifier.getPhrase(state, context.l10n),
                   maxLines: 3,

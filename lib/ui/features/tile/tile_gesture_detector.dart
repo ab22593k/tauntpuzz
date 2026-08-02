@@ -60,38 +60,39 @@ class TileGestureDetector extends ConsumerWidget {
 
     final puzzleState = ref.read(puzzleProvider);
 
-    if (puzzleState.movesCount == 1) {
-      if (puzzleState.gameMode == GameMode.speedrun) {
-        final seconds = puzzleState.speedrunCountdownSeconds;
-        ref.read(stopWatchProvider.notifier).configureCountdown(seconds);
-      }
-      ref.read(stopWatchProvider.notifier).start();
-      ref
-          .read(phrasesProvider.notifier)
-          .setPhraseState(PhraseState.puzzleStarted);
-    } else if (puzzleState.puzzle.isSolved) {
-      _handlePuzzleSolved(context, ref);
-    } else {
-      final phrasesState = ref.read(phrasesProvider);
-      if (phrasesState.phraseState case var state
-          when state != PhraseState.none) {
-        if (state
-            case PhraseState.puzzleStarted ||
-                PhraseState.dashTapped ||
-                PhraseState.puzzleSolved) {
-          Future.delayed(
-            AnimationsManager.phraseBubbleTotalAnimationDuration,
-            () {
-              if (!context.mounted) return;
-              ref
-                  .read(phrasesProvider.notifier)
-                  .setPhraseState(PhraseState.none);
-            },
-          );
-        } else {
-          ref.read(phrasesProvider.notifier).setPhraseState(PhraseState.none);
+    switch ((puzzleState.movesCount == 1, puzzleState.puzzle.isSolved)) {
+      case (true, _):
+        if (puzzleState.gameMode == GameMode.speedrun) {
+          final seconds = puzzleState.speedrunCountdownSeconds;
+          ref.read(stopWatchProvider.notifier).configureCountdown(seconds);
         }
-      }
+        ref.read(stopWatchProvider.notifier).start();
+        ref
+            .read(phrasesProvider.notifier)
+            .setPhraseState(PhraseState.puzzleStarted);
+      case (false, true):
+        _handlePuzzleSolved(context, ref);
+      case (false, false):
+        switch (ref.read(phrasesProvider).phraseState) {
+          case PhraseStateNone():
+            break;
+          case PhraseStatePuzzleStarted() ||
+              PhraseStateDashTapped() ||
+              PhraseStatePuzzleSolved():
+            Future.delayed(
+              AnimationsManager.phraseBubbleTotalAnimationDuration,
+              () {
+                if (!context.mounted) return;
+                ref
+                    .read(phrasesProvider.notifier)
+                    .setPhraseState(PhraseState.none);
+              },
+            );
+          case PhraseStateHardPuzzleSelected() ||
+              PhraseStateDoingGreat() ||
+              PhraseStatePuzzleTakingTooLong():
+            ref.read(phrasesProvider.notifier).setPhraseState(PhraseState.none);
+        }
     }
   }
 

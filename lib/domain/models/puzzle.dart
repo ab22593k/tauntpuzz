@@ -171,11 +171,14 @@ class Puzzle extends Equatable {
   }
 
   factory Puzzle.fromJson(Map<String, dynamic> json) {
-    return Puzzle(
-      tiles: List<Tile>.from(json['tiles'].map((x) => Tile.fromJson(x))),
-      movesCount: json['movesCount'] ?? 0,
-      n: json['n'],
-    );
+    return switch (json) {
+      {'n': int n, 'tiles': List<dynamic> rawTiles} => Puzzle(
+        tiles: rawTiles.map((x) => Tile.fromJson(x)).toList(growable: false),
+        movesCount: json['movesCount'] ?? 0,
+        n: n,
+      ),
+      _ => throw const FormatException('Invalid puzzle JSON'),
+    };
   }
 
   Map<String, dynamic> toJson() => {

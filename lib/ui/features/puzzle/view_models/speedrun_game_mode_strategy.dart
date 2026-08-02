@@ -24,7 +24,9 @@ class SpeedrunGameModeStrategy extends GameModeStrategy {
   @override
   int get speedrunCountdownSeconds {
     final host = _host;
-    if (host == null) return 0;
-    return GameModeHelper.speedrunCountdownSeconds(host.n);
+    return switch (host) {
+      final h? => GameModeHelper.speedrunCountdownSeconds(h.n),
+      _ => 0,
+    };
   }
 }

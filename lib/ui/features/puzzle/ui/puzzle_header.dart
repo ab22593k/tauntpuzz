@@ -32,21 +32,25 @@ class PuzzleHeader extends ConsumerWidget {
     final puzzleState = ref.watch(puzzleProvider);
     final l10n = context.l10n;
 
-    if (puzzleState.gameMode == GameMode.marathon) {
-      return FadeInTransition(
-        delay: AnimationsManager.bgLayerAnimationDuration,
-        child: displayMode == HeaderDisplay.sidePane
-            ? _marathonPane(colorScheme, puzzleState, l10n)
-            : _marathonHeader(colorScheme, puzzleState, l10n),
-      );
-    }
-
     return FadeInTransition(
       delay: AnimationsManager.bgLayerAnimationDuration,
-      child: switch (displayMode) {
-        HeaderDisplay.sidePane => _sidePaneLayout(colorScheme, l10n),
-        HeaderDisplay.bottomBar
-            when wc == WindowClass.compact || wc == WindowClass.medium =>
+      child: switch ((puzzleState.gameMode, displayMode, wc)) {
+        (GameMode.marathon, HeaderDisplay.sidePane, _) => _marathonPane(
+          colorScheme,
+          puzzleState,
+          l10n,
+        ),
+        (GameMode.marathon, _, _) => _marathonHeader(
+          colorScheme,
+          puzzleState,
+          l10n,
+        ),
+        (_, HeaderDisplay.sidePane, _) => _sidePaneLayout(colorScheme, l10n),
+        (
+          _,
+          HeaderDisplay.bottomBar,
+          WindowClass.compact || WindowClass.medium,
+        ) =>
           _compactLayout(colorScheme),
         _ => const SizedBox.shrink(),
       },

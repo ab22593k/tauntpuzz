@@ -41,23 +41,22 @@ class Position extends Equatable {
   ///
   /// See [PositionTween]
   static Position lerp(Position? a, Position? b, double t) {
-    if (a == null || b == null) {
-      return const Position.zero();
-    } else {
+    if ((a, b) case (var from?, var to?)) {
       return Position(
-        left: a.left == null && b.left == null
+        left: from.left == null && to.left == null
             ? null
-            : lerpDouble((a.left ?? 0), (b.left ?? 0), t),
-        right: a.right == null && b.right == null
+            : lerpDouble((from.left ?? 0), (to.left ?? 0), t),
+        right: from.right == null && to.right == null
             ? null
-            : lerpDouble((a.right ?? 0), (b.right ?? 0), t),
-        top: a.top == null && b.top == null
+            : lerpDouble((from.right ?? 0), (to.right ?? 0), t),
+        top: from.top == null && to.top == null
             ? null
-            : lerpDouble((a.top ?? 0), (b.top ?? 0), t),
-        bottom: a.bottom == null && b.bottom == null
+            : lerpDouble((from.top ?? 0), (to.top ?? 0), t),
+        bottom: from.bottom == null && to.bottom == null
             ? null
-            : lerpDouble((a.bottom ?? 0), (b.bottom ?? 0), t),
+            : lerpDouble((from.bottom ?? 0), (to.bottom ?? 0), t),
       );
     }
+    return const Position.zero();
   }
 }

@@ -6,10 +6,12 @@ class GameModeHelper {
   /// Speedrun: seconds allocated per puzzle size.
   /// Formula: max(60, size² × 15 - 60)
   /// Returns 60 for unsupported sizes (defensive against edge cases).
-  static int speedrunCountdownSeconds(int puzzleSize) {
-    final idx = (puzzleSize - 3).clamp(0, 3);
-    return [60, 180, 300, 480][idx];
-  }
+  static int speedrunCountdownSeconds(int puzzleSize) => switch (puzzleSize) {
+    >= 6 => 480,
+    >= 5 => 300,
+    >= 4 => 180,
+    _ => 60,
+  };
 
   /// Blind: seconds before tile numbers are hidden.
   /// Formula: size × 5 + (size - 3) × 5

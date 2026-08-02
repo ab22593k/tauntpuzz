@@ -36,12 +36,21 @@ class Tile extends Equatable {
   }
 
   factory Tile.fromJson(Map<String, dynamic> json) {
-    return Tile(
-      value: json['value'],
-      tileIsWhiteSpace: json['tileIsWhiteSpace'],
-      correctLocation: Location.fromJson(json['correctLocation']),
-      currentLocation: Location.fromJson(json['currentLocation']),
-    );
+    return switch (json) {
+      {
+        'value': int value,
+        'tileIsWhiteSpace': bool tileIsWhiteSpace,
+        'correctLocation': Map<String, dynamic> correct,
+        'currentLocation': Map<String, dynamic> current,
+      } =>
+        Tile(
+          value: value,
+          tileIsWhiteSpace: tileIsWhiteSpace,
+          correctLocation: Location.fromJson(correct),
+          currentLocation: Location.fromJson(current),
+        ),
+      _ => throw const FormatException('Invalid tile JSON'),
+    };
   }
 
   Map<String, dynamic> toJson() {

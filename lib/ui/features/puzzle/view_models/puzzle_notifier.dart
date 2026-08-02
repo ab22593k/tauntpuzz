@@ -72,10 +72,10 @@ class PuzzleState {
 
   bool get hasStarted => movesCount > 0;
 
-  bool get isMarathonComplete =>
-      gameMode == GameMode.marathon &&
-      marathonEndSize != null &&
-      n >= marathonEndSize!;
+  bool get isMarathonComplete => switch ((gameMode, marathonEndSize)) {
+    (GameMode.marathon, final end?) => n >= end,
+    _ => false,
+  };
 
   bool get isModeLocked => movesCount > 0;
 
@@ -181,11 +181,10 @@ class PuzzleNotifier extends Notifier<PuzzleState>
       } catch (_) {}
     });
 
-    final storedGameMode = _storageService.get(StorageKey.gameMode);
-    GameMode initialMode = GameMode.classic;
-    if (storedGameMode != null) {
-      initialMode = GameMode.values.byName(storedGameMode);
-    }
+    final initialMode = switch (_storageService.get(StorageKey.gameMode)) {
+      String name => GameMode.values.byName(name),
+      _ => GameMode.classic,
+    };
     _strategies[initialMode]!.onActivate(this);
 
     final savedScores = _getScoresFromStorage();
@@ -242,9 +241,10 @@ class PuzzleNotifier extends Notifier<PuzzleState>
   @override
   void updateScoresInStorage() {
     final storage = _storageService;
-    final seconds = state.stopWatchSecondsOverride > 0
-        ? state.stopWatchSecondsOverride
-        : (storage.get(StorageKey.secondsElapsed) ?? 0);
+    final seconds = switch (state.stopWatchSecondsOverride) {
+      > 0 => state.stopWatchSecondsOverride,
+      _ => storage.get(StorageKey.secondsElapsed) ?? 0,
+    };
     final newScore = Score(
       movesCount: state.movesCount,
       puzzleSize: state.n,

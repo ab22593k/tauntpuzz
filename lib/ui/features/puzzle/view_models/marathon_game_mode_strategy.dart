@@ -69,12 +69,10 @@ class MarathonGameModeStrategy extends GameModeStrategy {
   }
 
   @override
-  bool get isMarathonComplete {
-    if (_marathonEndSize == null) return false;
-    final host = _host;
-    if (host == null) return false;
-    return host.n >= _marathonEndSize!;
-  }
+  bool get isMarathonComplete => switch ((_host, _marathonEndSize)) {
+    (final host?, final endSize?) => host.n >= endSize,
+    _ => false,
+  };
 
   @override
   void readyMarathonAdvance() {
