@@ -18,6 +18,7 @@ class Location extends Equatable implements Comparable<Location> {
   /// | 1,1 | 2,1 | 3, 1 |
   /// | 1,2 | 2,2 | 3, 2 |
   /// | 1,3 | 2,3 | 3, 3 |
+  ///
   /// The tile (2, 2) has tiles:
   /// (1, 2), (2, 1), (3, 2), (2, 3) Located around it
   bool isLocatedAround(Location location) {

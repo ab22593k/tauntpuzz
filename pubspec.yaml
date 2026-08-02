@@ -57,6 +57,9 @@ flutter:
     - assets/images/
     - assets/images/solved/
     - assets/images/background/
+
+  shaders:
+    - shaders/aurora.frag
   fonts:
     - family: PaytoneOne
       fonts:

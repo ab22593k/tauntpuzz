@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 /// ## Breakpoint adaptation (per MD3 Scaffold + Panes spec)
 ///
 /// | Breakpoint | Width (dp) | Bars | Rails | Panes |
-/// |---|---|---|---|---|
+///
 /// | **Compact** | <600 | AppBar + NavBar | top/bottom rail only | 1 |
 /// | **Medium** | 600–839 | AppBar + NavBar | top/bottom rail, opt. leading | 1 (opt. 2) |
 /// | **Expanded** | 840–1199 | AppBar | leading rail, opt. trailing | 2 (opt. 1) |

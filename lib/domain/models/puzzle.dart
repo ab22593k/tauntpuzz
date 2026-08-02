@@ -114,7 +114,8 @@ class Puzzle extends Equatable {
   /// An inversion is when a tile of a lower value is in a greater position than
   /// a tile of a higher value.
   int countInversions() {
-    if (tiles.length < 4) return 0; // 2x2 or smaller has no inversions
+    // 2x2 or smaller has no inversions
+    if (tiles.length < 4) return 0;
 
     var count = 0;
     final len = tiles.length;
